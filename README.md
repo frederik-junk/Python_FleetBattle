@@ -7,3 +7,6 @@ Python Programmentwurf
 - Schiffplatzierung: Angabe Schiffsanfang, dann in welche Richtung 
 - Eck zählt als Berührpunkt mit -> nicht möglich 
 
+
+-Wikipedia Schiffe versenken Anleitung:
+    https://de.wikipedia.org/wiki/Schiffe_versenken
