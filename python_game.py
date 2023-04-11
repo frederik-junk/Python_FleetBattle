@@ -9,7 +9,7 @@ sixthRow = ["06",0,0,0,0,0,0,0,0,0,0]
 seventhRow = ["07",0,0,0,0,0,0,0,0,0,0]
 eighthRow = ["08",0,0,0,0,0,0,0,0,0,0]
 ninethRow = ["09",0,0,0,0,0,0,0,0,0,0]
-tenthRow = [10,0,0,0,0,0,0,0,0,0,0]
+tenthRow = ["10",0,0,0,0,0,0,0,0,0,0]
 placementBoard = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 probe = [[1,2,3],[5,6,7]]
 
