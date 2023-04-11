@@ -32,3 +32,7 @@ X = versenkter Treffer
 "#" = Postion Schiff
 - | = Verbidungsglieder
 ~ = Wasser
+
+
+
+am besten doch verschiedene ASCII Zeichen für die unterschiedlichen Schiffe verwenden (Da die übersichtlichkeit stark leidet). Das mit den Strichen umzusetzen wird sehr schwer. Wenn man die unterschiedlichen Zeichen verwendet einfach beim angeben der Position eine vorgegebene Reihenfolge machen und somit die Zeichen festlegen.
