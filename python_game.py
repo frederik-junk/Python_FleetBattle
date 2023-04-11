@@ -39,7 +39,7 @@ def placeShip(placementBoard):
     print("Der erste Buchstabe ist:", firstChar)
     print("Der Rest des Strings ist:", restInput)
 
-placeShip(placementBoard)
+#placeShip(placementBoard)
     
 
 
