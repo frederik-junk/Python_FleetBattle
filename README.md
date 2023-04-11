@@ -30,9 +30,14 @@ O = leerer Treffer
 x = Treffer
 X = versenkter Treffer
 "#" = Postion Schiff
-- | = Verbidungsglieder
 ~ = Wasser
 
+Zahlenzugriffe:
+0 = leeres Feld ~
+1 = Feld mit Schiff #
+2 = Feld mit leerem Treffer O
+3 = Feld mit Treffer x
+4 = Feld mit versenkter Treffer X
 
 
 am besten doch verschiedene ASCII Zeichen für die unterschiedlichen Schiffe verwenden (Da die übersichtlichkeit stark leidet). Das mit den Strichen umzusetzen wird sehr schwer. Wenn man die unterschiedlichen Zeichen verwendet einfach beim angeben der Position eine vorgegebene Reihenfolge machen und somit die Zeichen festlegen.

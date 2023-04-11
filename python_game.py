@@ -1,41 +1,48 @@
-
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
-firstRow = ["01",1,1,0,0,0,0,0,0,0,0]
-secondRow = ["02",0,0,0,0,0,0,0,0,0,0]
-thirdRow = ["03",0,0,0,0,0,0,0,0,0,0]
-fourthRow = ["04",0,0,0,0,0,0,0,0,0,0]
-fifthRow = ["05",0,0,0,0,0,0,0,0,0,0]
-sixthRow = ["06",0,0,0,0,0,0,0,0,0,0]
-seventhRow = ["07",0,0,0,0,0,0,0,0,0,0]
-eighthRow = ["08",0,0,0,0,0,0,0,0,0,0]
-ninethRow = ["09",0,0,0,0,0,0,0,0,0,0]
-tenthRow = ["10",0,0,0,0,0,0,0,0,0,0]
+firstRow =   [1,1,1,0,0,0,0,0,0,0]
+secondRow =  [0,0,0,0,0,0,0,0,0,0]
+thirdRow =   [0,1,0,0,0,0,0,2,0,0]
+fourthRow =  [0,1,0,0,2,0,0,0,0,0]
+fifthRow =   [0,1,0,0,0,0,0,0,0,0]
+sixthRow =   [0,0,2,0,0,0,4,0,0,0]
+seventhRow = [0,0,0,0,0,0,4,0,0,0]
+eighthRow =  [0,0,0,3,0,0,4,0,0,0]
+ninethRow =  [0,0,0,0,0,0,0,0,0,0]
+tenthRow =   [0,0,0,0,0,0,0,0,0,0]
 placementBoard = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-probe = [[1,2,3],[5,6,7]]
+
+def printleakedBoard(board):
+    print("  ".join(letterRow))
+    for i, row in enumerate(board):
+        print(str(i+1).zfill(2), end="  ")
+        print("  ".join(str(elem).replace("1","#").replace("0","~") for elem in row))
 
 
-#for row in placementBoard:
- #   for element in row:
-  #      print(element, end=' ')
-        
-i = 0 
+def printhiddenBoard(board):
+    print("  ".join(letterRow))
+    for i, row in enumerate(board):
+        print(str(i+1).zfill(2), end="  ")
+        print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
 
-for element in letterRow:
-    print(element, end='    ')
-print("\n")
-for row in placementBoard:
-    for element in row:
-        i += 1
-        if i % 11 == 0:
-            match element:
-                case 1: print("#", end="    ")
-                case 0: print("~", end="    ")
-            print("\n")
-        elif element == 1:
-            print("#", end="    ")
-        elif element == 0:
-            print("~", end="    ")
-        else:
-            print(element, end="    ")
+printleakedBoard(placementBoard)
+print(" \n")
+printhiddenBoard(placementBoard)
 
 
+
+def winoutput():
+    lineone =  [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
+    linetwo =  [1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0]
+    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,1,1]
+    linefour = [0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1]
+    linefive = [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
+    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+    for i, row in enumerate(fullwordoutput):
+        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+winoutput()
