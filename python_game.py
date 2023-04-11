@@ -13,29 +13,50 @@ tenthRow = ["10",0,0,0,0,0,0,0,0,0,0]
 placementBoard = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 probe = [[1,2,3],[5,6,7]]
 
-
-#for row in placementBoard:
- #   for element in row:
-  #      print(element, end=' ')
         
-i = 0 
 
-for element in letterRow:
-    print(element, end='    ')
-print("\n")
-for row in placementBoard:
-    for element in row:
-        i += 1
-        if i % 11 == 0:
-            match element:
-                case 1: print("#", end="    ")
-                case 0: print("~", end="    ")
-            print("\n")
-        elif element == 1:
-            print("#", end="    ")
-        elif element == 0:
-            print("~", end="    ")
-        else:
-            print(element, end="    ")
+def printPlacementBoard(placementBoard):
+        
+        #countingvariable for later use
+        i = 0 
+
+        #reading and printing of the first letterRow
+        for element in letterRow:
+            print(element, end='    ')
+        print("\n")
+
+        #auslesen und printen der spielfeldzeilen !!allerdings ist die erste Dekorspalte auch in dem Spielfeld array muss geeändert werden
+        # mit offset oder so
+        for row in placementBoard:
+            for element in row:
+                i += 1
+                if i % 11 == 0:
+                    #distinction in the last column
+                    match element:
+                        case 1: print("#", end="    ")
+                        case 0: print("~", end="    ")
+                    print("\n")
+                #printing the other rows and columns
+                elif element == 1:
+                    print("#", end="    ")
+                elif element == 0:
+                    print("~", end="    ")
+                #default case
+                else:
+                    print(element, end="    ")
+
+#printPlacementBoard(placementBoard)
+
+
+
+def placeShip(placementBoard):
+    placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+    firstChar = placementInput[0] #extrcting the first char of the users input
+    restInput = placementInput[1:] #extracting the rest of the users input
+    print("Der erste Buchstabe ist:", firstChar)
+    print("Der Rest des Strings ist:", restInput)
+
+placeShip(placementBoard)
+    
 
 
