@@ -28,6 +28,20 @@ printleakedBoard(placementBoard)
 print(" \n")
 printhiddenBoard(placementBoard)
 
+#printPlacementBoard(placementBoard)
+
+
+
+def placeShip(placementBoard):
+    placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+    firstChar = placementInput[0] #extrcting the first char of the users input
+    restInput = placementInput[1:] #extracting the rest of the users input
+    print("Der erste Buchstabe ist:", firstChar)
+    print("Der Rest des Strings ist:", restInput)
+
+placeShip(placementBoard)
+    
+
 
 
 def winoutput():
