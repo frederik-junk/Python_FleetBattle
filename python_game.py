@@ -1,3 +1,7 @@
+import random 
+
+
+
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow = ["01",0,0,0,0,0,0,0,0,0,0]
@@ -11,7 +15,6 @@ eighthRow = ["08",0,0,0,0,0,0,0,0,0,0]
 ninethRow = ["09",0,0,0,0,0,0,0,0,0,0]
 tenthRow = ["10",0,0,0,0,0,0,0,0,0,0]
 placementBoard = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-probe = [[1,2,3],[5,6,7]]
 
         
 #function to print the placement board
@@ -79,6 +82,7 @@ def placeShip(placementBoard, shipLength):
     #adding one for the correct alignment still needs fixes
     startingRowNumber = int(startingRowNumber) - 1
     startingColumnChar = int(startingColumnChar) + 1
+    
     #putting the 1 in the right position
     placementBoard[startingRowNumber][startingColumnChar] = 1
 
@@ -86,13 +90,20 @@ def placeShip(placementBoard, shipLength):
 
 
     
-    #asking the direction of the ship
+    #placing the ship in the right direction
+    shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
+    
+    printPlacementBoard(placementBoard)
+
+
+
+
+def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
     directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
     j = 0 # just a counting variable for later use
     match directionInput:
-
         case "w": 
-            #changin every index between the beginning and the end to a 1
+            #changing every index between the beginning and the end to a 1
             while j < shipLength:
                 placementBoard[startingRowNumber][startingColumnChar] = 1
                 startingRowNumber = startingRowNumber - 1
@@ -117,12 +128,62 @@ def placeShip(placementBoard, shipLength):
                 j += 1
 
         case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
-    
+
+
+
+
+def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
+    #get a random direction for the ship to be placed in
+    cpuDirection = random.randint(0,4)
+    match cpuDirection:
+        case 0: cpuDirection = "w"
+        case 1: cpuDirection = "a"
+        case 2: cpuDirection = "s"
+        case 3: cpuDirection = "d"
+        case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
+
+    j = 0 # just a counting variable for later use
+    match cpuDirection:
+        case "w": 
+            #changing every index between the beginning and the end to a 1
+            while j < shipLength:
+                placementBoard[startingRowNumber][startingColumnChar] = 1
+                startingRowNumber = startingRowNumber - 1
+                j += 1
+
+        case "a": 
+            while j < shipLength:
+                placementBoard[startingRowNumber][startingColumnChar] = 1
+                startingColumnChar -= 1
+                j += 1
+
+        case "s": 
+            while j < shipLength:
+                placementBoard[startingRowNumber][startingColumnChar] = 1
+                startingRowNumber += 1
+                j += 1
+
+        case "d": 
+            while j < shipLength:
+                placementBoard[startingRowNumber][startingColumnChar] = 1
+                startingColumnChar += 1
+                j += 1
+
+        case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
+
+
+#function for the cpu opponent to place the a ship
+def cpuPlaceShip(placementBoard, shipLength):
+    startingRowNumber = random.randint(0, 11)
+    startingColoumnChar = random.randint(0, 11)
+
+    #cpu places the ship with the random startig coordinates
+    cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColoumnChar)
     printPlacementBoard(placementBoard)
 
-
-
-placeShip(placementBoard, shipLength)
+    
+#cpuPlaceShip(placementBoard, shipLength)
+#placeShip(placementBoard, shipLength)
 
     
     
