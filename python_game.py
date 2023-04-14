@@ -60,3 +60,21 @@ def winoutput():
     print(len(linefive)*"== ")
     print("\n")
 winoutput()
+
+def loseoutput():
+    lineone =  [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1]
+    linetwo =  [1,1,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0]
+    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,1,1,0,0,1,0,0,0,1,1,1,1,0,1,0,1,1,0,1,1,1]
+    linefour = [1,0,1,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,1,0,0]
+    linefive = [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,0,1,1,1]
+    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+    for i, row in enumerate(fullwordoutput):
+        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+loseoutput()
+
