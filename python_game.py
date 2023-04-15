@@ -35,6 +35,7 @@ def printhiddenBoard(board):
 # printhiddenBoard(board)
 
 shipLength = int(2)
+
 #splitting the input into the column and row indices 
 def splitColumn(placementInput):
   
@@ -358,23 +359,9 @@ def cpuPlaceShip(board, shipLength):
 # placeShip(board, shipLength)
 
 
-def winoutput():
-    print("_________________________________\n")
-    print(" _____   _____   ______    _____")
-    print("/ ____| |_   _| |  ____|  / ____|")     
-    print("| (___    | |   | |__    | |  __")     
-    print("\___ \    | |   |  __|   | | |_ |")     
-    print("____) |  _| |_  | |____  | |__| |")     
-    print("|_____/ |_____| |______|  \_____|")
-    print("_________________________________\n")
+
 #winoutput()
 
-def loseoutput():
-    print(" _   _   _____   ______   _____    ______   _____    _                    _____   ______")   
-    print("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ")
-    print("|  \| |   | |   | |__    | |  | | | |__    | |__) | | |         /  \    | |  __  | |__     ")
-    print("| . ` |   | |   |  __|   | |  | | |  __|   |  _  /  | |        / /\ \   | | |_ | |  __|    ")
-    print("| |\  |  _| |_  | |____  | |__| | | |____  | | \ \  | |____   / ____ \  | |__| | | |____   ")
-    print("|_| \_| |_____| |______| |_____/  |______| |_|  \_\ |______| /_/    \_\  \_____| |______|  ")
+
 #loseoutput()
 
