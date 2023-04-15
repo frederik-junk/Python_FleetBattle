@@ -1,5 +1,5 @@
 import random
-
+import shipmanager
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -47,8 +47,6 @@ def placeShip(placementBoard, shipLength):
     #splitting the input into the column and row indices 
     startingColumnChar = placementInput[0] #extrcting the first char of the users input
     startingRowNumber = placementInput[1:] #extracting the rest of the users input
-    print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
-    print("Der Rest des Strings ist:", startingRowNumber) #diese ausgabe kann entfernt werden
 
     #match case to convert the letters into column idexes
     match startingColumnChar:
@@ -81,13 +79,9 @@ def placeShip(placementBoard, shipLength):
     
     # printleakedBoard(placementBoard)
 
-
-
-
-def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
-    directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
+def directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, direction):
     j = 0 # just a counting variable for later use
-    match directionInput:
+    match direction:
         case "w": 
             #changing every index between the beginning and the end to a 1
             while j < shipLength:
@@ -115,9 +109,12 @@ def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnC
 
         case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
 
-
-
-
+    
+def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
+    directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
+    directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, directionInput)
+ 
+         
 def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
     #get a random direction for the ship to be placed in
     cpuDirection = random.randint(0,4)
@@ -128,35 +125,7 @@ def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColu
         case 3: cpuDirection = "d"
         case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-    j = 0 # just a counting variable for later use
-    match cpuDirection:
-        case "w": 
-            #changing every index between the beginning and the end to a 1
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingRowNumber = startingRowNumber - 1
-                j += 1
-
-        case "a": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingColumnChar -= 1
-                j += 1
-
-        case "s": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingRowNumber += 1
-                j += 1
-
-        case "d": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingColumnChar += 1
-                j += 1
-
-        case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
-
+    directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(placementBoard, shipLength):
