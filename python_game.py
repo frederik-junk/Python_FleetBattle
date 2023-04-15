@@ -96,7 +96,8 @@ def placeShip(placementBoard, shipLength):
                 print(f"Die Spitze des Schiffes liegt auf {placementInput}")
                 #putting the 1 in the right position
                 placementBoard[startingRowNumber][startingColumnChar] = 1
-
+                #placing the ship in the right direction
+                shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
                 break
         except IndexError:
             #if the index is out of bounds
@@ -193,7 +194,7 @@ def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnC
 
 def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
     #get a random direction for the ship to be placed in
-    cpuDirection = random.randint(0,4)
+    cpuDirection = random.randint(0,3)
     match cpuDirection:
         case 0: cpuDirection = "w"
         case 1: cpuDirection = "a"
@@ -205,8 +206,8 @@ def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColu
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(placementBoard, shipLength):
-    startingRowNumber = random.randint(0, 11)
-    startingColoumnChar = random.randint(0, 11)
+    startingRowNumber = random.randint(0, 10)
+    startingColoumnChar = random.randint(0, 10)
 
     #cpu places the ship with the random startig coordinates
     cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColoumnChar)
