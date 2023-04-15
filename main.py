@@ -18,8 +18,10 @@ def welcomeUser():
 
 # variable that holds the game rules to print when starting the game
 gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen 6. Jeder Spieler hat 10 Schiffe\n"
+# setting current Player to 0 to define it afterwards in function below
 currentPlayer = 0
 
+# Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
     userInput = input("Bitte wähle die gewünschte Spielart: \n [1] Spiel gegen den Computer \n [2] 2 Spieler\n")
     match userInput:
@@ -48,27 +50,21 @@ def selectStartingPlayer(mode):
     global currentPlayer
     playerOne = 1
     playerTwo = 2
-    startingPlayer = 0
-    randint(1,2)
-    if(mode == "1"):
-        if(randint == "onePlayer"):
-            print("Spieler 1 beginnt.")
-            startingPlayer = 1
-            currentPlayer = 1
-        else:
-            print("Der Computer beginnt.")
-            startingPlayer = 2
+    startingPlayer = randint(1,2)
+    if(startingPlayer == 1):
+        currentPlayer = 1
+        print("Spieler 1 ist an der Reihe")
+        return currentPlayer
+    elif(startingPlayer == 2):
+        if(mode == "1"):
+            print("Der Computer ist an der Reihe.")
             currentPlayer = 2
-    elif(mode == "2"):
-        if(randint == playerOne):
-            print("Spieler 1 beginnt.")
-            startingPlayer = 1
-            currentPlayer = 1
+            return currentPlayer
         else:
-            print("Spieler 2 beginnt.")
-            startingPlayer = 2
+            print("Spieler 2 ist an der Reihe.")
             currentPlayer = 2
-    return currentPlayer
+            return currentPlayer
+
 
 # Switches the current player after each action
 def nextPlayer():
@@ -88,4 +84,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
