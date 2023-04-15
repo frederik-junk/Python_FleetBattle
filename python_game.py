@@ -1,10 +1,12 @@
+import random
+
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
-firstRow =   [1,1,1,0,0,0,0,0,0,0]
+firstRow =   [0,0,0,0,0,0,0,0,0,0]
 secondRow =  [0,0,0,0,0,0,0,0,0,0]
-thirdRow =   [0,1,0,0,0,0,0,2,0,0]
-fourthRow =  [0,1,0,0,2,0,0,0,0,0]
-fifthRow =   [0,1,0,0,0,0,0,0,0,0]
+thirdRow =   [0,0,0,0,0,0,0,2,0,0]
+fourthRow =  [0,0,0,0,2,0,0,0,0,0]
+fifthRow =   [0,0,0,0,0,0,0,0,0,0]
 sixthRow =   [0,0,2,0,0,0,4,0,0,0]
 seventhRow = [0,0,0,0,0,0,4,0,0,0]
 eighthRow =  [0,0,0,3,0,0,4,0,0,0]
@@ -30,7 +32,7 @@ print(" \n")
 printhiddenBoard(placementBoard)
 
 
-#printPlacementBoard(placementBoard)
+
 
 
 shipLength = int(2)
@@ -64,20 +66,20 @@ def placeShip(placementBoard, shipLength):
     
     #adding one for the correct alignment still needs fixes
     startingRowNumber = int(startingRowNumber) - 1
-    startingColumnChar = int(startingColumnChar) + 1
+    startingColumnChar = int(startingColumnChar) 
 
     
     #putting the 1 in the right position
     placementBoard[startingRowNumber][startingColumnChar] = 1
 
-    printPlacementBoard(placementBoard)
+    printleakedBoard(placementBoard)
 
 
     
     #placing the ship in the right direction
     shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
     
-    printPlacementBoard(placementBoard)
+    printleakedBoard(placementBoard)
 
 
 
@@ -163,11 +165,11 @@ def cpuPlaceShip(placementBoard, shipLength):
 
     #cpu places the ship with the random startig coordinates
     cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColoumnChar)
-    printPlacementBoard(placementBoard)
+    printleakedBoard(placementBoard)
 
     
 #cpuPlaceShip(placementBoard, shipLength)
-#placeShip(placementBoard, shipLength)
+placeShip(placementBoard, shipLength)
 
     
     
@@ -188,7 +190,7 @@ def winoutput():
     print("\n")
     print(len(linefive)*"== ")
     print("\n")
-winoutput()
+#winoutput()
 
 def loseoutput():
     lineone =  [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1]
@@ -205,5 +207,5 @@ def loseoutput():
     print("\n")
     print(len(linefive)*"== ")
     print("\n")
-loseoutput()
+#loseoutput()
 
