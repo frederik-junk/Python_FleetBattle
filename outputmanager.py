@@ -10,6 +10,10 @@ class User:
 
 user1 = User("Spieler 1")
 user2 = User("Spieler 2")
+
+# variable that holds the game rules to print when starting the game
+gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
+
 def welcomeUser():
     print("______________________________________________________\n")
     print(" ______ _           _     ____        _   _   _        ")
