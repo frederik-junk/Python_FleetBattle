@@ -29,7 +29,7 @@ def opponentAction():#random Feld fuer Treffer
     i = 0 #variable zum verschieben des Treffers
     while isHit == 2:
             i = i+1
-            match direction
+            match direction:
                 case 1:
                    isHit = checkHit(hiddenBoard1,leakedBoard1,row-i,coulmn)
                 case 2:
