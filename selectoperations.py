@@ -57,13 +57,13 @@ def selectStartingPlayer(mode):
     if(startingPlayer == 2):
         currentPlayer = 2
         print(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!")
-        #return currentPlayer
+        return currentPlayer
     elif(startingPlayer == 1):
         if(mode == "1"):
             print(f"{outputmanager.user1.getName()}ccccccc darf das Spiel beginnen und ist an der Reihe!") #cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
             currentPlayer = 2
-            #return currentPlayer
+            return currentPlayer
         else:
             print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
             currentPlayer = 2
-            #return currentPlayer
+            return currentPlayer
