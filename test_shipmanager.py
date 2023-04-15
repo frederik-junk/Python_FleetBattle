@@ -16,3 +16,6 @@ class TestShipmanager(unittest.TestCase):
     def tearDown(self):
         del self.schlachtSchiff
         del self.kreuzer
+
+if __name__ == '__main__':
+    unittest.main()
