@@ -74,7 +74,7 @@ def splitRow(placementInput):
     return startingRowNumber
             
 #function to place a ship in the right position with the right length and the right direction
-def placeShip(board, shipLength):
+def placeShip(board, shipLength, ship):
     while True:
         try:
             placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
@@ -88,7 +88,7 @@ def placeShip(board, shipLength):
                 startingColumnChar = startingColumnChar.upper()
                 
                 
-            except ValueError as e:
+            except ValueError as e:   #TODO: overlook this handling of exceptions
                 print(str(e))
                 print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
                 print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
@@ -120,7 +120,7 @@ def placeShip(board, shipLength):
                 board[startingRowNumber][startingColumnChar] = 1
                 #placing the ship in the right direction
                 #TODO give ship to this function
-                shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
+                shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
                 break
         except IndexError:
             #if the index is out of bounds
@@ -136,7 +136,9 @@ def placeShip(board, shipLength):
     
     # printleakedBoard(board)
 
-def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode):
+schlachtschiff = shipmanager.Schlachtschiff(3)
+
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     j = 0 # just a counting variable for later use
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
@@ -261,11 +263,11 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
     #ship.setPosition(positionTupelList)
     
 
-def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2
     while True: 
         directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
             continue
         else:
             print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 

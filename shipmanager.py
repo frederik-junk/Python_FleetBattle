@@ -27,8 +27,8 @@ class Ships:
     def hitOnShip(self):
         self.__damageCounter += 1
 
-    def classPlaceShip(self, board):
-         result = placeShip(board, self.getSize())
+    def classPlaceShip(self, board, ship):
+         result = placeShip(board, self.getSize(), ship)
          return result
          
 
