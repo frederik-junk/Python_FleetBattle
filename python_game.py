@@ -128,14 +128,14 @@ def placeShip(board, shipLength):
     
     # printleakedBoard(board)
 
-def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode):
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode,ship):
     j = 0 # just a counting variable for later use
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
         case "w":
             try: # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingRowNumber = startingRowNumber - shipLength
-                if betweenStartingRowNumber < 0:
+                if betweenStartingRowNumber <= 0:
                     if gameMode == 1:
                         raise IndexError
                     else:
@@ -149,6 +149,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         positionTupelList.append(positionTupel)
 
                         startingRowNumber = startingRowNumber - 1
+
                         j += 1
                     return False
             except IndexError as e:
@@ -163,7 +164,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
         case "a":
             try: # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingColoumnChar = startingColumnChar - shipLength
-                if betweenStartingColoumnChar < 0:
+                if betweenStartingColoumnChar <= 0:
                     if gameMode == 1:
                         raise IndexError
                     else:
@@ -241,7 +242,9 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                 print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
                 return True
             else: return True
-
+    #setting of the ship position
+    ship.setPosition(positionTupelList)
+    
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 2
@@ -250,11 +253,11 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
         if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
             continue
         else:
-            print("Ihr Schiff wurde platziert!") #hier muss der Name des Schifftypes noch rein
+            print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
             printleakedBoard(board)
             break
 
-def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar,ship):
     gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
@@ -266,18 +269,81 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode,ship) == True:
             continue
         else:
             break
 
+#function to add the blockers so that ships cant be placed next to the ship
+def addPlacementBlocker(board, positionTupelList):
+    for tupel in positionTupelList:
+        rowNumber, columnNumber = tupel
+    #calculate the positions left, right, top and bottom of the position
+    blockerLeftNumber = columnNumber - 1
+    blockerRightNumber = columnNumber + 1
+    blockerTopNumber = rowNumber - 1
+    blockerBottomNumber = rowNumber + 1
+    #list in which the blocker tupels are saved
+    blockerList = []
+    
+    #if blocker number is out of bounce or there is a ship(1) ther will be no blocker placed
+    if blockerTopNumber < 0 and blockerLeftNumber < 0 or board[blockerTopNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerTopLeft = (blockerTopNumber, blockerLeftNumber))
+        board[blockerTopNumber][blockerLeftNumber] = 6
+
+    if blockerTopNumber < 0 or board[blockerTopNumber][columnNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerTop = (blockerTopNumber, columnNumber))
+        board[blockerTopNumber][columnNumber] = 6
+
+    if blockerTopNumber < 0 and blockerRightNumber > 10 or board[blockerTopNumber][blockerRightNumber] == 0:
+        pass
+    else:
+        blockerList.append(blockerTopRight = (blockerTopNumber, blockerRightNumber))
+        board[blockerTopNumber][blockerRightNumber] = 6
+
+    if  blockerRightNumber > 10 or board[rowNumber][blockerRightNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerRight = (rowNumber, blockerRightNumber))
+        board[rowNumber][blockerRightNumber] = 6
+
+    if blockerBottomNumber > 10 and blockerRightNumber > 10 or board[blockerBottomNumber][blockerRightNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottomRight = (blockerBottomNumber, blockerRightNumber))
+        board[blockerBottomNumber][blockerRightNumber] = 6
+
+    if blockerBottomNumber > 10 or board[blockerBottomNumber][columnNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottom = (blockerBottomNumber, columnNumber))
+        board[blockerBottomNumber][columnNumber] = 6
+
+    if blockerBottomNumber > 10 and blockerLeftNumber < 0 or board[blockerBottomNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottomLeft = (blockerBottomNumber, blockerLeftNumber))
+        board[blockerBottomNumber][blockerLeftNumber] = 6
+        
+    if blockerLeftNumber < 0 or board[rowNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerLeft = (rowNumber, blockerLeftNumber))
+        board[rowNumber][blockerLeftNumber] = 6
+
+
+
 #function for the cpu opponent to place the a ship
-def cpuPlaceShip(board, shipLength):
+def cpuPlaceShip(board, shipLength,ship):
     startingRowNumber = random.randint(0, 10)
     startingColoumnChar = random.randint(0, 10)
 
     #cpu places the ship with the random startig coordinates
-    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar)
+    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar,ship)
     printleakedBoard(board)
 
     
