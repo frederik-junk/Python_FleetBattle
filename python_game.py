@@ -128,15 +128,18 @@ def placeShip(board, shipLength):
     
     # printleakedBoard(board)
 
-def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction):
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode):
     j = 0 # just a counting variable for later use
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
         case "w":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                endRowNumber = startingRowNumber - shipLength
-                if endRowNumber <= 0:
-                    raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
+                betweenStartingRowNumber = startingRowNumber - shipLength
+                if betweenStartingRowNumber < 0:
+                    if gameMode == 1:
+                        raise IndexError
+                    else:
+                        raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:
                     #changing every index between the beginning and the end to a 1
                     while j < shipLength:
@@ -150,16 +153,22 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         j += 1
                     return False
             except IndexError as e:
-                print(str(e))
-                print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
-                return True #is send back to the beginning to set another direction
+                if gameMode == 2:       
+                    print(str(e))
+                    print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
+                    return True #is send back to the beginning to set another direction
+                else:
+                    return True
             
 
         case "a":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                endColoumnChar = startingColumnChar - shipLength
-                if endColoumnChar <= 0:
-                    raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
+                betweenStartingColoumnChar = startingColumnChar - shipLength
+                if betweenStartingColoumnChar < 0:
+                    if gameMode == 1:
+                        raise IndexError
+                    else:
+                        raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:  
                     while j < shipLength:
                         board[startingRowNumber][startingColumnChar] = 1
@@ -169,16 +178,23 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar -= 1
                         j += 1
-                    return False
+                    repeater = False
+                    return repeater
             except IndexError as e:
-                print(str(e))
-                print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
-                return True
+                if gameMode == 2:
+                    print(str(e))
+                    print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
+                    return True
+                else:
+                    return True
         case "s": 
             try: # exception for the case that the ship travels out of bounce in the given direction
-                endRowNumber = startingColumnChar + shipLength
-                if endRowNumber > 10:
-                    raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
+                betweenStartingRowNumber = startingColumnChar + shipLength
+                if betweenStartingRowNumber > 10:
+                    if gameMode == 1:
+                        raise IndexError
+                    else:
+                        raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else: 
                     while j < shipLength:
                         board[startingRowNumber][startingColumnChar] = 1
@@ -190,14 +206,20 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         j += 1
                     return False
             except IndexError as e:
-                print(str(e))
-                print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
-                return True
+                if gameMode == 2:
+                    print(str(e))
+                    print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
+                    return True
+                else:
+                    return True
         case "d":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                endColoumnChar = startingColumnChar + shipLength
-                if endColoumnChar > 10:
-                    raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
+                betweenStartingRowNumber = startingColumnChar + shipLength
+                if betweenStartingRowNumber > 10:
+                    if gameMode == 1:
+                        raise IndexError
+                    else:
+                        raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:
                     while j < shipLength:
                         board[startingRowNumber][startingColumnChar] = 1
@@ -209,24 +231,32 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         j += 1
                     return False
             except IndexError as e:
-                print(str(e))
-                print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
-                return True
+                if gameMode == 2:
+                    print(str(e))
+                    print("Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll.")
+                    return True
+                else: 
+                    return True
         case _: 
-            print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
-            return True
+            if gameMode == 2:
+                print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
+                return True
+            else: return True
 
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+    gameMode = 2
     while True: 
         directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput)
-        printleakedBoard(board)
-       
-
-
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
+            continue
+        else:
+            print("Ihr Schiff wurde platziert!") #hier muss der Name des Schifftypes noch rein
+            printleakedBoard(board)
+            break
 
 def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+    gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
         cpuDirection = random.randint(0,3)
@@ -237,8 +267,10 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
-
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
+            continue
+        else:
+            break
 
 #function to add the blockers so that ships cant be placed next to the ship
 def addPlacementBlocker(board, positionTupelList):
@@ -299,10 +331,7 @@ def cpuPlaceShip(board, shipLength):
 
     
 #cpuPlaceShip(board, shipLength)
-placeShip(leakedBoard1, shipLength)
-
-    
-    
+# placeShip(board, shipLength)
 
 
 def winoutput():
