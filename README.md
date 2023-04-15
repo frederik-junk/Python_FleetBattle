@@ -45,3 +45,6 @@ am besten doch verschiedene ASCII Zeichen für die unterschiedlichen Schiffe ver
 playerIndex 1 = Spieler 1
 playerIndex 2 = Spieler 2
 playerIndex 3 = Computer
+
+1 = alles mit Computer oder Spieler 2
+2 = Spieler

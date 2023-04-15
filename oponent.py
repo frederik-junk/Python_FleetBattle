@@ -3,74 +3,74 @@ import random
 import python_game
 
 
-#Schiffe noch Initialisieren mit vernünftigen Positions
-#o steht fuer opponent
-oschlachtschiff1 = shipmanager.Schlachtschiff((1,1))
-okreuzer1 = shipmanager.Kreuzer((1,1))
-okreuzer2 = shipmanager.Kreuzer((1,1))
-ozerstoerer1 = shipmanager.Zerstoerer((1,1))
-ozerstoerer2 = shipmanager.Zerstoerer((1,1))
-ozerstoerer3 = shipmanager.Zerstoerer((1,1))
-ouboot1 = shipmanager.UBoot((1,1))
-ouboot2 = shipmanager.UBoot((1,1))
-ouboot3 = shipmanager.UBoot((1,1))
-ouboot4 = shipmanager.UBoot((1,1))
+#o means opponent
+oschlachtschiff1 = shipmanager.Schlachtschiff((1,1),(1,2),(1,3),(1,4),(1,5))
+okreuzer1 = shipmanager.Kreuzer((1,1),(1,2),(1,3),(1,4))
+okreuzer2 = shipmanager.Kreuzer((1,1),(1,2),(1,3),(1,4))
+ozerstoerer1 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
+ozerstoerer2 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
+ozerstoerer3 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
+ouboot1 = shipmanager.UBoot((1,1),(1,2))
+ouboot2 = shipmanager.UBoot((1,1),(1,2))
+ouboot3 = shipmanager.UBoot((1,1),(1,2))
+ouboot4 = shipmanager.UBoot((1,1),(1,2))
 
 opponentships = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
 def initShips():
-    for ship in opponentship:
+    for ship in opponentships:
         length = ship.getSize()
-        cpuPlaceShip(leakedBoard2,length)
+        python_game.cpuPlaceShip(leakedBoard2,length,ship)
 
-def opponentAction():#random Feld fuer Treffer
+def opponentAction():#hit random field 
     isHit = 1
-    #erneut schießen, wenn das random Feld schonmal beschossen wurde nochmal schießen
+    #hit again, if random field was alredy fired at
     while(isHit == 1):
         row = random.randint(1,10)
         column = random.randint(1,10)
-        isHit = checkHit(hiddenBoard1,leakedBoard1,row,coulmn)
-    #erneut feuern auf ein anliegendes Feld
+        isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column)
+    #fire again to a neighbouring field
+    #TODO check if its in the field
     direction = random.randint(1,4)
-    #TODO checken, dass es noch im Feld ist
-    i = 0 #variable zum verschieben des Treffers
+    i = 0 #move hit to a neighbouring field
     while isHit == 2:
             i = i+1
             match direction:
                 case 1:
-                   isHit = checkHit(hiddenBoard1,leakedBoard1,row-i,coulmn)
+                   isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row-i,column)
                 case 2:
-                    isHit = checkHit(hiddenBoard1,leakedBoard1,row,coulmn-i)
+                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column-i)
                 case 3:
-                    isHit = checkHit(hiddenBoard1,leakedBoard1,row+i,coulmn)
+                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row+i,column)
                 case 4:
-                    isHit = checkHit(hiddenBoard1,leakedBoard1,row,coulmn+i)
+                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column+i)
                     
-    #wenn auf ein Feld geschoss wird, dass schonmal beschossen wurde wieder random schießen
+    #if a field is hit that was hit before shoot a random field
+    #TODO what to do when hit a already shoot field after a hit
     if isHit == 1:
         opponentAction()
         
-#hidden = Schiffe versteckt 
+#hidden = ships hidden 
 def checkHit(hiddenBoard,leakedBoard,row,column):
-    #check ob auf das Feld schonmal geschossen wurde
+    #check if field was alredy hit
     if leakedBoard[row][column] != 0:
         return 1
-    #wenn ein Schiff an der Position ist
+    #hitted ship
     if hiddenBoard[row][column] == 1:
-        #welches Schiff ist getroffen ermitteln
+        #get which ship is hit
         for ship in opponentships:
             if(row,column)in ship.getPosition():
                 shipName = ship
         shipName.hitOnShip()
         if shipName.getSize() == shipName.getDamageCounter():
-            #Schiff versenkt
+            #ship sunk
             for position in shipName.getPosition():
                 hiddenBoard[position]=4
             return 1
-        #Schiff nicht versenkt
+        #ship isnt sunk
         else:
             leakedBoard[row][column] = 3
         return 2
-    #wenn Wasser an derPosition ist
+    #hitted water
     elif hiddenBoard[row][column] == 0:
         leakedBoard[row][column]= 2
     return 0
