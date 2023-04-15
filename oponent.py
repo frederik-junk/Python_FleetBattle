@@ -19,7 +19,7 @@ opponentships = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,
 def initShips():
     for ship in opponentships:
         length = ship.getSize()
-        cpuPlaceShip(leakedBoard2,length,ship)
+        python_game.cpuPlaceShip(leakedBoard2,length,ship)
 
 def opponentAction():#hit random field 
     isHit = 1
