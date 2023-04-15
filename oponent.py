@@ -17,8 +17,8 @@ ouboot3 = shipmanager.UBoot((1,1))
 ouboot4 = shipmanager.UBoot((1,1))
 
 opponentships = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
-def initShips
-    for ship in opponentship
+def initShips():
+    for ship in opponentship:
         length = ship.getSize()
         cpuPlaceShip(leakedBoard2,length)
 
