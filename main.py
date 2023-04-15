@@ -132,7 +132,6 @@ def main():
     print (gameMode)
     battleEnd(2, gameMode)
 
-    
 
 if __name__ == "__main__":
     main()
