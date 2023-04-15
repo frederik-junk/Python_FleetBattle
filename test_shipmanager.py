@@ -1,6 +1,8 @@
 import unittest
 from shipmanager import *
 
+#pylint: disable=C
+
 class TestShipmanager(unittest.TestCase):
 
     def setUp(self):
@@ -16,6 +18,11 @@ class TestShipmanager(unittest.TestCase):
     def test_setPositon(self):
         self.schlachtSchiff.setPosition(7)
         self.assertEqual(self.schlachtSchiff.getPosition(),7)
+
+    def test_hitOnShip(self):
+        self.assertEqual(self.kreuzer.getDamageCounter(),0)
+        self.kreuzer.hitOnShip()
+        self.assertEqual(self.kreuzer.getDamageCounter(),1)
 
     def tearDown(self):
         del self.schlachtSchiff
