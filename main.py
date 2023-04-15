@@ -2,6 +2,19 @@ import os
 from python_game import *
 from random import *
 
+class User:
+    def __init__(self, name):
+        self.__name = name
+
+    def getName(self):
+        return self.__name
+    
+    def setName(self, name):
+        self.__name = name
+
+user1 = User("Spieler 1")
+user2 = User("Spieler 2")
+
 # extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
 print("Aktueller Pfad: ", path)
@@ -29,25 +42,28 @@ def gameModeSelection():
             print("__________________________________\n")
             print("1-Spieler Modus.\n")
             print(gameRules)
-            userName1 = "Spieler"
-            userName1 = input("Bitte geben Sie ihren Namen an ('Enter' um annonym fortzufahren): \n")
-            print (f"Hallo {userName1}, bitte platzieren Sie nun Ihre Schiffe")
+            userName1 = input("Bitte geben Sie ihren Namen an: \n")
+            user1.setName(userName1)
+            print (f"Hallo {user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
             placeShip(leakedBoard1, shipLength)
             print("Der Computer plaziert nun seine Schiffe. Dies kann einige Sekunden dauern")
             cpuPlaceShip(leakedBoard2, shipLength)
             print("")
             print("Das Spiel beginnt.")
-            selectStartingPlayer(userInput)
+            user2.setName("Computer")
+            selectStartingPlayer(userInput, userName1)
         case "2":
             print("__________________________________\n")
             print("2-Spieler Modus.\n")
             print(gameRules)
             userName1 = input("Spieler 1, bitte geben Sie ihren Namen an: \n")
-            print (f"Hallo {userName1}, bitte platzieren Sie nun Ihre Schiffe")
+            user1.setName(userName1)
+            print (f"Hallo {user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
             print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
             placeShip(leakedBoard1, shipLength)
             userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
-            print (f"Hallo {userName2}, bitte platzieren Sie nun Ihre Schiffe")
+            user2.setName(userName2)
+            print (f"Hallo {user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
             print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
             placeShip(leakedBoard2, shipLength)
             print("Das Spiel beginnt.")
@@ -61,18 +77,19 @@ def selectStartingPlayer(mode):
     global currentPlayer
     playerOne = 1
     playerTwo = 2
+    print("Es wird zufällig bestimmt wer beginnt...")
     startingPlayer = randint(1,2)
     if(startingPlayer == 1):
         currentPlayer = 1
-        print("Spieler 1 ist an der Reihe")
+        print(f"{user1.getName()} darf das Spiel beginnen und ist an der Reihe")
         return currentPlayer
     elif(startingPlayer == 2):
         if(mode == "1"):
-            print("Der Computer ist an der Reihe.")
+            print(f"{user2.getName()}ccccccc darf das Spiel beginnen und ist an der Reihe") #cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
             currentPlayer = 2
             return currentPlayer
         else:
-            print("Spieler 2 ist an der Reihe.")
+            print(f"{user2.getName()} darf das Spiel beginnen und ist an der Reihe")
             currentPlayer = 2
             return currentPlayer
 
@@ -82,10 +99,10 @@ def nextPlayer():
     global currentPlayer
     if(currentPlayer == 1):
         currentPlayer = 2
-        print("Spieler 2 ist an der Reihe.")
+        print(f"{user2.getName()} ist nun an der Reihe.")
     else:
         currentPlayer = 1
-        print("Spieler 1 ist an der Reihe.")
+        print(f"{user1.getName()} ist nun an der Reihe.")
     return currentPlayer
 
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
