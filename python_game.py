@@ -46,9 +46,9 @@ def placeShip(placementBoard, shipLength):
             placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
 
 
-    #splitting the input into the column and row indices 
-    startingColumnChar = placementInput[0] #extrcting the first char of the users input
-    startingRowNumber = placementInput[1:] #extracting the rest of the users input
+            #splitting the input into the column and row indices 
+            startingColumnChar = placementInput[0] #extrcting the first char of the users input
+            startingRowNumber = placementInput[1:] #extracting the rest of the users input
             #splitting the input into the column and row indices 
             startingColumnChar = placementInput[0] #extrcting the first char of the users input
             startingRowNumber = placementInput[1:] #extracting the rest of the users input
@@ -201,7 +201,7 @@ def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColu
         case 3: cpuDirection = "d"
         case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-    directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
+    #directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(placementBoard, shipLength):
