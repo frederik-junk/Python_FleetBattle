@@ -99,7 +99,7 @@ def placeShip(board, shipLength):
                    
             
             #adding one for the correct alignment still needs fixes
-            printingStartingRowNumber = int(startingRowNumber) - 1
+            startingRowNumber = int(startingRowNumber) - 1
             startingColumnChar = int(startingColumnChar) 
 
             if startingRowNumber < 0:
@@ -135,7 +135,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
         case "w":
             try: # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingRowNumber = startingRowNumber - shipLength
-                if betweenStartingRowNumber < 0:
+                if betweenStartingRowNumber <= 0:
                     if gameMode == 1:
                         raise IndexError
                     else:
@@ -164,7 +164,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
         case "a":
             try: # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingColoumnChar = startingColumnChar - shipLength
-                if betweenStartingColoumnChar < 0:
+                if betweenStartingColoumnChar <= 0:
                     if gameMode == 1:
                         raise IndexError
                     else:
