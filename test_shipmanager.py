@@ -13,6 +13,10 @@ class TestShipmanager(unittest.TestCase):
         self.assertEqual(self.kreuzer.getName(), "Kreuzer")
         self.assertEqual(self.kreuzer.getSize(), 4)
 
+    def test_setPositon(self):
+        self.schlachtSchiff.setPosition(7)
+        self.assertEqual(self.schlachtSchiff.getPosition(),7)
+
     def tearDown(self):
         del self.schlachtSchiff
         del self.kreuzer
