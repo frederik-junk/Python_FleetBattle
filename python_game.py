@@ -27,9 +27,9 @@ def printhiddenBoard(board):
         print(str(i+1).zfill(2), end="  ")
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
 
-printleakedBoard(placementBoard)
-print(" \n")
-printhiddenBoard(placementBoard)
+# printleakedBoard(placementBoard)
+# print(" \n")
+# printhiddenBoard(placementBoard)
 
 
 
@@ -72,14 +72,14 @@ def placeShip(placementBoard, shipLength):
     #putting the 1 in the right position
     placementBoard[startingRowNumber][startingColumnChar] = 1
 
-    printleakedBoard(placementBoard)
+    # printleakedBoard(placementBoard)
 
 
     
     #placing the ship in the right direction
-    shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
+    # shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
     
-    printleakedBoard(placementBoard)
+    # printleakedBoard(placementBoard)
 
 
 
@@ -169,7 +169,7 @@ def cpuPlaceShip(placementBoard, shipLength):
 
     
 #cpuPlaceShip(placementBoard, shipLength)
-placeShip(placementBoard, shipLength)
+# placeShip(placementBoard, shipLength)
 
     
     
