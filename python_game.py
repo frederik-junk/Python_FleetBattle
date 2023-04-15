@@ -128,7 +128,7 @@ def placeShip(board, shipLength):
     
     # printleakedBoard(board)
 
-def directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, direction, gameMode):
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode):
     j = 0 # just a counting variable for later use
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
@@ -243,18 +243,18 @@ def directionConverter(placementBoard, shipLength, startingRowNumber, startingCo
             else: return True
 
 
-def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
+def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 2
     while True: 
         directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
             continue
         else:
             print("Ihr Schiff wurde platziert!") #hier muss der Name des Schifftypes noch rein
-            printleakedBoard(placementBoard)
+            printleakedBoard(board)
             break
 
-def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
+def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
@@ -266,7 +266,7 @@ def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColu
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        if directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
             continue
         else:
             break
@@ -281,8 +281,8 @@ def cpuPlaceShip(board, shipLength):
     printleakedBoard(board)
 
     
-#cpuPlaceShip(placementBoard, shipLength)
-# placeShip(placementBoard, shipLength)
+#cpuPlaceShip(board, shipLength)
+# placeShip(board, shipLength)
 
 
 def winoutput():
