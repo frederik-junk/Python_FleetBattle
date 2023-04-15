@@ -145,37 +145,23 @@ def cpuPlaceShip(placementBoard, shipLength):
 
 
 def winoutput():
-    lineone =  [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
-    linetwo =  [1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0]
-    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,1,1]
-    linefour = [0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1]
-    linefive = [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
-    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
-    for i, row in enumerate(fullwordoutput):
-        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
+    print("_________________________________\n")
+    print(" _____   _____   ______    _____")
+    print("/ ____| |_   _| |  ____|  / ____|")     
+    print("| (___    | |   | |__    | |  __")     
+    print("\___ \    | |   |  __|   | | |_ |")     
+    print("____) |  _| |_  | |____  | |__| |")     
+    print("|_____/ |_____| |______|  \_____|")
+    print("_________________________________\n")
 #winoutput()
 
 def loseoutput():
-    lineone =  [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1]
-    linetwo =  [1,1,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0]
-    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,1,1,0,0,1,0,0,0,1,1,1,1,0,1,0,1,1,0,1,1,1]
-    linefour = [1,0,1,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,1,0,0]
-    linefive = [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,0,1,1,1]
-    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
-    for i, row in enumerate(fullwordoutput):
-        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
+    print("  _   _   _____   ______   _____    ______   _____    _                    _____   ______")   
+    print("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ")
+    print("|  \| |   | |   | |__    | |  | | | |__    | |__) | | |         /  \    | |  __  | |__     ")
+    print("| . ` |   | |   |  __|   | |  | | |  __|   |  _  /  | |        / /\ \   | | |_ | |  __|    ")
+    print("| |\  |  _| |_  | |____  | |__| | | |____  | | \ \  | |____   / ____ \  | |__| | | |____   ")
+    print("|_| \_| |_____| |______| |_____/  |______| |_|  \_\ |______| /_/    \_\  \_____| |______|  ")
 #loseoutput()
 
 
