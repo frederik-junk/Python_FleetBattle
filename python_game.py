@@ -1,5 +1,5 @@
 import random
-
+import shipmanager
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -27,9 +27,9 @@ def printhiddenBoard(board):
         print(str(i+1).zfill(2), end="  ")
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
 
-printleakedBoard(placementBoard)
-print(" \n")
-printhiddenBoard(placementBoard)
+# printleakedBoard(placementBoard)
+# print(" \n")
+# printhiddenBoard(placementBoard)
 
 
 
@@ -46,6 +46,9 @@ def placeShip(placementBoard, shipLength):
             placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
 
 
+    #splitting the input into the column and row indices 
+    startingColumnChar = placementInput[0] #extrcting the first char of the users input
+    startingRowNumber = placementInput[1:] #extracting the rest of the users input
             #splitting the input into the column and row indices 
             startingColumnChar = placementInput[0] #extrcting the first char of the users input
             startingRowNumber = placementInput[1:] #extracting the rest of the users input
@@ -105,9 +108,9 @@ def placeShip(placementBoard, shipLength):
 
     
     #placing the ship in the right direction
-    shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
+    # shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
     
-    printleakedBoard(placementBoard)
+    # printleakedBoard(placementBoard)
 
 
 
@@ -198,35 +201,7 @@ def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColu
         case 3: cpuDirection = "d"
         case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-    j = 0 # just a counting variable for later use
-    match cpuDirection:
-        case "w": 
-            #changing every index between the beginning and the end to a 1
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingRowNumber = startingRowNumber - 1
-                j += 1
-
-        case "a": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingColumnChar -= 1
-                j += 1
-
-        case "s": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingRowNumber += 1
-                j += 1
-
-        case "d": 
-            while j < shipLength:
-                placementBoard[startingRowNumber][startingColumnChar] = 1
-                startingColumnChar += 1
-                j += 1
-
-        case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
-
+    directionConverter(placementBoard, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(placementBoard, shipLength):
@@ -239,7 +214,7 @@ def cpuPlaceShip(placementBoard, shipLength):
 
     
 #cpuPlaceShip(placementBoard, shipLength)
-placeShip(placementBoard, shipLength)
+# placeShip(placementBoard, shipLength)
 
     
     
