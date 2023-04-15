@@ -96,7 +96,8 @@ def placeShip(placementBoard, shipLength):
                 print(f"Die Spitze des Schiffes liegt auf {placementInput}")
                 #putting the 1 in the right position
                 placementBoard[startingRowNumber][startingColumnChar] = 1
-
+                #placing the ship in the right direction
+                shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
                 break
         except IndexError:
             #if the index is out of bounds
