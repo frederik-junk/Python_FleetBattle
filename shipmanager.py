@@ -35,6 +35,4 @@ class Zerstoerer(Ships):
 class Uboot(Ships):
     def __init__(self, position):
         super().__init__("U-Boot", 2, position)
-
-schlachtschiff = Schlachtschiff(5)
-print(f"{schlachtschiff.getName()} wird zum Training geschickt!")
+        
