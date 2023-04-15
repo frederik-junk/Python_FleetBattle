@@ -99,7 +99,7 @@ def placeShip(board, shipLength):
                    
             
             #adding one for the correct alignment still needs fixes
-            startingRowNumber = int(startingRowNumber) - 1
+            printingStartingRowNumber = int(startingRowNumber) - 1
             startingColumnChar = int(startingColumnChar) 
 
             if startingRowNumber < 0:
@@ -134,8 +134,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
     match direction:
         case "w":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                betweenStartingRowNumber = startingRowNumber - shipLength
-                if betweenStartingRowNumber < 0:
+                endRowNumber = startingRowNumber - shipLength
+                if endRowNumber <= 0:
                     raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:
                     #changing every index between the beginning and the end to a 1
@@ -146,6 +146,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         positionTupelList.append(positionTupel)
 
                         startingRowNumber = startingRowNumber - 1
+
                         j += 1
                     return False
             except IndexError as e:
@@ -156,8 +157,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
         case "a":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                betweenStartingColoumnChar = startingColumnChar - shipLength
-                if betweenStartingColoumnChar < 0:
+                endColoumnChar = startingColumnChar - shipLength
+                if endColoumnChar <= 0:
                     raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:  
                     while j < shipLength:
@@ -175,8 +176,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                 return True
         case "s": 
             try: # exception for the case that the ship travels out of bounce in the given direction
-                betweenStartingRowNumber = startingColumnChar + shipLength
-                if betweenStartingRowNumber > 10:
+                endRowNumber = startingColumnChar + shipLength
+                if endRowNumber > 10:
                     raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else: 
                     while j < shipLength:
@@ -194,8 +195,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                 return True
         case "d":
             try: # exception for the case that the ship travels out of bounce in the given direction
-                betweenStartingRowNumber = startingColumnChar + shipLength
-                if betweenStartingRowNumber > 10:
+                endColoumnChar = startingColumnChar + shipLength
+                if endColoumnChar > 10:
                     raise IndexError("In dieser Richtung läuft das Schiff über das Spielfeld hinaus.")
                 else:
                     while j < shipLength:
@@ -237,6 +238,55 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
         directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection)
+
+
+#function to add the blockers so that ships cant be placed next to the ship
+def addPlacementBlocker(board, positionTupelList):
+    for tupel in positionTupelList:
+        rowNumber, columnNumber = tupel
+    blockerLeftNumber = columnNumber - 1
+    blockerRightNumber = columnNumber + 1
+    blockerTopNumber = rowNumber - 1
+    blockerBottomNumber = rowNumber + 1
+
+    blockerList = []
+    
+
+
+    if blockerTopNumber < 0 and blockerLeftNumber < 0 or board[blockerTopNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerTopLeft = (blockerTopNumber, blockerLeftNumber))
+    if blockerTopNumber < 0 or board[blockerTopNumber][columnNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerTop = (blockerTopNumber, columnNumber))
+    if blockerTopNumber < 0 and blockerRightNumber > 10 or board[blockerTopNumber][blockerRightNumber] == 0:
+        pass
+    else:
+        blockerList.append(blockerTopRight = (blockerTopNumber, blockerRightNumber))
+    if  blockerRightNumber > 10 or board[rowNumber][blockerRightNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerRight = (rowNumber, blockerRightNumber))
+    if blockerBottomNumber > 10 and blockerRightNumber > 10 or board[blockerBottomNumber][blockerRightNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottomRight = (blockerBottomNumber, blockerRightNumber))
+    if blockerBottomNumber > 10 or board[blockerBottomNumber][columnNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottom = (blockerBottomNumber, columnNumber))
+    if blockerBottomNumber > 10 and blockerLeftNumber < 0 or board[blockerBottomNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerBottomLeft = (blockerBottomNumber, blockerLeftNumber))
+    if blockerLeftNumber < 0 or board[rowNumber][blockerLeftNumber] == 1:
+        pass
+    else:
+        blockerList.append(blockerLeft = (rowNumber, blockerLeftNumber))
+
+
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(board, shipLength):
