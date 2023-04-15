@@ -30,7 +30,7 @@ def welcomeUser():
     print("______________________________________________________\n")
 
 # variable that holds the game rules to print when starting the game
-gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen 6. Jeder Spieler hat 10 Schiffe\n"
+gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
 # setting current Player to 0 to define it afterwards in function below
 currentPlayer = 0
 
