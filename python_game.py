@@ -52,6 +52,24 @@ def placeShip(placementBoard, shipLength):
             #splitting the input into the column and row indices 
             startingColumnChar = placementInput[0] #extrcting the first char of the users input
             startingRowNumber = placementInput[1:] #extracting the rest of the users input
+  
+            try:
+                if startingColumnChar.isalpha() == False:
+                    raise ValueError
+                startingColumnChar = startingColumnChar.upper()
+                
+                
+            except ValueError as e:
+                print(str(e))
+                print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
+                print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
+                continue
+
+            except Exception:
+                print("Ihre Eingabe enthaelt Fehler. Bitte geben sie Buchstaben zwischen A und J ein.")
+                print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
+                continue
+            
             print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
             print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
 
