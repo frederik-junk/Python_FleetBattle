@@ -1,6 +1,5 @@
 import random
 
-
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
 secondRow =  [0,0,0,0,0,0,0,0,0,0]
@@ -27,17 +26,7 @@ def printhiddenBoard(board):
         print(str(i+1).zfill(2), end="  ")
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
 
-printleakedBoard(placementBoard)
-print(" \n")
-printhiddenBoard(placementBoard)
-
-
-
-
-
 shipLength = int(2)
-
-
 
 # function to place a ship in the right position with the right length and the right direction
 def placeShip(placementBoard, shipLength):
@@ -71,18 +60,11 @@ def placeShip(placementBoard, shipLength):
     
     #putting the 1 in the right position
     placementBoard[startingRowNumber][startingColumnChar] = 1
-
-    printleakedBoard(placementBoard)
-
-
     
     #placing the ship in the right direction
     shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar)
     
     printleakedBoard(placementBoard)
-
-
-
 
 def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
     directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
@@ -114,8 +96,6 @@ def shipDirection(placementBoard, shipLength, startingRowNumber, startingColumnC
                 j += 1
 
         case _: print("Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben")
-
-
 
 
 def cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColumnChar):
@@ -167,14 +147,6 @@ def cpuPlaceShip(placementBoard, shipLength):
     cpuShipDirection(placementBoard, shipLength, startingRowNumber, startingColoumnChar)
     printleakedBoard(placementBoard)
 
-    
-#cpuPlaceShip(placementBoard, shipLength)
-placeShip(placementBoard, shipLength)
-
-    
-    
-
-
 def winoutput():
     print("  _____   _____   ______    _____")    
     print(" / ____| |_   _| |  ____|  / ____|")   
@@ -187,9 +159,9 @@ def winoutput():
     print("\n")
     for i, row in enumerate(fullwordoutput):
         print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
+        print("\n")
+        print(len(linefive)*"== ")
+        print("\n")
 #winoutput()
 
 def loseoutput():
@@ -204,8 +176,8 @@ def loseoutput():
     print("\n")
     for i, row in enumerate(fullwordoutput):
         print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
-    print("\n")
-    print(len(linefive)*"== ")
-    print("\n")
+        print("\n")
+        print(len(linefive)*"== ")
+        print("\n")
 #loseoutput()
 
