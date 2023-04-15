@@ -1,52 +1,34 @@
-import random 
-
-
-
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
-firstRow = ["01",0,0,0,0,0,0,0,0,0,0]
-secondRow = ["02",0,0,0,0,0,0,0,0,0,0]
-thirdRow = ["03",0,0,0,0,0,0,0,0,0,0]
-fourthRow = ["04",0,0,0,0,0,0,0,0,0,0]
-fifthRow = ["05",0,0,0,0,0,0,0,0,0,0]
-sixthRow = ["06",0,0,0,0,0,0,0,0,0,0]
-seventhRow = ["07",0,0,0,0,0,0,0,0,0,0]
-eighthRow = ["08",0,0,0,0,0,0,0,0,0,0]
-ninethRow = ["09",0,0,0,0,0,0,0,0,0,0]
-tenthRow = ["10",0,0,0,0,0,0,0,0,0,0]
+firstRow =   [1,1,1,0,0,0,0,0,0,0]
+secondRow =  [0,0,0,0,0,0,0,0,0,0]
+thirdRow =   [0,1,0,0,0,0,0,2,0,0]
+fourthRow =  [0,1,0,0,2,0,0,0,0,0]
+fifthRow =   [0,1,0,0,0,0,0,0,0,0]
+sixthRow =   [0,0,2,0,0,0,4,0,0,0]
+seventhRow = [0,0,0,0,0,0,4,0,0,0]
+eighthRow =  [0,0,0,3,0,0,4,0,0,0]
+ninethRow =  [0,0,0,0,0,0,0,0,0,0]
+tenthRow =   [0,0,0,0,0,0,0,0,0,0]
 placementBoard = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 
-        
-#function to print the placement board
-def printPlacementBoard(placementBoard):
-        
-        #countingvariable for later use
-        i = 0 
+def printleakedBoard(board):
+    print("  ".join(letterRow))
+    for i, row in enumerate(board):
+        print(str(i+1).zfill(2), end="  ")
+        print("  ".join(str(elem).replace("1","#").replace("0","~") for elem in row))
 
-        #reading and printing of the first letterRow
-        for element in letterRow:
-            print(element, end='    ')
-        print("\n")
 
-        #auslesen und printen der spielfeldzeilen !!allerdings ist die erste Dekorspalte auch in dem Spielfeld array muss geeändert werden
-        # mit offset oder so
-        for row in placementBoard:
-            for element in row:
-                i += 1
-                if i % 11 == 0:
-                    #distinction in the last column
-                    match element:
-                        case 1: print("#", end="    ")
-                        case 0: print("~", end="    ")
-                    print("\n")
-                #printing the other rows and columns
-                elif element == 1:
-                    print("#", end="    ")
-                elif element == 0:
-                    print("~", end="    ")
-                #default case
-                else:
-                    print(element, end="    ")
+def printhiddenBoard(board):
+    print("  ".join(letterRow))
+    for i, row in enumerate(board):
+        print(str(i+1).zfill(2), end="  ")
+        print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
+
+printleakedBoard(placementBoard)
+print(" \n")
+printhiddenBoard(placementBoard)
+
 
 #printPlacementBoard(placementBoard)
 
@@ -58,6 +40,7 @@ shipLength = int(2)
 # function to place a ship in the right position with the right length and the right direction
 def placeShip(placementBoard, shipLength):
     placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+
 
     #splitting the input into the column and row indices 
     startingColumnChar = placementInput[0] #extrcting the first char of the users input
@@ -82,6 +65,7 @@ def placeShip(placementBoard, shipLength):
     #adding one for the correct alignment still needs fixes
     startingRowNumber = int(startingRowNumber) - 1
     startingColumnChar = int(startingColumnChar) + 1
+
     
     #putting the 1 in the right position
     placementBoard[startingRowNumber][startingColumnChar] = 1
@@ -187,4 +171,39 @@ def cpuPlaceShip(placementBoard, shipLength):
 
     
     
+
+
+def winoutput():
+    lineone =  [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
+    linetwo =  [1,0,0,0,0,0,1,0,0,1,0,0,0,1,0,0,0]
+    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,1,1]
+    linefour = [0,0,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1]
+    linefive = [1,1,1,1,0,1,1,1,0,1,1,1,0,1,1,1,1]
+    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+    for i, row in enumerate(fullwordoutput):
+        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+winoutput()
+
+def loseoutput():
+    lineone =  [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,1,1,0,0,1,0,0,0,0,1,1,0,0,1,1,1,1,0,1,1,1]
+    linetwo =  [1,1,0,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0]
+    linethree =[1,1,1,1,0,0,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,1,1,0,0,1,0,0,0,1,1,1,1,0,1,0,1,1,0,1,1,1]
+    linefour = [1,0,1,1,0,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,1,0,0,1,0,0,0,1,0,0,1,0,1,0,0,1,0,1,0,0]
+    linefive = [1,0,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,0,1,1,1,0,1,0,0,1,0,1,1,1,0,1,0,0,1,0,1,1,1,1,0,1,1,1]
+    fullwordoutput = [lineone,linetwo,linethree,linefour,linefive]
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+    for i, row in enumerate(fullwordoutput):
+        print("  ".join(str(elem).replace("1","#").replace("0"," ") for elem in row))
+    print("\n")
+    print(len(linefive)*"== ")
+    print("\n")
+loseoutput()
 
