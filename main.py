@@ -26,21 +26,30 @@ def gameModeSelection():
     userInput = input("Bitte wähle die gewünschte Spielart: \n [1] Spiel gegen den Computer \n [2] 2 Spieler\n")
     match userInput:
         case "1":
-            gameMode = 1
             print("__________________________________\n")
             print("1-Spieler Modus.\n")
             print(gameRules)
+            userName1 = "Spieler"
+            userName1 = input("Bitte geben Sie ihren Namen an ('Enter' um annonym fortzufahren): \n")
+            print (f"Hallo {userName1}, bitte platzieren Sie nun Ihre Schiffe")
             placeShip(placementBoard, shipLength)
+            print("Der Computer plaziert nun seine Schiffe. Dies kann einige Sekunden dauern")
             cpuPlaceShip(placementBoard, shipLength)
+            print("")
             print("Das Spiel beginnt.")
             selectStartingPlayer(userInput)
         case "2":
-            gameMode = 2
             print("__________________________________\n")
             print("2-Spieler Modus.\n")
             print(gameRules)
+            userName1 = input("Spieler 1, bitte geben Sie ihren Namen an: \n")
+            print (f"Hallo {userName1}, bitte platzieren Sie nun Ihre Schiffe")
+            print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
             placeShip(placementBoard, shipLength)
-            cpuPlaceShip(placementBoard, shipLength)
+            userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
+            print (f"Hallo {userName2}, bitte platzieren Sie nun Ihre Schiffe")
+            print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
+            placeShip(placementBoard, shipLength)
             print("Das Spiel beginnt.")
             selectStartingPlayer(userInput)
         case _: 
