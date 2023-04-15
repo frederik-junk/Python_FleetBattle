@@ -5,6 +5,9 @@ class Ships:
         self.__position = position
         self.__damageCounter = 0
 
+    def setPosition(self,position):
+        self.__position = position
+
     def getName(self):
         return self.__name
     
@@ -21,18 +24,17 @@ class Ships:
         self.__damageCounter += 1
 
 class Schlachtschiff(Ships):
-    def __init__(self, position):
-        super().__init__("Schlachtschiff", 5, position)
+        def __init__(self,position):
+            super().__init__("Schlachtschiff", 5, position)
 
 class Kreuzer(Ships):
-    def __init__(self, position):
-        super().__init__("Kreuzer", 4, position)
+        def __init__(self,position):
+            super().__init__("Kreuzer", 4, position)
 
 class Zerstoerer(Ships):
-    def __init__(self, position):
-        super().__init__("Zerstoerer", 3, position)
+        def __init__(self,position):
+            super().__init__("Zerstoerer", 3, position)
 
-class Uboot(Ships):
-    def __init__(self, position):
-        super().__init__("U-Boot", 2, position)
-        
+class UBoot(Ships):
+        def __init__(self,position):
+            super().__init__("UBoot", 2, position)
