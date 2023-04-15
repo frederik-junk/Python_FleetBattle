@@ -21,7 +21,7 @@ def printleakedBoard(board):
     print("  ".join(letterRow))
     for i, row in enumerate(board):
         print(str(i+1).zfill(2), end="  ")
-        print("  ".join(str(elem).replace("1","#").replace("0","~") for elem in row))
+        print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","?") for elem in row))
 
 
 def printhiddenBoard(board):
@@ -113,7 +113,7 @@ def placeShip(board, shipLength):
                 print("Bitte geben sie eine neue Startposition an.")
                 continue
             else:
-                value = board[startingRowNumber][startingColumnChar]
+                value = board[startingRowNumber][startingColumnChar] #dies kann entfernt werden
 
                 print(f"Die Spitze des Schiffes liegt auf {placementInput}")
                 #putting the 1 in the right position
@@ -159,6 +159,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingRowNumber = startingRowNumber - 1
 
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:       
@@ -186,8 +188,9 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar -= 1
                         j += 1
-                    repeater = False
-                    return repeater
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
+                    return False
             except IndexError as e:
                 if gameMode == 2:
                     print(str(e))
@@ -212,6 +215,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingRowNumber += 1
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
@@ -237,6 +242,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar += 1
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
