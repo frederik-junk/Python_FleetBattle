@@ -25,7 +25,7 @@ def addPlacementBlocker(board, positionTupelList):
             blockerList.append(blockerTop)
             board[blockerTopNumber][columnNumber] = 6
 
-        if blockerTopNumber < 0 or blockerRightNumber >= 10 or board[blockerTopNumber][blockerRightNumber] == 0:
+        if blockerTopNumber < 0 or blockerRightNumber >= 10 or board[blockerTopNumber][blockerRightNumber] == 1:
             pass
         else:
             blockerTopRight = (blockerTopNumber, blockerRightNumber)

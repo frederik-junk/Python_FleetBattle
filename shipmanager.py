@@ -46,6 +46,6 @@ class Zerstoerer(Ships):
         def __init__(self,position):
             super().__init__("Zerstoerer", 3, position)
 
-class UBoot(Ships):
+class Uboot(Ships):
         def __init__(self,position):
             super().__init__("UBoot", 2, position)

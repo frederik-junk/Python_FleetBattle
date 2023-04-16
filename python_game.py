@@ -1,6 +1,7 @@
 import random
 from shipmanager import *
 from converterfunctions import *
+from circularImportFixing import *
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -138,7 +139,7 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
     #hitted ship
     elif leakedBoard[row][column] == 1:
         #get which ship is hit
-        for ship in opponentships:
+        for ship in opponentShips:
             if(row,column)in ship.getPosition():
                 shipName = ship
         shipName.hitOnShip()
