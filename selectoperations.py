@@ -1,9 +1,9 @@
 # Import required modules
 import outputmanager
-from python_game import *
-from random import *
+import python_game
+import random
 import circularImportFixing
-from shipmanager import *
+import shipmanager
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
@@ -26,7 +26,7 @@ def gameModeSelection():
                     # Print welcome message for user 2 and ask to place ships
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     # Call function placeShip to give user the opportunity to select the ship positions
-                    placeShip(leakedBoard1, shipLength)
+                    placeShip(python_game.leakedBoard1, python_game.shipLength)
                     # Print message for computer to place ships
                     print("Der Computer plaziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
@@ -52,7 +52,7 @@ def gameModeSelection():
                     print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
                     # Call function placeShip for user 1 to place ships
                     for ship in circularImportFixing.playerShips:
-                        ship.classPlaceShip(leakedBoard1, ship)
+                        ship.classPlaceShip(python_game.leakedBoard1, ship)
                     # Ask for user 2 name and welcome message
                     userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
                     # Set user name 2
@@ -60,7 +60,7 @@ def gameModeSelection():
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
                     # Call function for user 2 to place ships
-                    placeShip(leakedBoard2, shipLength)
+                    placeShip(python_game.leakedBoard2, python_game.shipLength)
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
                     # Call function to randomly select starting player
@@ -82,7 +82,7 @@ def selectStartingPlayer(mode):
     playerOne = 1
     playerTwo = 2
     print("Es wird zufällig bestimmt wer beginnt...")
-    startingPlayer = randint(1,2)
+    startingPlayer = random.randint(1,2)
     if(startingPlayer == 2):
         currentPlayer = 2
         print(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!")

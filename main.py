@@ -3,7 +3,7 @@ import outputmanager
 import selectoperations
 import player
 import oponent
-from circularImportFixing import *
+import circularImportFixing
 
 
 # extracting current Path for optimal usage on Windows and Linux systems
@@ -50,7 +50,7 @@ def nextPlayer():
 def main():
     outputmanager.welcomeUser()
     gameMode = selectoperations.gameModeSelection()
-    for ship in playerShips:
+    for ship in circularImportFixing.playerShips:
         ship.classPlaceShip(leakedBoard1, ship)
     outputmanager.battleEnd(2, gameMode)
 

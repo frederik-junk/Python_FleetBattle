@@ -1,6 +1,5 @@
 import random
-from shipmanager import *
-from converterfunctions import *
+import converterfunctions
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -47,8 +46,8 @@ def placeShip(board, shipLength, ship, shipName):
         try:
             placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {shipName} platziert werden soll. Es hab die Laenge {shipLength}.\n")
 
-            startingColumnChar = splitColumnConverter(placementInput)
-            startingRowNumber = splitRow(placementInput)
+            startingColumnChar = converterfunctions.splitColumnConverter(placementInput)
+            startingRowNumber = converterfunctions.splitRow(placementInput)
             if startingColumnChar == 11:  #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
             else:
@@ -91,7 +90,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
     gameMode = 2
     while True: 
         directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
+        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
             continue
         else:
             print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
@@ -110,7 +109,7 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
+        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
             continue
         else:
             break
