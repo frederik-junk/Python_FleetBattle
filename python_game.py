@@ -139,9 +139,18 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
     #hitted ship
     elif leakedBoard[row][column] == 1:
         #get which ship is hit
-        for ship in opponentShips:
-            if(row,column)in ship.getPosition():
-                shipName = ship
+        #TODO are gameMode and currentplayer functioning?
+        #don´t import main!
+        if(main.gameMode == 1 and main.currentplayer == 2):  
+            for ship in shipmanager.opponentShips:
+                if(row,column)in ship.getPosition():
+                    shipName = ship
+                    break
+        else:
+            for ship in shipmanager.playerShips:
+                if(row,column)in ship.getPosition():
+                    shipName = ship
+                    break
         shipName.hitOnShip()
         if shipName.getSize() == shipName.getDamageCounter():
             #ship sunk
