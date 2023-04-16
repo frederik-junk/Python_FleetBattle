@@ -65,7 +65,7 @@ def gameModeSelection():
                         counter = counter+1
                     counter = 1
                     # Ask for user 2 name and welcome message
-                    continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und Spieler 2 seine Schiff platzieren zu lassen: ")
+                    continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und Spieler 2 seine Schiff platzieren zu lassen: \n")
                     clearConsole()
                     userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
                     # Set user name 2
@@ -77,6 +77,7 @@ def gameModeSelection():
                         ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
+                    continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und das Spiel zu starten: \n")
                     # Print messaSge indicating start of the game
                     clearConsole()
                     print("Das Spiel beginnt.")
