@@ -2,6 +2,10 @@ import python_game
 import main
 import converterfunctions
 import hitShip
+import os
+
+def clearConsole():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 class Player:
     def __init__(self,name):
@@ -13,6 +17,7 @@ def playerAction(currentPlayer, gameMode):
         #input hitting field
         #TODO check if input is valid
         hittingInput = input("Bitte geben Sie an auf welches Feld Sie schießen wollen: \n")
+        clearConsole()
         #split row and column
         row = converterfunctions.splitRow(hittingInput)
         column = converterfunctions.splitColumnConverter(hittingInput)
@@ -30,9 +35,15 @@ def playerAction(currentPlayer, gameMode):
         elif isHit == 2:
             #hit a ship
             print("Treffer! Bitte wählen Sie ein neues Zielfeld.")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            clearConsole()
         elif isHit == 3:
             print("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            clearConsole()
         else:
             print("Das war leider ein Wassertreffer!")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            clearConsole()
     #switch to player/computer
     main.nextPlayer()
