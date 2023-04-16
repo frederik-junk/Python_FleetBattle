@@ -29,9 +29,9 @@ def playerAction(currentPlayer, gameMode):
             playerAction(currentPlayer,gameMode)
         elif isHit == 2:
             #hit a ship
-            print("Sie haben getroffen, bitte schießen Sie ernuet!")
+            print("Treffer! Bitte wählen Sie ein neues Zielfeld.")
         elif isHit == 3:
-            print("Sie haben das Schiff versenkt! \nSie duerfen noch einmal schießen")
+            print("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.")
         else:
             print("Das war leider ein Wassertreffer!")
     #switch to player/computer
