@@ -21,27 +21,26 @@ hiddenBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, se
 
 
 
+#function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
+    #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
-        print(str(i+1).zfill(2), end="  ")
+        #creates the first column with letters to locate the ship positon (vertical)
+        print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
+        #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","?") for elem in row))
 
-
+#function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
+    #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
-        print(str(i+1).zfill(2), end="  ")
+        #creates the first column with letters to locate the ship positon (vertical)
+        print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
+        #replace function to optical replace  1 = ship filed but hidden (shown as water), 2 = free space (water), 2 = shotted spot without hit, 3 = shotted spot with hit, 4 = eleminated ship (complet)
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
-
-# printleakedBoard(board)
-# print(" \n")
-# printhiddenBoard(board)
-
-shipLength = int(2)
-
-
-            
+         
 #function to place a ship in the right position with the right length and the right direction
 def placeShip(board, shipLength, ship):
     while True:
@@ -130,3 +129,29 @@ def cpuPlaceShip(board, shipLength):
     
 
 
+
+#hidden = ships hidden
+def checkHit(hiddenBoard,leakedBoard,row,column):
+    #check if field was alredy hit
+    if hiddenBoard[row][column] != 0:
+        return 1
+    #hitted ship
+    elif leakedBoard[row][column] == 1:
+        #get which ship is hit
+        for ship in opponentships:
+            if(row,column)in ship.getPosition():
+                shipName = ship
+        shipName.hitOnShip()
+        if shipName.getSize() == shipName.getDamageCounter():
+            #ship sunk
+            for position in shipName.getPosition():
+                hiddenBoard[position]=4
+            return 1
+        #ship isnt sunk
+        else:
+            leakedBoard[row][column] = 3
+        return 2
+    #hitted water
+    elif hiddenBoard[row][column] == 0:
+        leakedBoard[row][column]= 2
+    return 0

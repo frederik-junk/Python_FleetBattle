@@ -1,6 +1,9 @@
 import os
 import outputmanager
 import selectoperations
+import player
+import oponent
+
 
 # extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
@@ -16,10 +19,14 @@ def nextPlayer():
     if(currentPlayer == 1):
         currentPlayer = 2
         print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
+        player.playerAction(currentPlayer)
     else:
         currentPlayer = 1
         print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-    return currentPlayer
+        if(selectoperations.gameMode == 1):
+            oponent.oponentAction()
+        elif(selectoperations.gameMode == 2): 
+            player.playerAction(currentPlayer)
 
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def main():

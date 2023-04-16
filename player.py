@@ -1,14 +1,12 @@
-import shipmanager
 import python_game
-import oponent
 import main
 
 class Player:
     def __init__(self,name):
         self.__name = name
 """
-#playerships
-#no implementation yet might change later
+#TODO delete comment when ships are implemented differently
+#TODO import shipmanager if want to use again
 pschlachtschiff1 = shipmanager.Schlachtschiff(((1,1),(1,2),(1,3),(1,4),(1,5)))
 pkreuzer1 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
 pkreuzer2 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
@@ -26,15 +24,19 @@ def initPlayerShips():
         length = ship.getSize()
         python_game.placeShip(python_gameleakedBoard2,length,ship)
 """
-def playerAction():
+def playerAction(currentPlayer):
     isHit = 1
     while(isHit != 0):
         #input hitting field
         hittingInput = input("Bitte geben sie an auf welches Feld schießen wollen")
         #split row and column
-        row = python_game.splitRow(placementInput)
-        column = python_game.splitColumn(placementInput)
-        isHit = oponent.checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column)
+        row = converterFunctions.splitRow(placementInput)
+        column = converterFunctions.splitColumn(placementInput)
+        if currentPlayer == 2:
+            isHit = python_game.checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column)
+        elif currentPlayer == 1:
+            isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column)
+
         if isHit == 1:
             #hit an alredy hitted field
             print("Bitte waelen sie ein Feld auf dass sie noch nicht geschossen haben!")
