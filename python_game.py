@@ -42,10 +42,10 @@ def printhiddenBoard(board):
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
          
 #function to place a ship in the right position with the right length and the right direction
-def placeShip(board, shipLength, ship):
+def placeShip(board, shipLength, ship, shipName):
     while True:
         try:
-            placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+            placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {shipName} platziert werden soll. Es hab die Laenge {shipLength}.\n")
 
             startingColumnChar = splitColumnConverter(placementInput)
             startingRowNumber = splitRow(placementInput)
@@ -133,6 +133,8 @@ def cpuPlaceShip(board, shipLength):
 #hidden = ships hidden
 def checkHit(hiddenBoard,leakedBoard,row,column):
     #check if field was alredy hit
+    #TODO hier könnte eine falsche Ausgabe entstehen wegen dem +65, ist dafür da die Zahl zu einem char via ascii-Tabelle um zu wandeln
+    print("Schuss auf: "+chr(column+65),row)
     if hiddenBoard[row][column] != 0:
         return 1
     #hitted ship
@@ -146,7 +148,7 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
             #ship sunk
             for position in shipName.getPosition():
                 hiddenBoard[position]=4
-            return 1
+            return 3
         #ship isnt sunk
         else:
             leakedBoard[row][column] = 3

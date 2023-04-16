@@ -1,5 +1,4 @@
 from blockerfunctions import *
-import python_game
 from shipmanager import *
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
@@ -68,7 +67,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     return True
         case "s": 
             try: # exception for the case that the ship travels out of bounce in the given direction
-                betweenStartingRowNumber = startingColumnChar + shipLength
+                betweenStartingRowNumber = startingRowNumber + shipLength
                 if betweenStartingRowNumber > 10:
                     if gameMode == 1:
                         raise IndexError
