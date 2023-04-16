@@ -40,8 +40,6 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
-                        else:
-                            print(positionTupelList)
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
@@ -66,7 +64,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
         case "a":
             try:  # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingColoumnChar = startingColumnChar - shipLength
-                if betweenStartingColoumnChar <= 0:
+                if betweenStartingColoumnChar < 0:
                     if gameMode == 1:
                         raise wrongPlacement
                     else:
@@ -90,8 +88,6 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
-                        else:
-                            print(positionTupelList)
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
@@ -140,8 +136,6 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
-                        else:
-                            print(positionTupelList)
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
@@ -190,8 +184,6 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
-                        else:
-                            print(positionTupelList)
                     ship.setPosition(positionTupelList)
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     return False

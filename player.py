@@ -16,11 +16,23 @@ def playerAction(currentPlayer, gameMode):
     while isHit != 0:
         #input hitting field
         #TODO check if input is valid
-        hittingInput = input("Bitte geben Sie an auf welches Feld Sie schießen wollen: \n")
-        #clearConsole()
-        #split row and column
-        row = converterfunctions.splitRow(hittingInput)
-        column = converterfunctions.splitColumnConverter(hittingInput)
+        while True:
+            try:
+                hittingInput = input("Bitte geben Sie an auf welches Feld Sie schießen wollen: \n")
+                #split row and column
+                row = converterfunctions.splitRow(hittingInput)
+                column = converterfunctions.splitColumnConverter(hittingInput)
+                if row == 11:
+                    raise Exception("wrong Input")
+                elif column == 11:
+                    raise Exception("wrong Input") 
+                else:
+                    break
+            except Exception:
+                print("Ihre Angabe ist fehlerhaft.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
+                print("Bitte geben Sie die Schießposition in der Form (z.B.: A3) an.")
+                continue
+            
         #choose on which board to shoot
 
         if currentPlayer == 2:
