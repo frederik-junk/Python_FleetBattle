@@ -276,7 +276,7 @@ def splitRow(placementInput):
         # extracting the rest of the users input
         # the code above could raise a ValueError which is excepted down below
         if 0 < startingRowNumber <= 10:
-            return startingRowNumber
+            return startingRowNumber - 1
         else:
             raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
 
