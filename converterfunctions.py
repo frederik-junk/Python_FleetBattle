@@ -49,7 +49,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
                     else:
                         print(str(e))
-                    print("Bitte platzieren sie ihr Schiff neu. Tipp:\n -sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -sie könne aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
                     return True
                 else: 
                     return True
@@ -89,7 +89,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
                     else:
                         print(str(e))
-                    print("Bitte platzieren sie ihr Schiff neu. Tipp:\n -sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -sie könne aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
                     return True
                 else: 
                     return True
@@ -129,7 +129,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
                     else:
                         print(str(e))
-                    print("Bitte platzieren sie ihr Schiff neu. Tipp:\n -sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -sie könne aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
                     return True
                 else: 
                     return True
@@ -169,14 +169,14 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
                     else:
                         print(str(e))
-                    print("Bitte platzieren sie ihr Schiff neu. Tipp:\n -sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -sie könne aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
                     return True
                 else:
                     return True
         case _:
             if gameMode == 2:
                 print(
-                    "Bitte bestimmen Sie mithilfe von [w][a][s][d] die Ausrichtung des Schiffes."
+                    "Bitte bestimmen Sie mithilfe der Tasten [w][a][s][d] die Ausrichtung des Schiffes."
                 )
                 return True
             else:
