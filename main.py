@@ -35,8 +35,6 @@ currentPlayer = 0
 def main():
     outputmanager.welcomeUser()
     gameMode = selectoperations.gameModeSelection()
-    for ship in circularImportFixing.playerShips:
-        ship.classPlaceShip(leakedBoard1, ship)
     outputmanager.battleEnd(2, gameMode)
 
 if __name__ == "__main__":
