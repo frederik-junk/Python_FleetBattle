@@ -1,5 +1,9 @@
 import random
 import converterfunctions
+import os
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -28,7 +32,7 @@ def printleakedBoard(board):
         #creates the first column with letters to locate the ship positon (vertical)
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
-        print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","?") for elem in row))
+        print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","X") for elem in row))
 
 #function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
@@ -41,24 +45,21 @@ def printhiddenBoard(board):
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
          
 #function to place a ship in the right position with the right length and the right direction
-def placeShip(board, shipLength, ship, shipName):
+def placeShip(board, shipLength, ship, shipName, counter):
+    if counter == 1:
+        printleakedBoard(board)
     while True:
         try:
-            placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {shipName} platziert werden soll. Es hab die Laenge {shipLength}.\n")
+            placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {counter}. Schiffs ({shipName}) platziert werden soll. Dieses hat die Laenge {shipLength}.\n")
 
             startingColumnChar = converterfunctions.splitColumnConverter(placementInput)
             startingRowNumber = converterfunctions.splitRow(placementInput)
             if startingColumnChar == 11:  #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
-            else:
-                print("Der erste Buchstabe ist:", placementInput[0])    #diese ausgabe kann entfernt werden
-
-            if startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
+            
+            elif startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
-            else:
-                print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
-                
-                
+                 
         except Exception as e:
             print(str(e))
             print("Ihre Eingabe enthaelt Fehler.\n Bitte geben sie Buchstaben zwischen A und J ein.\n Bitte geben sie eine Zahl zwischen 1 und 10 ein.")
@@ -83,14 +84,12 @@ def placeShip(board, shipLength, ship, shipName):
             else:
                 break
 
-    printleakedBoard(board)
+    #printleakedBoard(board)
 
 
     #DELETE if Positions for ships are available 
     #placing the ship in the right direction
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
-    
-    # printleakedBoard(board)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2 
@@ -98,6 +97,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
     if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
         return True #is send back to set another coordinate
     else:
+            clear_console()
         print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
         printleakedBoard(board)
         return False
@@ -144,9 +144,18 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
     #hitted ship
     elif leakedBoard[row][column] == 1:
         #get which ship is hit
-        for ship in opponentShips:
-            if(row,column)in ship.getPosition():
-                shipName = ship
+        #TODO are gameMode and currentplayer functioning?
+        #don´t import main!
+        if(main.gameMode == 1 and main.currentplayer == 2):  
+            for ship in shipmanager.opponentShips:
+                if(row,column)in ship.getPosition():
+                    shipName = ship
+                    break
+        else:
+            for ship in shipmanager.playerShips:
+                if(row,column)in ship.getPosition():
+                    shipName = ship
+                    break
         shipName.hitOnShip()
         if shipName.getSize() == shipName.getDamageCounter():
             #ship sunk

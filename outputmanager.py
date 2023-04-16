@@ -6,17 +6,16 @@ class User:
 
     def getName(self):
         return self.__name
-    
+
     def setName(self, name):
         self.__name = name
 
-#creating two instances of User 
+#creating two instances of User
 user1 = User("Spieler 1")
 user2 = User("Spieler 2")
 
 # variable that holds the game rules to print when starting the game
-gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
-
+GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
 
 #function to select the right winning/ losing informations after game has ended
 def battleEnd(winID, gameMode):
@@ -50,20 +49,21 @@ def welcomeUser():
 def winoutput():
     print("_________________________________\n")
     print(" _____   _____   ______    _____")
-    print("/ ____| |_   _| |  ____|  / ____|")     
-    print("| (___    | |   | |__    | |  __")     
-    print("\___ \    | |   |  __|   | | |_ |")     
-    print("____) |  _| |_  | |____  | |__| |")     
+    print("/ ____| |_   _| |  ____|  / ____|")
+    print("| (___    | |   | |__    | |  __")
+    print("\___ \    | |   |  __|   | | |_ |")
+    print("____) |  _| |_  | |____  | |__| |")
     print("|_____/ |_____| |______|  \_____|")
     print("_________________________________\n")
 
 #function to print out "lose" in case a user lost the game (only used in 1 player mode)
 def loseoutput():
     print("_________________________________________________________________________________________\n")
-    print(" _   _   _____   ______   _____    ______   _____    _                    _____   ______")   
+    print(" _   _   _____   ______   _____    ______   _____    _                    _____   ______")
     print("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ")
     print("|  \| |   | |   | |__    | |  | | | |__    | |__) | | |         /  \    | |  __  | |__     ")
     print("| . ` |   | |   |  __|   | |  | | |  __|   |  _  /  | |        / /\ \   | | |_ | |  __|    ")
     print("| |\  |  _| |_  | |____  | |__| | | |____  | | \ \  | |____   / ____ \  | |__| | | |____   ")
     print("|_| \_| |_____| |______| |_____/  |______| |_|  \_\ |______| /_/    \_\  \_____| |______|  ")
     print("_________________________________________________________________________________________\n")
+    
