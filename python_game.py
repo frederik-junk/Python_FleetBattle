@@ -150,6 +150,8 @@ def cpuPlaceShip(board, shipLength):
 #hidden = ships hidden
 def checkHit(hiddenBoard,leakedBoard,row,column):
     #check if field was alredy hit
+    #TODO hier könnte eine falsche Ausgabe entstehen wegen dem +65, ist dafür da die Zahl zu einem char via ascii-Tabelle um zu wandeln
+    print("Schuss auf: "+chr(column+65),row)
     if hiddenBoard[row][column] != 0:
         return 1
     #hitted ship
@@ -163,7 +165,7 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
             #ship sunk
             for position in shipName.getPosition():
                 hiddenBoard[position]=4
-            return 1
+            return 3
         #ship isnt sunk
         else:
             leakedBoard[row][column] = 3
