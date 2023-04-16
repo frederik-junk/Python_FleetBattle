@@ -1,34 +1,12 @@
 import random
 import python_game
 import main
-"""
-#TODO delete comment when ships are implemented differently
-#TODO import shipmanager if want to use again
-#TODO real ship positions getter 
-oschlachtschiff1 = shipmanager.Schlachtschiff(((1,1),(1,2),(1,3),(1,4),(1,5)))
-okreuzer1 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
-okreuzer2 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
-ozerstoerer1 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
-ozerstoerer2 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
-ozerstoerer3 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
-ouboot1 = shipmanager.UBoot(((1,1),(1,2)))
-ouboot2 = shipmanager.UBoot(((1,1),(1,2)))
-ouboot3 = shipmanager.UBoot(((1,1),(1,2)))
-ouboot4 = shipmanager.UBoot(((1,1),(1,2)))
-
-opponentShips = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
-def initOpponentShips():
-    for ship in opponentShips:
-        length = ship.getSize()
-        python_game.cpuPlaceShip(python_gameleakedBoard1,length,ship)
-"""
-
 
 """
     #TODO implement this usefully
     #for better undertanding what is happening
     if isHit == 2:
-        print("Der Computer hat getroffen")
+        
     else:
         print("Der Computer hat ins Wasser geschossen!")
 """
@@ -70,6 +48,8 @@ def opponentAction():#hit random field
 
     i = 0 #move hit to a neighbouring field
     while isHit == 2:
+         #for better undertanding what is happening
+            print("Der Computer hat getroffen")
             hitStatus = 1
             #variable for hitting the next field
             i = i+1
@@ -82,7 +62,7 @@ def opponentAction():#hit random field
                             direction = 3
                             directionLock = direction
                         #only one field was hit
-                        elif i == 1 and isHIt == 0:
+                        elif i == 1 and isHit == 0:
                             directionLock = direction
                     else:
                         direction = 3
@@ -94,7 +74,7 @@ def opponentAction():#hit random field
                             direction = 4
                             directionLock = direction
                        #only one field was hit
-                        elif i == 1 and isHIt == 0:
+                        elif i == 1 and isHit == 0:
                             directionLock = 0
                     else:
                         direction = 4
@@ -106,7 +86,7 @@ def opponentAction():#hit random field
                             direction = 1
                             directionLock = direction
                         #only one field was hit
-                        elif i == 1 and isHIt == 0:
+                        elif i == 1 and isHit == 0:
                             directionLock = 0
                     else:
                         direction = 1
@@ -118,7 +98,7 @@ def opponentAction():#hit random field
                             direction = 2
                             directionLock = direction
                         #only one field was hit
-                        elif i == 1 and isHIt == 0:
+                        elif i == 1 and isHit == 0:
                             directionLock = 0
                     else:
                         direction = 2
@@ -127,6 +107,8 @@ def opponentAction():#hit random field
         
     #if ship is sunk reset hitStatus
     if isHit == 3:
+         #for better undertanding what is happening
+        print("Computer hat ein Schiff versenkt")
         i = 0
         hitStatus = 0
         opponentAction()
@@ -138,5 +120,7 @@ def opponentAction():#hit random field
 
     #switch to player
     elif isHit == 0:
+         #for better undertanding what is happening
+        print("Der Computer hat Wasser getroffen")
         main.nextPlayer()
     
