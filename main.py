@@ -9,12 +9,14 @@ import circularImportFixing
 path = os.path.dirname(os.path.abspath(__file__))
 
 # setting current Player to 0 to define it afterwards in function below
-currentPlayer = 0
+currentPlayer = 1
+gameMode = 0
 
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def main():
     outputmanager.welcomeUser()
     gameMode = selectoperations.gameModeSelection()
+    player.playerAction(currentPlayer,gameMode)
     outputmanager.battleEnd(2, gameMode)
 
 if __name__ == "__main__":
@@ -23,14 +25,21 @@ if __name__ == "__main__":
 # Switches the current player after each action
 def nextPlayer():
     global currentPlayer
+    global gameMode
+    print(currentPlayer)
+
     if currentPlayer == 1:
         currentPlayer = 2
         print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
-        player.playerAction(currentPlayer)
+        player.playerAction(currentPlayer, gameMode)
+        
     else:
         currentPlayer = 1
         print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-        if selectoperations.gameMode == 1:
+        print(gameMode)
+        if gameMode == 1:
             oponent.oponentAction()
-        elif selectoperations.gameMode == 2:
-            player.playerAction(currentPlayer)
+        else:
+            player.playerAction(currentPlayer, gameMode)
+
+        

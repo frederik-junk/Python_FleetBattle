@@ -78,6 +78,7 @@ def gameModeSelection():
                         counter = counter+1
                     counter = 1
                     # Print messaSge indicating start of the game
+                    clearConsole()
                     print("Das Spiel beginnt.")
                     # Call function to randomly select starting player
                     selectStartingPlayer(gameMode)
