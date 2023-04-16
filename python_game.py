@@ -5,23 +5,34 @@ import os
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
-firstRow =   [0,0,0,0,0,0,0,0,0,0]
-secondRow =  [0,0,0,0,0,0,0,0,0,0]
-thirdRow =   [0,0,0,0,0,0,0,0,0,0]
-fourthRow =  [0,0,0,0,0,0,0,0,0,0]
-fifthRow =   [0,0,0,0,0,0,0,0,0,0]
-sixthRow =   [0,0,0,0,0,0,0,0,0,0]
-seventhRow = [0,0,0,0,0,0,0,0,0,0]
-eighthRow =  [0,0,0,3,0,0,0,0,0,0]
-ninethRow =  [0,0,0,0,0,0,0,0,0,0]
-tenthRow =   [0,0,0,0,0,0,0,0,0,0]
-leakedBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-leakedBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-hiddenBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-hiddenBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
+letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]# Erstellen des Spielfelds
+leakedBoard1 = []
+for i in range(10):
+    row = []
+    for j in range(10):
+        row.append(0)
+    leakedBoard1.append(row)
 
+leakedBoard2 = []
+for x in range(10):
+    row = []
+    for y in range(10):
+        row.append(0)
+    leakedBoard2.append(row)
 
+hiddenBoard1 = []
+for a in range(10):
+    row = []
+    for b in range(10):
+        row.append(0)
+    hiddenBoard1.append(row)
+
+hiddenBoard2 = []
+for v in range(10):
+    row = []
+    for w in range(10):
+        row.append(0)
+    hiddenBoard2.append(row)
 
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
@@ -33,7 +44,7 @@ def printleakedBoard(board):
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","X") for elem in row))
-
+printleakedBoard(leakedBoard1)
 #function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
     #creates the first row with letters to locate the ship positon (horizontal)
@@ -66,17 +77,23 @@ def placeShip(board, shipLength, ship, shipName, counter):
             print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
             continue     
                         
-        #adding one for the correct alignment still needs fixes
+        #subtract one for the correct alignment
         startingRowNumber = int(startingRowNumber) - 1
-        startingColumnChar = int(startingColumnChar) 
-
-        print(f"Die Spitze des Schiffes liegt auf {placementInput}")
-        #putting the 1 in the right position
-        board[startingRowNumber][startingColumnChar] = 1
-        #placing the ship in the right direction
-        #TODO give ship to this function
-        shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
-        break
+        startingColumnChar = int(startingColumnChar)
+        if board[startingRowNumber][startingColumnChar] == 1:
+            print(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.")
+            continue
+        elif board[startingRowNumber][startingColumnChar] == 6:
+            print(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff laege.")
+            continue 
+        else:
+            print(f"Die Spitze des Schiffes liegt auf {placementInput}")
+            #placing the ship in the right direction
+            #TODO give ship to this function
+            if shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) == True:
+                continue
+            else:
+                break
 
     #printleakedBoard(board)
 
@@ -86,16 +103,15 @@ def placeShip(board, shipLength, ship, shipName, counter):
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
-    gameMode = 2
-    while True: 
-        directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
-            continue
-        else:
-            clear_console()
-            print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
-            printleakedBoard(board)
-            break
+    gameMode = 2 
+    directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
+    if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
+        return True #is send back to set another coordinate
+    else:
+        clear_console()
+        print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
+        printleakedBoard(board)
+        return False
 
 def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 1
@@ -128,40 +144,3 @@ def cpuPlaceShip(board, shipLength):
     
 
 
-
-#hidden = ships hidden
-def checkHit(hiddenBoard,leakedBoard,row,column):
-    #check if field was alredy hit
-    #TODO hier könnte eine falsche Ausgabe entstehen wegen dem +65, ist dafür da die Zahl zu einem char via ascii-Tabelle um zu wandeln
-    print("Schuss auf: "+chr(column+65),row)
-    if hiddenBoard[row][column] != 0:
-        return 1
-    #hitted ship
-    elif leakedBoard[row][column] == 1:
-        #get which ship is hit
-        #TODO are gameMode and currentplayer functioning?
-        #don´t import main!
-        if(main.gameMode == 1 and main.currentplayer == 2):  
-            for ship in shipmanager.opponentShips:
-                if(row,column)in ship.getPosition():
-                    shipName = ship
-                    break
-        else:
-            for ship in shipmanager.playerShips:
-                if(row,column)in ship.getPosition():
-                    shipName = ship
-                    break
-        shipName.hitOnShip()
-        if shipName.getSize() == shipName.getDamageCounter():
-            #ship sunk
-            for position in shipName.getPosition():
-                hiddenBoard[position]=4
-            return 3
-        #ship isnt sunk
-        else:
-            leakedBoard[row][column] = 3
-        return 2
-    #hitted water
-    elif hiddenBoard[row][column] == 0:
-        leakedBoard[row][column]= 2
-    return 0

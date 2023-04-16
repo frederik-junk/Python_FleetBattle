@@ -16,9 +16,9 @@ def playerAction(currentPlayer):
         column = converterFunctions.splitColumn(placementInput)
         #choose on which board to shoot
         if currentPlayer == 2:
-            isHit = python_game.checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column)
+            isHit = hitShip.checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,column,row)
         elif currentPlayer == 1:
-            isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column)
+            isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row)
 
         if isHit == 1:
             #hit an alredy hitted field
