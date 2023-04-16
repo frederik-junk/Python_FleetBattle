@@ -2,15 +2,6 @@ import random
 import python_game
 import main
 
-"""
-    #TODO implement this usefully
-    #for better undertanding what is happening
-    if isHit == 2:
-        
-    else:
-        print("Der Computer hat ins Wasser geschossen!")
-"""
-
 #variable to check if hit in former turn
 # hitStatus = 0
 rowLock = 1
@@ -31,7 +22,7 @@ def opponentAction():
     #hit again, if random field was alredy fired at
         while isHit == 1:
             row = random.randint(1,10)
-            column = random.randint(1,10)
+            column = random.randint(0,9)
             isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column)
     
     #what to do when there was a hit in the former round

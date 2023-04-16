@@ -25,22 +25,25 @@ class Ships:
     def hitOnShip(self):
         self.__damageCounter += 1
 
-    def classPlaceShip(self, board, ship):
-        result = python_game.placeShip(board, self.getSize(), ship, self.getName())
-        return result
+    def classPlaceShip(self, board, ship, counter):
+         result = python_game.placeShip(board, self.getSize(), ship, self.getName(), counter)
+         return result
+         
+
+
 
 class Schlachtschiff(Ships):
-    def __init__(self,position):
-        super().__init__("Schlachtschiff(1)", 5, position)
+        def __init__(self,position):
+            super().__init__("Schlachtschiff(1x)", 5, position)
 
 class Kreuzer(Ships):
-    def __init__(self,position):
-        super().__init__("Kreuzer(2)", 4, position)
+        def __init__(self,position):
+            super().__init__("Kreuzer(2x)", 4, position)
 
 class Zerstoerer(Ships):
-    def __init__(self,position):
-        super().__init__("Zerstoerer(3)", 3, position)
+        def __init__(self,position):
+            super().__init__("Zerstoerer(3x)", 3, position)
 
 class Uboot(Ships):
-    def __init__(self,position):
-        super().__init__("UBoot(4)", 2, position)
+        def __init__(self,position):
+            super().__init__("UBoot(4x)", 2, position)
