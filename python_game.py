@@ -37,15 +37,7 @@ def printhiddenBoard(board):
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace  1 = ship filed but hidden (shown as water), 2 = free space (water), 2 = shotted spot without hit, 3 = shotted spot with hit, 4 = eleminated ship (complet)
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
-
-# printleakedBoard(board)
-# print(" \n")
-# printhiddenBoard(board)
-
-shipLength = int(2)
-
-
-            
+         
 #function to place a ship in the right position with the right length and the right direction
 def placeShip(board, shipLength, ship):
     while True:
