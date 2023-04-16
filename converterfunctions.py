@@ -7,7 +7,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
         case "w":
-            try: # exception for the case that the ship travels out of bounce in the given direction
+            try: # exception for the case that the ship is placed out of bounce in the given direction
                 betweenStartingRowNumber = startingRowNumber - shipLength
                 if betweenStartingRowNumber <= 0:
                     if gameMode == 1:
@@ -20,6 +20,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         board[startingRowNumber][startingColumnChar] = 1
                         #this is for the positionTuple 
                         positionTupel = (startingRowNumber,startingColumnChar)
+                        #add every postion tuple to tuple list to store the ship position
                         positionTupelList.append(positionTupel)
 
                         startingRowNumber = startingRowNumber - 1
@@ -50,6 +51,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         board[startingRowNumber][startingColumnChar] = 1
                         #this is for the positionTupel
                         positionTupel = (startingRowNumber,startingColumnChar)
+                        #add every postion tuple to tuple list to store the ship position
                         positionTupelList.append(positionTupel)
 
                         startingColumnChar -= 1
@@ -77,6 +79,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         board[startingRowNumber][startingColumnChar] = 1
                         #this is for the positionTupel
                         positionTupel = (startingRowNumber,startingColumnChar)
+                        #add every postion tuple to tuple list to store the ship position
                         positionTupelList.append(positionTupel)
 
                         startingRowNumber += 1
@@ -104,6 +107,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         board[startingRowNumber][startingColumnChar] = 1
                         #this is for the positionTupel
                         positionTupel = (startingRowNumber,startingColumnChar)
+                        #add every postion tuple to tuple list to store the ship position
                         positionTupelList.append(positionTupel)
                         
                         startingColumnChar += 1
