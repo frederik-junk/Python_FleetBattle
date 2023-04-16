@@ -29,7 +29,11 @@ def gameModeSelection():
                     # Print welcome message for user 2 and ask to place ships
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     # Call function placeShip to give user the opportunity to select the ship positions
-                    placeShip(python_game.leakedBoard1, python_game.shipLength)
+                    counter = 1
+                    for ship in circularImportFixing.playerShips:
+                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        counter = counter+1
+                    counter = 1
                     # Print message for computer to place ships
                     print("Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
