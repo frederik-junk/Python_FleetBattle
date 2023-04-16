@@ -1,5 +1,5 @@
 import blockerfunctions
-import shipmanager
+from shipmanager import Ships
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     j = 0 # just a counting variable for later use
@@ -26,7 +26,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         j += 1
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    shipmanager.ship.setPosition(positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:       
@@ -56,7 +56,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingColumnChar -= 1
                         j += 1
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    shipmanager.ship.setPosition(positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
@@ -84,7 +84,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingRowNumber += 1
                         j += 1
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    shipmanager.ship.setPosition(positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
@@ -111,7 +111,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         
                         startingColumnChar += 1
                         j += 1
-                    shipmanager.ship.setPosition(positionTupelList)
+                    ship.setPosition(positionTupelList)
                     blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     return False
             except IndexError as e:
