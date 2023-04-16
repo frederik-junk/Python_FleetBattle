@@ -22,13 +22,13 @@ def playerAction(currentPlayer):
 
         if isHit == 1:
             #hit an alredy hitted field
-            print("Bitte waehlen sie ein Feld auf dass Sie noch nicht geschossen haben!")
+            print("Dieses Feld haben Sie bereits beschossen. Bitte wählen Sie ein anderes!")
             playerAction(currentPlayer)
         elif isHit == 2:
             #hit a ship
-            print("Sie haben getroffen, bitte schießen Sie ernuet!")
+            print("Treffer! Bitte wählen Sie ein neues Zielfeld.")
         elif isHit == 3:
-            print("Sie haben das Schiff versenkt! \nSie duerfen noch einmal schießen")
+            print("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.")
         else:
             print("Das war leider ein Wassertreffer!")
     #switch to player/computer
