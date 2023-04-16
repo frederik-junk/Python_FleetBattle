@@ -1,5 +1,5 @@
-from blockerfunctions import *
-from shipmanager import *
+import blockerfunctions
+from shipmanager import Ships
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     j = 0 # just a counting variable for later use
@@ -25,7 +25,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingRowNumber = startingRowNumber - 1
 
                         j += 1
-                    addPlacementBlocker(board, positionTupelList)
+                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
@@ -55,7 +55,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar -= 1
                         j += 1
-                    addPlacementBlocker(board, positionTupelList)
+                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
@@ -83,7 +83,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingRowNumber += 1
                         j += 1
-                    addPlacementBlocker(board, positionTupelList)
+                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
@@ -112,7 +112,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingColumnChar += 1
                         j += 1
                     ship.setPosition(positionTupelList)
-                    addPlacementBlocker(board, positionTupelList)
+                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:

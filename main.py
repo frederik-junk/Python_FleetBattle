@@ -3,7 +3,7 @@ import outputmanager
 import selectoperations
 import player
 import oponent
-from circularImportFixing import *
+import circularImportFixing
 
 
 # extracting current Path for optimal usage on Windows and Linux systems
@@ -31,6 +31,17 @@ leakedBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, se
 # setting current Player to 0 to define it afterwards in function below
 currentPlayer = 0
 
+# Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
+def main():
+    outputmanager.welcomeUser()
+    gameMode = selectoperations.gameModeSelection()
+    for ship in circularImportFixing.playerShips:
+        ship.classPlaceShip(leakedBoard1, ship)
+    outputmanager.battleEnd(2, gameMode)
+
+if __name__ == "__main__":
+    main()
+
 # Switches the current player after each action
 def nextPlayer():
     global currentPlayer
@@ -45,14 +56,3 @@ def nextPlayer():
             oponent.oponentAction()
         elif(selectoperations.gameMode == 2): 
             player.playerAction(currentPlayer)
-
-# Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
-def main():
-    outputmanager.welcomeUser()
-    gameMode = selectoperations.gameModeSelection()
-    for ship in playerShips:
-        ship.classPlaceShip(leakedBoard1, ship)
-    outputmanager.battleEnd(2, gameMode)
-
-if __name__ == "__main__":
-    main()
