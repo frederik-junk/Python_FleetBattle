@@ -6,7 +6,7 @@ import main
 class Player:
     def __init__(self,name):
         self.__name = name
-
+"""
 #playerships
 #no implementation yet might change later
 pschlachtschiff1 = shipmanager.Schlachtschiff(((1,1),(1,2),(1,3),(1,4),(1,5)))
@@ -20,7 +20,12 @@ puboot2 = shipmanager.UBoot(((1,1),(1,2)))
 puboot3 = shipmanager.UBoot(((1,1),(1,2)))
 puboot4 = shipmanager.UBoot(((1,1),(1,2)))
 
-
+playerShips = [pschlachtschiff1,pkreuzer1,pkreuzer2,pzerstoerer1,pzerstoerer2,pzerstoerer3,puboot1,puboot2,puboot3,puboot4]
+def initPlayerShips():
+    for ship in playerShips:
+        length = ship.getSize()
+        python_game.placeShip(python_gameleakedBoard2,length,ship)
+"""
 def playerAction():
     isHit = 1
     while(isHit != 0):
@@ -37,7 +42,7 @@ def playerAction():
             #hit a ship
             print("Sie haben getroffen, bitte schießen sie ernuet!")
         else:
-            print("Das war leider Wasser")
+            print("Das war leider ein Wassertreffer!")
     #TODO look how that is working
     main.nextPlayer()
    
