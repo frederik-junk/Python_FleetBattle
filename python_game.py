@@ -1,5 +1,4 @@
 import random
-from shipmanager import *
 from converterfunctions import *
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
