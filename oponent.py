@@ -1,25 +1,28 @@
 import shipmanager
 import random
 import python_game
-
+import main
 
 #o means opponent
-oschlachtschiff1 = shipmanager.Schlachtschiff((1,1),(1,2),(1,3),(1,4),(1,5))
-okreuzer1 = shipmanager.Kreuzer((1,1),(1,2),(1,3),(1,4))
-okreuzer2 = shipmanager.Kreuzer((1,1),(1,2),(1,3),(1,4))
-ozerstoerer1 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
-ozerstoerer2 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
-ozerstoerer3 = shipmanager.Zerstoerer((1,1),(1,2),(1,3))
-ouboot1 = shipmanager.UBoot((1,1),(1,2))
-ouboot2 = shipmanager.UBoot((1,1),(1,2))
-ouboot3 = shipmanager.UBoot((1,1),(1,2))
-ouboot4 = shipmanager.UBoot((1,1),(1,2))
+#TODO real ship positions getter 
+oschlachtschiff1 = shipmanager.Schlachtschiff(((1,1),(1,2),(1,3),(1,4),(1,5)))
+okreuzer1 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
+okreuzer2 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
+ozerstoerer1 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
+ozerstoerer2 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
+ozerstoerer3 = shipmanager.Zerstoerer(((1,1),(1,2),(1,3)))
+ouboot1 = shipmanager.UBoot(((1,1),(1,2)))
+ouboot2 = shipmanager.UBoot(((1,1),(1,2)))
+ouboot3 = shipmanager.UBoot(((1,1),(1,2)))
+ouboot4 = shipmanager.UBoot(((1,1),(1,2)))
 
 opponentships = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
 def initShips():
     for ship in opponentships:
         length = ship.getSize()
-        #python_game.cpuPlaceShip(leakedBoard2,length,ship)
+
+        python_game.cpuPlaceShip(python_gameleakedBoard2,length,ship)
+
 
 def opponentAction():#hit random field 
     isHit = 1
@@ -48,14 +51,16 @@ def opponentAction():#hit random field
     #TODO what to do when hit a already shoot field after a hit
     if isHit == 1:
         opponentAction()
-        
+    #TODO look into how that is working
+    main.nextPlayer()
+    
 #hidden = ships hidden 
 def checkHit(hiddenBoard,leakedBoard,row,column):
     #check if field was alredy hit
-    if leakedBoard[row][column] != 0:
+    if hiddenBoard[row][column] != 0:
         return 1
     #hitted ship
-    if hiddenBoard[row][column] == 1:
+    elif leakedBoard[row][column] == 1:
         #get which ship is hit
         for ship in opponentships:
             if(row,column)in ship.getPosition():

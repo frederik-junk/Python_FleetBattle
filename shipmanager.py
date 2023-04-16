@@ -1,3 +1,7 @@
+from python_game import *
+
+
+
 class Ships:
     def __init__(self, name, size, position):
         self.__name = name
@@ -22,6 +26,13 @@ class Ships:
     
     def hitOnShip(self):
         self.__damageCounter += 1
+
+    def classPlaceShip(self, board, ship):
+         result = placeShip(board, self.getSize(), ship)
+         return result
+         
+
+
 
 class Schlachtschiff(Ships):
         def __init__(self,position):

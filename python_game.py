@@ -21,7 +21,7 @@ def printleakedBoard(board):
     print("  ".join(letterRow))
     for i, row in enumerate(board):
         print(str(i+1).zfill(2), end="  ")
-        print("  ".join(str(elem).replace("1","#").replace("0","~") for elem in row))
+        print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","?") for elem in row))
 
 
 def printhiddenBoard(board):
@@ -36,42 +36,13 @@ def printhiddenBoard(board):
 
 shipLength = int(2)
 
-# function to place a ship in the right position with the right length and the right direction
-def placeShip(board, shipLength):
-    while True:
-        try:
-            placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
-
-
-            #splitting the input into the column and row indices 
-            startingColumnChar = placementInput[0] #extrcting the first char of the users input
-            startingRowNumber = placementInput[1:] #extracting the rest of the users input
-            #splitting the input into the column and row indices 
-            startingColumnChar = placementInput[0] #extrcting the first char of the users input
-            startingRowNumber = placementInput[1:] #extracting the rest of the users input
+#splitting the input into the column and row indices 
+def splitColumn(placementInput):
   
-            try:
-                if startingColumnChar.isalpha() == False:
-                    raise ValueError
-                startingColumnChar = startingColumnChar.upper()
-                
-                
-            except ValueError as e:
-                print(str(e))
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
-                print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
-                continue
-
-            except Exception:
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben sie Buchstaben zwischen A und J ein.")
-                print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
-                continue
-
-            print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
-            print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
-
-            #match case to convert the letters into column idexes
-            match startingColumnChar:
+    startingColumnChar = placementInput[0] #extrcting the first char of the users input
+    
+    #match case to convert the letters into column idexes
+    match startingColumnChar:
                 case "A": 
                     startingColumnChar = 0
                 case "B": 
@@ -95,7 +66,43 @@ def placeShip(board, shipLength):
                 case _: 
                     print("Bitte geben sie Buchstaben zwischen A und J ein.")
                     print("Bitte geben sie eine neue Startposition an.")
-                    continue 
+                    placeShip
+    return startingColumnChar
+
+def splitRow(placementInput):
+    startingRowNumber = placementInput[1:] #extracting the rest of the users input
+    return startingRowNumber
+            
+#function to place a ship in the right position with the right length and the right direction
+def placeShip(board, shipLength, ship):
+    while True:
+        try:
+            placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+
+            startingColumnChar = splitColumn(placementInput)
+            startingRowNumber = splitRow(placementInput)
+  
+            try:
+                if startingColumnChar.isalpha() == False:
+                    raise ValueError
+                startingColumnChar = startingColumnChar.upper()
+                
+                
+            except ValueError as e:   #TODO: overlook this handling of exceptions
+                print(str(e))
+                print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
+                print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
+                continue
+
+            except Exception:
+                print("Ihre Eingabe enthaelt Fehler. Bitte geben sie Buchstaben zwischen A und J ein.")
+                print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
+                continue
+
+            print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
+            print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
+
+           
                    
             
             #adding one for the correct alignment still needs fixes
@@ -106,13 +113,14 @@ def placeShip(board, shipLength):
                 print("Bitte geben sie eine neue Startposition an.")
                 continue
             else:
-                value = board[startingRowNumber][startingColumnChar]
+                value = board[startingRowNumber][startingColumnChar] #dies kann entfernt werden
 
                 print(f"Die Spitze des Schiffes liegt auf {placementInput}")
                 #putting the 1 in the right position
                 board[startingRowNumber][startingColumnChar] = 1
                 #placing the ship in the right direction
-                shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
+                #TODO give ship to this function
+                shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
                 break
         except IndexError:
             #if the index is out of bounds
@@ -122,13 +130,15 @@ def placeShip(board, shipLength):
     printleakedBoard(board)
 
 
-    
+    #DELETE if Positions for ships are available 
     #placing the ship in the right direction
-    # shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
+    #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
     
     # printleakedBoard(board)
 
-def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode,ship):
+schlachtschiff = shipmanager.Schlachtschiff(3)
+
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     j = 0 # just a counting variable for later use
     positionTupelList = [] #this is the List which is given to the position list of the object
     match direction:
@@ -151,6 +161,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         startingRowNumber = startingRowNumber - 1
 
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:       
@@ -178,8 +190,9 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar -= 1
                         j += 1
-                    repeater = False
-                    return repeater
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
+                    return False
             except IndexError as e:
                 if gameMode == 2:
                     print(str(e))
@@ -204,6 +217,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingRowNumber += 1
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
@@ -229,6 +244,8 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                         startingColumnChar += 1
                         j += 1
+                    addPlacementBlocker(board, positionTupelList)
+                    ship.setPosition(positionTupelList)
                     return False
             except IndexError as e:
                 if gameMode == 2:
@@ -243,21 +260,21 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                 return True
             else: return True
     #setting of the ship position
-    ship.setPosition(positionTupelList)
+    #ship.setPosition(positionTupelList)
     
 
-def shipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2
     while True: 
         directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
             continue
         else:
             print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
             printleakedBoard(board)
             break
 
-def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar,ship):
+def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
@@ -269,7 +286,7 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar,sh
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode,ship) == True:
+        if directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
             continue
         else:
             break
@@ -338,12 +355,12 @@ def addPlacementBlocker(board, positionTupelList):
 
 
 #function for the cpu opponent to place the a ship
-def cpuPlaceShip(board, shipLength,ship):
+def cpuPlaceShip(board, shipLength):
     startingRowNumber = random.randint(0, 10)
     startingColoumnChar = random.randint(0, 10)
 
     #cpu places the ship with the random startig coordinates
-    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar,ship)
+    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar)
     printleakedBoard(board)
 
     
