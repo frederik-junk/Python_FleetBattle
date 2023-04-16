@@ -12,6 +12,7 @@ print("Aktueller Pfad: ", path)
 
 
 #this are the gameboards
+"""
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
 secondRow =  [0,0,0,0,0,0,0,0,0,0]
@@ -24,6 +25,7 @@ eighthRow =  [0,0,0,3,0,0,0,0,0,0]
 ninethRow =  [0,0,0,0,0,0,0,0,0,0]
 tenthRow =   [0,0,0,0,0,0,0,0,0,0]
 leakedBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
+"""
 
 
 

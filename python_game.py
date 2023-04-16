@@ -5,23 +5,34 @@ import os
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
-firstRow =   [0,0,0,0,0,0,0,0,0,0]
-secondRow =  [0,0,0,0,0,0,0,0,0,0]
-thirdRow =   [0,0,0,0,0,0,0,0,0,0]
-fourthRow =  [0,0,0,0,0,0,0,0,0,0]
-fifthRow =   [0,0,0,0,0,0,0,0,0,0]
-sixthRow =   [0,0,0,0,0,0,0,0,0,0]
-seventhRow = [0,0,0,0,0,0,0,0,0,0]
-eighthRow =  [0,0,0,3,0,0,0,0,0,0]
-ninethRow =  [0,0,0,0,0,0,0,0,0,0]
-tenthRow =   [0,0,0,0,0,0,0,0,0,0]
-leakedBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-leakedBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-hiddenBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
-hiddenBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
+letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]# Erstellen des Spielfelds
+leakedBoard1 = []
+for i in range(10):
+    row = []
+    for j in range(10):
+        row.append(0)
+    leakedBoard1.append(row)
 
+leakedBoard2 = []
+for x in range(10):
+    row = []
+    for y in range(10):
+        row.append(0)
+    leakedBoard2.append(row)
 
+hiddenBoard1 = []
+for a in range(10):
+    row = []
+    for b in range(10):
+        row.append(0)
+    hiddenBoard1.append(row)
+
+hiddenBoard2 = []
+for v in range(10):
+    row = []
+    for w in range(10):
+        row.append(0)
+    hiddenBoard2.append(row)
 
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
@@ -33,7 +44,7 @@ def printleakedBoard(board):
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","X") for elem in row))
-
+printleakedBoard(leakedBoard1)
 #function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
     #creates the first row with letters to locate the ship positon (horizontal)
