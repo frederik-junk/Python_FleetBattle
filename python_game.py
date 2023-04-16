@@ -1,5 +1,5 @@
 import random
-import shipmanager
+from shipmanager import *
 from converterfunctions import *
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
@@ -18,80 +18,65 @@ leakedBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, se
 hiddenBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 hiddenBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 
+
+
+
+#function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
+    #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
-        print(str(i+1).zfill(2), end="  ")
+        #creates the first column with letters to locate the ship positon (vertical)
+        print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
+        #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","?") for elem in row))
 
-
+#function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
+    #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
-        print(str(i+1).zfill(2), end="  ")
+        #creates the first column with letters to locate the ship positon (vertical)
+        print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
+        #replace function to optical replace  1 = ship filed but hidden (shown as water), 2 = free space (water), 2 = shotted spot without hit, 3 = shotted spot with hit, 4 = eleminated ship (complet)
         print("  ".join(str(elem).replace("1","~").replace("0","~").replace("2","O").replace("3","x").replace("4","X") for elem in row))
-
-# printleakedBoard(board)
-# print(" \n")
-# printhiddenBoard(board)
-
-shipLength = int(2)
-
-
-            
+         
 #function to place a ship in the right position with the right length and the right direction
-def placeShip(board, shipLength, ship):
+def placeShip(board, shipLength, ship, shipName):
     while True:
         try:
-            placementInput = input("Geben sie eine Koordinate an, auf die die Spitze des Schiffs platziert werden soll.\n")
+            placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {shipName} platziert werden soll. Es hab die Laenge {shipLength}.\n")
 
             startingColumnChar = splitColumnConverter(placementInput)
             startingRowNumber = splitRow(placementInput)
-  
-            try:
-                if startingColumnChar.isalpha() == False:
-                    raise ValueError
-                startingColumnChar = startingColumnChar.upper()
-                
-                
-            except ValueError as e:   #TODO: overlook this handling of exceptions
-                print(str(e))
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
-                print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
-                continue
-
-            except Exception:
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben sie Buchstaben zwischen A und J ein.")
-                print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
-                continue
-
-            print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
-            print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
-
-           
-                   
-            
-            #adding one for the correct alignment still needs fixes
-            startingRowNumber = int(startingRowNumber) - 1
-            startingColumnChar = int(startingColumnChar) 
-
-            if startingRowNumber < 0:
-                print("Bitte geben sie eine neue Startposition an.")
-                continue
+            if startingColumnChar == 11:  #eleven is the statuscode for input is out of bounce
+                raise Exception("Ihre Angabe ist fehlerhaft")
             else:
-                value = board[startingRowNumber][startingColumnChar] #dies kann entfernt werden
+                print("Der erste Buchstabe ist:", placementInput[0])    #diese ausgabe kann entfernt werden
 
-                print(f"Die Spitze des Schiffes liegt auf {placementInput}")
-                #putting the 1 in the right position
-                board[startingRowNumber][startingColumnChar] = 1
-                #placing the ship in the right direction
-                #TODO give ship to this function
-                shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
-                break
-        except IndexError:
-            #if the index is out of bounds
-            print(f"Ihre Angabe {placementInput} liegt außerhalb des Spielfelds.")
-            print("Bitte geben sie eine neue Startposition an.\n")
+            if startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
+                raise Exception("Ihre Angabe ist fehlerhaft")
+            else:
+                print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
+                
+                
+        except Exception as e:
+            print(str(e))
+            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben sie Buchstaben zwischen A und J ein.\n Bitte geben sie eine Zahl zwischen 1 und 10 ein.")
+            print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
+            continue     
+                        
+        #adding one for the correct alignment still needs fixes
+        startingRowNumber = int(startingRowNumber) - 1
+        startingColumnChar = int(startingColumnChar) 
+
+        print(f"Die Spitze des Schiffes liegt auf {placementInput}")
+        #putting the 1 in the right position
+        board[startingRowNumber][startingColumnChar] = 1
+        #placing the ship in the right direction
+        #TODO give ship to this function
+        shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
+        break
 
     printleakedBoard(board)
 
@@ -101,8 +86,6 @@ def placeShip(board, shipLength, ship):
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
     
     # printleakedBoard(board)
-
-schlachtschiff = shipmanager.Schlachtschiff(3)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2
@@ -157,7 +140,7 @@ def checkHit(hiddenBoard,leakedBoard,row,column):
     #hitted ship
     elif leakedBoard[row][column] == 1:
         #get which ship is hit
-        for ship in opponentships:
+        for ship in opponentShips:
             if(row,column)in ship.getPosition():
                 shipName = ship
         shipName.hitOnShip()
