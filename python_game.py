@@ -97,7 +97,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
     if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
         return True #is send back to set another coordinate
     else:
-            clear_console()
+        clear_console()
         print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
         printleakedBoard(board)
         return False
