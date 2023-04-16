@@ -60,7 +60,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
         printleakedBoard(board)
     while True:
         try:
-            placementInput = input(f"Geben sie eine Koordinate an, auf die die Spitze ihres {counter}. Schiffs ({shipName}) platziert werden soll. Dieses hat die Laenge {shipLength}.\n")
+            placementInput = input(f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({shipName}) platziert werden soll. Dieses hat die Laenge {shipLength}.\n")
 
             startingColumnChar = converterfunctions.splitColumnConverter(placementInput)
             startingRowNumber = converterfunctions.splitRow(placementInput)
@@ -72,8 +72,8 @@ def placeShip(board, shipLength, ship, shipName, counter):
                  
         except Exception as e:
             print(str(e))
-            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben sie Buchstaben zwischen A und J ein.\n Bitte geben sie eine Zahl zwischen 1 und 10 ein.")
-            print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
+            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
+            print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
             continue     
                         
         #subtract one for the correct alignment
@@ -83,7 +83,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
             print(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.")
             continue
         elif board[startingRowNumber][startingColumnChar] == 6:
-            print(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff laege.")
+            print(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff liegt.")
             continue 
         else:
             print(f"Die Spitze des Schiffes liegt auf {placementInput}")
@@ -103,7 +103,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2 
-    directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
+    directionInput = input("Geben Sie über die Tasten [w][a][s][d] die Ausrichtung des Schiffes an.\n")
     if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
         return True #is send back to set another coordinate
     else:
