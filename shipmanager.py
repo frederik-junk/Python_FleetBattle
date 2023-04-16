@@ -1,4 +1,4 @@
-from python_game import placeShip
+import python_game
 
 
 
