@@ -1,6 +1,8 @@
 import outputmanager
 from python_game import *
 from random import *
+import player
+
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
@@ -57,13 +59,14 @@ def selectStartingPlayer(mode):
     if(startingPlayer == 2):
         currentPlayer = 2
         print(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!")
-        return currentPlayer
+        
     elif(startingPlayer == 1):
+        #if its Singleplayer the Player begins 
         if(mode == "1"):
             print(f"{outputmanager.user1.getName()}ccccccc darf das Spiel beginnen und ist an der Reihe!") #cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
             currentPlayer = 2
-            return currentPlayer
         else:
             print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
             currentPlayer = 2
-            return currentPlayer
+    #call of the first operation
+    player.playerAction(currentPlayer)    
