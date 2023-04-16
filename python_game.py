@@ -65,17 +65,23 @@ def placeShip(board, shipLength, ship, shipName):
             print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
             continue     
                         
-        #adding one for the correct alignment still needs fixes
+        #subtract one for the correct alignment
         startingRowNumber = int(startingRowNumber) - 1
-        startingColumnChar = int(startingColumnChar) 
-
-        print(f"Die Spitze des Schiffes liegt auf {placementInput}")
-        #putting the 1 in the right position
-        board[startingRowNumber][startingColumnChar] = 1
-        #placing the ship in the right direction
-        #TODO give ship to this function
-        shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
-        break
+        startingColumnChar = int(startingColumnChar)
+        if board[startingRowNumber][startingColumnChar] == 1:
+            print(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.")
+            continue
+        elif board[startingRowNumber][startingColumnChar] == 6:
+            print(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff laege.")
+            continue 
+        else:
+            print(f"Die Spitze des Schiffes liegt auf {placementInput}")
+            #placing the ship in the right direction
+            #TODO give ship to this function
+            if shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) == True:
+                continue
+            else:
+                break
 
     printleakedBoard(board)
 
@@ -87,15 +93,14 @@ def placeShip(board, shipLength, ship, shipName):
     # printleakedBoard(board)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
-    gameMode = 2
-    while True: 
-        directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
-        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
-            continue
-        else:
-            print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
-            printleakedBoard(board)
-            break
+    gameMode = 2 
+    directionInput = input("Geben sie über w,a,s,d die Ausrichtung des Schiffes an.\n")
+    if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
+        return True #is send back to set another coordinate
+    else:
+        print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
+        printleakedBoard(board)
+        return False
 
 def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
     gameMode = 1
