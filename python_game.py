@@ -1,5 +1,5 @@
 import random
-import shipmanager
+from shipmanager import *
 from converterfunctions import *
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
@@ -17,6 +17,9 @@ leakedBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, se
 leakedBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 hiddenBoard1 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
 hiddenBoard2 = [firstRow, secondRow, thirdRow, fourthRow, fifthRow, sixthRow, seventhRow, eighthRow,ninethRow, tenthRow]
+
+
+
 
 def printleakedBoard(board):
     print("  ".join(letterRow))
@@ -47,51 +50,34 @@ def placeShip(board, shipLength, ship):
 
             startingColumnChar = splitColumnConverter(placementInput)
             startingRowNumber = splitRow(placementInput)
-  
-            try:
-                if startingColumnChar.isalpha() == False:
-                    raise ValueError
-                startingColumnChar = startingColumnChar.upper()
-                
-                
-            except ValueError as e:   #TODO: overlook this handling of exceptions
-                print(str(e))
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
-                print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
-                continue
-
-            except Exception:
-                print("Ihre Eingabe enthaelt Fehler. Bitte geben sie Buchstaben zwischen A und J ein.")
-                print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
-                continue
-
-            print("Der erste Buchstabe ist:", startingColumnChar)    #diese ausgabe kann entfernt werden
-            print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
-
-           
-                   
-            
-            #adding one for the correct alignment still needs fixes
-            startingRowNumber = int(startingRowNumber) - 1
-            startingColumnChar = int(startingColumnChar) 
-
-            if startingRowNumber < 0:
-                print("Bitte geben sie eine neue Startposition an.")
-                continue
+            if startingColumnChar == 11:  #eleven is the statuscode for input is out of bounce
+                raise Exception("Ihre Angabe ist fehlerhaft")
             else:
-                value = board[startingRowNumber][startingColumnChar] #dies kann entfernt werden
+                print("Der erste Buchstabe ist:", placementInput[0])    #diese ausgabe kann entfernt werden
 
-                print(f"Die Spitze des Schiffes liegt auf {placementInput}")
-                #putting the 1 in the right position
-                board[startingRowNumber][startingColumnChar] = 1
-                #placing the ship in the right direction
-                #TODO give ship to this function
-                shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
-                break
-        except IndexError:
-            #if the index is out of bounds
-            print(f"Ihre Angabe {placementInput} liegt außerhalb des Spielfelds.")
-            print("Bitte geben sie eine neue Startposition an.\n")
+            if startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
+                raise Exception("Ihre Angabe ist fehlerhaft")
+            else:
+                print("Der Rest des Strings ist:", startingRowNumber)   #diese ausgabe kann entfernt werden
+                
+                
+        except Exception as e:
+            print(str(e))
+            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben sie Buchstaben zwischen A und J ein.\n Bitte geben sie eine Zahl zwischen 1 und 10 ein.")
+            print("Bitte geben sie die Startposition in der Form (z.B.: A3) an.")
+            continue     
+                        
+        #adding one for the correct alignment still needs fixes
+        startingRowNumber = int(startingRowNumber) - 1
+        startingColumnChar = int(startingColumnChar) 
+
+        print(f"Die Spitze des Schiffes liegt auf {placementInput}")
+        #putting the 1 in the right position
+        board[startingRowNumber][startingColumnChar] = 1
+        #placing the ship in the right direction
+        #TODO give ship to this function
+        shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship)
+        break
 
     printleakedBoard(board)
 
@@ -101,8 +87,6 @@ def placeShip(board, shipLength, ship):
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
     
     # printleakedBoard(board)
-
-schlachtschiff = shipmanager.Schlachtschiff(3)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 2
