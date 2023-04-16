@@ -2,6 +2,10 @@ import python_game
 import main
 import converterfunctions
 import hitShip
+import os
+
+def clearConsole():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 class Player:
     def __init__(self,name):
@@ -33,8 +37,10 @@ def playerAction(currentPlayer, gameMode):
 
         if currentPlayer == 2:
             isHit = hitShip.checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,column,row, gameMode)
+            python_game.printhiddenBoard(python_game.hiddenBoard1)
         elif currentPlayer == 1:
             isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row, gameMode)
+            python_game.printhiddenBoard(python_game.hiddenBoard2)
 
         if isHit == 1:
             #hit an alredy hitted field
@@ -43,9 +49,15 @@ def playerAction(currentPlayer, gameMode):
         elif isHit == 2:
             #hit a ship
             print("Treffer! Bitte wählen Sie ein neues Zielfeld.")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            #clearConsole()
         elif isHit == 3:
             print("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            #clearConsole()
         else:
             print("Das war leider ein Wassertreffer!")
+            continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
+            #clearConsole()
     #switch to player/computer
     main.nextPlayer()
