@@ -1,7 +1,5 @@
 import python_game
 
-
-
 class Ships:
     def __init__(self, name, size, position):
         self.__name = name
@@ -14,16 +12,16 @@ class Ships:
 
     def getName(self):
         return self.__name
-    
+
     def getSize(self):
         return self.__size
-    
+
     def getPosition(self):
         return self.__position
-    
+
     def getDamageCounter(self):
         return self.__damageCounter
-    
+
     def hitOnShip(self):
         self.__damageCounter += 1
 
