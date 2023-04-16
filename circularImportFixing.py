@@ -52,4 +52,5 @@ oUboot4 = Uboot(emptyTupelList)
 opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
 
 
+
 pKreuzer1.classPlaceShip(leakedBoard3, pKreuzer1)
