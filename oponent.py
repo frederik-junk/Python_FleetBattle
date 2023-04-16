@@ -1,6 +1,7 @@
 import random
 import python_game
 import main
+import hitShip
 
 #variable to check if hit in former turn 
 hitStatus = 0
@@ -17,7 +18,7 @@ def opponentAction():#hit random field
         while(isHit == 1):
             row = random.randint(1,10)
             column = random.randint(0,9)
-            isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column)
+            isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row)
     #what to do when there was a hit in the former round
     elif hitStatus == 1:
         global rowLock
@@ -32,10 +33,10 @@ def opponentAction():#hit random field
             while isHit == 1:
                 direction = random.randint(1,4)
                 match direction:
-                    case 1: isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row-1,column)
-                    case 2: isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column-1)
-                    case 3: isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row+1,column)
-                    case 4: isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column+1)
+                    case 1: isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row-1)
+                    case 2: isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column-1,row)
+                    case 3: isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row+1)
+                    case 4: isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column+1,row)
 
     i = 0 #move hit to a neighbouring field
     while isHit == 2:
@@ -48,7 +49,7 @@ def opponentAction():#hit random field
             match direction:
                 case 1:
                     if row - i >= 0:
-                        isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row-i,column)
+                        isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row-i)
                         if i > 1 and isHit == 0:
                             direction = 3
                             directionLock = direction
@@ -60,7 +61,7 @@ def opponentAction():#hit random field
                         i = 0
                 case 2:
                     if column - i >= 0:
-                        isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column-i)   
+                        isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column-i,row)   
                         if i > 1 and isHit == 0:
                             direction = 4
                             directionLock = direction
@@ -72,7 +73,7 @@ def opponentAction():#hit random field
                         i = 0
                 case 3:
                     if row + i <= 9:
-                        isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row+i,column)
+                        isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column,row+i)
                         if i > 1 and isHit == 0:
                             direction = 1
                             directionLock = direction
@@ -84,7 +85,7 @@ def opponentAction():#hit random field
                         i = 0
                 case 4:
                     if column + i <= 9:
-                        isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column+i)
+                        isHit = hitShip.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,column+i,row)
                         if i > 1 and isHit == 0:
                             direction = 2
                             directionLock = direction
