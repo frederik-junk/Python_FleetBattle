@@ -14,7 +14,7 @@ class TestStartingPlayerSelection(unittest.TestCase):
         startingPlayer = MagicMock()
         startingPlayer.return_value = 2
 
-        # Call the function with the mocked startingPlayer
+        # Call the function with the mocked startingPlayer (otherwise no fixed 'random' value!!)
         with patch('selectoperations.randint', startingPlayer):
             selectStartingPlayer(mode)
         
@@ -30,7 +30,7 @@ class TestStartingPlayerSelection(unittest.TestCase):
         startingPlayer = MagicMock()
         startingPlayer.return_value = 1
         
-        # Call the function with the mocked startingPlayer
+        # Call the function with the mocked startingPlayer (otherwise no fixed 'random' value!!)
         with patch('selectoperations.randint', startingPlayer):
             selectStartingPlayer(mode)
         

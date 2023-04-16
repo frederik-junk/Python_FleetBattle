@@ -28,7 +28,7 @@ class Ships:
         self.__damageCounter += 1
 
     def classPlaceShip(self, board, ship):
-         result = placeShip(board, self.getSize(), ship, self.getName())
+         result = python_game.placeShip(board, self.getSize(), ship, self.getName())
          return result
          
 
