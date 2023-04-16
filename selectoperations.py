@@ -2,6 +2,8 @@
 import outputmanager
 from python_game import *
 from random import *
+import circularImportFixing
+from shipmanager import *
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
@@ -49,7 +51,8 @@ def gameModeSelection():
                     print (f"Hallo {outputmanager.user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
                     # Call function placeShip for user 1 to place ships
-                    placeShip(leakedBoard1, shipLength)
+                    for ship in circularImportFixing.playerShips:
+                        ship.classPlaceShip(leakedBoard1, ship)
                     # Ask for user 2 name and welcome message
                     userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
                     # Set user name 2
