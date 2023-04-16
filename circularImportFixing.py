@@ -32,7 +32,8 @@ pUboot2 = shipmanager.Uboot(emptyTupelList)
 pUboot3 = shipmanager.Uboot(emptyTupelList)
 pUboot4 = shipmanager.Uboot(emptyTupelList)
 
-playerShips = [pSchlachtschiff1, pKreuzer1, pKreuzer2, pZerstoerer1, pZerstoerer2, pZerstoerer3, pUboot1, pUboot2, pUboot3, pUboot4]
+#playerShips = [pSchlachtschiff1, pKreuzer1, pKreuzer2, pZerstoerer1, pZerstoerer2, pZerstoerer3, pUboot1, pUboot2, pUboot3, pUboot4]
+playerShips = [pSchlachtschiff1]
 
 #these are are the user2 ships player1 or player2 
 oSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList)
