@@ -1,14 +1,10 @@
 import blockerfunctions
-from shipmanager import Ships
+import shipmanager
 
-
-def directionConverter(
-    board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship
-):
-    j = 0  # just a counting variable for later use
-    positionTupelList = (
-        []
-    )  # this is the List which is given to the position list of the object
+def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
+    j = 0  #counting variable for later use
+    # this is the List which is given to the position list of the object
+    positionTupelList = ([])
     match direction:
         case "w":
             try:  # exception for the case that the ship is placed out of bounce in the given direction
@@ -39,14 +35,13 @@ def directionConverter(
                 if gameMode == 2:
                     print(str(e))
                     print(
-                        "Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
+                        "Bitte wählen Sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
                     )
                     return (
                         True  # is send back to the beginning to set another direction
                     )
                 else:
                     return True
-
         case "a":
             try:  # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingColoumnChar = startingColumnChar - shipLength
@@ -74,7 +69,7 @@ def directionConverter(
                 if gameMode == 2:
                     print(str(e))
                     print(
-                        "Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
+                        "Bitte wählen Sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
                     )
                     return True
                 else:
@@ -106,7 +101,7 @@ def directionConverter(
                 if gameMode == 2:
                     print(str(e))
                     print(
-                        "Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
+                        "Bitte wählen Sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
                     )
                     return True
                 else:
@@ -138,7 +133,7 @@ def directionConverter(
                 if gameMode == 2:
                     print(str(e))
                     print(
-                        "Bitte nehmen sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
+                        "Bitte wählen Sie eine andere Richtung, in die das Schiff ausgerichtet werden soll."
                     )
                     return True
                 else:
@@ -146,7 +141,7 @@ def directionConverter(
         case _:
             if gameMode == 2:
                 print(
-                    "Bitte bestimmen sie mithilfe von w,a,s,d die Ausrichtung des Schiffes. In Kleinbuchstaben"
+                    "Bitte bestimmen Sie mithilfe von [w][a][s][d] die Ausrichtung des Schiffes."
                 )
                 return True
             else:
@@ -156,13 +151,12 @@ def directionConverter(
 
     # splitting the input into the column and row indices
 
-
 def splitColumnConverter(placementInput):
     startingColumnChar = str(
         placementInput[0]
     )  # extracting the first char of the users input
     try:
-        if startingColumnChar.isalpha() == False:
+        if startingColumnChar.isalpha() is False:
             raise ValueError
         else:
             startingColumnChar = startingColumnChar.upper()
@@ -189,8 +183,8 @@ def splitColumnConverter(placementInput):
             case "J":
                 startingColumnChar = 9
             case _:
-                print("Bitte geben sie Buchstaben zwischen A und J ein.")
-                print("Bitte geben sie eine neue Startposition an.")
+                print("Bitte geben Sie Buchstaben zwischen A und J ein.")
+                print("Bitte geben Sie eine neue Startposition an.")
                 startingColumnChar = 11
                 return startingColumnChar
         return startingColumnChar
@@ -199,16 +193,14 @@ def splitColumnConverter(placementInput):
         print(
             "Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an."
         )
-        print("Geben sie nun die Startposition erneut in der Form (z.B.: A3) an.")
+        print("Geben Sie nun die Startposition erneut in der Form (z.B.: A3) an.")
         startingColumnChar = 11
         return startingColumnChar
 
-
 def splitRow(placementInput):
     try:
-        startingRowNumber = int(
-            placementInput[1:]
-        )  # extracting the rest of the users input
+        startingRowNumber = int(placementInput[1:])
+        # extracting the rest of the users input
         # the code above could raise a ValueError which is excepted down below
         if 0 < startingRowNumber <= 10:
             return startingRowNumber
@@ -217,6 +209,6 @@ def splitRow(placementInput):
 
     except ValueError as e:
         print(str(e))
-        print("Bitte geben sie als Zeilen nur Zahlen zwischen 1 und 10 an.")
+        print("Bitte geben Sie als Zeile nur Zahlen zwischen 1 und 10 an.")
         startingRowNumber = 11
         return startingRowNumber
