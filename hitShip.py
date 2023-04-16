@@ -4,7 +4,7 @@ import shipmanager
 #hidden = ships hidden
 def checkHit(hiddenBoard,leakedBoard,column,row):
     #check if field was alredy hit
-    print("Schuss auf: "+chr(column+65),row)
+    print("Sie schießen auf: "+chr(column+65),row)
     if hiddenBoard[row][column] != 0:
         return 1
     #hitted ship
