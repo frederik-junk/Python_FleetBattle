@@ -1,9 +1,9 @@
-import shipmanager
 import random
 import python_game
 import main
-
-#o means opponent
+"""
+#TODO delete comment when ships are implemented differently
+#TODO import shipmanager if want to use again
 #TODO real ship positions getter 
 oschlachtschiff1 = shipmanager.Schlachtschiff(((1,1),(1,2),(1,3),(1,4),(1,5)))
 okreuzer1 = shipmanager.Kreuzer(((1,1),(1,2),(1,3),(1,4)))
@@ -16,13 +16,12 @@ ouboot2 = shipmanager.UBoot(((1,1),(1,2)))
 ouboot3 = shipmanager.UBoot(((1,1),(1,2)))
 ouboot4 = shipmanager.UBoot(((1,1),(1,2)))
 
-opponentships = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
-def initShips():
-    for ship in opponentships:
+opponentShips = [oschlachtschiff1,okreuzer1,okreuzer2,ozerstoerer1,ozerstoerer2,ozerstoerer3,ouboot1,ouboot2,ouboot3,ouboot4]
+def initOpponentShips():
+    for ship in opponentShips:
         length = ship.getSize()
-
-        python_game.cpuPlaceShip(python_gameleakedBoard2,length,ship)
-
+        python_game.cpuPlaceShip(python_gameleakedBoard1,length,ship)
+"""
 
 def opponentAction():#hit random field 
     isHit = 1
@@ -30,7 +29,7 @@ def opponentAction():#hit random field
     while(isHit == 1):
         row = random.randint(1,10)
         column = random.randint(1,10)
-        isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column)
+        isHit = python_game.checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column)
     #fire again to a neighbouring field
     #TODO check if its in the field
     direction = random.randint(1,4)
@@ -39,13 +38,13 @@ def opponentAction():#hit random field
             i = i+1
             match direction:
                 case 1:
-                   isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row-i,column)
+                    python_game.isHit = checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row-i,column)
                 case 2:
-                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column-i)
+                    python_game.isHit = checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column-i)
                 case 3:
-                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row+i,column)
+                    python_game.isHit = checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row+i,column)
                 case 4:
-                    isHit = checkHit(python_game.hiddenBoard1,python_game.leakedBoard1,row,column+i)
+                    python_game.isHit = checkHit(python_game.hiddenBoard2,python_game.leakedBoard2,row,column+i)
                     
     #if a field is hit that was hit before shoot a random field
     #TODO what to do when hit a already shoot field after a hit
@@ -54,28 +53,3 @@ def opponentAction():#hit random field
     #TODO look into how that is working
     main.nextPlayer()
     
-#hidden = ships hidden 
-def checkHit(hiddenBoard,leakedBoard,row,column):
-    #check if field was alredy hit
-    if hiddenBoard[row][column] != 0:
-        return 1
-    #hitted ship
-    elif leakedBoard[row][column] == 1:
-        #get which ship is hit
-        for ship in opponentships:
-            if(row,column)in ship.getPosition():
-                shipName = ship
-        shipName.hitOnShip()
-        if shipName.getSize() == shipName.getDamageCounter():
-            #ship sunk
-            for position in shipName.getPosition():
-                hiddenBoard[position]=4
-            return 1
-        #ship isnt sunk
-        else:
-            leakedBoard[row][column] = 3
-        return 2
-    #hitted water
-    elif hiddenBoard[row][column] == 0:
-        leakedBoard[row][column]= 2
-    return 0
