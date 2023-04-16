@@ -44,7 +44,6 @@ def printleakedBoard(board):
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","X") for elem in row))
-printleakedBoard(leakedBoard1)
 #function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
 def printhiddenBoard(board):
     #creates the first row with letters to locate the ship positon (horizontal)

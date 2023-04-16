@@ -35,5 +35,5 @@ oUboot2 = shipmanager.Uboot(emptyTupelList)
 oUboot3 = shipmanager.Uboot(emptyTupelList)
 oUboot4 = shipmanager.Uboot(emptyTupelList)
 
-opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
-
+#opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
+opponentShips = [oSchlachtschiff1]
