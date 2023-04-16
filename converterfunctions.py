@@ -36,7 +36,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             startingRowNumber = startingRowNumber - 1
 
                             j += 1
-                        if j == shipLength:
+                        if j == shipLength - 1:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -86,7 +86,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                             startingColumnChar -= 1
                             j += 1
-                        if j == shipLength:
+                        if j == shipLength - 1:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -136,7 +136,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                             startingRowNumber += 1
                             j += 1
-                        if j == shipLength:
+                        if j == shipLength - 1:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -186,7 +186,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             
                             startingColumnChar += 1
                             j += 1
-                        if j == shipLength:
+                        if j == shipLength - 1:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -265,10 +265,8 @@ def splitColumnConverter(placementInput):
         return startingColumnChar
     except ValueError as e:
         print(str(e))
-        print(
-            "Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an."
-        )
-        print("Geben Sie nun die Startposition erneut in der Form (z.B.: A3) an.")
+        print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
+        print("Geben Sie bitte die Startposition erneut in der Form (z.B.: A3) an.")
         startingColumnChar = 11
         return startingColumnChar
 
@@ -282,8 +280,6 @@ def splitRow(placementInput):
         else:
             raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
 
-    except ValueError as e:
-        print(str(e))
-        print("Bitte geben Sie als Zeile nur Zahlen zwischen 1 und 10 an.")
+    except ValueError:
         startingRowNumber = 11
         return startingRowNumber

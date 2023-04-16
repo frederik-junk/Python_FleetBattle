@@ -70,8 +70,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
             elif startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
                  
-        except Exception as e:
-            print(str(e))
+        except Exception:
             print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
             print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
             continue     
