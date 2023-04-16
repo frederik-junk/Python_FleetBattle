@@ -78,8 +78,7 @@ def placeShip(board, shipLength, ship, shipName):
         break
 
     printleakedBoard(board)
-
-
+    
     #DELETE if Positions for ships are available 
     #placing the ship in the right direction
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
