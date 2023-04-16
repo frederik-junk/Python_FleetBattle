@@ -76,7 +76,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
             continue     
                         
         #subtract one for the correct alignment
-        startingRowNumber = int(startingRowNumber) - 1
+        startingRowNumber = int(startingRowNumber)
         startingColumnChar = int(startingColumnChar)
         if board[startingRowNumber][startingColumnChar] == 1:
             print(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.")

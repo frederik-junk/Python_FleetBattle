@@ -30,7 +30,7 @@ def playerAction(currentPlayer, gameMode):
                     break
             except Exception:
                 print("Ihre Angabe ist fehlerhaft.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
-                print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
+                print("Bitte geben Sie die Schießposition in der Form (z.B.: A3) an.")
                 continue
             
         #choose on which board to shoot
