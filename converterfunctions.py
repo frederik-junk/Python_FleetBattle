@@ -36,7 +36,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             startingRowNumber = startingRowNumber - 1
 
                             j += 1
-                        if j == shipLength - 1:
+                        if j == shipLength:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -86,7 +86,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                             startingColumnChar -= 1
                             j += 1
-                        if j == shipLength - 1:
+                        if j == shipLength:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -136,7 +136,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
 
                             startingRowNumber += 1
                             j += 1
-                        if j == shipLength - 1:
+                        if j == shipLength:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
@@ -186,7 +186,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                             
                             startingColumnChar += 1
                             j += 1
-                        if j == shipLength - 1:
+                        if j == shipLength:
                             for tupel in positionTupelList:
                                 rowNumber, columnNumber = tupel
                                 board[rowNumber][columnNumber] = 1
