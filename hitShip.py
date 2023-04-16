@@ -4,11 +4,7 @@ import circularImportFixing
 #hidden = ships hidden
 def checkHit(hiddenBoard,leakedBoard,column,row,gameMode):
     #check if field was alredy hit
-<<<<<<< HEAD
     print("Sie schießen auf: "+chr(column+65),row + 1)
-=======
-    print("Sie schießen auf3: "+chr(column+65),row)
->>>>>>> dbc0230628f9b6cdddfa8951c21ed64cbfda3155
     if hiddenBoard[row][column] != 0:
         print("Hallo hier hiddenBoard ungleich 0 :)")
         return 1
