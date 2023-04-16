@@ -4,6 +4,10 @@ import python_game
 import random
 import circularImportFixing
 import shipmanager
+import os
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
@@ -48,7 +52,7 @@ def gameModeSelection():
                     userName1 = input("Spieler 1, bitte geben Sie ihren Namen an: \n")
                     # Set user name 1 
                     outputmanager.user1.setName(userName1)
-                    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+                    clear_console()
                     print (f"Hallo {outputmanager.user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
                     # Call function placeShip for user 1 to place ships
@@ -58,10 +62,11 @@ def gameModeSelection():
                         counter = counter+1
                     counter = 1
                     # Ask for user 2 name and welcome message
+                    continue_request = input("Beliebige Taste und Enter drücken um chat zu leeren und Spieler 2 seine Schiff plazieren zu lassen: ")
+                    clear_console()
                     userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
                     # Set user name 2
                     outputmanager.user2.setName(userName2)
-                    print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
                     # Call function for user 2 to place ships
@@ -69,7 +74,7 @@ def gameModeSelection():
                         ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
-                    # Print message indicating start of the game
+                    # Print messaSge indicating start of the game
                     print("Das Spiel beginnt.")
                     # Call function to randomly select starting player
                     selectStartingPlayer(gameMode)

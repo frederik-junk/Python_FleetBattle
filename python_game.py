@@ -1,5 +1,9 @@
 import random
 import converterfunctions
+import os
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]
 firstRow =   [0,0,0,0,0,0,0,0,0,0]
@@ -88,7 +92,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
         if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
             continue
         else:
-            print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+            clear_console()
             print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
             printleakedBoard(board)
             break
