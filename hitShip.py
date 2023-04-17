@@ -1,40 +1,47 @@
 import main
-import shipmanager
+import circularImportFixing
 
 #hidden = ships hidden
-def checkHit(hiddenBoard,leakedBoard,column,row):
+def checkHit(hiddenBoard,leakedBoard,column,row,gameMode):
     #check if field was alredy hit
-    print("Sie schießen auf: "+chr(column+65),row)
+    print("Sie schießen auf: "+chr(column+65),row + 1)
     if hiddenBoard[row][column] != 0:
+        print("Hallo hier hiddenBoard ungleich 0 :)")
         return 1
     #hitted ship
-    elif leakedBoard[row][column] == 1:
+    elif leakedBoard[row][column] == 0:
         #get which ship is hit
         #TODO are gameMode and currentplayer functioning?
         #don´t import main!
         if(main.gameMode == 1 and main.currentplayer == 2):  
-            for ship in shipmanager.opponentShips:
+            for ship in circularImportFixing.opponentShips:
                 if(row,column)in ship.getPosition():
                     shipName = ship
+                    print("Es wird der if-Zweig aufgerufen!!")
+                    print("Shipname innerhalb der Schleife:",ship)
                     break
         else:
-            for ship in shipmanager.playerShips:
+            for ship in circularImportFixing.playerShips:
                 if(row,column)in ship.getPosition():
                     shipName = ship
+                    print("Es wird der else-Zweig aufgerufen!!")
+                    print("Shipname innerhalb der Schleife:",ship)
                     break
+        print("Shipname außerhalb der Schleife:",ship)
         shipName.hitOnShip()
         if shipName.getSize() == shipName.getDamageCounter():
             #ship sunk
             for position in shipName.getPosition():
-                hiddenBoard[position] = 4
+                print(type(position[0]))
+                hiddenBoard[a,b] = 4
             return 3
         #ship isnt sunk
         else:
-            hiddenboard[row][column] = 3
+            hiddenBoard[row][column] = 3
         return 2
     #hitted water
-    elif hiddenBoard[row][column] == 0:
-        hiddenboard[row][column]= 2
+    elif leakedBoard[row][column] == 0:
+        hiddenBoard[row][column]= 2
     return 0
 
 

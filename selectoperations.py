@@ -91,7 +91,7 @@ def gameModeSelection():
         except ValueError as e:
             # Print error message and ask for correct input
             print(str(e))
-            print("Bitte wähle sie entweder [1] für singleplayer oder [2] für multiplayer.")
+            print("Bitte wählen Sie entweder [1] für Singleplayer oder [2] für Multiplayer.")
             continue
 
 # Random selection which player starts the game
@@ -108,7 +108,7 @@ def selectStartingPlayer(mode):
     if startingPlayer == 1:
         if mode == "1":
             #cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
-            print(f"{outputmanager.user1.getName()}ccccccc darf das Spiel beginnen und ist an der Reihe!")
+            print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
             currentPlayer = 1
             return currentPlayer
         print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
