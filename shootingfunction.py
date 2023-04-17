@@ -1,11 +1,11 @@
-import shipmanager
-import main
+import os
 import circularImportFixing
 import converterfunctions
 import python_game
 import outputmanager
 
-
+def clearConsole():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 
@@ -60,7 +60,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
             match currentPlayer:
                 case 1:
                     while shootingRepeater == True:
-                        shootingPosition = input("Geben sie eine Koordinate an, auf die sie schießen wollen: \n")
+                        shootingPosition = input(f"{outputmanager.user1.getName()} geben sie eine Koordinate an, auf die sie schießen wollen: \n")
                         row = converterfunctions.splitRow(shootingPosition)
                         column = converterfunctions.splitColumnConverter(shootingPosition)
                         leakedBoard = python_game.leakedBoard2
@@ -114,12 +114,13 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                 shootingRepeater = False
                             case _:
                                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
+                        #clearConsole()
                         python_game.printhiddenBoard(hiddenBoard)
                     nextPlayer(gameMode, currentPlayer)
        
                 case 2:
                     while shootingRepeater == True:
-                        shootingPosition = input("Geben sie eine Koordinate an, auf die sie schießen wollen: \n")
+                        shootingPosition = input(f"{outputmanager.user2.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
                         row = converterfunctions.splitRow(shootingPosition)
                         column = converterfunctions.splitColumnConverter(shootingPosition)
                         leakedBoard = python_game.leakedBoard1
@@ -177,6 +178,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                 shootingRepeater = False
                             case _:
                                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
+                        #clearConsole()
                         python_game.printhiddenBoard(hiddenBoard)
                     nextPlayer(gameMode, currentPlayer)
                 case _: 
@@ -201,10 +203,18 @@ def nextPlayer(gameMode, currentPlayer):
 
     if currentPlayer == 1:
         currentPlayer = 2
+        print("__________________________________\n")
         print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
+        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n")
+        #clearConsole()
         shooting(gameMode, currentPlayer)
         
     else:
         currentPlayer = 1
+        print("__________________________________\n")
         print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
+        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
+        #clearConsole()
         shooting(gameMode, currentPlayer)
