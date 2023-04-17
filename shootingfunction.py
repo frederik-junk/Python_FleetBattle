@@ -13,8 +13,28 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
             print("You have")
             #hier KI Technik
         elif currentPlayer == 2:
-            print("You have")
-            #hier Mensch
+                leakedBoard = python_game.leakedBoard2
+                hiddenBoard = python_game.hiddenBoard2
+                if leakedBoard[row][column] == 1:
+                    shootingTupel = (row, column)
+
+                    for ship in circularImportFixing.playerShips:
+                        postitions = ship.getPosition()
+                        if shootingTupel in postitions:
+                            print("Das war ein Treffer! Sehr gute Arbeit")
+                            hiddenBoard[row][column] = 4
+                            postitions.remove(shootingTupel)
+                            if len(postitions) == 0:
+                                print("Schiff versenkt")
+                            else:
+                                pass
+                            python_game.printhiddenBoard
+                        else:
+                            pass
+                else:
+                    print("Das war leider ein Wassertreffer")
+                    hiddenBoard[row][column] = 3
+                    python_game.printhiddenBoard
         else:
             print("Shit")
     elif gameMode == 2:
