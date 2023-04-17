@@ -45,17 +45,17 @@ class Ships:
 
 #classes for each ship type with standard values
 class Schlachtschiff(Ships):
-        def __init__(self,position):
-            super().__init__("Schlachtschiff(1x)", 5, position)
+        def __init__(self,position, positionMemory):
+            super().__init__("Schlachtschiff(1x)", 5, position, positionMemory)
 
 class Kreuzer(Ships):
-        def __init__(self,position):
-            super().__init__("Kreuzer(2x)", 4, position)
+        def __init__(self,position, positionMemory):
+            super().__init__("Kreuzer(2x)", 4, position, positionMemory)
 
 class Zerstoerer(Ships):
-        def __init__(self,position):
-            super().__init__("Zerstoerer(3x)", 3, position)
+        def __init__(self,position, positionMemory):
+            super().__init__("Zerstoerer(3x)", 3, position, positionMemory)
 
 class Uboot(Ships):
-        def __init__(self,position):
-            super().__init__("UBoot(4x)", 2, position)
+        def __init__(self,position, positionMemory):
+            super().__init__("UBoot(4x)", 2, position, positionMemory)
