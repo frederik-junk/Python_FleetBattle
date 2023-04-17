@@ -81,6 +81,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
 
 
 # Switches the current player after each action
+"""
 def nextPlayer(currentPlayer):
     print(currentPlayer)
 
@@ -97,5 +98,4 @@ def nextPlayer(currentPlayer):
             oponent.oponentAction()
         else:
             player.playerAction(currentPlayer, gameMode)
-
-    
+"""
