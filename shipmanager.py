@@ -32,7 +32,7 @@ class Ships:
     #function to call ship place function 
     def classPlaceShip(self, board, ship, counter):
          result = python_game.placeShip(board, self.getSize(), ship, self.getName(), counter)
-         print(self.getPosition())
+         print(self.getPosition()) #TODO: this is a debug output can be deleted
          return result
          
 
