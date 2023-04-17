@@ -16,6 +16,8 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
 
     match currentPlayer:
         case 1:
+            leakedBoard = python_game.leakedBoard1
+            hiddenBoard = python_game.hiddenBoard1
             if leakedBoard[row][column] == 1:
                 shootingTupel = (row, column)
 
@@ -37,6 +39,8 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                 hiddenBoard[row][column] = 3
                 python_game.printhiddenBoard
         case 2:
+            leakedBoard = python_game.leakedBoard1
+            hiddenBoard = python_game.hiddenBoard1
             if leakedBoard[row][column] == 1:
                 shootingTupel = (row, column)
 
