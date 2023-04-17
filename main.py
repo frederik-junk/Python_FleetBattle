@@ -18,7 +18,7 @@ def main():
     outputmanager.welcomeUser()
     gameMode = selectoperations.gameModeSelection()
     # Call function to randomly select starting player
-    currentPlayer = selectoperations.selectStartingPlayer()
+    currentPlayer = selectoperations.selectStartingPlayer() 
     winningID = shootingfunction.shooting(gameMode, currentPlayer)
     #player.playerAction(currentPlayer,gameMode)
     outputmanager.battleEnd(winningID, gameMode)
