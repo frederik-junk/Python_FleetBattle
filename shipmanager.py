@@ -27,6 +27,7 @@ class Ships:
 
     def classPlaceShip(self, board, ship, counter):
          result = python_game.placeShip(board, self.getSize(), ship, self.getName(), counter)
+         print(self.getPosition())
          return result
          
 

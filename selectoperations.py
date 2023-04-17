@@ -66,7 +66,7 @@ def gameModeSelection():
                     counter = 1
                     # Ask for user 2 name and welcome message
                     continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und Spieler 2 seine Schiff platzieren zu lassen: \n")
-                    clearConsole()
+                    clearConsole() 
                     userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
                     # Set user name 2
                     outputmanager.user2.setName(userName2)

@@ -36,3 +36,6 @@ def checkHit(hiddenBoard,leakedBoard,column,row):
     elif hiddenBoard[row][column] == 0:
         hiddenboard[row][column]= 2
     return 0
+
+
+    
