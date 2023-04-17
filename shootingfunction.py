@@ -29,15 +29,22 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         postitions = ship.getPosition()
                         if shootingTupel in postitions:
                             print("Das war ein Treffer! Sehr gute Arbeit")
-                            hiddenBoard[row][column] = 4
+                            hiddenBoard[row][column] = 3
                             positionMemory.append(shootingTupel)
                             ship.setPositionMemory(positionMemory)
                             postitions.remove(shootingTupel)
                             if len(postitions) == 0:
                                 positionMemory = ship.getPositionMemory()
                                 for tupel in positionMemory:
-                                    hiddenBoard[tupel[0]][tupel[1:]] = 4
+                                    row, column = tupel
+                                    hiddenBoard[row][column] = 4
                                 print("Schiff versenkt")
+                                circularImportFixing.playerShips.remove(ship)
+                                if len(circularImportFixing.playerShips) == 0:
+                                    winningID = 2
+                                    return winningID
+                                else:
+                                    pass
                             else:
                                 pass
                             python_game.printhiddenBoard
@@ -61,15 +68,26 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         match leakedBoard[row][column]:
                             case 1:
                                 shootingTupel = (row, column)
-                                for ship in circularImportFixing.playerShips:
+                                for ship in circularImportFixing.opponentShips:
                                     postitions = ship.getPosition()
                                     if shootingTupel in postitions:
                                         print("Das war ein Treffer! Sehr gute Arbeit")
                                         hiddenBoard[row][column] = 3
+                                        positionMemory.append(shootingTupel)
+                                        ship.setPositionMemory(positionMemory)
                                         postitions.remove(shootingTupel)
                                         if len(postitions) == 0:
+                                            positionMemory = ship.getPositionMemory()
+                                            for tupel in positionMemory:
+                                                row, column = tupel
+                                                hiddenBoard[row][column] = 4
                                             print("Schiff versenkt")
-                                            circularImportFixing.playerShips.remove(ship)
+                                            circularImportFixing.opponentShips.remove(ship)
+                                            if len(circularImportFixing.opponentShips) == 0:
+                                                winningID = 1
+                                                return winningID
+                                            else:
+                                                pass
                                         else:
                                             pass
                                         python_game.printhiddenBoard
@@ -115,12 +133,21 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                     if shootingTupel in postitions:
                                         print("Das war ein Treffer! Sehr gute Arbeit")
                                         hiddenBoard[row][column] = 3
+                                        positionMemory.append(shootingTupel)
+                                        ship.setPositionMemory(positionMemory)
                                         postitions.remove(shootingTupel)
                                         if len(postitions) == 0:
+                                            positionMemory = ship.getPositionMemory()
+                                            for tupel in positionMemory:
+                                                row, column = tupel
+                                                hiddenBoard[row][column] = 4
                                             print("Schiff versenkt")
                                             circularImportFixing.playerShips.remove(ship)
-                                        else:
-                                            pass
+                                            if len(circularImportFixing.playerShips) == 0:
+                                                winningID = 2
+                                                return winningID
+                                            else:
+                                                pass
                                         python_game.printhiddenBoard
                                     else:
                                         pass

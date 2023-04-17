@@ -26,7 +26,7 @@ class Ships:
     def getPosition(self):
         return self.__position
     
-    def getpositionMemory(self):
+    def getPositionMemory(self):
         return self.__positionMemory
 
     def getDamageCounter(self):
