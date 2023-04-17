@@ -1,39 +1,40 @@
 import shipmanager
 
 emptyTupelList = []
+variable = 0
 
 #these are the user1 ship player or cpu
-pSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList)
+pSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList, variable)
 
-pKreuzer1 = shipmanager.Kreuzer(emptyTupelList)
-pKreuzer2 = shipmanager.Kreuzer(emptyTupelList)
+pKreuzer1 = shipmanager.Kreuzer(emptyTupelList, variable)
+pKreuzer2 = shipmanager.Kreuzer(emptyTupelList, variable)
 
-pZerstoerer1 = shipmanager.Zerstoerer(emptyTupelList)
-pZerstoerer2 = shipmanager.Zerstoerer(emptyTupelList)
-pZerstoerer3 = shipmanager.Zerstoerer(emptyTupelList)
+pZerstoerer1 = shipmanager.Zerstoerer(emptyTupelList, variable)
+pZerstoerer2 = shipmanager.Zerstoerer(emptyTupelList, variable)
+pZerstoerer3 = shipmanager.Zerstoerer(emptyTupelList, variable)
 
-pUboot1 = shipmanager.Uboot(emptyTupelList)
-pUboot2 = shipmanager.Uboot(emptyTupelList)
-pUboot3 = shipmanager.Uboot(emptyTupelList)
-pUboot4 = shipmanager.Uboot(emptyTupelList)
+pUboot1 = shipmanager.Uboot(emptyTupelList, variable)
+pUboot2 = shipmanager.Uboot(emptyTupelList, variable)
+pUboot3 = shipmanager.Uboot(emptyTupelList, variable)
+pUboot4 = shipmanager.Uboot(emptyTupelList, variable)
 
 #playerShips = [pSchlachtschiff1, pKreuzer1, pKreuzer2, pZerstoerer1, pZerstoerer2, pZerstoerer3, pUboot1, pUboot2, pUboot3, pUboot4]
 playerShips = [pSchlachtschiff1]
 
 #these are are the user2 ships player1 or player2
-oSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList)
+oSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList, variable)
 
-oKreuzer1 = shipmanager.Kreuzer(emptyTupelList)
-oKreuzer2 = shipmanager.Kreuzer(emptyTupelList)
+oKreuzer1 = shipmanager.Kreuzer(emptyTupelList, variable)
+oKreuzer2 = shipmanager.Kreuzer(emptyTupelList, variable)
 
-oZertsoerer1 = shipmanager.Zerstoerer(emptyTupelList)
-oZerstoerer2 = shipmanager.Zerstoerer(emptyTupelList)
-oZerstoerer3 = shipmanager.Zerstoerer(emptyTupelList)
+oZertsoerer1 = shipmanager.Zerstoerer(emptyTupelList, variable)
+oZerstoerer2 = shipmanager.Zerstoerer(emptyTupelList, variable)
+oZerstoerer3 = shipmanager.Zerstoerer(emptyTupelList, variable)
 
-oUboot1 = shipmanager.Uboot(emptyTupelList)
-oUboot2 = shipmanager.Uboot(emptyTupelList)
-oUboot3 = shipmanager.Uboot(emptyTupelList)
-oUboot4 = shipmanager.Uboot(emptyTupelList)
+oUboot1 = shipmanager.Uboot(emptyTupelList, variable)
+oUboot2 = shipmanager.Uboot(emptyTupelList, variable)
+oUboot3 = shipmanager.Uboot(emptyTupelList, variable)
+oUboot4 = shipmanager.Uboot(emptyTupelList, variable)
 
 #opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
 opponentShips = [oSchlachtschiff1]
