@@ -19,31 +19,14 @@ def main():
     gameMode = selectoperations.gameModeSelection()
     # Call function to randomly select starting player
     currentPlayer = selectoperations.selectStartingPlayer()
-    shootingfunction.shooting(gameMode, currentPlayer)
+    winningID = shootingfunction.shooting(gameMode, currentPlayer)
     #player.playerAction(currentPlayer,gameMode)
-    outputmanager.battleEnd(2, gameMode)
+    outputmanager.battleEnd(winningID, gameMode)
 
 if __name__ == "__main__":
     main()
 
-# Switches the current player after each action
-def nextPlayer():
-    global currentPlayer
-    global gameMode
-    print(currentPlayer)
 
-    if currentPlayer == 1:
-        currentPlayer = 2
-        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
-        player.playerAction(currentPlayer, gameMode)
-        
-    else:
-        currentPlayer = 1
-        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-        print(gameMode)
-        if gameMode == 1:
-            oponent.oponentAction()
-        else:
-            player.playerAction(currentPlayer, gameMode)
+
 
         
