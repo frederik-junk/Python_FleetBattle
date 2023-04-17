@@ -7,8 +7,8 @@ import python_game
 
 
 
-def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
-    shootingPosition = input("Geben sie eine Koordinate an, auf die sie schißen wollen")
+def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
+    shootingPosition = input("Geben sie eine Koordinate an, auf die sie schießen wollen")
 
     row = converterfunctions.splitRow(shootingPosition)
     column = converterfunctions.splitColumnConverter(shootingPosition)
@@ -16,15 +16,13 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
 
     match currentPlayer:
         case 1:
-            leakedBoard = python_game.leakedBoard1
-            hiddenBoard = python_game.hiddenBoard1
             if leakedBoard[row][column] == 1:
                 shootingTupel = (row, column)
 
                 for ship in circularImportFixing.opponentShips:
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
-                        print("Treffer")
+                        print("Das war ein Treffer! Sehr gute Arbeit")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
                         if len(postitions) == 0:
@@ -35,19 +33,17 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                     else:
                         pass
             else:
-                print("Wasser")
+                print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 3
                 python_game.printhiddenBoard
         case 2:
-            leakedBoard = python_game.leakedBoard2
-            hiddenBoard = python_game.hiddenBoard2
             if leakedBoard[row][column] == 1:
                 shootingTupel = (row, column)
 
                 for ship in circularImportFixing.playerShips:
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
-                        print("Treffer")
+                        print("Das war ein Treffer! Sehr gute Arbeit")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
                         if len(postitions) == 0:
@@ -58,7 +54,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                     else:
                         pass
             else:
-                print("Wasser")
+                print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 3
                 python_game.printhiddenBoard
         case _: 
