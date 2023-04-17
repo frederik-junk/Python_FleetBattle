@@ -25,12 +25,17 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                         print("Treffer")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
+                        if len(postitions) == 0:
+                            print("Schiff versenkt")
+                        else:
+                            pass
                         python_game.printhiddenBoard
                     else:
                         pass
             else:
                 print("Wasser")
                 hiddenBoard[row][column] = 3
+                python_game.printhiddenBoard
         case 2:
             if leakedBoard[row][column] == 1:
                 shootingTupel = (row, column)
@@ -41,12 +46,17 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                         print("Treffer")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
+                        if len(postitions) == 0:
+                            print("Schiff versenkt")
+                        else:
+                            pass
                         python_game.printhiddenBoard
                     else:
                         pass
             else:
                 print("Wasser")
                 hiddenBoard[row][column] = 3
+                python_game.printhiddenBoard
         case _: 
             print("something went wrong")
 
