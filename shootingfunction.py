@@ -8,6 +8,7 @@ import python_game
 
 
 def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
+    positionMemory = []
     if gameMode ==  1:
         if currentPlayer == 1:
             print("You have")
@@ -23,8 +24,13 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         if shootingTupel in postitions:
                             print("Das war ein Treffer! Sehr gute Arbeit")
                             hiddenBoard[row][column] = 4
+                            positionMemory.append(shootingTupel)
+                            ship.setPositionMemory(positionMemory)
                             postitions.remove(shootingTupel)
                             if len(postitions) == 0:
+                                positionMemory = ship.getPositionMemory()
+                                for tupel in positionMemory:
+                                    hiddenBoard[tupel[0]][tupel[1:]] = 4
                                 print("Schiff versenkt")
                             else:
                                 pass

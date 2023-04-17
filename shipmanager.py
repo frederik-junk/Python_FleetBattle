@@ -2,15 +2,19 @@ import python_game
 
 #creating main class with ships
 class Ships:
-    def __init__(self, name, size, position):
+    def __init__(self, name, size, position, positionMemory):
         self.__name = name #ship name
         self.__size = size #size of ship
         self.__position = position #position of ship stored in touple
         self.__damageCounter = 0 #damage counter as damage indcator
+        self.__positionMemory = positionMemory
 
     #set function to store ship postion of each ship (tupel)
     def setPosition(self,position):
         self.__position = position
+
+    def setPositionMemory(self, positionMemory):
+        self.__positionMemory = positionMemory
 
     #get functions to get differnet values of each ship
     def getName(self):
@@ -21,6 +25,9 @@ class Ships:
 
     def getPosition(self):
         return self.__position
+    
+    def getpositionMemory(self):
+        return self.__positionMemory
 
     def getDamageCounter(self):
         return self.__damageCounter
