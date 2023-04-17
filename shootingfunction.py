@@ -8,7 +8,7 @@ import python_game
 
 
 def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
-    shootingPosition = input("Geben sie eine Koordinate an, auf die sie schißen wollen")
+    shootingPosition = input("Geben sie eine Koordinate an, auf die sie schießen wollen")
 
     row = converterfunctions.splitRow(shootingPosition)
     column = converterfunctions.splitColumnConverter(shootingPosition)
@@ -22,7 +22,7 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                 for ship in circularImportFixing.opponentShips:
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
-                        print("Treffer")
+                        print("Das war ein Treffer! Sehr gute Arbeit")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
                         if len(postitions) == 0:
@@ -33,7 +33,7 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                     else:
                         pass
             else:
-                print("Wasser")
+                print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 3
                 python_game.printhiddenBoard
         case 2:
@@ -43,7 +43,7 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                 for ship in circularImportFixing.playerShips:
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
-                        print("Treffer")
+                        print("Das war ein Treffer! Sehr gute Arbeit")
                         hiddenBoard[row][column] = 4
                         postitions.remove(shootingTupel)
                         if len(postitions) == 0:
@@ -54,7 +54,7 @@ def shooting(hiddenBoard, leakedBoard, gameMode, currentPlayer):  #I would remov
                     else:
                         pass
             else:
-                print("Wasser")
+                print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 3
                 python_game.printhiddenBoard
         case _: 

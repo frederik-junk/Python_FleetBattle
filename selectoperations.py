@@ -41,8 +41,6 @@ def gameModeSelection():
                     print("")
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
-                    # Call function to randomly select starting player
-                    selectStartingPlayer(gameMode)
                     # Return the game mode
                     return gameMode
                 case 2:
@@ -81,8 +79,6 @@ def gameModeSelection():
                     # Print messaSge indicating start of the game
                     clearConsole()
                     print("Das Spiel beginnt.")
-                    # Call function to randomly select starting player
-                    selectStartingPlayer(gameMode)
                     # Return the game mode
                     return gameMode
                 case _:
@@ -95,10 +91,10 @@ def gameModeSelection():
             continue
 
 # Random selection which player starts the game
-def selectStartingPlayer(mode):
+def selectStartingPlayer():
     global currentPlayer
-    playerOne = 1
-    playerTwo = 2
+    #playerOne = 1
+    #playerTwo = 2
     print("Es wird zufällig bestimmt wer beginnt...")
     startingPlayer = random.randint(1,2)
     if startingPlayer == 2:
@@ -106,11 +102,11 @@ def selectStartingPlayer(mode):
         currentPlayer = 2
         return currentPlayer
     if startingPlayer == 1:
-        if mode == "1":
+        #if mode == "1":
             #cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
-            print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
-            currentPlayer = 1
-            return currentPlayer
+            #print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
+            #currentPlayer = 1
+            #return currentPlayer
         print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
         currentPlayer = 1
         return currentPlayer
