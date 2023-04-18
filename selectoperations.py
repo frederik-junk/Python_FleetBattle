@@ -37,7 +37,7 @@ def gameModeSelection():
                     # Print message for computer to place ships
                     print("Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
-                    #cpuPlaceShip(leakedBoard2, shipLength) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    python_game.cpuPlaceShip(python_game.leakedBoard1, shipLength)
                     print("")
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
