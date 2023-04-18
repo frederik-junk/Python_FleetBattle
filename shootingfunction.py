@@ -159,8 +159,17 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                 case 1:
                     while shootingRepeater == True:
                         shootingPosition = input(f"{outputmanager.user1.getName()} geben sie eine Koordinate an, auf die sie schießen wollen: \n")
-                        row = converterfunctions.splitRow(shootingPosition)
-                        column = converterfunctions.splitColumnConverter(shootingPosition)
+                        try:
+                            row = converterfunctions.splitRow(shootingPosition)
+                            if row == 11:
+                                raise Exception("Ihre Angabe ist fehlerhaft")
+                            column = converterfunctions.splitColumnConverter(shootingPosition)
+                            if column == 11:
+                                raise Exception("Ihre Angabe ist fehlerhaft")
+                        except Exception:
+                            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
+                            print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
+                            continue 
                         leakedBoard = python_game.leakedBoard2
                         hiddenBoard = python_game.hiddenBoard1
                         match leakedBoard[row][column]:
@@ -223,8 +232,17 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                 case 2:
                     while shootingRepeater == True:
                         shootingPosition = input(f"{outputmanager.user2.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
-                        row = converterfunctions.splitRow(shootingPosition)
-                        column = converterfunctions.splitColumnConverter(shootingPosition)
+                        try:
+                            row = converterfunctions.splitRow(shootingPosition)
+                            if row == 11:
+                                raise Exception("Ihre Angabe ist fehlerhaft")
+                            column = converterfunctions.splitColumnConverter(shootingPosition)
+                            if column == 11:
+                                raise Exception("Ihre Angabe ist fehlerhaft")
+                        except Exception:
+                            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
+                            print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
+                            continue
                         leakedBoard = python_game.leakedBoard1
                         hiddenBoard = python_game.hiddenBoard2
                         print(leakedBoard[row][column])
