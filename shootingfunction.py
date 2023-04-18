@@ -161,7 +161,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         shootingPosition = input(f"{outputmanager.user1.getName()} geben sie eine Koordinate an, auf die sie schießen wollen: \n")
                         try:
                             row = converterfunctions.splitRow(shootingPosition)
-                            if row == 11:
+                            if row == 11: #11 is the statuscode for wrong placement
                                 raise Exception("Ihre Angabe ist fehlerhaft")
                             column = converterfunctions.splitColumnConverter(shootingPosition)
                             if column == 11:

@@ -65,17 +65,16 @@ def placeShip(board, shipLength, ship, shipName, counter):
     if counter == 1:
         printleakedBoard(board)
     while True:
-        try:
-            placementInput = input(f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({shipName}) platziert werden soll. Dieses hat die Laenge {shipLength}.\n")
+        placementInput = input(f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({shipName}) platziert werden soll. Dieses hat die Laenge {shipLength}.\n")
 
+        try: 
             startingColumnChar = converterfunctions.splitColumnConverter(placementInput)
-            startingRowNumber = converterfunctions.splitRow(placementInput)
             if startingColumnChar == 11:  #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
-            
-            elif startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
+            startingRowNumber = converterfunctions.splitRow(placementInput)  
+            if startingRowNumber == 11: #eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
-                 
+                   
         except Exception:
             print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
             print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
