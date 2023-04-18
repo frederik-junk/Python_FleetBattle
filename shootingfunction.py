@@ -38,7 +38,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                     row = random.randint(0,9)
                     column = random.randint(0,9)
                 shootingTupel = (row, column)
-                positionMemory = (shootingTupel)
+                positionMemory.append(shootingTupel)
                 
             #continue hitting ship till its sunk
             elif hitStatus == 1:
@@ -52,8 +52,8 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         case 4: shootingTupel = (row, column+i)
                 else:
                     #muss noch befüllt werden, hier wird weiter in eine herausgefundene Richtung geschossen
-                    row = converterfunctions.splitRow(positionMemory)
-                    column = converterfunctions.splitColumnConverter(positionMemory)#CHECK will this work with a number?
+                    row = converterfunctions.splitRow(shootingTupel)
+                    column = converterfunctions.splitColumnConverter(shootingTupel)#CHECK will this work with a number?
                     shootingTupel = (row, column+i)
 
                     
@@ -82,7 +82,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                     #TODO do a loop that doesnt always shoot the same field, this one shoots the same field every time
                     #while shootingRepeater == True: 
                         #determine which ship is hit
-                        for ship in circularImportFixing.playerShips:
+                        for ship in circularImportFixing.opponentShips:
                                 postitions = ship.getPosition()
                                 if shootingTupel in postitions:
                                     print("Der Computer hat getroffen")
@@ -94,7 +94,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                     #ship is sunk
                                     if len(postitions) == 0:
                                         print("Der Computer hat ein Schiff versenkt")
-                                        circularImportFixing.playerShips.remove(ship)
+                                        circularImportFixing.opponentShips.remove(ship)
                                         hitStatus = 0
                                         directionLock = 0
                                     else:
@@ -121,7 +121,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                 if leakedBoard[row][column] == 1:
                     shootingTupel = (row, column)
 
-                    for ship in circularImportFixing.oponentShips:
+                    for ship in circularImportFixing.playerShips:
                         postitions = ship.getPosition()
                         if shootingTupel in postitions:
                             print("Das war ein Treffer! Sehr gute Arbeit")
