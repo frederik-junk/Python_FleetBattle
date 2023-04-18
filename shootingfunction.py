@@ -176,13 +176,14 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                         ship.setPositionMemory(positionMemory)
                                         postitions.remove(shootingTupel)
                                         if len(postitions) == 0:
+                                            circularImportFixing.opponentShips.remove(ship)
                                             positionMemory = ship.getPositionMemory()
                                             for tupel in positionMemory:
                                                 row, column = tupel
                                                 hiddenBoard[row][column] = 4
                                             print("Schiff versenkt")
-                                            circularImportFixing.opponentShips.remove(ship)
                                             if len(circularImportFixing.opponentShips) == 0:
+                                                python_game.printhiddenBoard(hiddenBoard)
                                                 winningID = 1
                                                 return winningID
                                             else:
@@ -239,16 +240,18 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                                         ship.setPositionMemory(positionMemory)
                                         postitions.remove(shootingTupel)
                                         if len(postitions) == 0:
+                                            circularImportFixing.playerShips.remove(ship)
                                             positionMemory = ship.getPositionMemory()
                                             for tupel in positionMemory:
                                                 row, column = tupel
                                                 hiddenBoard[row][column] = 4
                                             print("Schiff versenkt")
-                                            circularImportFixing.playerShips.remove(ship)
                                             if len(circularImportFixing.playerShips) == 0:
+                                                python_game.printhiddenBoard(hiddenBoard)
                                                 winningID = 2
                                                 return winningID
                                             else:
+                                                print("wrong path") #this is a debugging output
                                                 pass
                                         python_game.printhiddenBoard
                                     else:
@@ -283,6 +286,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                         #clearConsole()
                         python_game.printhiddenBoard(hiddenBoard)
                     nextPlayer(gameMode, currentPlayer)
+
                 case _: 
                     print("something went wrong")
                 
@@ -290,11 +294,6 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
         print("Shit")
 
 
-
-    shootingPosition = input("Geben sie eine Koordinate an, auf die sie schießen wollen")
-
-    row = converterfunctions.splitRow(shootingPosition)
-    column = converterfunctions.splitColumnConverter(shootingPosition)
 
 
 
