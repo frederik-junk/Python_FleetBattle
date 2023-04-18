@@ -41,6 +41,11 @@ class Ships:
          result = python_game.placeShip(board, self.getSize(), ship, self.getName(), counter)
          print(self.getPosition()) #TODO: this is a debug output can be deleted
          return result
+    
+    def classCpuPlaceShip(self, board, ship):
+         result = python_game.cpuPlaceShip(board, self.getSize(), ship)
+         print(self.getPosition()) #TODO: this is a debug output can
+         return result
          
 
 #classes for each ship type with standard values

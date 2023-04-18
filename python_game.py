@@ -116,7 +116,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
         printleakedBoard(board)
         return False
 
-def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
+def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
@@ -128,7 +128,7 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
             case 3: cpuDirection = "d"
             case _: print("oh something went wrong") #eventuelle Schleife neue Zahl generieren 
 
-        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode) == True:
+        if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, cpuDirection, gameMode, ship) == True:
             continue
         else:
             break
@@ -136,12 +136,12 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar):
 #function to add the blockers so that ships cant be placed next to the ship
 
 #function for the cpu opponent to place the a ship
-def cpuPlaceShip(board, shipLength):
-    startingRowNumber = random.randint(0, 10)
-    startingColoumnChar = random.randint(0, 10)
+def cpuPlaceShip(board, shipLength, ship):
+    startingRowNumber = random.randint(0, 9)
+    startingColoumnChar = random.randint(0, 9)
 
     #cpu places the ship with the random startig coordinates
-    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar)
+    cpuShipDirection(board, shipLength, startingRowNumber, startingColoumnChar, ship)
     printleakedBoard(board)
 
     
