@@ -17,7 +17,7 @@ def clearConsole():
 
 def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
-    positionMemory = (1,1)
+    positionMemory = []
     shootingRepeater = True
     if gameMode ==  1:
         if currentPlayer == 1:
