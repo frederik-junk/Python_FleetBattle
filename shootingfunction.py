@@ -1,3 +1,4 @@
+
 import os
 import circularImportFixing
 import converterfunctions
@@ -8,7 +9,7 @@ import random
 
 directionLock = 0
 hitStatus = 0
-
+i = 0
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -17,6 +18,7 @@ def clearConsole():
 
 def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
+    cpuMemory = (1,1)
     positionMemory = []
     shootingRepeater = True
     if gameMode ==  1:
@@ -24,10 +26,11 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
             #loop isnt working here yet
             global hitStatus
             global directionLock
+            global i
             leakedBoard = python_game.leakedBoard2
             hiddenBoard = python_game.hiddenBoard1
             #counterVariable for shooting
-            i = 0
+            
             #ship wasnt hit before
             if hitStatus == 0:
                 #retundant also could use a set start worth
@@ -45,19 +48,16 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                 #Richtung des Schiffes noch nicht
                 if directionLock == 0:
                     direction = random.randint(1,4)
-                    match direction:
-                        case 1: shootingTupel = (row-i, column)
-                        case 2: shootingTupel = (row, column-i)
-                        case 3: shootingTupel = (row+i, column)
-                        case 4: shootingTupel = (row, column+i)
                 else:
-                    #muss noch befüllt werden, hier wird weiter in eine herausgefundene Richtung geschossen
-                    row = converterfunctions.splitRow(shootingTupel)
-                    column = converterfunctions.splitColumnConverter(shootingTupel)#CHECK will this work with a number?
-                    shootingTupel = (row, column+i)
+                    direction = directionLock
+                match direction:
+                    case 1: row = row-i
+                    case 2: column = column -i
+                    case 3: row = row + i
+                    case 4: column = column + i
+               
 
                     
-                hitStatus = 1
             print(leakedBoard[row][column])
             match leakedBoard[row][column]:
                 
@@ -76,12 +76,12 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                             case 2: directionLock = 4
                             case 3: directionLock = 1
                             case 4: directionLock = 2
-                        
+                        nextPlayer(gameMode, currentPlayer)
+
                 #hit ship
                 case 1:
-                    #TODO do a loop that doesnt always shoot the same field, this one shoots the same field every time
-                    #while shootingRepeater == True: 
                         #determine which ship is hit
+                        hitStatus = 1
                         for ship in circularImportFixing.opponentShips:
                                 postitions = ship.getPosition()
                                 if shootingTupel in postitions:
@@ -106,7 +106,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                             
                         i = i+1
                         print("Der Computer schießt erneut")
-                        #shootingRepeater = True
+                        shooting
                 case _:
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
             python_game.printhiddenBoard(hiddenBoard)
