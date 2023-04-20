@@ -197,90 +197,25 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    while shootingRepeater == True:
-                        shootingPosition = input(f"{outputmanager.user1.getName()} geben sie eine Koordinate an, auf die sie schießen wollen: \n")
-                        try:
-                            row = converterfunctions.splitRow(shootingPosition)
-                            if row == 11: #11 is the statuscode for wrong placement
-                                raise Exception("Ihre Angabe ist fehlerhaft")
-                            column = converterfunctions.splitColumnConverter(shootingPosition)
-                            if column == 11:
-                                raise Exception("Ihre Angabe ist fehlerhaft")
-                        except Exception:
-                            print("Ihre Eingabe enthaelt Fehler.\nBitte geben Sie Buchstaben zwischen A und J ein.\nBitte geben Sie eine Zahl zwischen 1 und 10 ein.")
-                            print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
-                            continue 
-                        leakedBoard = python_game.leakedBoard2
-                        hiddenBoard = python_game.hiddenBoard1
-                        clearConsole()
-                        print(f"Volle Feuerkraft auf {shootingPosition}!")
-                        match leakedBoard[row][column]:
-                            #hit ship
-                            case 1:
-                                shootingTupel = (row, column)
-                                for ship in circularImportFixing.opponentShips:
-                                    postitions = ship.getPosition()
-                                    if shootingTupel in postitions:
-                                        print("Das war ein Treffer! Sehr gute Arbeit")
-                                        hiddenBoard[row][column] = 3
-                                        leakedBoard[row][column] = 3
-                                        positionMemory.append(shootingTupel)
-                                        ship.setPositionMemory(positionMemory)
-                                        postitions.remove(shootingTupel)
-                                        if len(postitions) == 0:
-                                            circularImportFixing.opponentShips.remove(ship)
-                                            positionMemory = ship.getPositionMemory()
-                                            for tupel in positionMemory:
-                                                row, column = tupel
-                                                hiddenBoard[row][column] = 4
-                                                leakedBoard[row][column] = 4
-                                            print("Schiff versenkt")
-                                            if len(circularImportFixing.opponentShips) == 0:
-                                                python_game.printhiddenBoard(hiddenBoard)
-                                                winningID = 1
-                                                return winningID
-                                            else:
-                                                pass
-                                        else:
-                                            pass
-                                        python_game.printhiddenBoard
-                                    else:
-                                        pass
-                                print("Sie erhalten einen weiteren Schuss")
-                                shootingRepeater = True
-                            case 2:
-                                print("Sie hatten dieses Feld bereits beschossen und einen Wassertreffer erzielt!\nIhr Schuss liefert keine neue Erkenntnis!")
-                                print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
-                                shootingRepeater = False
-                            case 3:
-                                print("Sie hatten dieses Feld bereits beschossen und sogar einen Treffer erzielt!\nIhr Schuss liefert allerdings keine neue Erkenntnis!")
-                                print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
-                                shootingRepeater = False
-                            case 4:
-                                print("Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\nIhr Schuss liefert keine neue Erkenntnis!")
-                                print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
-                                shootingRepeater = False
-                            #hit Water
-                            case 0:
-                                print("Das war leider ein Wassertreffer")
-                                hiddenBoard[row][column] = 2
-                                leakedBoard[row][column] = 2
-                                python_game.printhiddenBoard
-                                shootingRepeater = False
-                            case 6:
-                                print("Das war leider ein Wassertreffer")
-                                hiddenBoard[row][column] = 2 
-                                leakedBoard[row][column] = 2
-                                python_game.printhiddenBoard
-                                shootingRepeater = False
-                            case _:
-                                print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
-                        python_game.printhiddenBoard(hiddenBoard)
+                    playermanager(outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1)
                     nextPlayer(gameMode, currentPlayer)
        
                 case 2:
-                    while shootingRepeater == True:
-                        shootingPosition = input(f"{outputmanager.user2.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
+                    playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2)
+                    nextPlayer(gameMode, currentPlayer)
+
+                case _: 
+                    print("something went wrong")
+                
+    else:
+        print("Shit")
+
+
+
+def playermanager(currentPlayerName, leakedBoard, hiddenBoard):
+    shootingRepeater = True
+    while shootingRepeater == True:
+                        shootingPosition = input(f"{currentPlayerName} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
                         try:
                             row = converterfunctions.splitRow(shootingPosition)
                             if row == 11:
@@ -356,15 +291,6 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                             case _:
                                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
                         python_game.printhiddenBoard(hiddenBoard)
-                    nextPlayer(gameMode, currentPlayer)
-
-                case _: 
-                    print("something went wrong")
-                
-    else:
-        print("Shit")
-
-
 
 
 
