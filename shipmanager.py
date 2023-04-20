@@ -44,7 +44,6 @@ class Ships:
     
     def classCpuPlaceShip(self, board, ship):
          result = python_game.cpuPlaceShip(board, self.getSize(), ship)
-         print(self.getPosition()) #TODO: this is a debug output can
          return result
          
 
