@@ -214,6 +214,7 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
 
 def playermanager(currentPlayerName, leakedBoard, hiddenBoard):
     shootingRepeater = True
+    positionMemory = []
     while shootingRepeater == True:
                         shootingPosition = input(f"{currentPlayerName} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
                         try:
