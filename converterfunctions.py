@@ -1,6 +1,8 @@
 import blockerfunctions
 import shipmanager
-
+from termcolor import colored
+from colorama import init
+init()
 
 #own exception class
 class wrongPlacement(Exception):
@@ -46,18 +48,18 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except wrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
-                        print("In dieser Richtung läuft das Schiff aus dem Spielfeld")
+                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in anderes Schiff":
-                        print("In dieser Richtung läuft das Schiff in eine anderes Schiff.")
+                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in Blocker":
-                        print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
+                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
                         positionTupelList.clear()
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
                     return True
                 else: 
                     return True
@@ -94,18 +96,18 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except wrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
-                        print("In dieser Richtung läuft das Schiff aus dem Spielfeld")
+                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in anderes Schiff":
-                        print("In dieser Richtung läuft das Schiff in eine anderes Schiff.")
+                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in Blocker":
-                        print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
+                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
                         positionTupelList.clear()
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
                     return True
                 else: 
                     return True
@@ -142,18 +144,18 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except wrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
-                        print("In dieser Richtung läuft das Schiff aus dem Spielfeld")
+                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in anderes Schiff":
-                        print("In dieser Richtung läuft das Schiff in eine anderes Schiff.")
+                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in Blocker":
-                        print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
+                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
                         positionTupelList.clear()
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
                     return True
                 else: 
                     return True
@@ -190,18 +192,18 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except wrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
-                        print("In dieser Richtung läuft das Schiff aus dem Spielfeld")
+                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in anderes Schiff":
-                        print("In dieser Richtung läuft das Schiff in eine anderes Schiff.")
+                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
                         positionTupelList.clear()
                     elif str(e) == "laeuft in Blocker":
-                        print("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.")
+                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
                         positionTupelList.clear()
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben")
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
                     return True
                 else:
                     return True
@@ -250,15 +252,15 @@ def splitColumnConverter(placementInput):
             case "J":
                 startingColumnChar = 9
             case _:
-                print("Bitte geben Sie Buchstaben zwischen A und J ein.")
-                print("Bitte geben Sie eine neue Startposition an.")
+                print("Bitte geben Sie Buchstaben zwischen A und J ein.\n")
+                print("Bitte geben Sie eine neue Startposition an.\n")
                 startingColumnChar = 11
                 return startingColumnChar
         return startingColumnChar
     except ValueError as e:
         print(str(e))
-        print("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.")
-        print("Geben Sie bitte die Startposition erneut in der Form (z.B.: A3) an.")
+        print(colored("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.",'red'))
+        print("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
         startingColumnChar = 11
         return startingColumnChar
 

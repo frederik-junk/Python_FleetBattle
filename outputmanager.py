@@ -26,28 +26,28 @@ def battleEnd(winID, gameMode):
     if winID == 1:
         if gameMode == 1: #computer wins the game (1 Player mode)
             loseoutput()
-            print(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!")
+            print(colored(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!",'magenta'))
         else:
             winoutput() #player 1 wins the game (2 Player mode)
-            print(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!",'green'))
     else:
         if gameMode == 1: #player wins the game (1 Player mode)
             winoutput()
-            print(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!",'green'))
         else:
             winoutput() #player 2 wins the game (2 Player mode) mode
-            print(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
 
 #function to print out the game name at beginning of the game
 def welcomeUser():
-    print(colored("______________________________________________________\n",'blue',attrs=["blink"]))
-    print(" ______ _           _     ____        _   _   _        ")
-    print("|  ____| |         | |   |  _ \      | | | | | |       ")
-    print("| |__  | | ___  ___| |_  | |_) | __ _| |_| |_| | ___   ")
-    print("|  __| | |/ _ \/ _ \ __| |  _ < / _` | __| __| |/ _ \  ")
-    print("| |    | |  __/  __/ |_  | |_) | (_| | |_| |_| |  __/  ")
-    print("|_|    |_|\___|\___|\__| |____/ \__,_|\__|\__|_|\___|  ")
-    print(colored("______________________________________________________\n",'blue',attrs=["blink"]))
+    print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
+    print(colored(" ______ _           _     ____        _   _   _        ",'cyan',attrs=["blink"]))
+    print(colored("|  ____| |         | |   |  _ \      | | | | | |       ",'cyan',attrs=["blink"]))
+    print(colored("| |__  | | ___  ___| |_  | |_) | __ _| |_| |_| | ___   ",'cyan',attrs=["blink"]))
+    print(colored("|  __| | |/ _ \/ _ \ __| |  _ < / _` | __| __| |/ _ \  ",'cyan',attrs=["blink"]))
+    print(colored("| |    | |  __/  __/ |_  | |_) | (_| | |_| |_| |  __/  ",'cyan',attrs=["blink"]))
+    print(colored("|_|    |_|\___|\___|\__| |____/ \__,_|\__|\__|_|\___|  ",'cyan',attrs=["blink"]))
+    print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
 
 #function to print out "win" in case a user won the game (always used in 2 player mode)
 def winoutput():
