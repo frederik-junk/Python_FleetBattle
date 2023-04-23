@@ -6,7 +6,6 @@ def checkHit(hiddenBoard,leakedBoard,column,row,gameMode):
     #check if field was alredy hit
     print("Sie schießen auf: "+chr(column+65),row + 1)
     if hiddenBoard[row][column] != 0:
-        print("Hallo hier hiddenBoard ungleich 0 :)")
         return 1
     #hitted ship
     elif leakedBoard[row][column] == 0:
@@ -17,17 +16,12 @@ def checkHit(hiddenBoard,leakedBoard,column,row,gameMode):
             for ship in circularImportFixing.opponentShips:
                 if(row,column)in ship.getPosition():
                     shipName = ship
-                    print("Es wird der if-Zweig aufgerufen!!")
-                    print("Shipname innerhalb der Schleife:",ship)
                     break
         else:
             for ship in circularImportFixing.playerShips:
                 if(row,column)in ship.getPosition():
                     shipName = ship
-                    print("Es wird der else-Zweig aufgerufen!!")
-                    print("Shipname innerhalb der Schleife:",ship)
                     break
-        print("Shipname außerhalb der Schleife:",ship)
         shipName.hitOnShip()
         if shipName.getSize() == shipName.getDamageCounter():
             #ship sunk

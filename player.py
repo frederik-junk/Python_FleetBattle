@@ -3,6 +3,9 @@ import main
 import converterfunctions
 import hitShip
 import os
+from termcolor import colored
+from colorama import init
+init()
 
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -29,8 +32,8 @@ def playerAction(currentPlayer, gameMode):
                 else:
                     break
             except Exception:
-                print("Ihre Angabe ist fehlerhaft.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
-                print("Bitte geben Sie die Schießposition in der Form (z.B.: A3) an.")
+                print(colored("Ihre Angabe ist fehlerhaft.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.",'red'))
+                print("Bitte geben Sie ein Koordinatenpaar (z.B.: A3) an.")
                 continue
             
         #choose on which board to shoot
@@ -44,15 +47,15 @@ def playerAction(currentPlayer, gameMode):
 
         if isHit == 1:
             #hit an alredy hitted field
-            print("Bitte waehlen sie ein Feld auf dass Sie noch nicht geschossen haben!")
+            print("Bitte waehlen sie ein Feld auf dass Sie noch nicht geschossen haben!\n")
             playerAction(currentPlayer,gameMode)
         elif isHit == 2:
             #hit a ship
-            print("Treffer! Bitte wählen Sie ein neues Zielfeld.")
+            print(colored("Treffer! Bitte wählen Sie ein neues Zielfeld.",'green'))
             continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
             #clearConsole()
         elif isHit == 3:
-            print("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.")
+            print(colored("Schiff versenkt! \nBitte wählen Sie ein neues Zielfeld.\n",'green'))
             continueRequest = input("Beliebige Taste und Enter drücken um fortzufahren: \n")
             #clearConsole()
         else:
