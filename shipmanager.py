@@ -63,3 +63,6 @@ class Zerstoerer(Ships):
 class Uboot(Ships):
         def __init__(self,position, positionMemory):
             super().__init__("UBoot(4x)", 2, position, positionMemory)
+
+
+

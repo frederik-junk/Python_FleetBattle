@@ -38,3 +38,14 @@ oUboot4 = shipmanager.Uboot(emptyTupelList, variable)
 
 #opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
 opponentShips = [oSchlachtschiff1]
+
+
+
+
+#initialize with empty List
+emptyList = []
+for ship in opponentShips:
+    ship.setPositionMemory(emptyList)
+
+for ship in playerShips:
+    ship.setPositionMemory(emptyList)

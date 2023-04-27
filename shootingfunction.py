@@ -144,7 +144,6 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
 
 def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
     shootingRepeater = True
-    positionMemory = []
     while shootingRepeater == True:
         shootingPosition = input(f"{currentPlayerName} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
         try:
@@ -165,6 +164,7 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
                 shootingTupel = (row, column)
                 for ship in shipList:
                     postitions = ship.getPosition()
+                    positionMemory = ship.getPositionMemory()
                     if shootingTupel in postitions:
                         print("Das war ein Treffer! Sehr gute Arbeit")
                         hiddenBoard[row][column] = 3
@@ -185,7 +185,6 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
                                 winningID = 2
                                 return winningID
                             else:
-                                print("wrong path") #this is a debugging output
                                 pass
                         python_game.printhiddenBoard
                     else:
