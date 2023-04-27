@@ -4,6 +4,9 @@ import random
 import outputmanager
 import python_game
 import circularImportFixing
+from termcolor import colored
+from colorama import init
+init()
 
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -19,7 +22,7 @@ def gameModeSelection():
                 case 1:
                     # Print game mode message
                     print("__________________________________\n")
-                    print("1-Spieler Modus.\n")
+                    print(colored("1-Spieler Modus.\n",'cyan',attrs=["reverse"]))
                     # Print game rules message
                     print(outputmanager.GAME_RULES)
                     # Set computer as user 1 and ask for user 2 name
@@ -47,7 +50,7 @@ def gameModeSelection():
                 case 2:
                     # Print game mode message
                     print("__________________________________\n")
-                    print("2-Spieler Modus.\n")
+                    print(colored("2-Spieler Modus.\n",'cyan',attrs=["reverse"]))
                     # Print game rules message
                     print(outputmanager.GAME_RULES)
                     # Ask for user 1 name and welcome message
@@ -56,7 +59,7 @@ def gameModeSelection():
                     outputmanager.user1.setName(userName1)
                     clearConsole()
                     print (f"Hallo {outputmanager.user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
-                    print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
+                    print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function placeShip for user 1 to place ships
                     counter = 1
                     for ship in circularImportFixing.playerShips:
@@ -64,19 +67,19 @@ def gameModeSelection():
                         counter = counter+1
                     counter = 1
                     # Ask for user 2 name and welcome message
-                    continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und Spieler 2 seine Schiff platzieren zu lassen: \n")
+                    continueRequest = input("Enter drücken um Chat zu leeren und Spieler 2 seine Schiffe platzieren zu lassen: \n")
                     clearConsole() 
-                    userName2 = input("Spieler 2 bitte geben Sie ihren Namen an: \n")
+                    userName2 = input("Spieler 2 bitte geben Sie Ihren Namen an: \n")
                     # Set user name 2
                     outputmanager.user2.setName(userName2)
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
-                    print ("!!WICHTIG!! Der andere Spieler sollte diesen Vorgang nicht sehen, bitte weggucken!")
+                    print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function for user 2 to place ships
                     for ship in circularImportFixing.opponentShips:
                         ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
-                    continueRequest = input("Beliebige Taste und Enter drücken um Chat zu leeren und das Spiel zu starten: \n")
+                    continueRequest = input("Enter drücken um Chat zu leeren und das Spiel zu starten: \n")
                     # Print messaSge indicating start of the game
                     clearConsole()
                     print("Das Spiel beginnt.")
@@ -88,7 +91,7 @@ def gameModeSelection():
         except ValueError as e:
             # Print error message and ask for correct input
             print(str(e))
-            print("Bitte wählen Sie entweder [1] für Singleplayer oder [2] für Multiplayer.")
+            print("Bitte wählen Sie entweder [1] für den Einspieler-Modus oder [2] für den Mehrspieler-Modus.")
             continue
 
 # Random selection which player starts the game
@@ -99,7 +102,7 @@ def selectStartingPlayer():
     print("Es wird zufällig bestimmt wer beginnt...")
     startingPlayer = random.randint(1,2)
     if startingPlayer == 2:
-        print(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!")
+        print(colored(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!",'cyan'))
         currentPlayer = 2
         return currentPlayer
     if startingPlayer == 1:
@@ -108,6 +111,6 @@ def selectStartingPlayer():
             #print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
             #currentPlayer = 1
             #return currentPlayer
-        print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
+        print(colored(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!",'cyan'))
         currentPlayer = 1
         return currentPlayer

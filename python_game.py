@@ -1,6 +1,9 @@
 import random
 import converterfunctions
 import os
+from termcolor import colored
+from colorama import init
+init()
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -76,21 +79,21 @@ def placeShip(board, shipLength, ship, shipName, counter):
                 raise Exception("Ihre Angabe ist fehlerhaft")
                    
         except Exception:
-            print("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.")
-            print("Bitte geben Sie die Startposition in der Form (z.B.: A3) an.")
+            print(colored("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.",'red'))
+            print("Bitte geben Sie neue Anfangskoordinaten ein (z.B.: A3).")
             continue     
                         
         #subtract one for the correct alignment
         startingRowNumber = int(startingRowNumber)
         startingColumnChar = int(startingColumnChar)
         if board[startingRowNumber][startingColumnChar] == 1:
-            print(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.")
+            print(colored(f"Sie können an dieser Stelle {placementInput} kein Schiff platzieren, da dort schon ein Schiff liegt.",'red'))
             continue
         elif board[startingRowNumber][startingColumnChar] == 6:
-            print(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff liegt.")
+            print(colored(f"Sie können hier {placementInput} kein Schiff platzieren, da es zu nah an einem anderen Schiff liegt.",'red'))
             continue 
         else:
-            print(f"Die Spitze des Schiffes liegt auf {placementInput}")
+            print(colored(f"Die Spitze des Schiffes liegt auf {placementInput}",'cyan'))
             #placing the ship in the right direction
             #TODO give ship to this function
             if shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) == True:
@@ -112,7 +115,7 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
         return True #is send back to set another coordinate
     else:
         clear_console()
-        print("Ihr Schiff wurde platziert!") #TODO insert Name of ship Type here 
+        print(colored("Ihr Schiff wurde platziert!",'green')) #TODO insert Name of ship Type here 
         printleakedBoard(board)
         return False
 

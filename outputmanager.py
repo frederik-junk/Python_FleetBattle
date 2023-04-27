@@ -1,3 +1,7 @@
+from termcolor import colored
+from colorama import init
+init()
+
 #creating class user to store player names
 #in case of 1 player mode, computer uses player 1 as playeraccount
 class User:
@@ -22,48 +26,48 @@ def battleEnd(winID, gameMode):
     if winID == 1:
         if gameMode == 1: #computer wins the game (1 Player mode)
             loseoutput()
-            print(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!")
+            print(colored(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!",'magenta'))
         else:
             winoutput() #player 1 wins the game (2 Player mode)
-            print(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!",'green'))
     else:
         if gameMode == 1: #player wins the game (1 Player mode)
             winoutput()
-            print(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!",'green'))
         else:
             winoutput() #player 2 wins the game (2 Player mode) mode
-            print(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!")
+            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
 
 #function to print out the game name at beginning of the game
 def welcomeUser():
-    print("______________________________________________________\n")
-    print(" ______ _           _     ____        _   _   _        ")
-    print("|  ____| |         | |   |  _ \      | | | | | |       ")
-    print("| |__  | | ___  ___| |_  | |_) | __ _| |_| |_| | ___   ")
-    print("|  __| | |/ _ \/ _ \ __| |  _ < / _` | __| __| |/ _ \  ")
-    print("| |    | |  __/  __/ |_  | |_) | (_| | |_| |_| |  __/  ")
-    print("|_|    |_|\___|\___|\__| |____/ \__,_|\__|\__|_|\___|  ")
-    print("______________________________________________________\n")
+    print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
+    print(colored(" ______ _           _     ____        _   _   _        ",'cyan',attrs=["blink"]))
+    print(colored("|  ____| |         | |   |  _ \      | | | | | |       ",'cyan',attrs=["blink"]))
+    print(colored("| |__  | | ___  ___| |_  | |_) | __ _| |_| |_| | ___   ",'cyan',attrs=["blink"]))
+    print(colored("|  __| | |/ _ \/ _ \ __| |  _ < / _` | __| __| |/ _ \  ",'cyan',attrs=["blink"]))
+    print(colored("| |    | |  __/  __/ |_  | |_) | (_| | |_| |_| |  __/  ",'cyan',attrs=["blink"]))
+    print(colored("|_|    |_|\___|\___|\__| |____/ \__,_|\__|\__|_|\___|  ",'cyan',attrs=["blink"]))
+    print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
 
 #function to print out "win" in case a user won the game (always used in 2 player mode)
 def winoutput():
     print("_________________________________\n")
-    print(" _____   _____   ______    _____")
-    print("/ ____| |_   _| |  ____|  / ____|")
-    print("| (___    | |   | |__    | |  __")
-    print("\___ \    | |   |  __|   | | |_ |")
-    print("____) |  _| |_  | |____  | |__| |")
-    print("|_____/ |_____| |______|  \_____|")
+    print(colored(" _____   _____   ______    _____",'green'))
+    print(colored("/ ____| |_   _| |  ____|  / ____|",'green'))
+    print(colored("| (___    | |   | |__    | |  __",'green'))
+    print(colored("\___ \    | |   |  __|   | | |_ |",'green'))
+    print(colored("____) |  _| |_  | |____  | |__| |",'green'))
+    print(colored("|_____/ |_____| |______|  \_____|",'green'))
     print("_________________________________\n")
 
 #function to print out "lose" in case a user lost the game (only used in 1 player mode)
 def loseoutput():
     print("_________________________________________________________________________________________\n")
-    print(" _   _   _____   ______   _____    ______   _____    _                    _____   ______")
-    print("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ")
-    print("|  \| |   | |   | |__    | |  | | | |__    | |__) | | |         /  \    | |  __  | |__     ")
-    print("| . ` |   | |   |  __|   | |  | | |  __|   |  _  /  | |        / /\ \   | | |_ | |  __|    ")
-    print("| |\  |  _| |_  | |____  | |__| | | |____  | | \ \  | |____   / ____ \  | |__| | | |____   ")
-    print("|_| \_| |_____| |______| |_____/  |______| |_|  \_\ |______| /_/    \_\  \_____| |______|  ")
+    print(colored(" _   _   _____   ______   _____    ______   _____    _                    _____   ______",'red'))
+    print(colored("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ",'red'))
+    print(colored("|  \| |   | |   | |__    | |  | | | |__    | |__) | | |         /  \    | |  __  | |__     ",'red'))
+    print(colored("| . ` |   | |   |  __|   | |  | | |  __|   |  _  /  | |        / /\ \   | | |_ | |  __|    ",'red'))
+    print(colored("| |\  |  _| |_  | |____  | |__| | | |____  | | \ \  | |____   / ____ \  | |__| | | |____   ",'red'))
+    print(colored("|_| \_| |_____| |______| |_____/  |______| |_|  \_\ |______| /_/    \_\  \_____| |______|  ",'red'))
     print("_________________________________________________________________________________________\n")
     
