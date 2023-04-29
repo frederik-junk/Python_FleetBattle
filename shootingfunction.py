@@ -15,7 +15,7 @@ i = 0
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
+def shooting(gameMode, currentPlayer, data):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
     cpuMemory = (1,1)
     positionMemory = []
@@ -39,12 +39,12 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
                     if playermanager(outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1, circularImportFixing.opponentShips) == 1:
                          return 1 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 1)
+                        nextPlayer(gameMode, 1, data)
                 case 2:
                     if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
                          return 2 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 2)
+                        nextPlayer(gameMode, 2, data)
                 case _: 
                     print("something went wrong")
     else:
@@ -218,12 +218,38 @@ def cpuManager(gameMode,currentPlayer, hitStatus):
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
             python_game.printhiddenBoard(hiddenBoard)
             nextPlayer(gameMode, currentPlayer)
-               
+
+
+
+
+
+def cpuManager1(currentPlayer, shootingIq):
+    leakedBoard = python_game.leakedBoard2
+    hiddenBoard = python_game.hiddenBoard1
+    global cpuMemory
+    match shootingIq:
+        case 0:
+            while True: #get correct shooting coordinates on which he didnt shot
+                row = random.randint(0,9)
+                column = random.randint(0,9)
+                if hiddenBoard[row][column] == 0:
+                    shootingTuple = (row, column)
+                    cpuMemory = shootingTuple
+                    break
+                else:
+                    continue
+
+            #check if it is a hit
+            
+                
+
+
+
 
 
 # Switches the current player after each action
 
-def nextPlayer(gameMode, currentPlayer):
+def nextPlayer(gameMode, currentPlayer, data):
 
     if currentPlayer == 1:
         currentPlayer = 2

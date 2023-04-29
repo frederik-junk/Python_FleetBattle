@@ -43,10 +43,7 @@ def boardmaster():
 
 if main.load == False:
     boardtupel = boardmaster()
-    leakedboard1 = boardtupel[0]
-    leakedboard2 = boardtupel[1]
-    hiddenboard1 = boardtupel[2]
-    hiddenboard2 = boardtupel[3]
+    leakedboard1, leakedboard2, hiddenboard1, hiddenboard2 = boardtupel
 
 
 
