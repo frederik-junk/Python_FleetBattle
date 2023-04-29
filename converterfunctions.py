@@ -59,6 +59,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     else:
                         print(str(e))
                         positionTupelList.clear()
+                    
                     print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
                     return True
                 else: 

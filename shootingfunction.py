@@ -21,8 +21,8 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
     shootingRepeater = True
     if gameMode ==  1:
         if currentPlayer == 1:
-
-            cpuManager(gameMode,currentPlayer)
+            hitStatus = 0
+            cpuManager(gameMode,currentPlayer, hitStatus)
             nextPlayer(gameMode,currentPlayer)
         elif currentPlayer == 2:
             if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
@@ -129,21 +129,20 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
         python_game.printhiddenBoard(hiddenBoard)
 
 
-def cpuManager(gameMode,currentPlayer):
-            global hitStatus
+def cpuManager(gameMode,currentPlayer, hitStatus):
             global directionLock
             global i
+            global cpuMemory
             leakedBoard = python_game.leakedBoard2
             hiddenBoard = python_game.hiddenBoard1
             #counterVariable for shooting
             
             #ship wasnt hit before
             if hitStatus == 0:
-                #retundant also could use a set start worth
                 row = random.randint(0,9)
                 column = random.randint(0,9)
                 #searching for an unshoot field
-                while leakedBoard[row][column] !=0:
+                while hiddenBoard[row][column] != 0:
                     row = random.randint(0,9)
                     column = random.randint(0,9)
                 shootingTupel = (row, column)
@@ -152,6 +151,7 @@ def cpuManager(gameMode,currentPlayer):
             elif hitStatus == 1:
                 #saved hitted field
                 shootingTupel = cpuMemory
+                row, column = shootingTupel
                 #direction of ship unknown
                 if directionLock == 0:
                     direction = random.randint(1,4)
@@ -174,7 +174,7 @@ def cpuManager(gameMode,currentPlayer):
                     i = 0         
                     print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
                     hiddenBoard[row][column] = 2
-                    python_game.printhiddenBoard
+                    python_game.printhiddenBoard(hiddenBoard)
                     #change direction if known, but water was hit
                     if directionLock !=0:
                         match directionLock:
@@ -188,6 +188,7 @@ def cpuManager(gameMode,currentPlayer):
                 case 1:
                         #determine which ship is hit
                         hitStatus = 1
+                        shootingTupel = cpuMemory
                         for ship in circularImportFixing.opponentShips:
                                 postitions = ship.getPosition()
                                 if shootingTupel in postitions:
@@ -205,13 +206,13 @@ def cpuManager(gameMode,currentPlayer):
                                         directionLock = 0
                                     else:
                                         pass
-                                    python_game.printhiddenBoard
+                                    python_game.printhiddenBoard(hiddenBoard)
                                 else:
                                     pass
                         
                         i = i+1
                         print("Der Computer schießt erneut")
-                        shooting(gameMode, currentPlayer)
+                        cpuManager(gameMode, currentPlayer, hitStatus)
                 case _:
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
             python_game.printhiddenBoard(hiddenBoard)
