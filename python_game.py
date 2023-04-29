@@ -1,6 +1,7 @@
 import random
 import converterfunctions
 import os
+import main
 from termcolor import colored
 from colorama import init
 init()
@@ -12,27 +13,40 @@ def clear_console():
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]# Erstellen des Spielfelds
 
 def initializeBoard(board):
-    for i in range(10):
-        row = []
-        for j in range(10):
-            row.append(0)
-        board.append(row)
+        for i in range(10):
+            row = []
+            for j in range(10):
+                row.append(0)
+            board.append(row)
 
-#creating board with leaked ships for player 1 ship placing
-leakedBoard1 = []
-initializeBoard(leakedBoard1)
+def boardmaster():
 
-#creating board with leaked ships for player 2 ship placing
-leakedBoard2 = []
-initializeBoard(leakedBoard2)
+    #creating board with leaked ships for player 1 ship placing
+    leakedBoard1 = []
+    initializeBoard(leakedBoard1)
 
-#creating board with hidden ships from player 1 for game of player 2
-hiddenBoard1 = []
-initializeBoard(hiddenBoard1)
+    #creating board with leaked ships for player 2 ship placing
+    leakedBoard2 = []
+    initializeBoard(leakedBoard2)
 
-#creating board with hidden ships from player 2 for game of player 1
-hiddenBoard2 = []
-initializeBoard(hiddenBoard2)
+    #creating board with hidden ships from player 1 for game of player 2
+    hiddenBoard1 = []
+    initializeBoard(hiddenBoard1)
+
+    #creating board with hidden ships from player 2 for game of player 1
+    hiddenBoard2 = []
+    initializeBoard(hiddenBoard2)
+
+    boardtupel = (leakedBoard1, leakedBoard2, hiddenBoard1, hiddenBoard2)
+
+    return boardtupel
+
+if main.load == False:
+    boardtupel = boardmaster()
+    leakedboard1 = boardtupel[0]
+    leakedboard2 = boardtupel[1]
+    hiddenboard1 = boardtupel[2]
+    hiddenboard2 = boardtupel[3]
 
 
 
