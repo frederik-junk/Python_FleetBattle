@@ -9,14 +9,19 @@ from termcolor import colored
 from colorama import init
 init()
 
+
+with open("shipstorage.json", "r") as read_file:
+    data = json.load(read_file)
+
 directionLock = 0
 hitStatus = 0
 i = 0
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def shooting(gameMode, currentPlayer, data):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
+def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
+
     cpuMemory = (1,1)
     positionMemory = []
     shootingRepeater = True
@@ -39,12 +44,12 @@ def shooting(gameMode, currentPlayer, data):  #I would remove gameMode and curre
                     if playermanager(outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1, circularImportFixing.opponentShips) == 1:
                          return 1 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 1, data)
+                        nextPlayer(gameMode, 1)
                 case 2:
                     if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
                          return 2 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 2, data)
+                        nextPlayer(gameMode, 2)
                 case _: 
                     print("something went wrong")
     else:
@@ -249,7 +254,7 @@ def cpuManager1(currentPlayer, shootingIq):
 
 # Switches the current player after each action
 
-def nextPlayer(gameMode, currentPlayer, data):
+def nextPlayer(gameMode, currentPlayer):
 
     if currentPlayer == 1:
         currentPlayer = 2

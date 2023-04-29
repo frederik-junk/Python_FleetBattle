@@ -9,6 +9,9 @@ from colorama import init
 import json
 init()
 
+with open("shipstorage.json", "r") as read_file:
+    data = json.load(read_file)
+
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -19,8 +22,6 @@ def loadrequest():
             loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
             match loadstorage:
                 case 'j':
-                    with open("shipstorage.json", "r") as read_file:
-                        data = json.load(read_file)
                         storage_available = data["storage_available"]
                         if storage_available == 1:
                             load = True
@@ -33,7 +34,6 @@ def loadrequest():
                         else :
                             print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut!")
                             return False
-                    break
                 case 'n':
                     load = False
                     print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
@@ -54,6 +54,7 @@ def gameModeSelection():
         try:
             # Ask user for game mode input
             gameMode = int(input("Bitte wählen Sie die gewünschte Spielart: \n [1] Spiel gegen den Computer \n [2] 2 Spieler\n"))
+            data["gameMode"] = gameMode
             # Use match statement to determine the game mode
             match gameMode:
                 case 1:
@@ -138,6 +139,7 @@ def selectStartingPlayer():
     #playerTwo = 2
     print("Es wird zufällig bestimmt wer beginnt...")
     startingPlayer = random.randint(1,2)
+    data["currentPlayer"] = startingPlayer
     if startingPlayer == 2:
         print(colored(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!",'cyan'))
         currentPlayer = 2

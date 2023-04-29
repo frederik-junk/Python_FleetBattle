@@ -4,7 +4,7 @@ from oponent import *
 class TestOpponent(unittest.TestCase):
 
     def setUp(self):
-        self.oschlachtschiff = oschlachtschiff1
+        self.oschlachtschiff = schlachtschiff1
         self.leakedBoard = [
                             [0,0,0,0,0,0,0,0,0,0],
                             [0,2,0,0,0,0,0,0,0,0],

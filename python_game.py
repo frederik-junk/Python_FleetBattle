@@ -1,10 +1,13 @@
 import random
 import converterfunctions
 import os
-import main
+import json
 from termcolor import colored
 from colorama import init
 init()
+
+with open("shipstorage.json", "r") as read_file:
+    data = json.load(read_file)
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -19,33 +22,28 @@ def initializeBoard(board):
                 row.append(0)
             board.append(row)
 
-def boardmaster():
 
-    #creating board with leaked ships for player 1 ship placing
-    leakedBoard1 = []
-    initializeBoard(leakedBoard1)
+#creating board with leaked ships for player 1 ship placing
+leakedBoard1 = []
+initializeBoard(leakedBoard1)
 
-    #creating board with leaked ships for player 2 ship placing
-    leakedBoard2 = []
-    initializeBoard(leakedBoard2)
+#creating board with leaked ships for player 2 ship placing
+leakedBoard2 = []
+initializeBoard(leakedBoard2)
 
-    #creating board with hidden ships from player 1 for game of player 2
-    hiddenBoard1 = []
-    initializeBoard(hiddenBoard1)
+#creating board with hidden ships from player 1 for game of player 2
+hiddenBoard1 = []
+initializeBoard(hiddenBoard1)
 
-    #creating board with hidden ships from player 2 for game of player 1
-    hiddenBoard2 = []
-    initializeBoard(hiddenBoard2)
+#creating board with hidden ships from player 2 for game of player 1
+hiddenBoard2 = []
+initializeBoard(hiddenBoard2)
 
-    boardtupel = (leakedBoard1, leakedBoard2, hiddenBoard1, hiddenBoard2)
-
-    return boardtupel
-
-if main.load == False:
-    boardtupel = boardmaster()
-    leakedboard1, leakedboard2, hiddenboard1, hiddenboard2 = boardtupel
-
-
+def boardloader():
+    leakedBoard1 = data["leakedBoard1"]
+    leakedBoard2 = data["leakedBoard2"]
+    hiddenBoard1 = data["hiddenBoard1"]
+    hiddenBoard2 = data["hiddenBoard2"]
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
