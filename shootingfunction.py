@@ -21,97 +21,14 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
     shootingRepeater = True
     if gameMode ==  1:
         if currentPlayer == 1:
-            #loop isnt working here yet
-            global hitStatus
-            global directionLock
-            global i
-            leakedBoard = python_game.leakedBoard2
-            hiddenBoard = python_game.hiddenBoard1
-            #counterVariable for shooting
-            
-            #ship wasnt hit before
-            if hitStatus == 0:
-                #retundant also could use a set start worth
-                row = random.randint(0,9)
-                column = random.randint(0,9)
-                #searching for an unshoot field
-                while leakedBoard[row][column] !=0:
-                    row = random.randint(0,9)
-                    column = random.randint(0,9)
-                shootingTupel = (row, column)
-                positionMemory.append(shootingTupel)
-                
-            #continue hitting ship till its sunk
-            elif hitStatus == 1:
-                #Richtung des Schiffes noch nicht
-                if directionLock == 0:
-                    direction = random.randint(1,4)
-                else:
-                    direction = directionLock
-                match direction:
-                    case 1: row = row-i
-                    case 2: column = column -i
-                    case 3: row = row + i
-                    case 4: column = column + i
-               
-            print(leakedBoard[row][column])
-            match leakedBoard[row][column]:
-                
-                #hit water
-                #is there a need for using case 6 ?
-                case 0:
-                             
-                    print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
-                    hiddenBoard[row][column] = 2
-                    python_game.printhiddenBoard
-                    shootingRepeater = False
-                    #change direction if known, but water was hit
-                    if directionLock !=0:
-                        match directionLock:
-                            case 1: directionLock = 3
-                            case 2: directionLock = 4
-                            case 3: directionLock = 1
-                            case 4: directionLock = 2
-                        nextPlayer(gameMode, currentPlayer)
 
-                #hit ship
-                case 1:
-                        #determine which ship is hit
-                        hitStatus = 1
-                        for ship in circularImportFixing.opponentShips:
-                                postitions = ship.getPosition()
-                                if shootingTupel in postitions:
-                                    print(colored("Der Computer hat eines Ihrer Schiffe getroffen",'red'))
-                                    hiddenBoard[row][column] = 3
-                                    postitions.remove(shootingTupel)
-                                    #if 2 fields in one direction are hit Lock this direction
-                                    if i >=2:
-                                        directionLock=direction
-                                    #ship is sunk
-                                    if len(postitions) == 0:
-                                        print(colored("Der Computer hat ein Schiff versenkt",'red'))
-                                        circularImportFixing.opponentShips.remove(ship)
-                                        hitStatus = 0
-                                        directionLock = 0
-                                    else:
-                                        pass
-                                    python_game.printhiddenBoard
-                                else:
-                                    pass
-                        
-                        i = i+1
-                        print("Der Computer schießt erneut")
-                        shooting
-                case _:
-                    print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
-            python_game.printhiddenBoard(hiddenBoard)
-            nextPlayer(gameMode, currentPlayer)
-               
+            cpuManager(gameMode,currentPlayer)
+            nextPlayer(gameMode,currentPlayer)
         elif currentPlayer == 2:
-                if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
-                     return 2 #is the winningID which should be returned to the main.
-                else:
-                    nextPlayer(gameMode, 2)
+            if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
+                return 2 #is the winningID which should be returned to the main.
+            else:
+                nextPlayer(gameMode, 2)
 
         else:
             print("Shit")
@@ -211,6 +128,92 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
         python_game.printhiddenBoard(hiddenBoard)
 
 
+def cpuManager(gameMode,currentPlayer):
+            global hitStatus
+            global directionLock
+            global i
+            leakedBoard = python_game.leakedBoard2
+            hiddenBoard = python_game.hiddenBoard1
+            #counterVariable for shooting
+            
+            #ship wasnt hit before
+            if hitStatus == 0:
+                #retundant also could use a set start worth
+                row = random.randint(0,9)
+                column = random.randint(0,9)
+                #searching for an unshoot field
+                while leakedBoard[row][column] !=0:
+                    row = random.randint(0,9)
+                    column = random.randint(0,9)
+                shootingTupel = (row, column)
+                positionMemory.append(shootingTupel)
+                
+            #continue hitting ship till its sunk
+            elif hitStatus == 1:
+                #Richtung des Schiffes noch nicht
+                if directionLock == 0:
+                    direction = random.randint(1,4)
+                else:
+                    direction = directionLock
+                match direction:
+                    case 1: row = row-i
+                    case 2: column = column -i
+                    case 3: row = row + i
+                    case 4: column = column + i
+               
+            print(leakedBoard[row][column])
+            match leakedBoard[row][column]:
+                
+                #hit water
+                #is there a need for using case 6 ?
+                case 0:
+                    i = 0         
+                    print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                    hiddenBoard[row][column] = 2
+                    python_game.printhiddenBoard
+                    shootingRepeater = False
+                    #change direction if known, but water was hit
+                    if directionLock !=0:
+                        match directionLock:
+                            case 1: directionLock = 3
+                            case 2: directionLock = 4
+                            case 3: directionLock = 1
+                            case 4: directionLock = 2
+                        nextPlayer(gameMode, currentPlayer)
+
+                #hit ship
+                case 1:
+                        #determine which ship is hit
+                        hitStatus = 1
+                        for ship in circularImportFixing.opponentShips:
+                                postitions = ship.getPosition()
+                                if shootingTupel in postitions:
+                                    print(colored("Der Computer hat eines Ihrer Schiffe getroffen",'red'))
+                                    hiddenBoard[row][column] = 3
+                                    postitions.remove(shootingTupel)
+                                    #if 2 fields in one direction are hit Lock this direction
+                                    if i >=2:
+                                        directionLock=direction
+                                    #ship is sunk
+                                    if len(postitions) == 0:
+                                        print(colored("Der Computer hat ein Schiff versenkt",'red'))
+                                        circularImportFixing.opponentShips.remove(ship)
+                                        hitStatus = 0
+                                        directionLock = 0
+                                    else:
+                                        pass
+                                    python_game.printhiddenBoard
+                                else:
+                                    pass
+                        
+                        i = i+1
+                        print("Der Computer schießt erneut")
+                        shooting(gameMode, currentPlayer)
+                case _:
+                    print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
+            python_game.printhiddenBoard(hiddenBoard)
+            nextPlayer(gameMode, currentPlayer)
+               
 
 
 # Switches the current player after each action
