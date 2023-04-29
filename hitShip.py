@@ -1,3 +1,4 @@
+"""
 import main
 import circularImportFixing
 
@@ -37,6 +38,6 @@ def checkHit(hiddenBoard,leakedBoard,column,row,gameMode):
     elif leakedBoard[row][column] == 0:
         hiddenBoard[row][column]= 2
     return 0
-
+"""
 
     
