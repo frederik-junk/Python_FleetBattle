@@ -44,6 +44,16 @@ for v in range(10):
     hiddenBoard2.append(row)
 
 
+
+def initializeBoard(board):
+    for i in range(10):
+        row = []
+        for j in range(10):
+            row.append(0)
+        board.append(row)
+    return board
+
+
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
     #creates the first row with letters to locate the ship positon (horizontal)
