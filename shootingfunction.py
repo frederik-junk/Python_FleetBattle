@@ -85,7 +85,8 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
                             for tupel in positionMemory:
                                 row, column = tupel
                                 hiddenBoard[row][column] = 4
-                                hiddenBoard[row][column] = 4
+                                # two times the same row?
+                                #hiddenBoard[row][column] = 4
                             print(colored("\nSchiff versenkt\n",'green',attrs=["blink"]))
                             if len(shipList) == 0:
                                 python_game.printhiddenBoard(hiddenBoard)
@@ -146,11 +147,12 @@ def cpuManager(gameMode,currentPlayer):
                     row = random.randint(0,9)
                     column = random.randint(0,9)
                 shootingTupel = (row, column)
-                positionMemory.append(shootingTupel)
-                
+                cpuMemory = shootingTupel
             #continue hitting ship till its sunk
             elif hitStatus == 1:
-                #Richtung des Schiffes noch nicht
+                #saved hitted field
+                shootingTupel = cpuMemory
+                #direction of ship unknown
                 if directionLock == 0:
                     direction = random.randint(1,4)
                 else:
@@ -160,18 +162,19 @@ def cpuManager(gameMode,currentPlayer):
                     case 2: column = column -i
                     case 3: row = row + i
                     case 4: column = column + i
-               
-            print(leakedBoard[row][column])
+            #unecessary if already replaced elsewhere
+            if leakedBoard[row][column] == 6:
+                leakedBoard[row][column] = 0
+            
+            #print(leakedBoard[row][column])
             match leakedBoard[row][column]:
                 
                 #hit water
-                #is there a need for using case 6 ?
                 case 0:
                     i = 0         
                     print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
                     hiddenBoard[row][column] = 2
                     python_game.printhiddenBoard
-                    shootingRepeater = False
                     #change direction if known, but water was hit
                     if directionLock !=0:
                         match directionLock:
@@ -222,18 +225,12 @@ def nextPlayer(gameMode, currentPlayer):
 
     if currentPlayer == 1:
         currentPlayer = 2
-        print("__________________________________\n")
-        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n")
-        clearConsole()
-        shooting(gameMode, currentPlayer)
         
     else:
         currentPlayer = 1
-        print("__________________________________\n")
-        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
-        clearConsole()
-        shooting(gameMode, currentPlayer)
+    print("__________________________________\n")
+    print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
+    print("__________________________________\n")
+    continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
+    clearConsole()
+    shooting(gameMode, currentPlayer)
