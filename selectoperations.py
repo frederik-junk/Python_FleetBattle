@@ -6,6 +6,7 @@ import python_game
 import circularImportFixing
 from termcolor import colored
 from colorama import init
+import json
 init()
 
 def clearConsole():
@@ -18,10 +19,25 @@ def loadrequest():
             loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
             match loadstorage:
                 case 'j':
-                    print("ja")
+                    with open("shipstorage.json", "r") as read_file:
+                        data = json.load(read_file)
+                        storage_available = data["storage_available"]
+                        if storage_available == 1:
+                            load = True
+                            print("Lets gooo")
+                            return load
+                        elif storage_available == 0:
+                            load = False
+                            print("Leider ist kein Spielstand vorhanden!\nDas Spiel startet daher ohne Spielstand!")
+                            return load
+                        else :
+                            print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut!")
+                            return False
                     break
                 case 'n':
-                    print("nein")
+                    load = False
+                    print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
+                    return False
                     break
                 case _:
                     # Raise value error if input is not 1 or 2
