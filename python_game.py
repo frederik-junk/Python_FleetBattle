@@ -11,47 +11,29 @@ def clear_console():
 #letterrow to show user the name of each column
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]# Erstellen des Spielfelds
 
-#creating board with leaked ships for player 1 ship placing
-leakedBoard1 = []
-for i in range(10):
-    row = []
-    for j in range(10):
-        row.append(0)
-    leakedBoard1.append(row)
-
-#creating board with leaked ships for player 2 ship placing
-leakedBoard2 = []
-for x in range(10):
-    row = []
-    for y in range(10):
-        row.append(0)
-    leakedBoard2.append(row)
-
-#creating board with hidden ships from player 1 for game of player 2
-hiddenBoard1 = []
-for a in range(10):
-    row = []
-    for b in range(10):
-        row.append(0)
-    hiddenBoard1.append(row)
-
-#creating board with hidden ships from player 2 for game of player 1
-hiddenBoard2 = []
-for v in range(10):
-    row = []
-    for w in range(10):
-        row.append(0)
-    hiddenBoard2.append(row)
-
-
-
 def initializeBoard(board):
     for i in range(10):
         row = []
         for j in range(10):
             row.append(0)
         board.append(row)
-    return board
+
+#creating board with leaked ships for player 1 ship placing
+leakedBoard1 = []
+initializeBoard(leakedBoard1)
+
+#creating board with leaked ships for player 2 ship placing
+leakedBoard2 = []
+initializeBoard(leakedBoard2)
+
+#creating board with hidden ships from player 1 for game of player 2
+hiddenBoard1 = []
+initializeBoard(hiddenBoard1)
+
+#creating board with hidden ships from player 2 for game of player 1
+hiddenBoard2 = []
+initializeBoard(hiddenBoard2)
+
 
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
