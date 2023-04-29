@@ -1,4 +1,6 @@
 {
-    "storage_available": true,
+    "storage_available": 0,
+    "currentPlayer": 0,
+    "gameMode": 1,
     "test": 32
 }
