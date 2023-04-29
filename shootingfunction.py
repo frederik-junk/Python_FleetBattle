@@ -225,12 +225,16 @@ def nextPlayer(gameMode, currentPlayer):
 
     if currentPlayer == 1:
         currentPlayer = 2
+        print("__________________________________\n")
+        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
+        
         
     else:
         currentPlayer = 1
-    print("__________________________________\n")
-    print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-    print("__________________________________\n")
+        print("__________________________________\n")
+        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
     continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
     clearConsole()
     shooting(gameMode, currentPlayer)
