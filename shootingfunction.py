@@ -220,6 +220,8 @@ def cpuManager(gameMode,currentPlayer, hitStatus):
                
 
 
+
+
 # Switches the current player after each action
 
 def nextPlayer(gameMode, currentPlayer):
