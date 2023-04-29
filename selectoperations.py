@@ -11,6 +11,27 @@ init()
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+def loadrequest():
+      while True:
+        try:
+            # Ask user for game mode input
+            loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
+            match loadstorage:
+                case 'j':
+                    print("ja")
+                    break
+                case 'n':
+                    print("nein")
+                    break
+                case _:
+                    # Raise value error if input is not 1 or 2
+                    raise ValueError("Ihre Eingabe ist falsch.")
+        except ValueError as f:
+            print(str(f))
+            print("Bitte wählen Sie entweder [j] für die Moeglichkeit einen Spielstand zu laden oder [n] um das Spiel normal zu starten.")
+            continue
+
+
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection():
     while True:
