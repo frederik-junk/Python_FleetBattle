@@ -1,5 +1,4 @@
 import blockerfunctions
-import shipmanager
 from termcolor import colored
 from colorama import init
 init()
