@@ -1,3 +1,4 @@
+from typing import Any
 from termcolor import colored
 from colorama import init
 init()
@@ -5,8 +6,12 @@ init()
 #creating class user to store player names
 #in case of 1 player mode, computer uses player 1 as playeraccount
 class User:
-    def __init__(self, name):
+    def __init__(self, name, cpuMemory, firstCpuMemory, shootingIq, direction):
         self.__name = name
+        self.__cpuMemory = cpuMemory
+        self.__firstCpuMemory = firstCpuMemory
+        self.__shootingIq = shootingIq
+        self.__direction = direction
 
     def getName(self):
         return self.__name
@@ -14,9 +19,39 @@ class User:
     def setName(self, name):
         self.__name = name
 
+
+    def getCpuMemory(self):
+        return self.__cpuMemory
+    
+    def setCpuMemory(self, cpuMemory):
+        self.__cpuMemory = cpuMemory
+
+
+    def getFirstCpuMemory(self):
+        return self.__firstCpuMemory
+    
+    def setFirstCpuMemory(self, firstCpuMemory):
+        self.__firstCpuMemory = firstCpuMemory
+
+
+    def getShootingIq(self):
+        return self.__shootingIq
+    
+    def setShootingIq(self, shootingIq):
+        self.__shootingIq = shootingIq
+
+
+    def getDirection(self):
+        return self.__direction
+    
+    def setDirection(self, direction):
+        self.__direction = direction
+
+
+
 #creating two instances of User
-user1 = User("Spieler 1")
-user2 = User("Spieler 2")
+user1 = User("Spieler 1", (0,0), (0,0), 0, 0)
+user2 = User("Spieler 2", (0,0), (0,0), 0, 0)
 
 # variable that holds the game rules to print when starting the game
 GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
