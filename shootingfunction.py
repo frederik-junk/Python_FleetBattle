@@ -4,14 +4,10 @@ import converterfunctions
 import python_game
 import outputmanager
 import random
-import json
 from termcolor import colored
 from colorama import init
 init()
 
-
-with open("shipstorage.json", "r") as read_file:
-    data = json.load(read_file)
 
 directionLock = 0
 hitStatus = 0
@@ -19,7 +15,7 @@ i = 0
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
+def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
 
     cpuMemory = (1,1)
@@ -28,34 +24,34 @@ def shooting(gameMode, currentPlayer):  #I would remove gameMode and currentPlay
     if gameMode ==  1:
         if currentPlayer == 1:
             hitStatus = 0
-            cpuManager(gameMode,currentPlayer, hitStatus)
-            nextPlayer(gameMode,currentPlayer)
+            cpuManager(data, gameMode,currentPlayer, hitStatus)
+            nextPlayer(data, gameMode,currentPlayer)
         elif currentPlayer == 2:
             if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
                 return 2 #is the winningID which should be returned to the main.
             else:
-                nextPlayer(gameMode, 2)
+                nextPlayer(data, gameMode, 2)
 
         else:
             print("Shit")
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1, circularImportFixing.opponentShips) == 1:
+                    if playermanager(data, outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1, circularImportFixing.opponentShips) == 1:
                          return 1 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 1)
+                        nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
+                    if playermanager(data, outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
                          return 2 #is the winningID which should be returned to the main.
                     else:
-                        nextPlayer(gameMode, 2)
+                        nextPlayer(data, gameMode, 2)
                 case _: 
                     print("something went wrong")
     else:
         print("Shit")
 
-def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
+def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
     shootingRepeater = True
     while shootingRepeater == True:
         shootingPosition = input(f"{currentPlayerName} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
@@ -135,7 +131,7 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
         python_game.printhiddenBoard(hiddenBoard)
 
 
-def cpuManager(gameMode,currentPlayer, hitStatus):
+def cpuManager(data, gameMode, currentPlayer, hitStatus):
             global directionLock
             global i
             global cpuMemory
@@ -188,7 +184,7 @@ def cpuManager(gameMode,currentPlayer, hitStatus):
                             case 2: directionLock = 4
                             case 3: directionLock = 1
                             case 4: directionLock = 2
-                        nextPlayer(gameMode, currentPlayer)
+                        nextPlayer(data, gameMode, currentPlayer)
 
                 #hit ship
                 case 1:
@@ -222,7 +218,7 @@ def cpuManager(gameMode,currentPlayer, hitStatus):
                 case _:
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
             python_game.printhiddenBoard(hiddenBoard)
-            nextPlayer(gameMode, currentPlayer)
+            nextPlayer(data, gameMode, currentPlayer)
 
 
 
@@ -254,7 +250,7 @@ def cpuManager1(currentPlayer, shootingIq):
 
 # Switches the current player after each action
 
-def nextPlayer(gameMode, currentPlayer):
+def nextPlayer(data, gameMode, currentPlayer):
 
     if currentPlayer == 1:
         currentPlayer = 2
@@ -274,4 +270,4 @@ def nextPlayer(gameMode, currentPlayer):
         print("Irgendwas ist hier schief gelaufen!")
     continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
     clearConsole()
-    shooting(gameMode, currentPlayer)
+    shooting(data, gameMode, currentPlayer)

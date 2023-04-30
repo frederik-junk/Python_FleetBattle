@@ -9,13 +9,10 @@ from colorama import init
 import json
 init()
 
-with open("shipstorage.json", "r") as read_file:
-    data = json.load(read_file)
-
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def loadrequest():
+def loadrequest(data):
       while True:
         try:
             # Ask user for game mode input
@@ -38,7 +35,6 @@ def loadrequest():
                     load = False
                     print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
                     return False
-                    break
                 case _:
                     # Raise value error if input is not 1 or 2
                     raise ValueError("Ihre Eingabe ist falsch.")
@@ -49,7 +45,7 @@ def loadrequest():
 
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
-def gameModeSelection():
+def gameModeSelection(data):
     while True:
         try:
             # Ask user for game mode input
@@ -133,7 +129,7 @@ def gameModeSelection():
             continue
 
 # Random selection which player starts the game
-def selectStartingPlayer():
+def selectStartingPlayer(data):
     global currentPlayer
     #playerOne = 1
     #playerTwo = 2
