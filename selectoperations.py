@@ -6,7 +6,6 @@ import python_game
 import circularImportFixing
 from termcolor import colored
 from colorama import init
-import json
 init()
 
 def clearConsole():
