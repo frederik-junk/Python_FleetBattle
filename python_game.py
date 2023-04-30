@@ -22,28 +22,30 @@ def initializeBoard(board):
                 row.append(0)
             board.append(row)
 
+def boardloader(loadavailable):
+    if loadavailable == False:
+        #creating board with leaked ships for player 1 ship placing
+        leakedBoard1 = []
+        initializeBoard(leakedBoard1)
 
-#creating board with leaked ships for player 1 ship placing
-leakedBoard1 = []
-initializeBoard(leakedBoard1)
+        #creating board with leaked ships for player 2 ship placing
+        leakedBoard2 = []
+        initializeBoard(leakedBoard2)
 
-#creating board with leaked ships for player 2 ship placing
-leakedBoard2 = []
-initializeBoard(leakedBoard2)
+        #creating board with hidden ships from player 1 for game of player 2
+        hiddenBoard1 = []
+        initializeBoard(hiddenBoard1)
 
-#creating board with hidden ships from player 1 for game of player 2
-hiddenBoard1 = []
-initializeBoard(hiddenBoard1)
-
-#creating board with hidden ships from player 2 for game of player 1
-hiddenBoard2 = []
-initializeBoard(hiddenBoard2)
-
-def boardloader():
-    leakedBoard1 = data["leakedBoard1"]
-    leakedBoard2 = data["leakedBoard2"]
-    hiddenBoard1 = data["hiddenBoard1"]
-    hiddenBoard2 = data["hiddenBoard2"]
+        #creating board with hidden ships from player 2 for game of player 1
+        hiddenBoard2 = []
+        initializeBoard(hiddenBoard2)
+    elif loadavailable == True:
+        leakedBoard1 = data["leakedBoard1"]
+        leakedBoard2 = data["leakedBoard2"]
+        hiddenBoard1 = data["hiddenBoard1"]
+        hiddenBoard2 = data["hiddenBoard2"]
+    else:
+        print("Beim Laden des Boards ist ein Fehler aufgetreten")
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):

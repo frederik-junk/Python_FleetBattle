@@ -18,7 +18,6 @@ with open("shipstorage.json", "r") as read_file:
 def main():
     outputmanager.welcomeUser()
     load = selectoperations.loadrequest()
-
     if load == True:
         python_game.boardloader()
         winningID = shootingfunction.shooting(data["gameMode"], data["currentPlayer"])
@@ -28,7 +27,7 @@ def main():
         # Call function to randomly select starting player
         startingPlayer = selectoperations.selectStartingPlayer()
         data["storage_available"] = 1 
-        winningID = shootingfunction.shooting(gameMode, startingPlayer, load)
+        winningID = shootingfunction.shooting(gameMode, startingPlayer)
         outputmanager.battleEnd(winningID, gameMode)
     else:
         print("Ein Fehler")
