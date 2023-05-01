@@ -205,10 +205,10 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                                 hiddenBoard[row][column] = 4
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
-                            if len(circularImportFixing.playerShips) == 0:
-                                return 11 #11 is the number which determines that the cpu won (for the winning ID)
                         else:
                             pass
+                        if len(circularImportFixing.playerShips) == 0:
+                            return 11 #11 is the number which determines that the cpu won (for the winning ID)
             return leakedBoard[row][column]
         case _:
             print("something went terribly wrong")
