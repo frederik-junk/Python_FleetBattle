@@ -1,5 +1,12 @@
-# function to add the blockers so that ships cant be placed next to the ship
+"""Module provides the functions to make sure that ships do not collide when placing them besides each other
+"""
 def addPlacementBlocker(board, positionTupelList):
+    """ Function to add the blockers so that ships cant be placed next to the ship
+
+    Args:
+        board (List): The board on which ships can be placed
+        positionTupelList (List): A tupel list that contains the coordinates of the ships position
+    """
     for tupel in positionTupelList:
         rowNumber, columnNumber = tupel
         # calculate the positions left, right, top and bottom of the position (4 directions around the placed ship compartment)

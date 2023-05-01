@@ -2,25 +2,33 @@
 import os
 import random
 import outputmanager
-import python_game
+import pythonGame
 import circularImportFixing
 from termcolor import colored
 from colorama import init
-import json
 init()
 
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def loadrequest():
-      while True:
+def loadrequest(data):
+    """Function to check if the player wants to load an existing score or start a new game
+
+    Args:
+        data (_type_): _description_
+
+    Raises:
+        ValueError: Prints an error message if wrong input is provided
+
+    Returns:
+        _type_: Returns True or False, depending on the branch of the function
+    """
+    while True:
         try:
             # Ask user for game mode input
             loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
             match loadstorage:
                 case 'j':
-                    with open("shipstorage.json", "r") as read_file:
-                        data = json.load(read_file)
                         storage_available = data["storage_available"]
                         if storage_available == 1:
                             load = True
@@ -33,12 +41,10 @@ def loadrequest():
                         else :
                             print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut!")
                             return False
-                    break
                 case 'n':
                     load = False
                     print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
                     return False
-                    break
                 case _:
                     # Raise value error if input is not 1 or 2
                     raise ValueError("Ihre Eingabe ist falsch.")
@@ -49,11 +55,23 @@ def loadrequest():
 
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
-def gameModeSelection():
+def gameModeSelection(data):
+    """Function to choose one or two player mode before starting a game
+
+    Args:
+        data (int): 
+
+    Raises:
+        ValueError: Prints an error message if wrong input is provided by a user
+
+    Returns:
+        gameMode(int): An int value that indicates the chosen game mode 
+    """
     while True:
         try:
             # Ask user for game mode input
             gameMode = int(input("Bitte wählen Sie die gewünschte Spielart: \n [1] Spiel gegen den Computer \n [2] 2 Spieler\n"))
+            data["gameMode"] = gameMode
             # Use match statement to determine the game mode
             match gameMode:
                 case 1:
@@ -71,14 +89,14 @@ def gameModeSelection():
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
                     for ship in circularImportFixing.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
                     # Print message for computer to place ships
                     print("Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
                     for ship in circularImportFixing.opponentShips:
-                        ship.classCpuPlaceShip(python_game.leakedBoard1, ship)
+                        ship.classCpuPlaceShip(pythonGame.leakedBoard1, ship)
                     print("")
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
@@ -100,7 +118,7 @@ def gameModeSelection():
                     # Call function placeShip for user 1 to place ships
                     counter = 1
                     for ship in circularImportFixing.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard1, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard1, ship, counter)
                         counter = counter+1
                     counter = 1
                     # Ask for user 2 name and welcome message
@@ -113,7 +131,7 @@ def gameModeSelection():
                     print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function for user 2 to place ships
                     for ship in circularImportFixing.opponentShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
                     continueRequest = input("Enter drücken um Chat zu leeren und das Spiel zu starten: \n")
@@ -131,13 +149,21 @@ def gameModeSelection():
             print("Bitte wählen Sie entweder [1] für den Einspieler-Modus oder [2] für den Mehrspieler-Modus.")
             continue
 
-# Random selection which player starts the game
-def selectStartingPlayer():
+def selectStartingPlayer(data):
+    """Function to randomly select a player to start the game
+
+    Args:
+        data (_type_): _description_
+
+    Returns:
+        currentPlayer(int): An int value that indicates the current player 
+    """
     global currentPlayer
     #playerOne = 1
     #playerTwo = 2
     print("Es wird zufällig bestimmt wer beginnt...")
     startingPlayer = random.randint(1,2)
+    data["currentPlayer"] = startingPlayer
     if startingPlayer == 2:
         print(colored(f"{outputmanager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!",'cyan'))
         currentPlayer = 2

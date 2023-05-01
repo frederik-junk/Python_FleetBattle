@@ -1,4 +1,4 @@
-import python_game
+import pythonGame
 
 #creating main class with ships
 class Ships:
@@ -38,12 +38,12 @@ class Ships:
 
     #function to call ship place function 
     def classPlaceShip(self, board, ship, counter):
-         result = python_game.placeShip(board, self.getSize(), ship, self.getName(), counter)
+         result = pythonGame.placeShip(board, self.getSize(), ship, self.getName(), counter)
          print(self.getPosition()) #TODO: this is a debug output can be deleted
          return result
     
     def classCpuPlaceShip(self, board, ship):
-         result = python_game.cpuPlaceShip(board, self.getSize(), ship)
+         result = pythonGame.cpuPlaceShip(board, self.getSize(), ship)
          return result
          
 
