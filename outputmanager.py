@@ -14,6 +14,7 @@ class User:
     """
     def __init__(self, name):
         self.__name = name
+        self.__leftships = 1
 
     def getName(self):
         """Returns the name of the user
@@ -30,6 +31,30 @@ class User:
             name (String): The name of the player
         """
         self.__name = name
+
+    def getLeftShips(self):
+        """Returns amount of left ships
+
+        Returns:
+            String: Returns the Amount of left ships
+        """
+        return self.__leftships
+
+    def decreaseLeftShips(self, leftships):
+        """decreases the amount of left ships
+
+        Args:
+            leftships (Int): Amount of left ships of player
+        """
+        self.__leftships -= 1
+
+    def setLeftShips(self, leftships):
+        """Sets the amount of left ships
+
+        Args:
+            leftships (Int): Amount of left ships of player
+        """
+        self.__leftships = leftships
 
 #creating two instances of User
 user1 = User("Spieler 1")

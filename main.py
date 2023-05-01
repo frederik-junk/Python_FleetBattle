@@ -27,8 +27,11 @@ def main():
         pythonGame.boardloader(data, load)
         outputmanager.user1.setName(data["playerName1"])
         outputmanager.user2.setName(data["playerName2"])
-        circularImportFixing.pSchlachtschiff1.setPositionMemory(data["pSchlachtschiff1"])
-
+        outputmanager.user1.setLeftShips(data["playerShips"])
+        outputmanager.user1.setLeftShips(data["opponentShips"])
+        circularImportFixing.pSchlachtschiff1.setPositionMemory(data["pSchlachtschiff1m"])
+        circularImportFixing.pSchlachtschiff1.setPosition(data["pSchlachtschiff1p"])
+        """
         circularImportFixing.pKreuzer1.setPositionMemory(data["pKreuzer1"])
         circularImportFixing.pKreuzer2.setPositionMemory(data["pKreuzer2"])
         circularImportFixing.pZerstoerer1.setPositionMemory(data["pKreuzer1"])
@@ -38,9 +41,10 @@ def main():
         circularImportFixing.pUboot2.setPositionMemory(data["pUboot2"])
         circularImportFixing.pUboot3.setPositionMemory(data["pUboot3"])
         circularImportFixing.pUboot4.setPositionMemory(data["pUboot4"])
-
-        circularImportFixing.pSchlachtschiff1.setPositionMemory(data["oSchlachtschiff1"])
-
+        """
+        circularImportFixing.pSchlachtschiff1.setPositionMemory(data["oSchlachtschiff1m"])
+        circularImportFixing.pSchlachtschiff1.setPosition(data["oSchlachtschiff1p"])
+        """
         circularImportFixing.pKreuzer1.setPositionMemory(data["oKreuzer1"])
         circularImportFixing.pKreuzer2.setPositionMemory(data["oKreuzer2"])
         circularImportFixing.pZerstoerer1.setPositionMemory(data["oKreuzer1"])
@@ -50,10 +54,10 @@ def main():
         circularImportFixing.pUboot2.setPositionMemory(data["oUboot2"])
         circularImportFixing.pUboot3.setPositionMemory(data["oUboot3"])
         circularImportFixing.pUboot4.setPositionMemory(data["oUboot4"])
-
+        """
         winningID = shootingfunction.shooting(data, data["gameMode"], data["currentPlayer"])
         data["storage_available"] = 0
-        pythonGame.board_reset(data)
+        pythonGame.boardReset(data)
         with open("shipstorage.json", "w") as writeFile:
             json.dump(data, writeFile, indent=2)
         outputmanager.battleEnd(winningID, data["gameMode"])
@@ -64,7 +68,7 @@ def main():
         startingPlayer = selectoperations.selectStartingPlayer(data)
         winningID = shootingfunction.shooting(data, gameMode, startingPlayer)
         data["storage_available"] = 0
-        pythonGame.board_reset(data)
+        pythonGame.boardReset(data)
         with open("shipstorage.json", "w") as writeFile:
             json.dump(data, writeFile, indent=2)
         outputmanager.battleEnd(winningID, gameMode)
@@ -76,7 +80,8 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
-        data["pSchlachtschiff1"] = circularImportFixing.pSchlachtschiff1.getPositionMemory()
+        data["pSchlachtschiff1m"] = circularImportFixing.pSchlachtschiff1.getPositionMemory()
+        data["pSchlachtschiff1p"] = circularImportFixing.pSchlachtschiff1.getPosition()
         """
         data["pKreuzer1"] = circularImportFixing.pKreuzer1.getPositionMemory()
         data["pKreuzer2"] = circularImportFixing.pKreuzer2.getPositionMemory()
@@ -88,7 +93,8 @@ if __name__ == "__main__":
         data["pUboot3"] = circularImportFixing.pUboot3.getPositionMemory()
         data["pUboot4"] = circularImportFixing.pUboot4.getPositionMemory()
         """
-        data["oSchlachtschiff1"] = circularImportFixing.pSchlachtschiff1.getPositionMemory()
+        data["oSchlachtschiff1m"] = circularImportFixing.pSchlachtschiff1.getPositionMemory()
+        data["oSchlachtschiff1p"] = circularImportFixing.pSchlachtschiff1.getPosition()
         """
         data["oKreuzer1"] = circularImportFixing.pKreuzer1.getPositionMemory()
         data["oKreuzer2"] = circularImportFixing.pKreuzer2.getPositionMemory()
@@ -102,6 +108,8 @@ if __name__ == "__main__":
         """
         data["playerName1"] = outputmanager.user1.getName()
         data["playerName2"] = outputmanager.user2.getName()
+        data["playerShips"] = outputmanager.user1.getLeftShips()
+        data["opponentShips"] = outputmanager.user2.getLeftShips()
         data["leakedBoard1"] = pythonGame.leakedBoard1
         data["leakedBoard2"] = pythonGame.leakedBoard2
         data["hiddenBoard1"] = pythonGame.hiddenBoard1

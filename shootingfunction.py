@@ -46,12 +46,12 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(data, outputmanager.user1.getName(), pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1:
+                    if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1:
                          return 1 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(data, outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 2:
+                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 2:
                          return 2 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 2)
@@ -60,10 +60,10 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     else:
         print("Shit")
 
-def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
+def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
     shootingRepeater = True
     while shootingRepeater == True:
-        shootingPosition = input(f"{currentPlayerName} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
+        shootingPosition = input(f"{currentPlayer.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
         try:
             row = converterfunctions.splitRow(shootingPosition)
             if row == 11:
@@ -91,7 +91,7 @@ def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
                         ship.setPositionMemory(positionMemory)
                         postitions.remove(shootingTupel)
                         if len(postitions) == 0:
-                            shipList.remove(ship)
+                            outputmanager.decreaseLeftShips(currentPlayer)
                             positionMemory = ship.getPositionMemory()
                             for tupel in positionMemory:
                                 row, column = tupel
@@ -99,7 +99,7 @@ def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
                                 # two times the same row?
                                 #hiddenBoard[row][column] = 4
                             print(colored("\nSchiff versenkt\n",'green',attrs=["blink"]))
-                            if len(shipList) == 0:
+                            if currentPlayer.getLeftShips() == 0:
                                 pythonGame.printhiddenBoard(hiddenBoard)
                                 winningID = 2
                                 return winningID
