@@ -8,19 +8,32 @@ init()
 
 
 def clear_console():
+    """Function to clear the console for better user interface while playing
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 #letterrow to show user the name of each column
 letterRow = ["\\\\","A","B","C","D","E","F","G","H","I","J"]# Erstellen des Spielfelds
 
 def initializeBoard(board):
-        for i in range(10):
-            row = []
-            for j in range(10):
-                row.append(0)
-            board.append(row)
+    """Initializes the board to place ships on
+
+    Args:
+        board (List): The list of each coordinates of the board for placing ships
+    """
+    for i in range(10):
+        row = []
+        for j in range(10):
+            row.append(0)
+        board.append(row)
 
 def boardloader(data, loadavailable):
+    """Function that loads the board with its values
+
+    Args:
+        data (_type_): _description_
+        loadavailable (int): Indicates if there is a score that can be loaded 
+    """
     global leakedBoard1
     leakedBoard1 = []
     global leakedBoard2
@@ -47,13 +60,22 @@ def boardloader(data, loadavailable):
         print("Beim Laden des Boards ist ein Fehler aufgetreten")
 
 def board_reset(data):
+    """Function to reset the board to initial values 
+
+    Args:
+        data (_type_): _description_
+    """
     data["leakedBoard1"] = data["resetBoard"]
     data["leakedBoard2"] = data["resetBoard"]
     data["hiddenBoard1"] = data["resetBoard"]
     data["hiddenBoard2"] = data["resetBoard"]
 
-#function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
+    """
+    function to print the board with visible ships
+    Args:
+        board (List): The board on which the ships are placed
+    """
     #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
@@ -61,8 +83,13 @@ def printleakedBoard(board):
         print(str(i+1).zfill(2), end="  ") #zfill to format number  (0digit)
         #replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print("  ".join(str(elem).replace("1","#").replace("0","~").replace("6","X") for elem in row))
-#function tp print the board without showing the ships (used for the game itself to hide ship postions to the opponent)
+
 def printhiddenBoard(board):
+    """Function to print the board without showing the ships, so the opponent cannot see the ships of the other player
+
+    Args:
+        board (List): The board on which the ships are placed
+    """
     #creates the first row with letters to locate the ship positon (horizontal)
     print("  ".join(letterRow))
     for i, row in enumerate(board):
@@ -73,6 +100,18 @@ def printhiddenBoard(board):
          
 #function to place a ship in the right position with the right length and the right direction
 def placeShip(board, shipLength, ship, shipName, counter):
+    """Function to place ships on the game board
+
+    Args:
+        board (List): The board on which the ships are placed
+        shipLength (int): The length of each ship
+        ship (Class): The class of the ship for generating initial values depending on the type
+        shipName (String): The ship name to show the user which ship has to be placed currently
+        counter (int): A counter to keep track on how many ships have already been placed
+
+    Raises:
+        Exception: Prints an error message if there was a wrong input for example 
+    """
     if counter == 1:
         printleakedBoard(board)
     while True:
@@ -117,6 +156,18 @@ def placeShip(board, shipLength, ship, shipName, counter):
     #shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
 
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
+    """Function to set the direction of the ship that is to be placed
+
+    Args:
+        board (List): The board on which ships are being placed
+        shipLength (int): The individual ship length
+        startingRowNumber (int): A number to indicate the current row
+        startingColumnChar (char): A char to indicate the current column
+        ship (Class): The class of each ships to provide inital values
+
+    Returns:
+        Boolean: Returns a True or False value
+    """
     gameMode = 2 
     directionInput = input("Geben Sie über die Tasten [w][a][s][d] die Ausrichtung des Schiffes an.\n")
     if converterfunctions.directionConverter(board, shipLength, startingRowNumber, startingColumnChar, directionInput, gameMode, ship) == True:
@@ -128,6 +179,18 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
         return False
 
 def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
+    """Function to set the direction of the ship that is to be placed for the computer opponent
+
+    Args:
+        board (List): The board on which ships are being placed
+        shipLength (int): The individual ship length
+        startingRowNumber (int): A number to indicate the current row
+        startingColumnChar (char): A char to indicate the current column
+        ship (Class): The class of each ships to provide inital values
+
+    Returns:
+        Boolean: Returns a True or False value
+    """
     gameMode = 1
     #get a random direction for the ship to be placed in
     while True:
@@ -149,6 +212,13 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar, s
 
 #function for the cpu opponent to place the a ship
 def cpuPlaceShip(board, shipLength, ship):
+    """Function that is responsible for placing the CPU ships
+
+    Args:
+        board (List): The board on which ships are being placed
+        shipLength (int): The individual ship length
+        ship (Class): The class of each ships to provide inital values
+    """
     while True:
         startingRowNumber = random.randint(0, 9)
         startingColoumnChar = random.randint(0, 9)

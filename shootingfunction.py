@@ -8,16 +8,25 @@ from termcolor import colored
 from colorama import init
 init()
 
-
 directionLock = 0
 hitStatus = 0
 i = 0
+
 def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     #used for CPU
+    """Function to process shots of the user 
 
+    Args:
+        data (_type_): _description_
+        gameMode (int): The game mode to indicate if there's another human player or the CPU
+        currentPlayer (int): The current player to keep track on which boards should be printed etc.
+
+    Returns:
+        winningID(int): An int value to indicate which player won the game
+    """
     cpuMemory = (1,1)
     positionMemory = []
     shootingRepeater = True
@@ -111,7 +120,7 @@ def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
                 print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
                 shootingRepeater = False
             case 4:
-                print("Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\nIhr Schuss liefert keine neue Erkenntnis!")
+                print("Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\n")
                 print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
                 shootingRepeater = False
             case 0:

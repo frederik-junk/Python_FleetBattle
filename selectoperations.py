@@ -12,7 +12,18 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def loadrequest(data):
-      while True:
+    """Function to check if the player wants to load an existing score or start a new game
+
+    Args:
+        data (_type_): _description_
+
+    Raises:
+        ValueError: Prints an error message if wrong input is provided
+
+    Returns:
+        _type_: Returns True or False, depending on the branch of the function
+    """
+    while True:
         try:
             # Ask user for game mode input
             loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
@@ -45,6 +56,17 @@ def loadrequest(data):
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
 def gameModeSelection(data):
+    """Function to choose one or two player mode before starting a game
+
+    Args:
+        data (int): 
+
+    Raises:
+        ValueError: Prints an error message if wrong input is provided by a user
+
+    Returns:
+        gameMode(int): An int value that indicates the chosen game mode 
+    """
     while True:
         try:
             # Ask user for game mode input
@@ -127,8 +149,15 @@ def gameModeSelection(data):
             print("Bitte wählen Sie entweder [1] für den Einspieler-Modus oder [2] für den Mehrspieler-Modus.")
             continue
 
-# Random selection which player starts the game
 def selectStartingPlayer(data):
+    """Function to randomly select a player to start the game
+
+    Args:
+        data (_type_): _description_
+
+    Returns:
+        currentPlayer(int): An int value that indicates the current player 
+    """
     global currentPlayer
     #playerOne = 1
     #playerTwo = 2

@@ -23,6 +23,12 @@ GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal pla
 
 #function to select the right winning/ losing informations after game has ended
 def battleEnd(winID, gameMode):
+    """Function that prints a message after a game is over
+
+    Args:
+        winID (int): a number that indicates which player has won the game
+        gameMode (int): the game mode in which has been played to indicate if the computer played or two humans
+    """
     if winID == 1:
         if gameMode == 1: #computer wins the game (1 Player mode)
             loseoutput()
@@ -38,8 +44,9 @@ def battleEnd(winID, gameMode):
             winoutput() #player 2 wins the game (2 Player mode) mode
             print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
 
-#function to print out the game name at beginning of the game
 def welcomeUser():
+    """function to print out the game name at beginning of the game
+    """
     print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
     print(colored(" ______ _           _     ____        _   _   _        ",'cyan',attrs=["blink"]))
     print(colored("|  ____| |         | |   |  _ \      | | | | | |       ",'cyan',attrs=["blink"]))
@@ -49,8 +56,9 @@ def welcomeUser():
     print(colored("|_|    |_|\___|\___|\__| |____/ \__,_|\__|\__|_|\___|  ",'cyan',attrs=["blink"]))
     print(colored("______________________________________________________\n",'cyan',attrs=["blink"]))
 
-#function to print out "win" in case a user won the game (always used in 2 player mode)
 def winoutput():
+    """function to print out "win" in case a user won the game (always used in 2 player mode)
+    """
     print("_________________________________\n")
     print(colored(" _____   _____   ______    _____",'green'))
     print(colored("/ ____| |_   _| |  ____|  / ____|",'green'))
@@ -60,8 +68,9 @@ def winoutput():
     print(colored("|_____/ |_____| |______|  \_____|",'green'))
     print("_________________________________\n")
 
-#function to print out "lose" in case a user lost the game (only used in 1 player mode)
 def loseoutput():
+    """function to print out "lose" in case a user lost the game (only used in 1 player mode)
+    """
     print("_________________________________________________________________________________________\n")
     print(colored(" _   _   _____   ______   _____    ______   _____    _                    _____   ______",'red'))
     print(colored("| \ | | |_   _| |  ____| |  __ \  |  ____| |  __ \  | |          /\      / ____| |  ____|  ",'red'))

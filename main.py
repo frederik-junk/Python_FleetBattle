@@ -14,6 +14,8 @@ path = os.path.dirname(os.path.abspath(__file__))
 #currentPlayer = 1
 gameMode = 0
 with open("shipstorage.json", "r") as read_file:
+    """Opening the json file to read previous saved data if there has been a save already
+    """
     data = json.load(read_file)
 
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
