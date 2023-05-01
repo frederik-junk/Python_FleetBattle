@@ -1,3 +1,4 @@
+"Module that initializes the ships of player and opponent"
 import shipmanager
 
 emptyTupelList = []

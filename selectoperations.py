@@ -2,7 +2,7 @@
 import os
 import random
 import outputmanager
-import python_game
+import pythonGame
 import circularImportFixing
 from termcolor import colored
 from colorama import init
@@ -89,14 +89,14 @@ def gameModeSelection(data):
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
                     for ship in circularImportFixing.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
                     # Print message for computer to place ships
                     print("Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
                     for ship in circularImportFixing.opponentShips:
-                        ship.classCpuPlaceShip(python_game.leakedBoard1, ship)
+                        ship.classCpuPlaceShip(pythonGame.leakedBoard1, ship)
                     print("")
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
@@ -118,7 +118,7 @@ def gameModeSelection(data):
                     # Call function placeShip for user 1 to place ships
                     counter = 1
                     for ship in circularImportFixing.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard1, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard1, ship, counter)
                         counter = counter+1
                     counter = 1
                     # Ask for user 2 name and welcome message
@@ -131,7 +131,7 @@ def gameModeSelection(data):
                     print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function for user 2 to place ships
                     for ship in circularImportFixing.opponentShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
                     continueRequest = input("Enter drücken um Chat zu leeren und das Spiel zu starten: \n")

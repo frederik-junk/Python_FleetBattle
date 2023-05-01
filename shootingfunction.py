@@ -1,7 +1,7 @@
 import os
 import circularImportFixing
 import converterfunctions
-import python_game
+import pythonGame
 import outputmanager
 import random
 from termcolor import colored
@@ -36,7 +36,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
             cpuManager(data, gameMode,currentPlayer, hitStatus)
             nextPlayer(data, gameMode,currentPlayer)
         elif currentPlayer == 2:
-            if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
+            if playermanager(outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 2:
                 return 2 #is the winningID which should be returned to the main.
             else:
                 nextPlayer(data, gameMode, 2)
@@ -46,12 +46,12 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(data, outputmanager.user1.getName(), python_game.leakedBoard2, python_game.hiddenBoard1, circularImportFixing.opponentShips) == 1:
+                    if playermanager(data, outputmanager.user1.getName(), pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1:
                          return 1 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(data, outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
+                    if playermanager(data, outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 2:
                          return 2 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 2)
@@ -100,12 +100,12 @@ def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
                                 #hiddenBoard[row][column] = 4
                             print(colored("\nSchiff versenkt\n",'green',attrs=["blink"]))
                             if len(shipList) == 0:
-                                python_game.printhiddenBoard(hiddenBoard)
+                                pythonGame.printhiddenBoard(hiddenBoard)
                                 winningID = 2
                                 return winningID
                             else:
                                 pass
-                        python_game.printhiddenBoard
+                        pythonGame.printhiddenBoard
                     else:
                         pass
                 print("Sie erhalten einen weiteren Schuss\n")
@@ -127,25 +127,25 @@ def playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList):
                 print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 2 
                 leakedBoard[row][column] = 2
-                python_game.printhiddenBoard
+                pythonGame.printhiddenBoard
                 shootingRepeater = False
             case 6:
                 print("Das war leider ein Wassertreffer")
                 hiddenBoard[row][column] = 2 
                 leakedBoard[row][column] = 2
-                python_game.printhiddenBoard
+                pythonGame.printhiddenBoard
                 shootingRepeater = False
             case _:
                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
-        python_game.printhiddenBoard(hiddenBoard)
+        pythonGame.printhiddenBoard(hiddenBoard)
 
 
 def cpuManager(data, gameMode, currentPlayer, hitStatus):
             global directionLock
             global i
             global cpuMemory
-            leakedBoard = python_game.leakedBoard2
-            hiddenBoard = python_game.hiddenBoard1
+            leakedBoard = pythonGame.leakedBoard2
+            hiddenBoard = pythonGame.hiddenBoard1
             #counterVariable for shooting
             
             #ship wasnt hit before
@@ -185,7 +185,7 @@ def cpuManager(data, gameMode, currentPlayer, hitStatus):
                     i = 0         
                     print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
                     hiddenBoard[row][column] = 2
-                    python_game.printhiddenBoard(hiddenBoard)
+                    pythonGame.printhiddenBoard(hiddenBoard)
                     #change direction if known, but water was hit
                     if directionLock !=0:
                         match directionLock:
@@ -217,7 +217,7 @@ def cpuManager(data, gameMode, currentPlayer, hitStatus):
                                         directionLock = 0
                                     else:
                                         pass
-                                    python_game.printhiddenBoard(hiddenBoard)
+                                    pythonGame.printhiddenBoard(hiddenBoard)
                                 else:
                                     pass
                         
@@ -226,7 +226,7 @@ def cpuManager(data, gameMode, currentPlayer, hitStatus):
                         cpuManager(gameMode, currentPlayer, hitStatus)
                 case _:
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
-            python_game.printhiddenBoard(hiddenBoard)
+            pythonGame.printhiddenBoard(hiddenBoard)
             nextPlayer(data, gameMode, currentPlayer)
 
 
@@ -234,8 +234,8 @@ def cpuManager(data, gameMode, currentPlayer, hitStatus):
 
 
 def cpuManager1(currentPlayer, shootingIq):
-    leakedBoard = python_game.leakedBoard2
-    hiddenBoard = python_game.hiddenBoard1
+    leakedBoard = pythonGame.leakedBoard2
+    hiddenBoard = pythonGame.hiddenBoard1
     global cpuMemory
     match shootingIq:
         case 0:

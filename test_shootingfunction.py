@@ -4,7 +4,7 @@ import io
 import sys
 import random
 import circularImportFixing
-import python_game
+import pythonGame
 import converterfunctions
 import outputmanager
 import shootingfunction

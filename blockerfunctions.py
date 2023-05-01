@@ -1,3 +1,5 @@
+"""Module provides the functions to make sure that ships do not collide when placing them besides each other
+"""
 def addPlacementBlocker(board, positionTupelList):
     """ Function to add the blockers so that ships cant be placed next to the ship
 

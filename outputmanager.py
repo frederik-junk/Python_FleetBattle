@@ -1,3 +1,8 @@
+"""Module contains graphic elements for user interface and messages that are displayed if a game is over
+
+Returns:
+    _type_: _description_
+"""
 from termcolor import colored
 from colorama import init
 init()
@@ -5,13 +10,25 @@ init()
 #creating class user to store player names
 #in case of 1 player mode, computer uses player 1 as playeraccount
 class User:
+    """Class for storing Username of the players
+    """
     def __init__(self, name):
         self.__name = name
 
     def getName(self):
+        """Returns the name of the user
+
+        Returns:
+            String: Returns the name of the user
+        """
         return self.__name
 
     def setName(self, name):
+        """Sets the player name
+
+        Args:
+            name (String): The name of the player
+        """
         self.__name = name
 
 #creating two instances of User

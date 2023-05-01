@@ -1,10 +1,17 @@
-import blockerfunctions
+"""Module contains functions to define the placement of the ships on the board
+"""
 from termcolor import colored
 from colorama import init
+import blockerfunctions
 init()
 
 #own exception class
-class wrongPlacement(Exception):
+class WrongPlacement(Exception):
+    """Own exception class
+
+    Args:
+        Exception (Error): Prints an error message
+    """
     pass
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
@@ -20,7 +27,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
         ship (class): The class of each ship to set some initial values
 
     Raises:
-        wrongPlacement: Prints an error message for different occasions, for example if a wrong direction char is given as input
+        WrongPlacement: Prints an error message for different occasions, for example if a wrong direction char is given as input
 
     Returns:
         boolean: Returns a True or False value, depending on each branch
@@ -33,35 +40,29 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                 betweenStartingRowNumber = startingRowNumber - shipLength
                 if betweenStartingRowNumber <= 0:
                     if gameMode == 1:
-                        raise wrongPlacement
-                    else:
-                        raise wrongPlacement("laeuft aus Spielfeld")
-                else:
-                    # changing every index between the beginning and the end to a 1
-                    while j < shipLength:
-                        if board[startingRowNumber][startingColumnChar] == 1:
-                            raise wrongPlacement("laeuft in anderes Schiff")
-                        elif board[startingRowNumber][startingColumnChar] == 6:
-                            raise wrongPlacement("laeuft in Blocker")
-                        else:
-                            #board[startingRowNumber][startingColumnChar] = 1 TODO:delete this
-
-                            #this is for the positionTuple 
-                            positionTupel = (startingRowNumber,startingColumnChar)
-                            #add every postion tuple to tuple list to store the ship position
-                            positionTupelList.append(positionTupel)
-
-                            startingRowNumber = startingRowNumber - 1
-
-                            j += 1
-                        if j == shipLength:
-                            for tupel in positionTupelList:
-                                rowNumber, columnNumber = tupel
-                                board[rowNumber][columnNumber] = 1
-                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    ship.setPosition(positionTupelList)
-                    return False
-            except wrongPlacement as e:
+                        raise WrongPlacement
+                    raise WrongPlacement("laeuft aus Spielfeld")
+                # changing every index between the beginning and the end to a 1
+                while j < shipLength:
+                    if board[startingRowNumber][startingColumnChar] == 1:
+                        raise WrongPlacement("laeuft in anderes Schiff")
+                    if board[startingRowNumber][startingColumnChar] == 6:
+                        raise WrongPlacement("laeuft in Blocker")
+                    #board[startingRowNumber][startingColumnChar] = 1 TODO:delete this
+                    #this is for the positionTuple
+                    positionTupel = (startingRowNumber,startingColumnChar)
+                    #add every postion tuple to tuple list to store the ship position
+                    positionTupelList.append(positionTupel)
+                    startingRowNumber = startingRowNumber - 1
+                    j += 1
+                    if j == shipLength:
+                        for tupel in positionTupelList:
+                            rowNumber, columnNumber = tupel
+                            board[rowNumber][columnNumber] = 1
+                blockerfunctions.addPlacementBlocker(board, positionTupelList)
+                ship.setPosition(positionTupelList)
+                return False
+            except WrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
                         print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
@@ -75,42 +76,37 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
+                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
                     return True
-                else: 
-                    return True
+                return True
         case "a":
             try:  # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingColoumnChar = startingColumnChar - shipLength
                 if betweenStartingColoumnChar < 0:
                     if gameMode == 1:
-                        raise wrongPlacement
-                    else:
-                        raise wrongPlacement("laeuft aus Spielfeld")
-                else:  
-                    while j < shipLength:
-                        if board[startingRowNumber][startingColumnChar] == 1:
-                            raise wrongPlacement("laeuft in anderes Schiff")
-                        elif board[startingRowNumber][startingColumnChar] == 6:
-                            raise wrongPlacement("laeuft in Blocker")
-                        else:
-                            #board[startingRowNumber][startingColumnChar] = 1 TODO:this can be deleted
-                            #this is for the positionTupel
-                            positionTupel = (startingRowNumber,startingColumnChar)
-                            #add every postion tuple to tuple list to store the ship position
-                            positionTupelList.append(positionTupel)
-
-                            startingColumnChar -= 1
-                            j += 1
-                        if j == shipLength:
-                            for tupel in positionTupelList:
-                                rowNumber, columnNumber = tupel
-                                board[rowNumber][columnNumber] = 1
-                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    ship.setPosition(positionTupelList)
-                    return False
-            except wrongPlacement as e:
+                        raise WrongPlacement
+                    raise WrongPlacement("laeuft aus Spielfeld")
+                while j < shipLength:
+                    if board[startingRowNumber][startingColumnChar] == 1:
+                        raise WrongPlacement("laeuft in anderes Schiff")
+                    if board[startingRowNumber][startingColumnChar] == 6:
+                        raise WrongPlacement("laeuft in Blocker")
+                    #board[startingRowNumber][startingColumnChar] = 1 TODO:this can be deleted
+                    #this is for the positionTupel
+                    positionTupel = (startingRowNumber,startingColumnChar)
+                    #add every postion tuple to tuple list to store the ship position
+                    positionTupelList.append(positionTupel)
+                    startingColumnChar -= 1
+                    j += 1
+                    if j == shipLength:
+                        for tupel in positionTupelList:
+                            rowNumber, columnNumber = tupel
+                            board[rowNumber][columnNumber] = 1
+                blockerfunctions.addPlacementBlocker(board, positionTupelList)
+                ship.setPosition(positionTupelList)
+                return False
+            except WrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
                         print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
@@ -124,41 +120,37 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
+                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
                     return True
-                else: 
-                    return True
+                return True
         case "s":
             try:  # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingRowNumber = startingRowNumber + shipLength
                 if betweenStartingRowNumber > 10:
                     if gameMode == 1:
-                        raise wrongPlacement
-                    else:
-                        raise wrongPlacement("laeuft aus Spielfeld")
-                else: 
-                    while j < shipLength:
-                        if board[startingRowNumber][startingColumnChar] == 1:
-                            raise wrongPlacement("laeuft in anderes Schiff")
-                        elif board[startingRowNumber][startingColumnChar] == 6:
-                            raise wrongPlacement("laeuft in Blocker")
-                        else:
-                            #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
-                            #this is for the positionTupel
-                            positionTupel = (startingRowNumber,startingColumnChar)
-                            #add every postion tuple to tuple list to store the ship position
-                            positionTupelList.append(positionTupel)
-
-                            startingRowNumber += 1
-                            j += 1
-                        if j == shipLength:
-                            for tupel in positionTupelList:
-                                rowNumber, columnNumber = tupel
-                                board[rowNumber][columnNumber] = 1
-                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    ship.setPosition(positionTupelList)
-                    return False
-            except wrongPlacement as e:
+                        raise WrongPlacement
+                    raise WrongPlacement("laeuft aus Spielfeld")
+                while j < shipLength:
+                    if board[startingRowNumber][startingColumnChar] == 1:
+                        raise WrongPlacement("laeuft in anderes Schiff")
+                    if board[startingRowNumber][startingColumnChar] == 6:
+                        raise WrongPlacement("laeuft in Blocker")
+                    #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
+                    #this is for the positionTupel
+                    positionTupel = (startingRowNumber,startingColumnChar)
+                    #add every postion tuple to tuple list to store the ship position
+                    positionTupelList.append(positionTupel)
+                    startingRowNumber += 1
+                    j += 1
+                    if j == shipLength:
+                        for tupel in positionTupelList:
+                            rowNumber, columnNumber = tupel
+                            board[rowNumber][columnNumber] = 1
+                blockerfunctions.addPlacementBlocker(board, positionTupelList)
+                ship.setPosition(positionTupelList)
+                return False
+            except WrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
                         print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
@@ -172,41 +164,37 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
+                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
                     return True
-                else: 
-                    return True
+                return True
         case "d":
             try:  # exception for the case that the ship travels out of bounce in the given direction
                 betweenStartingRowNumber = startingColumnChar + shipLength
                 if betweenStartingRowNumber > 10:
                     if gameMode == 1:
-                        raise wrongPlacement
-                    else:
-                        raise wrongPlacement("laeuft aus Spielfeld")
-                else:
-                    while j < shipLength:
-                        if board[startingRowNumber][startingColumnChar] == 1:
-                            raise wrongPlacement("laeuft in anderes Schiff")
-                        elif board[startingRowNumber][startingColumnChar] == 6:
-                            raise wrongPlacement("laeuft in Blocker")
-                        else:
-                            #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
-                            #this is for the positionTupel
-                            positionTupel = (startingRowNumber,startingColumnChar)
-                            #add every postion tuple to tuple list to store the ship position
-                            positionTupelList.append(positionTupel)
-                            
-                            startingColumnChar += 1
-                            j += 1
-                        if j == shipLength:
-                            for tupel in positionTupelList:
-                                rowNumber, columnNumber = tupel
-                                board[rowNumber][columnNumber] = 1
-                    ship.setPosition(positionTupelList)
-                    blockerfunctions.addPlacementBlocker(board, positionTupelList)
-                    return False
-            except wrongPlacement as e:
+                        raise WrongPlacement
+                    raise WrongPlacement("laeuft aus Spielfeld")
+                while j < shipLength:
+                    if board[startingRowNumber][startingColumnChar] == 1:
+                        raise WrongPlacement("laeuft in anderes Schiff")
+                    if board[startingRowNumber][startingColumnChar] == 6:
+                        raise WrongPlacement("laeuft in Blocker")
+                    #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
+                    #this is for the positionTupel
+                    positionTupel = (startingRowNumber,startingColumnChar)
+                    #add every postion tuple to tuple list to store the ship position
+                    positionTupelList.append(positionTupel)
+                    startingColumnChar += 1
+                    j += 1
+                    if j == shipLength:
+                        for tupel in positionTupelList:
+                            rowNumber, columnNumber = tupel
+                            board[rowNumber][columnNumber] = 1
+                ship.setPosition(positionTupelList)
+                blockerfunctions.addPlacementBlocker(board, positionTupelList)
+                return False
+            except WrongPlacement as e:
                 if gameMode == 2:
                     if str(e) == "laeuft aus Spielfeld":
                         print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
@@ -220,18 +208,17 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                     else:
                         print(str(e))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu. Tipp:\n -Sie können die gleichen Koordinaten und eine andere Ausrichtung verwenden\n -Sie können aber auch eine neue Koordinate und eine neue Ausrichtung angeben",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
+                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
                     return True
-                else:
-                    return True
+                return True
         case _:
             if gameMode == 2:
                 print(
                     "Bitte bestimmen Sie mithilfe der Tasten [w][a][s][d] die Ausrichtung des Schiffes."
                 )
                 return True
-            else:
-                return True
+            return True
     # setting of the ship position
     # ship.setPosition(positionTupelList)
 
@@ -253,8 +240,7 @@ def splitColumnConverter(placementInput):
     try:
         if startingColumnChar.isalpha() is False:
             raise ValueError
-        else:
-            startingColumnChar = startingColumnChar.upper()
+        startingColumnChar = startingColumnChar.upper()
         # match case to convert the letters into column idexes
         match startingColumnChar:
             case "A":
@@ -308,9 +294,7 @@ def splitRow(placementInput):
         # the code above could raise a ValueError which is excepted down below
         if 0 < startingRowNumber <= 10:
             return startingRowNumber - 1
-        else:
-            raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
-
+        raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
     except ValueError:
         startingRowNumber = 11
         return startingRowNumber
