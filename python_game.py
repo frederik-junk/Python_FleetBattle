@@ -6,8 +6,6 @@ from termcolor import colored
 from colorama import init
 init()
 
-with open("shipstorage.json", "r") as read_file:
-    data = json.load(read_file)
 
 def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -22,28 +20,37 @@ def initializeBoard(board):
                 row.append(0)
             board.append(row)
 
+def boardloader(data, loadavailable):
+    global leakedBoard1
+    leakedBoard1 = []
+    global leakedBoard2
+    leakedBoard2 = []
+    global hiddenBoard1
+    hiddenBoard1 = []
+    global hiddenBoard2
+    hiddenBoard2 = []
+    if loadavailable == False:
+        #creating board with leaked ships for player 1 ship placing
+        initializeBoard(leakedBoard1)
+        #creating board with leaked ships for player 2 ship placing       
+        initializeBoard(leakedBoard2)
+        #creating board with hidden ships from player 1 for game of player 2    
+        initializeBoard(hiddenBoard1)
+        #creating board with hidden ships from player 2 for game of player 1
+        initializeBoard(hiddenBoard2)
+    elif loadavailable == True:
+        leakedBoard1 = data["leakedBoard1"]
+        leakedBoard2 = data["leakedBoard2"]
+        hiddenBoard1 = data["hiddenBoard1"]
+        hiddenBoard2 = data["hiddenBoard2"]
+    else:
+        print("Beim Laden des Boards ist ein Fehler aufgetreten")
 
-#creating board with leaked ships for player 1 ship placing
-leakedBoard1 = []
-initializeBoard(leakedBoard1)
-
-#creating board with leaked ships for player 2 ship placing
-leakedBoard2 = []
-initializeBoard(leakedBoard2)
-
-#creating board with hidden ships from player 1 for game of player 2
-hiddenBoard1 = []
-initializeBoard(hiddenBoard1)
-
-#creating board with hidden ships from player 2 for game of player 1
-hiddenBoard2 = []
-initializeBoard(hiddenBoard2)
-
-def boardloader():
-    leakedBoard1 = data["leakedBoard1"]
-    leakedBoard2 = data["leakedBoard2"]
-    hiddenBoard1 = data["hiddenBoard1"]
-    hiddenBoard2 = data["hiddenBoard2"]
+def board_reset(data):
+    data["leakedBoard1"] = data["resetBoard"]
+    data["leakedBoard2"] = data["resetBoard"]
+    data["hiddenBoard1"] = data["resetBoard"]
+    data["hiddenBoard2"] = data["resetBoard"]
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
 def printleakedBoard(board):
