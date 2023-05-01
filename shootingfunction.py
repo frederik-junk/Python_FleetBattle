@@ -23,13 +23,13 @@ def shooting(gameMode, currentPlayer, data):  #I would remove gameMode and curre
     if gameMode ==  1:
         if currentPlayer == 1:
             shootingIq = outputmanager.user1.getShootingIq()
-            cpuManager1(gameMode,currentPlayer, shootingIq)
-            nextPlayer(gameMode,currentPlayer)
+            cpuManager1(gameMode, currentPlayer, shootingIq, data)
+            nextPlayer(gameMode, currentPlayer, data)
         elif currentPlayer == 2:
             if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
                 return 2 #is the winningID which should be returned to the main.
             else:
-                nextPlayer(gameMode, 2)
+                nextPlayer(gameMode, 2, data)
 
         else:
             print("Shit")
@@ -156,7 +156,7 @@ def nextPlayer(gameMode, currentPlayer, data):
         print("Irgendwas ist hier schief gelaufen!")
     continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
     clearConsole()
-    shooting(gameMode, currentPlayer)
+    shooting(gameMode, currentPlayer, data)
 
 
 
@@ -217,7 +217,7 @@ def firstPosition(board):
 
 
 
-def cpuManager1(gameMode, currentPlayer, shootingIq):
+def cpuManager1(gameMode, currentPlayer, shootingIq, data):
     leakedBoard = python_game.leakedBoard2
     hiddenBoard = python_game.hiddenBoard1
     global cpuMemory
@@ -231,6 +231,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                 firstShootingPosition = firstPosition(hiddenBoard)
                 outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
                 #unecessary if already replaced elsewhere
+                row, column = cpuMemory
                 if leakedBoard[row][column] == 6:
                     leakedBoard[row][column] = 0
 
@@ -250,7 +251,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                             hiddenBoard[row][column] = 2
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
+                            python_game.printhiddenBoard(hiddenBoard)
+                            nextPlayer(gameMode, currentPlayer, data)
                             break
                         case 1: #if the random shot is a hit -> get a random direction
                             shootingIq = 1
@@ -269,7 +271,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                                 case _:
                                     print("something went wrong")
                             outputmanager.user1.setDirection(direction)
-
+                            python_game.printhiddenBoard(hiddenBoard)
                             cpuMemory = (row, column)
                             outputmanager.user1.setCpuMemory(cpuMemory)
                             while True:
@@ -278,8 +280,9 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                                         print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
                                         hiddenBoard[row][column] = 2
                                         shootingIq = 2
-                                        outputmanager.user1.setShootingIq(shootingIq)   
-                                        nextPlayer(gameMode, currentPlayer)
+                                        outputmanager.user1.setShootingIq(shootingIq) 
+                                        python_game.printhiddenBoard(hiddenBoard)  
+                                        nextPlayer(gameMode, currentPlayer, data)
                                         break
 
                                     case 1: #the first shot in the new direction is a hit -> shootingIq = 1 until the first non-hit
@@ -298,6 +301,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                                                 print("something went wrong")
                                 cpuMemory = (row, column)
                                 outputmanager.user1.setCpuMemory(cpuMemory)
+                                python_game.printhiddenBoard(hiddenBoard)
                                 continue
                         case _:
                             print("something went wrong")
@@ -327,11 +331,13 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                             hiddenBoard[row][column] = 2
                             shootingIq = 3
                             outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
+                            python_game.printhiddenBoard(hiddenBoard)
+                            nextPlayer(gameMode, currentPlayer, data)
                             break
                         case 1:
                             shootingIq = 2
                             outputmanager.user1.setShootingIq(shootingIq)
+                            python_game.printhiddenBoard(hiddenBoard)
                             continue
                         case _:
                             print("something went wrong")
@@ -360,11 +366,13 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                             hiddenBoard[row][column] = 2
                             shootingIq = 4
                             outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
+                            python_game.printhiddenBoard(hiddenBoard)
+                            nextPlayer(gameMode, currentPlayer, data)
                             break
                         case 1:
                             shootingIq = 3
                             outputmanager.user1.setShootingIq(shootingIq)
+                            python_game.printhiddenBoard(hiddenBoard)
                             continue
                         case _:
                             print("something went wrong")
@@ -393,11 +401,13 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                             hiddenBoard[row][column] = 2
                             shootingIq = 5
                             outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
+                            python_game.printhiddenBoard(hiddenBoard)
+                            nextPlayer(gameMode, currentPlayer, data)
                             break
                         case 1:
                             shootingIq = 4
                             outputmanager.user1.setShootingIq(shootingIq)
+                            python_game.printhiddenBoard(hiddenBoard)
                             continue
                         case _:
                             print("something went wrong")
@@ -426,11 +436,13 @@ def cpuManager1(gameMode, currentPlayer, shootingIq):
                             hiddenBoard[row][column] = 2
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
+                            python_game.printhiddenBoard(hiddenBoard)
+                            nextPlayer(gameMode, currentPlayer, data)
                             break
                         case 1:
                             shootingIq = 5
                             outputmanager.user1.setShootingIq(shootingIq)
+                            python_game.printhiddenBoard(hiddenBoard)
                             continue
                         case _:
                             print("something went wrong")

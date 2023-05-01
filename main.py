@@ -13,6 +13,7 @@ gameMode = 0
 
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def main():
+    data = 0
     outputmanager.welcomeUser()
     load = selectoperations.loadrequest()
     with open("shipstorage.json", "r") as read_file:
@@ -23,7 +24,7 @@ def main():
         gameMode = selectoperations.gameModeSelection()
         # Call function to randomly select starting player
         startingPlayer = selectoperations.selectStartingPlayer() 
-        winningID = shootingfunction.shooting(gameMode, startingPlayer)
+        winningID = shootingfunction.shooting(gameMode, startingPlayer, data)
     else:
         print("Ein Fehler")
     #player.playerAction(currentPlayer,gameMode)
