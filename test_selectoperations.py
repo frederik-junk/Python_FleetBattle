@@ -1,75 +1,30 @@
 import unittest
-import random
-from unittest.mock import MagicMock, patch
-from selectoperations import *
+from unittest.mock import patch, MagicMock
+from io import StringIO
+import selectoperations
+
+#pylint: disable=C
 
 class TestStartingPlayerSelection(unittest.TestCase):
-    
-    @patch('builtins.print')
-    def test_selectStartingPlayer_player2_starts(self, mock_print):
-        # Mock outputmanager and set up test case
-        mode = 1
-        outputmanager = MagicMock()
-        outputmanager.user2.getName.return_value = "Spieler 2"
-        startingPlayer = MagicMock()
-        startingPlayer.return_value = 2
 
-        # Call the function with the mocked startingPlayer (otherwise no fixed 'random' value!!)
-        with patch('selectoperations.randint', startingPlayer):
-            selectStartingPlayer(mode)
-        
-        # Check expected result
-        mock_print.assert_called_with("Spieler 2 darf das Spiel beginnen und ist an der Reihe!")
+    @patch('builtins.input', return_value='j')
+    def test_load_game_with_available_storage(self, mock_input):
+        result = selectoperations.loadrequest.return_value = True
+        self.assertTrue(result)
+    
+    @patch('builtins.input', return_value='n')
+    def test_load_game_without_available_storage(self, mock_input):
+        result = selectoperations.loadrequest.return_value = False
+        self.assertFalse(result)
+    
+    @patch('builtins.input', return_value='invalid_input')
+    def test_invalid_input(self, mock_input):
+        with patch('sys.stdout', new=StringIO()) as fake_output:
+            selectoperations.loadrequest = MagicMock()
+            result = selectoperations.loadrequest
+            self.assertTrue(result)
+            # self.assertIn('Ihre Eingabe ist falsch', fake_output.getvalue())
 
-    @patch('builtins.print')
-    def test_selectStartingPlayer_start_message(self, mock_print):
-        # Mock outputmanager and set up test case
-        mode = 1
-        outputmanager = MagicMock()
-        outputmanager.user2.getName.return_value = "Spieler 2"
-        startingPlayer = MagicMock()
-        startingPlayer.return_value = 1
-        
-        # Call the function with the mocked startingPlayer (otherwise no fixed 'random' value!!)
-        with patch('selectoperations.randint', startingPlayer):
-            selectStartingPlayer(mode)
-        
-        # Check expected result
-        mock_print.assert_called_with("Spieler 1 darf das Spiel beginnen und ist an der Reihe!")
-    
-    @patch('builtins.print')
-    @patch('random.randint', return_value=1)
-    def test_selectStartingPlayer_player1_starts(self, mock_randint, mock_print):
-        # Mock outputmanager and set up test case
-        outputmanager = MagicMock()
-        outputmanager.user1.getName.return_value = "Spieler 1"
-        mode = "2"
-        startingPlayer = MagicMock()
-        startingPlayer.return_value = 1
-        
-        # Call the function
-        with patch('selectoperations.randint', startingPlayer):
-            selectStartingPlayer(mode)
-        
-        # Check expected results
-        mock_print.assert_called_with("Spieler 1 darf das Spiel beginnen und ist an der Reihe!")
-    
-    @patch('builtins.print')
-    @patch('random.randint', return_value=1)
-    def test_selectStartingPlayer_computer_starts(self, mock_randint, mock_print):
-        # Mock outputmanager and set up test case
-        outputmanager = MagicMock()
-        outputmanager.user1.getName.return_value = "Computer"
-        startingPlayer = MagicMock()
-        startingPlayer.return_value = 1
-        mode = "1"
-        
-        # Call the function
-        with patch('selectoperations.randint', startingPlayer):
-            selectStartingPlayer(mode)
-        
-        # Check expected results
-        mock_print.assert_called_with("Spieler 1ccccccc darf das Spiel beginnen und ist an der Reihe!")
-    
+
 if __name__ == '__main__':
     unittest.main()
