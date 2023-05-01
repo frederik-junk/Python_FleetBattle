@@ -53,7 +53,7 @@ def main():
 
         winningID = shootingfunction.shooting(data, data["gameMode"], data["currentPlayer"])
         data["storage_available"] = 0
-        pythonGame.board_reset(data)
+        pythonGame.boardReset(data)
         with open("shipstorage.json", "w") as writeFile:
             json.dump(data, writeFile, indent=2)
         outputmanager.battleEnd(winningID, data["gameMode"])
@@ -64,7 +64,7 @@ def main():
         startingPlayer = selectoperations.selectStartingPlayer(data)
         winningID = shootingfunction.shooting(data, gameMode, startingPlayer)
         data["storage_available"] = 0
-        pythonGame.board_reset(data)
+        pythonGame.boardReset(data)
         with open("shipstorage.json", "w") as writeFile:
             json.dump(data, writeFile, indent=2)
         outputmanager.battleEnd(winningID, gameMode)

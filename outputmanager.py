@@ -74,27 +74,31 @@ user2 = User("Spieler 2", (0,0), (0,0), 0, 0)
 GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
 
 #function to select the right winning/ losing informations after game has ended
-def battleEnd(winID, gameMode):
+def battleEnd(winningID, gameMode):
     """Function that prints a message after a game is over
 
     Args:
         winID (int): a number that indicates which player has won the game
         gameMode (int): the game mode in which has been played to indicate if the computer played or two humans
     """
-    if winID == 1:
-        if gameMode == 1: #computer wins the game (1 Player mode)
-            loseoutput()
-            print(colored(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!",'magenta'))
-        else:
-            winoutput() #player 1 wins the game (2 Player mode)
-            print(colored(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!",'green'))
-    else:
-        if gameMode == 1: #player wins the game (1 Player mode)
-            winoutput()
-            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!",'green'))
-        else:
-            winoutput() #player 2 wins the game (2 Player mode) mode
-            print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
+    match winningID:
+        
+        case 1:
+            if gameMode == 1: #computer wins the game (1 Player mode)
+                loseoutput()
+                print(colored(f"{user1.getName()} hat das Spiel gewonnen. {user2.getName()} versuche es doch noch einmal!",'magenta'))
+            else:
+                winoutput() #player 1 wins the game (2 Player mode)
+                print(colored(f"Herzlichen Glueckwunsch {user1.getName()} du hast das Spiel gegen {user2.getName()} gewonnen!",'green'))
+        case 2:
+            if gameMode == 1: #player wins the game (1 Player mode)
+                winoutput()
+                print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen den Computer gewonnen!",'green'))
+            else:
+                winoutput() #player 2 wins the game (2 Player mode) mode
+                print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
+        case _:
+            print("this is a fault")
 
 def welcomeUser():
     """function to print out the game name at beginning of the game
