@@ -131,6 +131,326 @@ def playermanager(currentPlayerName, leakedBoard, hiddenBoard, shipList):
         python_game.printhiddenBoard(hiddenBoard)
 
 
+
+
+
+
+# Switches the current player after each action
+def nextPlayer(gameMode, currentPlayer, data):
+
+    if currentPlayer == 1:
+        currentPlayer = 2
+        data["currentPlayer"] = currentPlayer
+        print("__________________________________\n")
+        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
+        
+        
+    elif currentPlayer == 2:
+        currentPlayer = 1
+        data["currentPlayer"] = currentPlayer
+        print("__________________________________\n")
+        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
+        print("__________________________________\n")
+    else:
+        print("Irgendwas ist hier schief gelaufen!")
+    continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
+    clearConsole()
+    shooting(gameMode, currentPlayer)
+
+
+
+
+
+
+
+def direction():
+    direction = random.randint(1,4)
+    return direction
+
+
+def checkHit(hiddenBoard, leakedBoard, cpuMemory):
+    row, column = cpuMemory
+    match leakedBoard[row][column]:
+        case 0:
+            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+            hiddenBoard[row][column] = 2
+            return leakedBoard[row][column]
+
+        case 1:
+            [row][column] = 1 
+            shootingIq = 1
+
+
+            shootingTupel = cpuMemory
+            for ship in circularImportFixing.playerShips:
+                    postitions = ship.getPosition()
+                    if shootingTupel in postitions:
+                        print(colored("Der Computer hat eines Ihrer Schiffe getroffen",'red'))
+                        hiddenBoard[row][column] = 3
+                        postitions.remove(shootingTupel)
+                        #ship is sunk
+                        if len(postitions) == 0:
+                            print(colored("Der Computer hat ein Schiff versenkt",'red'))
+                            circularImportFixing.playerShips.remove(ship)
+                            shootingIq = 0
+                            outputmanager.user1.setShootingIq(shootingIq)
+                        else:
+                            pass
+            return leakedBoard[row][column]
+        case _:
+            print("something went terribly wrong")
+
+
+
+def firstPosition(board):
+    while True: #get correct shooting coordinates on which he didnt shot
+                    row = random.randint(0,9)
+                    column = random.randint(0,9)
+                    if board[row][column] == 0:
+                        shootingTuple = (row, column)
+                        firstCpuMemory = shootingTuple
+                        break
+                    else:
+                        continue
+    return firstCpuMemory
+
+
+
+def cpuManager1(gameMode, currentPlayer, shootingIq):
+    leakedBoard = python_game.leakedBoard2
+    hiddenBoard = python_game.hiddenBoard1
+    global cpuMemory
+    global direction
+
+    direction = outputmanager.user1.getDirection()
+    cpuMemory = outputmanager.user1.getCpuMemory()
+    while True:
+        match shootingIq:
+            case 0:
+                firstShootingPosition = firstPosition(hiddenBoard)
+                outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
+                #unecessary if already replaced elsewhere
+                if leakedBoard[row][column] == 6:
+                    leakedBoard[row][column] = 0
+
+                shootingIq = 1
+                outputmanager.user1.setShootingIq(shootingIq)
+                continue
+
+     
+            case 1:
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
+                while True:
+                    #check if it is a hit
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0: #if the random shot is a non-hit -> still shootingIq = 0
+                            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 0
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            nextPlayer(gameMode, currentPlayer)
+                            break
+                        case 1: #if the random shot is a hit -> get a random direction
+                            shootingIq = 1
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            direction = direction()
+                            outputmanager.user1.setDirection(direction)
+                            match direction:
+                                case 0:
+                                    row = row + 1
+                                case 1:
+                                    column = column - 1
+                                case 2:
+                                    column = column + 1
+                                case 3:
+                                    row = row - 1
+                                case _:
+                                    print("something went wrong")
+                            outputmanager.user1.setDirection(direction)
+
+                            cpuMemory = (row, column)
+                            outputmanager.user1.setCpuMemory(cpuMemory)
+                            while True:
+                                match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                                    case 0: #the first shot in the new direction is a non-hit -> shootingIq = 2 (go opposite direction)
+                                        print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                                        hiddenBoard[row][column] = 2
+                                        shootingIq = 2
+                                        outputmanager.user1.setShootingIq(shootingIq)   
+                                        nextPlayer(gameMode, currentPlayer)
+                                        break
+
+                                    case 1: #the first shot in the new direction is a hit -> shootingIq = 1 until the first non-hit
+                                        shootingIq = 1
+                                        outputmanager.user1.setShootingIq(shootingIq)
+                                        match direction:
+                                            case 0:
+                                                row = row + 1
+                                            case 1:
+                                                column = column - 1
+                                            case 2:
+                                                column = column + 1
+                                            case 3:
+                                                row = row - 1
+                                            case _:
+                                                print("something went wrong")
+                                cpuMemory = (row, column)
+                                outputmanager.user1.setCpuMemory(cpuMemory)
+                                continue
+                        case _:
+                            print("something went wrong")
+                    break
+
+            case 2:
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
+                while True:
+                    match direction:
+                        case 0:
+                            row = row - 1
+                        case 1:
+                            column = column + 1
+                        case 2:
+                            column = column - 1
+                        case 3:
+                            row = row + 1
+                        case _:
+                            print("something went wrong")
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
+
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0: 
+                            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 3
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            nextPlayer(gameMode, currentPlayer)
+                            break
+                        case 1:
+                            shootingIq = 2
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            continue
+                        case _:
+                            print("something went wrong")
+
+            case 3:
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory 
+                while True:
+                    match direction:
+                        case 0:
+                            column = column + 1
+                        case 1:
+                            row = row + 1
+                        case 2:
+                            row = row - 1
+                        case 3:
+                            column = column - 1
+                        case _:
+                            print("something went wrong")
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
+
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0: 
+                            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 4
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            nextPlayer(gameMode, currentPlayer)
+                            break
+                        case 1:
+                            shootingIq = 3
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            continue
+                        case _:
+                            print("something went wrong")
+
+            case 4:
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
+                while True:
+                    match direction:
+                        case 0:
+                            column = column - 1
+                        case 1:
+                            row = row - 1
+                        case 2:
+                            row = row + 1
+                        case 3:
+                            column = column + 1
+                        case _:
+                            print("something went wrong")
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
+
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0: 
+                            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 5
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            nextPlayer(gameMode, currentPlayer)
+                            break
+                        case 1:
+                            shootingIq = 4
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            continue
+                        case _:
+                            print("something went wrong")
+
+            case 5:
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
+                while True:
+                    match direction:
+                        case 0:
+                            column = column + 1
+                        case 1:
+                            row = row + 1
+                        case 2:
+                            row = row - 1
+                        case 3:
+                            column = column - 1
+                        case _:
+                            print("something went wrong")
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
+
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0: 
+                            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 0
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            nextPlayer(gameMode, currentPlayer)
+                            break
+                        case 1:
+                            shootingIq = 5
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            continue
+                        case _:
+                            print("something went wrong")
+            case _:
+                print("something went wrong")         
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Samuel:
 def cpuManager(gameMode,currentPlayer, hitStatus):
             global directionLock
             global i
@@ -219,303 +539,3 @@ def cpuManager(gameMode,currentPlayer, hitStatus):
                     print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
             python_game.printhiddenBoard(hiddenBoard)
             nextPlayer(gameMode, currentPlayer)
-
-
-
-
-# Switches the current player after each action
-def nextPlayer(gameMode, currentPlayer, data):
-
-    if currentPlayer == 1:
-        currentPlayer = 2
-        data["currentPlayer"] = currentPlayer
-        print("__________________________________\n")
-        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-        
-        
-    elif currentPlayer == 2:
-        currentPlayer = 1
-        data["currentPlayer"] = currentPlayer
-        print("__________________________________\n")
-        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-    else:
-        print("Irgendwas ist hier schief gelaufen!")
-    continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
-    clearConsole()
-    shooting(gameMode, currentPlayer)
-
-
-
-
-
-
-
-def direction():
-    direction = random.randint(1,4)
-    return direction
-
-
-def checkHit(hiddenBoard, leakedBoard, cpuMemory):
-    row, column = cpuMemory
-    match leakedBoard[row][column]:
-        case 0:
-            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
-            hiddenBoard[row][column] = 2
-            shootingIq = 0
-            return shootingIq
-
-        case 1:
-            [row][column] = 1 
-            shootingIq = 1
-
-
-            shootingTupel = cpuMemory
-            for ship in circularImportFixing.opponentShips:
-                    postitions = ship.getPosition()
-                    if shootingTupel in postitions:
-                        print(colored("Der Computer hat eines Ihrer Schiffe getroffen",'red'))
-                        hiddenBoard[row][column] = 3
-                        postitions.remove(shootingTupel)
-                        #ship is sunk
-                        if len(postitions) == 0:
-                            print(colored("Der Computer hat ein Schiff versenkt",'red'))
-                            circularImportFixing.opponentShips.remove(ship)
-                            shootingIq = 0
-                        else:
-                            pass
-            return shootingIq
-        case _:
-            print("something went terribly wrong")
-
-
-
-def firstPosition(board):
-    while True: #get correct shooting coordinates on which he didnt shot
-                    row = random.randint(0,9)
-                    column = random.randint(0,9)
-                    if board[row][column] == 0:
-                        shootingTuple = (row, column)
-                        firstCpuMemory = shootingTuple
-                        break
-                    else:
-                        continue
-    return firstCpuMemory
-
-
-
-def cpuManager1(gameMode, currentPlayer, shootingIq):
-    leakedBoard = python_game.leakedBoard2
-    hiddenBoard = python_game.hiddenBoard1
-    global cpuMemory
-    global direction
-
-    direction = outputmanager.user1.getDirection()
-    cpuMemory = outputmanager.user1.getCpuMemory()
-
-    while True:
-        match shootingIq:
-            case 0:
-                firstShootingPosition = firstPosition(hiddenBoard)
-                outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
-                #unecessary if already replaced elsewhere
-                if leakedBoard[row][column] == 6:
-                    leakedBoard[row][column] = 0
-
-                shootingIq = 1
-                outputmanager.user1.setShootingIq(shootingIq)
-                continue
-
-     
-            case 1:
-                cpuMemory = outputmanager.user1.getFirstCpuMemory()
-                row, column = cpuMemory
-                while True:
-                    #check if it is a hit
-                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                        case 0: #if the random shot is a non-hit -> still shootingIq = 0
-                            shootingIq = 0
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
-                            break
-                        case 1: #if the random shot is a hit -> get a random direction
-                            shootingIq = 1
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            direction = direction()
-                            outputmanager.user1.setDirection(direction)
-                            match direction:
-                                case 0:
-                                    row = row + 1
-                                case 1:
-                                    column = column - 1
-                                case 2:
-                                    column = column + 1
-                                case 3:
-                                    row = row - 1
-                                case _:
-                                    print("something went wrong")
-                            outputmanager.user1.setDirection(direction)
-
-                            cpuMemory = (row, column)
-                            outputmanager.user1.setCpuMemory(cpuMemory)
-                            while True:
-                                match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                                    case 0: #the first shot in the new direction is a non-hit -> shootingIq = 2 (go opposite direction)
-                                        shootingIq = 2
-                                        outputmanager.user1.setShootingIq(shootingIq)   
-                                        nextPlayer(gameMode, currentPlayer)
-                                        break
-
-                                    case 1: #the first shot in the new direction is a hit -> shootingIq = 1 until the first non-hit
-                                        shootingIq = 1
-                                        outputmanager.user1.setShootingIq(shootingIq)
-                                        match direction:
-                                            case 0:
-                                                row = row + 1
-                                            case 1:
-                                                column = column - 1
-                                            case 2:
-                                                column = column + 1
-                                            case 3:
-                                                row = row - 1
-                                            case _:
-                                                print("something went wrong")
-                                cpuMemory = (row, column)
-                                outputmanager.user1.setCpuMemory(cpuMemory)
-                                continue
-                        case _:
-                            print("something went wrong")
-                    break
-
-            case 2:
-                cpuMemory = outputmanager.user1.getFirstCpuMemory()
-                row, column = cpuMemory
-                while True:
-                    match direction:
-                        case 0:
-                            row = row - 1
-                        case 1:
-                            column = column + 1
-                        case 2:
-                            column = column - 1
-                        case 3:
-                            row = row + 1
-                        case _:
-                            print("something went wrong")
-                    cpuMemory = (row, column)
-                    outputmanager.user1.setCpuMemory(cpuMemory)
-
-                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                        case 0: 
-                            shootingIq = 3
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
-                            break
-                        case 1:
-                            shootingIq = 2
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            continue
-                        case _:
-                            print("something went wrong")
-
-            case 3:
-                cpuMemory = outputmanager.user1.getFirstCpuMemory()
-                row, column = cpuMemory 
-                while True:
-                    match direction:
-                        case 0:
-                            column = column + 1
-                        case 1:
-                            row = row + 1
-                        case 2:
-                            row = row - 1
-                        case 3:
-                            column = column - 1
-                        case _:
-                            print("something went wrong")
-                    cpuMemory = (row, column)
-                    outputmanager.user1.setCpuMemory(cpuMemory)
-
-                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                        case 0: 
-                            shootingIq = 4
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
-                            break
-                        case 1:
-                            shootingIq = 3
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            continue
-                        case _:
-                            print("something went wrong")
-
-            case 4:
-                cpuMemory = outputmanager.user1.getFirstCpuMemory()
-                row, column = cpuMemory
-                while True:
-                    match direction:
-                        case 0:
-                            column = column - 1
-                        case 1:
-                            row = row - 1
-                        case 2:
-                            row = row + 1
-                        case 3:
-                            column = column + 1
-                        case _:
-                            print("something went wrong")
-                    cpuMemory = (row, column)
-                    outputmanager.user1.setCpuMemory(cpuMemory)
-
-                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                        case 0: 
-                            shootingIq = 5
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
-                            break
-                        case 1:
-                            shootingIq = 4
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            continue
-                        case _:
-                            print("something went wrong")
-
-            case 5:
-                cpuMemory = outputmanager.user1.getFirstCpuMemory()
-                row, column = cpuMemory
-                while True:
-                    match direction:
-                        case 0:
-                            column = column + 1
-                        case 1:
-                            row = row + 1
-                        case 2:
-                            row = row - 1
-                        case 3:
-                            column = column - 1
-                        case _:
-                            print("something went wrong")
-                    cpuMemory = (row, column)
-                    outputmanager.user1.setCpuMemory(cpuMemory)
-
-                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
-                        case 0: 
-                            shootingIq = 0
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            nextPlayer(gameMode, currentPlayer)
-                            break
-                        case 1:
-                            shootingIq = 5
-                            outputmanager.user1.setShootingIq(shootingIq)
-                            continue
-                        case _:
-                            print("something went wrong")
-            case _:
-                print("something went wrong")         
-                    
-
-
-
-
-

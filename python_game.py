@@ -41,10 +41,8 @@ def boardmaster():
 
     return boardtupel
 
-if main.load == False:
-    boardtupel = boardmaster()
-    leakedboard1, leakedboard2, hiddenboard1, hiddenboard2 = boardtupel
 
+leakedBoard1, leakedBoard2, hiddenBoard1, hiddenBoard2 = boardmaster()
 
 
 #function to print the board with leaked ships (used to show player at beginning his placed ships)
