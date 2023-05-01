@@ -23,7 +23,8 @@ def shooting(gameMode, currentPlayer, data):  #I would remove gameMode and curre
     if gameMode ==  1:
         if currentPlayer == 1:
             shootingIq = outputmanager.user1.getShootingIq()
-            cpuManager1(gameMode, currentPlayer, shootingIq, data)
+            if cpuManager1(gameMode, currentPlayer, shootingIq, data) == 11:
+                return 1
             nextPlayer(gameMode, currentPlayer, data)
         elif currentPlayer == 2:
             if playermanager(outputmanager.user2.getName(), python_game.leakedBoard1, python_game.hiddenBoard2, circularImportFixing.playerShips) == 2:
@@ -164,8 +165,8 @@ def nextPlayer(gameMode, currentPlayer, data):
 
 
 
-def direction():
-    direction = random.randint(1,4)
+def randomDirection():
+    direction = random.randint(0,3)
     return direction
 
 
@@ -177,24 +178,35 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
             hiddenBoard[row][column] = 2
             return leakedBoard[row][column]
 
+        case 6:
+            print(colored("Der Computer erzielt einen Wassertreffer",'cyan'))
+            hiddenBoard[row][column] = 2
+            leakedBoard[row][column] = 0
+            return leakedBoard[row][column]
+        
         case 1:
-            [row][column] = 1 
-            shootingIq = 1
-
-
             shootingTupel = cpuMemory
             for ship in circularImportFixing.playerShips:
+                    positionMemory = ship.getPositionMemory()
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
                         print(colored("Der Computer hat eines Ihrer Schiffe getroffen",'red'))
                         hiddenBoard[row][column] = 3
+                        positionMemory.append(shootingTupel)
+                        ship.setPositionMemory(positionMemory)
                         postitions.remove(shootingTupel)
                         #ship is sunk
                         if len(postitions) == 0:
                             print(colored("Der Computer hat ein Schiff versenkt",'red'))
                             circularImportFixing.playerShips.remove(ship)
+                            positionMemory = ship.getPositionMemory()
+                            for tupel in positionMemory:
+                                row, column = tupel
+                                hiddenBoard[row][column] = 4
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
+                            if len(circularImportFixing.playerShips) == 0:
+                                return 11 #11 is the number which determines that the cpu won (for the winning ID)
                         else:
                             pass
             return leakedBoard[row][column]
@@ -221,19 +233,18 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
     leakedBoard = python_game.leakedBoard2
     hiddenBoard = python_game.hiddenBoard1
     global cpuMemory
-    global direction
 
     direction = outputmanager.user1.getDirection()
     cpuMemory = outputmanager.user1.getCpuMemory()
     while True:
         match shootingIq:
             case 0:
-                firstShootingPosition = firstPosition(hiddenBoard)
-                outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
                 #unecessary if already replaced elsewhere
                 row, column = cpuMemory
                 if leakedBoard[row][column] == 6:
                     leakedBoard[row][column] = 0
+                firstShootingPosition = firstPosition(hiddenBoard)
+                outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
 
                 shootingIq = 1
                 outputmanager.user1.setShootingIq(shootingIq)
@@ -257,7 +268,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                         case 1: #if the random shot is a hit -> get a random direction
                             shootingIq = 1
                             outputmanager.user1.setShootingIq(shootingIq)
-                            direction = direction()
+                            direction = randomDirection()
                             outputmanager.user1.setDirection(direction)
                             match direction:
                                 case 0:
@@ -299,6 +310,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                                                 row = row - 1
                                             case _:
                                                 print("something went wrong")
+                                    case 11: #the cpu killed the last ship
+                                        return 11
                                 cpuMemory = (row, column)
                                 outputmanager.user1.setCpuMemory(cpuMemory)
                                 python_game.printhiddenBoard(hiddenBoard)
@@ -339,6 +352,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             outputmanager.user1.setShootingIq(shootingIq)
                             python_game.printhiddenBoard(hiddenBoard)
                             continue
+                        case 11: #the cpu killed the last ship
+                            return 11
                         case _:
                             print("something went wrong")
 
@@ -374,6 +389,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             outputmanager.user1.setShootingIq(shootingIq)
                             python_game.printhiddenBoard(hiddenBoard)
                             continue
+                        case 11: #the cpu killed the last ship
+                            return 11
                         case _:
                             print("something went wrong")
 
@@ -409,6 +426,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             outputmanager.user1.setShootingIq(shootingIq)
                             python_game.printhiddenBoard(hiddenBoard)
                             continue
+                        case 11: #the cpu killed the last ship
+                            return 11
                         case _:
                             print("something went wrong")
 
@@ -444,6 +463,8 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             outputmanager.user1.setShootingIq(shootingIq)
                             python_game.printhiddenBoard(hiddenBoard)
                             continue
+                        case 11: #the cpu killed the last ship
+                            return 11
                         case _:
                             print("something went wrong")
             case _:
