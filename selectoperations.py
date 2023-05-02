@@ -32,17 +32,20 @@ def loadrequest(data):
                         storage_available = data["storage_available"]
                         if storage_available == 1:
                             load = True
-                            print("Lets gooo")
+                            clearConsole()
+                            print("Willkommen zurück, Ihre Daten konnten erfolgreich geladen werden.\nDas Spiel geht an gespeicherter Stelle weiter!")
                             return load
                         elif storage_available == 0:
                             load = False
+                            clearConsole()
                             print("Leider ist kein Spielstand vorhanden!\nDas Spiel startet daher ohne Spielstand!")
                             return load
                         else :
-                            print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut!")
+                            print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut und gebe [n] an!")
                             return False
                 case 'n':
                     load = False
+                    clearConsole()
                     print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
                     return False
                 case _:

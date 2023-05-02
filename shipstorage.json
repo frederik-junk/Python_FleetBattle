@@ -1,10 +1,22 @@
 {
-  "storage_available": 0,
-  "currentPlayer": 1,
-  "gameMode": 1,
-  "playerName1": "a3",
-  "playerName2": "a3",
-  "pSchlachtschiff1": [
+  "storage_available": 1,
+  "currentPlayer": 2,
+  "gameMode": 2,
+  "playerName1": "Samuel",
+  "playerName2": "Anton",
+  "opponentShips": 1,
+  "playerShips": 1,
+  "pSchlachtschiff1p": [
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
+    ]
+  ],
+  "pSchlachtschiff1m": [
     [
       2,
       0
@@ -18,16 +30,47 @@
       0
     ]
   ],
-  "pKreuzer1": [],
-  "pKreuzer2": [],
-  "pZerstoerer1": [],
-  "pZerstoerer2": [],
-  "pZerstoerer3": [],
-  "pUboot1": [],
-  "pUboot2": [],
-  "pUboot3": [],
-  "pUboot4": [],
-  "oSchlachtschiff1": [
+  "pKreuzer1p": [],
+  "pKreuzer2p": [],
+  "pZerstoerer1p": [],
+  "pZerstoerer2p": [],
+  "pZerstoerer3p": [],
+  "pUboot1p": [],
+  "pUboot2p": [],
+  "pUboot3p": [],
+  "pUboot4p": [],
+  "pKreuzer1m": [],
+  "pKreuzer2m": [],
+  "pZerstoerer1m": [],
+  "pZerstoerer2m": [],
+  "pZerstoerer3m": [],
+  "pUboot1m": [],
+  "pUboot2m": [],
+  "pUboot3m": [],
+  "pUboot4m": [],
+  "oSchlachtschiff1p": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
+    ]
+  ],
+  "oSchlachtschiff1m": [
     [
       2,
       0
@@ -41,15 +84,24 @@
       0
     ]
   ],
-  "oKreuzer1": [],
-  "oKreuzer2": [],
-  "oZerstoerer1": [],
-  "oZerstoerer2": [],
-  "oZerstoerer3": [],
-  "oUboot1": [],
-  "oUboot2": [],
-  "oUboot3": [],
-  "oUboot4": [],
+  "oKreuzer1p": [],
+  "oKreuzer2p": [],
+  "oZerstoerer1p": [],
+  "oZerstoerer2p": [],
+  "oZerstoerer3p": [],
+  "oUboot1p": [],
+  "oUboot2p": [],
+  "oUboot3p": [],
+  "oUboot4p": [],
+  "oKreuzer1m": [],
+  "oKreuzer2m": [],
+  "oZerstoerer1m": [],
+  "oZerstoerer2m": [],
+  "oZerstoerer3m": [],
+  "oUboot1m": [],
+  "oUboot2m": [],
+  "oUboot3m": [],
+  "oUboot4m": [],
   "leakedBoard1": [
     [
       0,
@@ -64,20 +116,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      6,
+      6,
       0,
       0,
       0,
@@ -88,20 +128,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      3,
+      6,
       0,
       0,
       0,
@@ -112,20 +140,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      3,
+      6,
       0,
       0,
       0,
@@ -136,8 +152,44 @@
       0
     ],
     [
+      3,
+      6,
       0,
       0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      6,
       0,
       0,
       0,
@@ -186,20 +238,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      6,
+      6,
       0,
       0,
       0,
@@ -210,20 +250,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      1,
+      6,
       0,
       0,
       0,
@@ -234,20 +262,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      1,
+      6,
       0,
       0,
       0,
@@ -258,8 +274,44 @@
       0
     ],
     [
+      1,
+      6,
       0,
       0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      6,
       0,
       0,
       0,
@@ -442,19 +494,7 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
+      3,
       0,
       0,
       0,
@@ -466,7 +506,19 @@
       0
     ],
     [
+      3,
       0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
       0,
       0,
       0,
