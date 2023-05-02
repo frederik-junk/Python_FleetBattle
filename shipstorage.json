@@ -1,38 +1,36 @@
 {
-  "storage_available": 1,
-  "currentPlayer": 2,
-  "gameMode": 1,
-  "playerName1": "Der Computer",
-  "playerName2": "a",
+  "storage_available": 0,
+  "currentPlayer": 1,
+  "gameMode": 2,
+  "playerName1": "a",
+  "playerName2": "b",
   "opponentShips": 0,
   "playerShips": 0,
-  "firstCpuMemory": [
-    6,
-    0
-  ],
-  "shootingIq": 2,
-  "direction": 0,
   "pSchlachtschiff1p": [
+    [
+      4,
+      0
+    ]
+  ],
+  "pSchlachtschiff1m": [
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
     [
       2,
       0
     ],
     [
       3,
-      0
-    ],
-    [
-      4,
-      0
-    ],
-    [
-      5,
-      0
-    ]
-  ],
-  "pSchlachtschiff1m": [
-    [
-      6,
       0
     ]
   ],
@@ -56,6 +54,14 @@
   "pUboot4m": [],
   "oSchlachtschiff1p": [
     [
+      1,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
       8,
       6
     ],
@@ -64,21 +70,31 @@
       6
     ],
     [
-      6,
-      6
-    ],
-    [
-      5,
-      6
-    ],
-    [
       4,
-      6
+      0
     ]
   ],
   "oSchlachtschiff1m": [
     [
+      0,
+      0
       6,
+      6
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      2,
+      0
+    ],
+    [
+      3,
       0
     ]
   ],

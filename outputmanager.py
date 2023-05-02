@@ -107,7 +107,6 @@ def battleEnd(winningID, gameMode):
         gameMode (int): the game mode in which has been played to indicate if the computer played or two humans
     """
     match winningID:
-        
         case 1:
             if gameMode == 1: #computer wins the game (1 Player mode)
                 loseoutput()
@@ -123,7 +122,8 @@ def battleEnd(winningID, gameMode):
                 winoutput() #player 2 wins the game (2 Player mode) mode
                 print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
         case _:
-            print("this is a fault")
+            winoutput()
+            print(colored("Herzlichen Glueckwunsch du hast gewonnen!",'green'))
     
 
     #winoutput()
