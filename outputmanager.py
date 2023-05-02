@@ -45,7 +45,7 @@ class User:
         """
         return self.__leftships
 
-    def decreaseLeftShips(self, leftships):
+    def decreaseLeftShips(self):
         """decreases the amount of left ships
 
         Args:

@@ -28,7 +28,7 @@ oSchlachtschiff1 = shipmanager.Schlachtschiff(emptyTupelList, variable)
 oKreuzer1 = shipmanager.Kreuzer(emptyTupelList, variable)
 oKreuzer2 = shipmanager.Kreuzer(emptyTupelList, variable)
 
-oZertsoerer1 = shipmanager.Zerstoerer(emptyTupelList, variable)
+oZerstoerer1 = shipmanager.Zerstoerer(emptyTupelList, variable)
 oZerstoerer2 = shipmanager.Zerstoerer(emptyTupelList, variable)
 oZerstoerer3 = shipmanager.Zerstoerer(emptyTupelList, variable)
 
@@ -37,7 +37,7 @@ oUboot2 = shipmanager.Uboot(emptyTupelList, variable)
 oUboot3 = shipmanager.Uboot(emptyTupelList, variable)
 oUboot4 = shipmanager.Uboot(emptyTupelList, variable)
 
-#opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZertsoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
+#opponentShips = [oSchlachtschiff1, oKreuzer1, oKreuzer2, oZerstoerer1, oZerstoerer2, oZerstoerer3, oUboot1, oUboot2, oUboot3, oUboot4]
 
 opponentShips = [oSchlachtschiff1]
 

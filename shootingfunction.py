@@ -77,23 +77,30 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
             print(colored("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\nBitte geben Sie eine Zahl zwischen 1 und 10 ein.",'red'))
             print("Bitte geben Sie die Anfangskoordinaten erneut ein (z.B.: A3).")
             continue
-        print(colored(f"Volle Feuerkraft auf {shootingPosition}!",'cyan'))
         clearConsole()
+        print(colored(f"Volle Feuerkraft auf {shootingPosition}!",'cyan'))
         match leakedBoard[row][column]:
             case 1:
                 shootingTupel = (row, column)
+                shootingList = [row, column]
                 for ship in shipList:
+                    name = ship.getName()
+                    print(name)
                     positions = ship.getPosition()
                     positionMemory = ship.getPositionMemory()
+                    print(shootingTupel)
+                    print(positions)
                     if shootingTupel in positions:
+                        print(shootingTupel)
+                        print(positions)
                         print(colored("Das war ein Treffer! Weiter so!",'green'))
                         hiddenBoard[row][column] = 3
                         leakedBoard[row][column] = 3
                         positionMemory.append(shootingTupel)
                         ship.setPositionMemory(positionMemory)
-                        postitions.remove(shootingTupel)
-                        if len(postitions) == 0:
-                            outputmanager.decreaseLeftShips(currentPlayer)
+                        positions.remove(shootingTupel)
+                        if len(positions) == 0:
+                            currentPlayer.decreaseLeftShips()
                             positionMemory = ship.getPositionMemory()
                             for tupel in positionMemory:
                                 row, column = tupel
