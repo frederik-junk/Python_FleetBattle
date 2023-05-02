@@ -39,7 +39,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
                     nextPlayer(data, gameMode, 1)
           
         elif currentPlayer == 2:
-            match playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips) : #has to change with number of ships
+            match playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.opponentShips) : #has to change with number of ships
                 case "won":
                     return 2 #is the winningID which should be returned to the main.
                 case None:
@@ -52,13 +52,13 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == "won": #has to change with number of ships
+                    if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, shipinitializer.opponentShips) == "won": #has to change with number of ships
                             winningId = 1
                             return winningId #is the winningID which should be returned to the main
                     else:
                             nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == "won": #has to change with number of ships
+                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.playerShips) == "won": #has to change with number of ships
                             winningId = 2
                             return winningId #is the winningID which should be returned to the main.
                     else:
