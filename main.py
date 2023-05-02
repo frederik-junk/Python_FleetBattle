@@ -38,10 +38,12 @@ def main():
         # Call function to randomly select starting player
         startingPlayer = selectoperations.selectStartingPlayer(data)
         winningID = shootingfunction.shooting(data, gameMode, startingPlayer)
+        print(winningID)
         data["storage_available"] = 0
         pythonGame.boardReset(data)
         with open("shipstorage.json", "w") as writeFile:
             json.dump(data, writeFile, indent=2)
+
         outputmanager.battleEnd(winningID, gameMode)
     else:
         print("Ein Fehler")
