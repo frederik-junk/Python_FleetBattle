@@ -15,7 +15,7 @@ class User:
     """
     def __init__(self, name, cpuMemory, firstCpuMemory, shootingIq, direction):
         self.__name = name
-        self.__leftships = 1
+        self.__leftships = 0
         self.__cpuMemory = cpuMemory
         self.__firstCpuMemory = firstCpuMemory
         self.__shootingIq = shootingIq
@@ -45,13 +45,13 @@ class User:
         """
         return self.__leftships
 
-    def decreaseLeftShips(self):
+    def increaseLeftShips(self):
         """decreases the amount of left ships
 
         Args:
             leftships (Int): Amount of left ships of player
         """
-        self.__leftships -= 1
+        self.__leftships += 1
 
     def setLeftShips(self, leftships):
         """Sets the amount of left ships
@@ -124,6 +124,13 @@ def battleEnd(winningID, gameMode):
                 print(colored(f"Herzlichen Glueckwunsch {user2.getName()} du hast das Spiel gegen {user1.getName()} gewonnen!",'green'))
         case _:
             print("this is a fault")
+    
+
+    #winoutput()
+    #print(colored(f"Herzlichen Glueckwunsch {winningID} du hast gewonnen",'green'))
+
+
+    
 
 def welcomeUser():
     """function to print out the game name at beginning of the game
