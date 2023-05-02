@@ -1,5 +1,5 @@
 import os
-import circularImportFixing
+import shipinitializer
 import converterfunctions
 import pythonGame
 import outputmanager
@@ -36,7 +36,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
                 nextPlayer(data, gameMode, 1)
           
         elif currentPlayer == 2:
-            if playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips) == 1: #has to change with number of ships
+            if playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.opponentShips) == 1: #has to change with number of ships
                 return 2 #is the winningID which should be returned to the main.
             else:
                 nextPlayer(data, gameMode, 2)
@@ -46,12 +46,12 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(data, currentPlayer, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1: #has to change with number of ships
+                    if playermanager(data, currentPlayer, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, shipinitializer.opponentShips) == 1: #has to change with number of ships
                         return 1 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 1:#has to change with number of ships
+                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.playerShips) == 1:#has to change with number of ships
                          return 2 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 2)
@@ -171,7 +171,7 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
         
         case 1:
             shootingTupel = cpuMemory
-            for ship in circularImportFixing.playerShips:
+            for ship in shipinitializer.playerShips:
                     positionMemory = ship.getPositionMemory()
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:
