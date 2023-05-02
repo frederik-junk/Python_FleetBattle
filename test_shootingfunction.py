@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import io
 import sys
 import random
@@ -17,7 +17,6 @@ class TestShooting(unittest.TestCase):
         cls.currentPlayer = 1
         cls.gameMode = 1
         cls.user1 = "Testspieler"
-
         
     # @patch('builtins.input', side_effect=['A1'])
     # def test_playermanager_1(self, mock_input):
@@ -154,6 +153,62 @@ class TestShooting(unittest.TestCase):
 
         with self.assertRaises(IndexError):
             shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
+
+    def test_first_position_returns_tuple(self):
+        board = [[0 for _ in range(10)] for _ in range(10)]
+        firstCpuMemory = shootingfunction.firstPosition(board)
+        self.assertIsInstance(firstCpuMemory, tuple)
+    
+    def test_first_position_returns_valid_coordinates(self):
+        board = [[0 for _ in range(10)] for _ in range(10)]
+        firstCpuMemory = shootingfunction.firstPosition(board)
+        row, col = firstCpuMemory
+        self.assertGreaterEqual(row, 0)
+        self.assertLess(row, 10)
+        self.assertGreaterEqual(col, 0)
+        self.assertLess(col, 10)
+
+    def test_cpuManager1_return_11(self):
+        self.shootingIq = 0
+        user1 = Mock()
+        user1.getFirstCpuMemory.return_value = (5, 5)
+        user1.getCpuMemory.return_value = (5, 5)
+        user1.getDirection.return_value = 0
+        cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data)
+        self.assertEqual(cpuManager1_return, 11)
+
+    # @patch('cpu_manager.randomDirection')
+    # def test_cpuManager1_shootingIq_1(self, mock_randomDirection):
+    #     mock_randomDirection.return_value = 1
+    #     user1 = Mock()
+    #     user1.getFirstCpuMemory.return_value = (5, 5)
+    #     user1.getCpuMemory.return_value = (5, 6)
+    #     user1.getDirection.return_value = 1
+    #     self.shootingIq = 1
+    #     cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data)
+    #     self.assertEqual(user1.setCpuMemory.call_count, 3)
+    #     self.assertEqual(user1.setDirection.call_count, 2)
+    #     self.assertEqual(user1.setShootingIq.call_count, 2)
+
+    # def test_cpuManager1_shootingIq_2(self):
+    #     user1 = Mock()
+    #     user1.getFirstCpuMemory.return_value = (5, 5)
+    #     user1.getCpuMemory.return_value = (4, 5)
+    #     user1.getDirection.return_value = 2
+    #     self.shootingIq = 2
+    #     cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data)
+    #     self.assertEqual(user1.setCpuMemory.call_count, 2)
+    #     self.assertEqual(user1.setShootingIq.call_count, 1)
+
+    # def test_cpuManager1_shootingIq_3(self):
+    #     user1 = Mock()
+    #     user1.getFirstCpuMemory.return_value = (5, 5)
+    #     user1.getCpuMemory.return_value = (4, 6)
+    #     user1.getDirection.return_value = 3
+    #     self.shootingIq = 3
+    #     cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data)
+    #     self.assertEqual(user1.setCpuMemory.call_count, 2)
+    #     self.assertEqual(user1.setShootingIq.call_count, 1)
 
     # @patch('builtins.input', side_effect=['K1', 'A11', 'A1'])
     # def test_playermanager_2(self, mock_input):
