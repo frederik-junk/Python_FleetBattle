@@ -1,36 +1,32 @@
 {
   "storage_available": 0,
-  "currentPlayer": 1,
-  "gameMode": 1,
+  "currentPlayer": 2,
+  "gameMode": 2,
   "playerName1": "a",
-  "playerName2": "b",
+  "playerName2": "d",
   "opponentShips": 1,
   "playerShips": 1,
   "pSchlachtschiff1p": [
     [
-      4,
+      5,
+      0
+    ],
+    [
+      6,
       0
     ]
   ],
   "pSchlachtschiff1m": [
-    [
-      0,
-      0
-    ],
-    [
-      0,
-      0
-    ],
-    [
-      1,
-      0
-    ],
     [
       2,
       0
     ],
     [
       3,
+      0
+    ],
+    [
+      4,
       0
     ]
   ],
@@ -54,10 +50,6 @@
   "pUboot4m": [],
   "oSchlachtschiff1p": [
     [
-      1,
-      0
-    ],
-    [
       2,
       0
     ],
@@ -68,27 +60,27 @@
     [
       4,
       0
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
     ]
   ],
   "oSchlachtschiff1m": [
-    [
-      0,
-      0
-    ],
-    [
-      0,
-      0
-    ],
-    [
-      1,
-      0
-    ],
     [
       2,
       0
     ],
     [
       3,
+      0
+    ],
+    [
+      4,
       0
     ]
   ],
