@@ -88,11 +88,7 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
                     print(name)
                     positions = ship.getPosition()
                     positionMemory = ship.getPositionMemory()
-                    print(shootingTupel)
-                    print(positions)
                     if shootingTupel in positions:
-                        print(shootingTupel)
-                        print(positions)
                         print(colored("Das war ein Treffer! Weiter so!",'green'))
                         hiddenBoard[row][column] = 3
                         leakedBoard[row][column] = 3
