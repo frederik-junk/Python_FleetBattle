@@ -15,6 +15,7 @@ class User:
     """
     def __init__(self, name, cpuMemory, firstCpuMemory, shootingIq, direction):
         self.__name = name
+        self.__leftships = 1
         self.__cpuMemory = cpuMemory
         self.__firstCpuMemory = firstCpuMemory
         self.__shootingIq = shootingIq
@@ -35,6 +36,30 @@ class User:
             name (String): The name of the player
         """
         self.__name = name
+
+    def getLeftShips(self):
+        """Returns amount of left ships
+
+        Returns:
+            String: Returns the Amount of left ships
+        """
+        return self.__leftships
+
+    def decreaseLeftShips(self):
+        """decreases the amount of left ships
+
+        Args:
+            leftships (Int): Amount of left ships of player
+        """
+        self.__leftships -= 1
+
+    def setLeftShips(self, leftships):
+        """Sets the amount of left ships
+
+        Args:
+            leftships (Int): Amount of left ships of player
+        """
+        self.__leftships = leftships
 
 
     def getCpuMemory(self):

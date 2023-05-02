@@ -196,7 +196,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
         print(colored(f"Die Spitze des Schiffes liegt auf {placementInput}", "cyan"))
         # placing the ship in the right direction
         # TODO give ship to this function
-        if (shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) is True):
+        if shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) is True:
             continue
         break
     # printleakedBoard(board)
