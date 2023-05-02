@@ -25,7 +25,7 @@ def main():
     load = selectoperations.loadrequest(data)
     if load is True:
         pythonGame.boardloader(data, load)
-        memorymanager.loadData(data)
+        memorymanager.loadData(data, data["gameMode"])
         winningID = shootingfunction.shooting(data, data["gameMode"], data["currentPlayer"])
         data["storage_available"] = 0
         pythonGame.boardReset(data)

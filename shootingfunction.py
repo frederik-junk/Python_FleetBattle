@@ -1,5 +1,5 @@
 import os
-import circularImportFixing
+import shipinitializer
 import converterfunctions
 import pythonGame
 import outputmanager
@@ -178,7 +178,7 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
         
         case 1:
             shootingTupel = cpuMemory
-            for ship in circularImportFixing.playerShips:
+            for ship in shipinitializer.playerShips:
                     positionMemory = ship.getPositionMemory()
                     postitions = ship.getPosition()
                     if shootingTupel in postitions:

@@ -3,7 +3,7 @@ import os
 import random
 import outputmanager
 import pythonGame
-import circularImportFixing
+import shipinitializer
 from termcolor import colored
 from colorama import init
 init()
@@ -91,14 +91,14 @@ def gameModeSelection(data):
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
-                    for ship in circularImportFixing.playerShips:
+                    for ship in shipinitializer.playerShips:
                         ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
                     # Print message for computer to place ships
                     print("Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern")
                     # Call function cpuPlaceShip to let the computer randomly place ships
-                    for ship in circularImportFixing.opponentShips:
+                    for ship in shipinitializer.opponentShips:
                         ship.classCpuPlaceShip(pythonGame.leakedBoard1, ship)
                     print("")
                     # Print message indicating start of the game
@@ -120,7 +120,7 @@ def gameModeSelection(data):
                     print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function placeShip for user 1 to place ships
                     counter = 1
-                    for ship in circularImportFixing.playerShips:
+                    for ship in shipinitializer.playerShips:
                         ship.classPlaceShip(pythonGame.leakedBoard1, ship, counter)
                         counter = counter+1
                     counter = 1
@@ -133,7 +133,7 @@ def gameModeSelection(data):
                     print (f"Hallo {outputmanager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe")
                     print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
                     # Call function for user 2 to place ships
-                    for ship in circularImportFixing.opponentShips:
+                    for ship in shipinitializer.opponentShips:
                         ship.classPlaceShip(pythonGame.leakedBoard2, ship, counter)
                         counter = counter+1
                     counter = 1
