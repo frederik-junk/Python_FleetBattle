@@ -114,7 +114,6 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
                         pass
                 print("Sie erhalten einen weiteren Schuss\n")
                 shootingRepeater = True
-            #TODO case 2-4 funktionieren nicht weil sie in hiddenBoard stehen
             case 2:
                 print("Sie hatten dieses Feld bereits beschossen und einen Wassertreffer erzielt!\n")
                 print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
