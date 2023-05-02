@@ -1,5 +1,6 @@
 import circularImportFixing
 import outputmanager
+import pythonGame
 
 def loadData(data):
         outputmanager.user1.setName(data["playerName1"])
