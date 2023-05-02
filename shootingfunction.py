@@ -36,7 +36,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
                 nextPlayer(data, gameMode, 1)
           
         elif currentPlayer == 2:
-            if playermanager(data ,outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips, currentPlayer) == 2:
+            if playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips) == 1: #has to change with number of ships
                 return 2 #is the winningID which should be returned to the main.
             else:
                 nextPlayer(data, gameMode, 2)
@@ -46,12 +46,12 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
             match currentPlayer:
                 case 1:
-                    if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1:
-                         return 1 #is the winningID which should be returned to the main.
+                    if playermanager(data, currentPlayer, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, circularImportFixing.opponentShips) == 1: #has to change with number of ships
+                        return 1 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 1)
                 case 2:
-                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 2:
+                    if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips) == 1:#has to change with number of ships
                          return 2 #is the winningID which should be returned to the main.
                     else:
                         nextPlayer(data, gameMode, 2)
@@ -95,7 +95,7 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
                         ship.setPositionMemory(positionMemory)
                         positions.remove(shootingTupel)
                         if len(positions) == 0:
-                            currentPlayer.decreaseLeftShips()
+                            currentPlayer.increaseLeftShips()
                             positionMemory = ship.getPositionMemory()
                             for tupel in positionMemory:
                                 row, column = tupel
@@ -103,13 +103,13 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
                                 # two times the same row?
                                 #hiddenBoard[row][column] = 4
                             print(colored("\nSchiff versenkt\n",'green',attrs=["blink"]))
-                            if currentPlayer.getLeftShips() == 0:
+                            
+                            if currentPlayer.getLeftShips() == 1:
                                 pythonGame.printhiddenBoard(hiddenBoard)
-                                winningID = 2
+                                winningID = 1
                                 return winningID
-                            else:
-                                pass
-                        pythonGame.printhiddenBoard
+                        else:
+                            pass
                     else:
                         pass
                 print("Sie erhalten einen weiteren Schuss\n")
@@ -182,7 +182,7 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         postitions.remove(shootingTupel)
                         #ship is sunk
                         if len(postitions) == 0:
-                            circularImportFixing.playerShips.remove(ship)
+                            outputmanager.user1.increaseLeftShips()
                             positionMemory = ship.getPositionMemory()
                             for tupel in positionMemory:
                                 row, column = tupel
@@ -190,16 +190,16 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
                             print(colored("Der Computer hat ein Schiff versenkt",'red'))
+                            if outputmanager.user1.getLeftShips() == 1:
+                                allHit = 11 #11 is the number which determines that the cpu won (for the winning ID)
+                                return allHit 
+                            else:
+                                pass
                         else:
                             return leakedBoard[row][column]
         case _:
             print("something went terribly wrong")
 
-    if len(circularImportFixing.playerShips) == 0:
-        allHit = 11 #11 is the number which determines that the cpu won (for the winning ID)
-        return allHit 
-    else:
-        pass
 
 
 
