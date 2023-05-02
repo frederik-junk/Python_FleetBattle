@@ -27,17 +27,16 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     Returns:
         winningID(int): An int value to indicate which player won the game
     """
-    cpuMemory = (1,1)
-    positionMemory = []
-    shootingRepeater = True
     if gameMode ==  1:
         if currentPlayer == 1:
             shootingIq = outputmanager.user1.getShootingIq()
-            if cpuManager1(data, gameMode, currentPlayer, shootingIq) == 11:
+            if cpuManager1(data, gameMode, currentPlayer, shootingIq, pythonGame.leakedBoard2, pythonGame.hiddenBoard1) == 11:
                 return 1
-            nextPlayer(data, gameMode, currentPlayer, data)
+            else:
+                nextPlayer(data, gameMode, 1)
+          
         elif currentPlayer == 2:
-            if playermanager(data ,outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.playerShips, currentPlayer) == 2:
+            if playermanager(data ,outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips, currentPlayer) == 2:
                 return 2 #is the winningID which should be returned to the main.
             else:
                 nextPlayer(data, gameMode, 2)
@@ -149,33 +148,6 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
 
 
 
-# Switches the current player after each action
-def nextPlayer(gameMode, currentPlayer, data):
-
-    if currentPlayer == 1:
-        currentPlayer = 2
-        data["currentPlayer"] = currentPlayer
-        print("__________________________________\n")
-        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-        
-        
-    elif currentPlayer == 2:
-        currentPlayer = 1
-        data["currentPlayer"] = currentPlayer
-        print("__________________________________\n")
-        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
-        print("__________________________________\n")
-    else:
-        print("Irgendwas ist hier schief gelaufen!")
-    continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
-    clearConsole()
-    shooting(gameMode, currentPlayer, data)
-
-
-
-
-
 
 
 def randomDirection():
@@ -210,7 +182,6 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         postitions.remove(shootingTupel)
                         #ship is sunk
                         if len(postitions) == 0:
-                            print(colored("Der Computer hat ein Schiff versenkt",'red'))
                             circularImportFixing.playerShips.remove(ship)
                             positionMemory = ship.getPositionMemory()
                             for tupel in positionMemory:
@@ -218,13 +189,17 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                                 hiddenBoard[row][column] = 4
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
+                            print(colored("Der Computer hat ein Schiff versenkt",'red'))
                         else:
-                            pass
-                        if len(circularImportFixing.playerShips) == 0:
-                            return 11 #11 is the number which determines that the cpu won (for the winning ID)
-            return leakedBoard[row][column]
+                            return leakedBoard[row][column]
         case _:
             print("something went terribly wrong")
+
+    if len(circularImportFixing.playerShips) == 0:
+        allHit = 11 #11 is the number which determines that the cpu won (for the winning ID)
+        return allHit 
+    else:
+        pass
 
 
 
@@ -242,9 +217,7 @@ def firstPosition(board):
 
 
 
-def cpuManager1(gameMode, currentPlayer, shootingIq, data):
-    leakedBoard = pythonGame.leakedBoard2
-    hiddenBoard = pythonGame.hiddenBoard1
+def cpuManager1(data, gameMode, currentPlayer, shootingIq, leakedBoard, hiddenBoard):
     global cpuMemory
 
     direction = outputmanager.user1.getDirection()
@@ -276,7 +249,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            nextPlayer(gameMode, currentPlayer, data)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1: #if the random shot is a hit -> get a random direction
                             shootingIq = 1
@@ -306,7 +279,7 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                                         shootingIq = 2
                                         outputmanager.user1.setShootingIq(shootingIq) 
                                         pythonGame.printhiddenBoard(hiddenBoard)  
-                                        nextPlayer(gameMode, currentPlayer, data)
+                                        nextPlayer(data, gameMode, currentPlayer)
                                         break
 
                                     case 1: #the first shot in the new direction is a hit -> shootingIq = 1 until the first non-hit
@@ -323,12 +296,15 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                                                 row = row - 1
                                             case _:
                                                 print("something went wrong")
+
+                                        cpuMemory = (row, column)
+                                        outputmanager.user1.setCpuMemory(cpuMemory)
+                                        pythonGame.printhiddenBoard(hiddenBoard)
+                                        continue
                                     case 11: #the cpu killed the last ship
-                                        return 11
-                                cpuMemory = (row, column)
-                                outputmanager.user1.setCpuMemory(cpuMemory)
-                                pythonGame.printhiddenBoard(hiddenBoard)
-                                continue
+                                        allHit = 11
+                                        return allHit
+                                        
                         case _:
                             print("something went wrong")
                     break
@@ -358,17 +334,18 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             shootingIq = 3
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            nextPlayer(gameMode, currentPlayer, data)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
                             shootingIq = 2
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            continue
                         case 11: #the cpu killed the last ship
-                            return 11
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
+                    continue
 
             case 3:
                 cpuMemory = outputmanager.user1.getFirstCpuMemory()
@@ -395,17 +372,19 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             shootingIq = 4
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            nextPlayer(gameMode, currentPlayer, data)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
                             shootingIq = 3
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            continue
                         case 11: #the cpu killed the last ship
-                            return 11
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
+
+                    continue
 
             case 4:
                 cpuMemory = outputmanager.user1.getFirstCpuMemory()
@@ -432,17 +411,19 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             shootingIq = 5
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            nextPlayer(gameMode, currentPlayer, data)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
                             shootingIq = 4
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            continue
                         case 11: #the cpu killed the last ship
-                            return 11
+                            allHit = 11
+                            return allHit   
                         case _:
                             print("something went wrong")
+
+                    continue
 
             case 5:
                 cpuMemory = outputmanager.user1.getFirstCpuMemory()
@@ -469,17 +450,19 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
                             shootingIq = 0
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            nextPlayer(gameMode, currentPlayer, data)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
                             shootingIq = 5
                             outputmanager.user1.setShootingIq(shootingIq)
                             pythonGame.printhiddenBoard(hiddenBoard)
-                            continue
                         case 11: #the cpu killed the last ship
-                            return 11
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
+
+                    continue
             case _:
                 print("something went wrong")         
                     
@@ -497,7 +480,6 @@ def cpuManager1(gameMode, currentPlayer, shootingIq, data):
 
 
 # Switches the current player after each action
-
 def nextPlayer(data, gameMode, currentPlayer):
 
     if currentPlayer == 1:
@@ -506,6 +488,7 @@ def nextPlayer(data, gameMode, currentPlayer):
         print("__________________________________\n")
         print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
+        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n")
         
         
     elif currentPlayer == 2:
@@ -514,8 +497,9 @@ def nextPlayer(data, gameMode, currentPlayer):
         print("__________________________________\n")
         print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
+        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
     else:
         print("Irgendwas ist hier schief gelaufen!")
-    continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
+
     clearConsole()
     shooting(data, gameMode, currentPlayer)
