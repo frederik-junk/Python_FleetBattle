@@ -36,7 +36,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
                 nextPlayer(data, gameMode, 1)
           
         elif currentPlayer == 2:
-            if playermanager(data ,outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips, currentPlayer) == 2:
+            if playermanager(data ,outputmanager.user2.getName(), pythonGame.leakedBoard1, pythonGame.hiddenBoard2, circularImportFixing.opponentShips) == 2:
                 return 2 #is the winningID which should be returned to the main.
             else:
                 nextPlayer(data, gameMode, 2)

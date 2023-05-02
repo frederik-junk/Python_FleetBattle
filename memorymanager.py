@@ -2,7 +2,12 @@ import circularImportFixing
 import outputmanager
 import pythonGame
 
-def loadData(data):
+def loadData(data, gameMode):
+        if gameMode == 1:
+                firstCpuMemory = [tuple(item) for item in data["firstCpuMemory"]]
+                outputmanager.user1.setFirstCpuMemory(firstCpuMemory)
+                outputmanager.user1.setShootingIq(data["shootingIq"])
+                outputmanager.user1.setDirection(data["direction"])
         outputmanager.user1.setName(data["playerName1"])
         outputmanager.user2.setName(data["playerName2"])
         outputmanager.user1.setLeftShips(data["playerShips"])
@@ -141,6 +146,9 @@ def storeData(data):
         data["oUboot3"] = circularImportFixing.pUboot3.getPositionMemory()
         data["oUboot4"] = circularImportFixing.pUboot4.getPositionMemory()
         """
+        data["firstCpuMemory"] = outputmanager.user1.getFirstCpuMemory()
+        data["shootingIq"] = outputmanager.user1.getShootingIq()
+        data["direction"] = outputmanager.user1.getDirection()
         data["playerName1"] = outputmanager.user1.getName()
         data["playerName2"] = outputmanager.user2.getName()
         data["playerShips"] = outputmanager.user1.getLeftShips()
