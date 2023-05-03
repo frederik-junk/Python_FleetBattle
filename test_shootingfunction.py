@@ -3,10 +3,10 @@ from unittest.mock import Mock, patch
 import io
 import sys
 import random
-import pythonGame
-import converterfunctions
-import shipinitializer
-import outputmanager
+import python_game
+import converter_functions
+import ship_initializer
+import output_manager
 import shootingfunction
 
 
@@ -53,7 +53,7 @@ class TestShooting(unittest.TestCase):
         gameMode = "1"
         currentPlayer = 1
         data = {"currentPlayer": 1}
-        expected_output = f"__________________________________\n{outputmanager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
+        expected_output = f"__________________________________\n{output_manager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shootingfunction.nextPlayer(gameMode, currentPlayer, data)

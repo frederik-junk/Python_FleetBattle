@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import MagicMock, patch
-from outputmanager import *
+from output_manager import *
 
 # pylint: disable=C
 
