@@ -132,14 +132,14 @@ class TestShooting(unittest.TestCase):
         self.assertLess(col, 10)
 
     def test_cpu_manager_1_return_11(self):
-        self.shooting_iq = 0
-        self.leaked_board = [[0 for i in range(10)] for j in range(10)]
-        self.hidden_board = [[0 for i in range(10)] for j in range(10)]
+        shooting_iq = 0
+        leaked_board = [[0 for i in range(10)] for j in range(10)]
+        hidden_board = [[0 for i in range(10)] for j in range(10)]
         user_1 = Mock()
         user_1.get_first_cpu_memory.return_value = (5, 5)
         user_1.get_cpu_memory.return_value = (5, 5)
         user_1.get_direction.return_value = 0
-        cpu_manager_1_return = shooting_function.cpu_manager_1(self.shooting_iq, self.leaked_board, self.hidden_board)
+        cpu_manager_1_return = shooting_function.cpu_manager_1(shooting_iq, leaked_board, hidden_board)
         self.assertEqual(cpu_manager_1_return, None)
 
 if __name__ == "__main__":

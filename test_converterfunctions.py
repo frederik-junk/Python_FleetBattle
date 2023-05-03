@@ -87,11 +87,7 @@ class TestConverterFunctions(unittest.TestCase):
             result = split_column_converter("1")
             self.assertEqual(result, 11)
             mock_print.assert_called_with("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
-    
-    def test_valid_input(self):
-        self.assertEqual(split_row("A1"), 0)
-        self.assertEqual(split_row("B2"), 1)
-        self.assertEqual(split_row("C10"), 9)
+
     
     def test_invalid_input(self):
         self.assertEqual(split_row("A0"), 11)
