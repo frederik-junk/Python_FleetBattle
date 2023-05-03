@@ -42,7 +42,7 @@ def shooting(
         if current_player == 1:
             #getting iq level to let cpu plan the next action
             shooting_iq = output_manager.user_1.get_shooting_iq()
-            match cpu_manager1(
+            match cpu_manager_1(
                 shooting_iq,
                 python_game.leaked_board_2,
                 python_game.hidden_board_1,
@@ -133,7 +133,7 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
     while shooting_repeater is True:
         #asking user to input the coordinate to shoot on
         shooting_position = input(
-            f"{current_player.get_name()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
+            f"{current_player.get_name} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
         )
         #try to convert input into two numbers (alphabet numbers)
         try:
@@ -318,7 +318,7 @@ def first_position(board):
     return first_cpu_memory
 
 
-def cpu_manager1(shooting_iq, leaked_board, hidden_board):
+def cpu_manager_1(shooting_iq, leaked_board, hidden_board):
     """Handles the actions of the CPU
 
     Args:
@@ -624,7 +624,7 @@ def next_player(data, current_player):
             f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user_1.get_name()}  \n"
         )
     else:
-        print("Der Spielerweschel schlug fehl!")
+        print("Der Spielerwechsel schlug fehl!")
 
     clear_console()
     return current_player

@@ -1,7 +1,7 @@
 # pylint: disable=C
 from io import StringIO
 import unittest, select_operations
-from unittest.mock import mock_open, patch
+from unittest.mock import patch
 from main import main
 
 class TestMain(unittest.TestCase):
