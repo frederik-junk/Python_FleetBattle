@@ -1,5 +1,5 @@
 import unittest
-from shipmanager import *
+from ship_manager import *
 
 # pylint: disable=C
 

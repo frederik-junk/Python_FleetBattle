@@ -1,4 +1,4 @@
-import unittest, selectoperations
+import unittest, select_operations
 
 # pylint: disable=C
 
@@ -7,7 +7,7 @@ class TestMain(unittest.TestCase):
     currentPlayer = 1
 
     def test_StartingUser(self):
-        startingPlayer = selectoperations.selectStartingPlayer
+        startingPlayer = select_operations.selectStartingPlayer
         self.assertNotEqual(startingPlayer, 3)
 
 
