@@ -50,17 +50,14 @@ playerIndex 3 = Computer
 2 = Spieler
 
 {
-  "storage_available": 1,
-  "current_player": 2,
-  "game_mode": 1,
-  "player_name_1": "Spieler 1",
-  "player_name_2": "Spieler 2",
+  "storage_available": 0,
+  "current_player": 1,
+  "game_mode": 2,
+  "player_name_1": "default 1",
+  "player_name_2": "default 2",
   "opponent_ships": 0,
   "player_ships": 0,
-  "first_cpu_memory": [
-    0,
-    0
-  ],
+  "first_cpu_memory": [],
   "shooting_iq": 0,
   "direction": 0,
   "p_schlachtschiff_1_p": [],
