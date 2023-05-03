@@ -44,7 +44,7 @@ def shooting(
         if current_player == 1:
             shooting_iq = output_manager.user1.get_shooting_iq()
             match cpu_manager1(
-                data,
+                #data,
                 game_mode,
                 current_player,
                 shooting_iq,
@@ -56,11 +56,11 @@ def shooting(
                 #case None:
                  #   return 1
                 case _:
-                    next_player(data, game_mode, 1)
+                    winning_id = next_player(data, game_mode, 1)
 
         elif current_player == 2:
             match player_manager(
-                data,
+                #data,
                 output_manager.user2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
@@ -71,7 +71,7 @@ def shooting(
                 #case None:
                  #   return 2
                 case _:
-                    next_player(data, game_mode, 2)
+                    winning_id = next_player(data, game_mode, 2)
 
         else:
             print("Shit")
@@ -80,7 +80,7 @@ def shooting(
             case 1:
                 if (
                     player_manager(
-                        data,
+                        #data,
                         output_manager.user1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
@@ -90,11 +90,11 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 1
                     return winning_id  # is the winningID which should be returned to the main
-                next_player(data, game_mode, 1)
+                winning_id = next_player(data, game_mode, 1)
             case 2:
                 if (
                     player_manager(
-                        data,
+                        #data,
                         output_manager.user2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
@@ -104,14 +104,16 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 2
                     return winning_id  # is the winningID which should be returned to the main.
-                next_player(data, game_mode, 2)
+                winning_id = next_player(data, game_mode, 2)
             case _:
                 print("something went wrong")
     else:
         print("Shit")
 
+    return winning_id
 
-def player_manager(data, current_player, leaked_board, hidden_board, ship_list):
+
+def player_manager(current_player, leaked_board, hidden_board, ship_list):
     """Function that handles the shots of the player
 
     Args:
@@ -359,7 +361,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 0
                             output_manager.user1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            winning_id = next_player(data, game_mode, current_player)
                             break
                         case 1:  # if the random shot is a hit -> get a random direction
                             shooting_iq = 1
@@ -394,7 +396,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                                         shooting_iq = 2
                                         output_manager.user1.set_shooting_iq(shooting_iq)
                                         python_game.print_hidden_board(hidden_board)
-                                        next_player(data, game_mode, current_player)
+                                        winning_id = next_player(data, game_mode, current_player)
                                         break
 
                                     case 1:  # the first shot in the new direction is a hit -> shooting_iq = 1 until the first non-hit
@@ -453,7 +455,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 3
                             output_manager.user1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            winning_id = next_player(data, game_mode, current_player)
                             break
                         case 1:
                             shooting_iq = 2
@@ -495,7 +497,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 4
                             output_manager.user1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            winning_id = next_player(data, game_mode, current_player)
                             break
                         case 1:
                             shooting_iq = 3
@@ -538,7 +540,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 5
                             output_manager.user1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            winning_id = next_player(data, game_mode, current_player)
                             break
                         case 1:
                             shooting_iq = 4
@@ -581,7 +583,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 0
                             output_manager.user1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            winning_id = next_player(data, game_mode, current_player)
                             break
                         case 1:
                             shooting_iq = 5
@@ -630,4 +632,5 @@ def next_player(data, game_mode, current_player):
         print("Irgendwas ist hier schief gelaufen!")
 
     clear_console()
-    shooting(data, game_mode, current_player)
+    wininng_id = shooting(data, game_mode, current_player)
+    return wininng_id
