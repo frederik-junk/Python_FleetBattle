@@ -3,18 +3,24 @@
 from termcolor import colored
 from colorama import init
 import blockerfunctions
+
 init()
 
-#own exception class
+
+# own exception class
 class WrongPlacement(Exception):
     """Own exception class
 
     Args:
         Exception (Error): Prints an error message
     """
+
     pass
 
-def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
+
+def directionConverter(
+    board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship
+):
     """Function that is used to define the direction the ship is placed, based on the tip of the ship
 
     Args:
@@ -32,8 +38,10 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
     Returns:
         boolean: Returns a True or False value, depending on each branch
     """
-    j = 0 # just a counting variable for later use
-    positionTupelList = [] #this is the List which is given to the position list of the object
+    j = 0  # just a counting variable for later use
+    positionTupelList = (
+        []
+    )  # this is the List which is given to the position list of the object
     match direction:
         case "w":
             try:  # exception for the case that the ship is placed out of bounce in the given direction
@@ -48,10 +56,10 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[startingRowNumber][startingColumnChar] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    #board[startingRowNumber][startingColumnChar] = 1 TODO:delete this
-                    #this is for the positionTuple
-                    positionTupel = (startingRowNumber,startingColumnChar)
-                    #add every postion tuple to tuple list to store the ship position
+                    # board[startingRowNumber][startingColumnChar] = 1 TODO:delete this
+                    # this is for the positionTuple
+                    positionTupel = (startingRowNumber, startingColumnChar)
+                    # add every postion tuple to tuple list to store the ship position
                     positionTupelList.append(positionTupel)
                     startingRowNumber = startingRowNumber - 1
                     j += 1
@@ -65,19 +73,39 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except WrongPlacement as placementError:
                 if gameMode == 2:
                     if str(placementError) == "laeuft aus Spielfeld":
-                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in anderes Schiff":
-                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in Blocker":
-                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     else:
                         print(str(placementError))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
-                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
+                    print(
+                        colored(
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "cyan",
+                        )
+                    )
                     return True
                 return True
         case "a":
@@ -92,10 +120,10 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[startingRowNumber][startingColumnChar] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    #board[startingRowNumber][startingColumnChar] = 1 TODO:this can be deleted
-                    #this is for the positionTupel
-                    positionTupel = (startingRowNumber,startingColumnChar)
-                    #add every postion tuple to tuple list to store the ship position
+                    # board[startingRowNumber][startingColumnChar] = 1 TODO:this can be deleted
+                    # this is for the positionTupel
+                    positionTupel = (startingRowNumber, startingColumnChar)
+                    # add every postion tuple to tuple list to store the ship position
                     positionTupelList.append(positionTupel)
                     startingColumnChar -= 1
                     j += 1
@@ -109,19 +137,39 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except WrongPlacement as placementError:
                 if gameMode == 2:
                     if str(placementError) == "laeuft aus Spielfeld":
-                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in anderes Schiff":
-                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in Blocker":
-                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     else:
                         print(str(placementError))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
-                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
+                    print(
+                        colored(
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "cyan",
+                        )
+                    )
                     return True
                 return True
         case "s":
@@ -136,10 +184,10 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[startingRowNumber][startingColumnChar] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
-                    #this is for the positionTupel
-                    positionTupel = (startingRowNumber,startingColumnChar)
-                    #add every postion tuple to tuple list to store the ship position
+                    # board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
+                    # this is for the positionTupel
+                    positionTupel = (startingRowNumber, startingColumnChar)
+                    # add every postion tuple to tuple list to store the ship position
                     positionTupelList.append(positionTupel)
                     startingRowNumber += 1
                     j += 1
@@ -153,19 +201,39 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except WrongPlacement as placementError:
                 if gameMode == 2:
                     if str(placementError) == "laeuft aus Spielfeld":
-                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in anderes Schiff":
-                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in Blocker":
-                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     else:
                         print(str(placementError))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
-                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
+                    print(
+                        colored(
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "cyan",
+                        )
+                    )
                     return True
                 return True
         case "d":
@@ -180,10 +248,10 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[startingRowNumber][startingColumnChar] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    #board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
-                    #this is for the positionTupel
-                    positionTupel = (startingRowNumber,startingColumnChar)
-                    #add every postion tuple to tuple list to store the ship position
+                    # board[startingRowNumber][startingColumnChar] = 1 TODO: delete this
+                    # this is for the positionTupel
+                    positionTupel = (startingRowNumber, startingColumnChar)
+                    # add every postion tuple to tuple list to store the ship position
                     positionTupelList.append(positionTupel)
                     startingColumnChar += 1
                     j += 1
@@ -197,19 +265,39 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             except WrongPlacement as placementError:
                 if gameMode == 2:
                     if str(placementError) == "laeuft aus Spielfeld":
-                        print(colored("In dieser Richtung läuft das Schiff aus dem Spielfeld",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in anderes Schiff":
-                        print(colored("In dieser Richtung läuft das Schiff in eine anderes Schiff.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     elif str(placementError) == "laeuft in Blocker":
-                        print(colored("In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",'red'))
+                        print(
+                            colored(
+                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "red",
+                            )
+                        )
                         positionTupelList.clear()
                     else:
                         print(str(placementError))
                         positionTupelList.clear()
-                    print(colored("Bitte platzieren Sie Ihr Schiff neu.",'cyan'))
-                    print(colored("Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",'cyan'))
+                    print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
+                    print(
+                        colored(
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "cyan",
+                        )
+                    )
                     return True
                 return True
         case _:
@@ -221,6 +309,7 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
             return True
     # setting of the ship position
     # ship.setPosition(positionTupelList)
+
 
 def splitColumnConverter(placementInput):
     """Function that splits the input into the column and row indices
@@ -242,7 +331,7 @@ def splitColumnConverter(placementInput):
             raise ValueError
         startingColumnChar = startingColumnChar.upper()
         # match case to convert the letters into column idexes
-        match startingColumnChar:
+        """match startingColumnChar:
             case "A":
                 startingColumnChar = 0
             case "B":
@@ -268,13 +357,25 @@ def splitColumnConverter(placementInput):
                 print("Bitte geben Sie eine neue Startposition an.\n")
                 startingColumnChar = 11
                 return startingColumnChar
-        return startingColumnChar
+            return startingColumnChar
+            """
+        try:
+            return ord(startingColumnChar) - 65
+        except TypeError:
+            print("nenenenenene - vg :)")
+       
     except ValueError as valueError:
         print(str(valueError))
-        print(colored("Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.",'red'))
+        print(
+            colored(
+                "Ihre Eingabe enthaelt Fehler. Bitte geben Sie erst den Buchstaben und dann die Zahl an.",
+                "red",
+            )
+        )
         print("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
         startingColumnChar = 11
         return startingColumnChar
+
 
 def splitRow(placementInput):
     """Function that splits the input into Rows

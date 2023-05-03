@@ -1,6 +1,7 @@
 import unittest, selectoperations
 
-#pylint: disable=C
+# pylint: disable=C
+
 
 class TestMain(unittest.TestCase):
     currentPlayer = 1
@@ -9,5 +10,6 @@ class TestMain(unittest.TestCase):
         startingPlayer = selectoperations.selectStartingPlayer
         self.assertNotEqual(startingPlayer, 3)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
