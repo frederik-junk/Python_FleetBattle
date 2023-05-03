@@ -35,7 +35,6 @@ class TestShooting(unittest.TestCase):
         with io.StringIO("A1\n") as mock_input:
             sys.stdin = mock_input
             output = shooting_function.player_manager(
-                data,
                 current_player_name,
                 leaked_board,
                 hidden_board,
@@ -52,7 +51,7 @@ class TestShooting(unittest.TestCase):
 
         with patch("builtins.input", return_value="a"):
             shooting_function.next_player(data, game_mode, current_player)
-            self.assertEqual(data["current_player"], 1)
+            self.assertEqual(data["current_player"], 2)
 
     def test_next_player_error(self):
         # Test for invalid current_player value

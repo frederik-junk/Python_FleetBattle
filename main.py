@@ -27,7 +27,7 @@ def main():
     """Main function that provides game logic and calls other modules"""
     output_manager.welcome_user()
     should_load_game = select_operations.load_request(data)
-    if should_load_game == True:
+    if should_load_game is True:
         python_game.board_loader(data, should_load_game)
         memory_manager.load_data(data, data["game_mode"])
         winning_player_id = shooting_function.shooting(
@@ -41,7 +41,7 @@ def main():
             json.dump(data, write_file, indent=2)
         # prints winning/losing message using returned winning_id and current game_mode
         output_manager.battle_end(winning_player_id, data["game_mode"])
-    elif should_load_game == False:
+    elif should_load_game is False:
         # initializes new boards with default values
         python_game.board_loader(data, should_load_game)
         # gives the user the opportunity to choose the game mode (single player/ multiple players)
