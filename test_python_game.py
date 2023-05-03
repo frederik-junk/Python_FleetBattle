@@ -12,7 +12,7 @@ class TestPythonGame(unittest.TestCase):
         self.assertEqual(split_column_converter("A1"), 0)
         self.assertEqual(split_column_converter("b2"), 1)
         self.assertEqual(split_column_converter("J3"), 9)
-        self.assertEqual(split_column_converter("Z1"), 11)
+        self.assertEqual(split_column_converter("Z1"), 25)
 
     def test_split_row(self):
         self.assertEqual(split_row("A1"), 0)

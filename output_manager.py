@@ -142,8 +142,8 @@ class User:
 
 
 # creating two instances of User
-user1 = User("Spieler 1", (0, 0), (0, 0), 0, 0)
-user2 = User("Spieler 2", (0, 0), (0, 0), 0, 0)
+user_1 = User("Spieler 1", (0, 0), (0, 0), 0, 0)
+user_2 = User("Spieler 2", (0, 0), (0, 0), 0, 0)
 
 # variable that holds the game rules to print when starting the game
 GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
@@ -160,17 +160,17 @@ def battle_end(winning_id, game_mode):
         case 1:
             if game_mode == 1: #computer wins the game (1 Player mode)
                 lose_output()
-                print(colored(f"{user1.get_name()} hat das Spiel gewonnen. {user2.get_name()} versuche es doch noch einmal!",'magenta'))
+                print(colored(f"{user_1.get_name()} hat das Spiel gewonnen. {user_2.get_name()} versuche es doch noch einmal!",'magenta'))
             else:
                 win_output() #player 1 wins the game (2 Player mode)
-                print(colored(f"Herzlichen Glueckwunsch {user1.get_name()} du hast das Spiel gegen {user2.get_name()} gewonnen!",'green'))
+                print(colored(f"Herzlichen Glueckwunsch {user_1.get_name()} du hast das Spiel gegen {user_2.get_name()} gewonnen!",'green'))
         case 2:
             if game_mode == 1: #player wins the game (1 Player mode)
                 win_output()
-                print(colored(f"Herzlichen Glueckwunsch {user2.get_name()} du hast das Spiel gegen den Computer gewonnen!",'green'))
+                print(colored(f"Herzlichen Glueckwunsch {user_2.get_name()} du hast das Spiel gegen den Computer gewonnen!",'green'))
             else:
                 win_output() #player 2 wins the game (2 Player mode) mode
-                print(colored(f"Herzlichen Glueckwunsch {user2.get_name()} du hast das Spiel gegen {user1.get_name()} gewonnen!",'green'))
+                print(colored(f"Herzlichen Glueckwunsch {user_2.get_name()} du hast das Spiel gegen {user_1.get_name()} gewonnen!",'green'))
         case _:
             win_output()
             print(colored("Herzlichen Glueckwunsch du hast gewonnen!",'green'))
