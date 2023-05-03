@@ -1,3 +1,4 @@
+#pylint disable=C
 import os
 import json
 import output_manager
@@ -5,13 +6,8 @@ import select_operations
 import shooting_function
 import python_game
 import memory_manager
-import outputmanager
-import selectoperations
-import shootingfunction
-import pythonGame
-import memorymanager
 
-SHIP_STORAGE_FILE = "shipstorage.json"
+SHIP_STORAGE_FILE = "ship_storage.json"
 
 # extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
@@ -29,12 +25,12 @@ with open(SHIP_STORAGE_FILE, "r") as file:
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def play_game():
     """Main function that provides the game logic and calls the other modules"""
-    outputmanager.welcomeUser()
-    should_load_game = selectoperations.loadrequest(data)
+    output_manager.welcome_user()
+    should_load_game = select_operations.load_request(data)
     if should_load_game:
-        pythonGame.boardloader(data, should_load_game)
-        memorymanager.loadData(data, data["game_mode"])
-        winning_player_id = shootingfunction.shooting(
+        python_game.board_loader(data, should_load_game)
+        memory_manager.load_data(data, data["game_mode"])
+        winning_player_id = shooting_function.shooting(
             data, data["game_mode"], data["current_player"]
         )
         data["storage_available"] = 0
@@ -64,19 +60,19 @@ def play_game():
         # prints winning / losing message using the returned winning_id and the current game_mode
         output_manager.battle_end(winning_id, game_mode)
     else:
-        pythonGame.boardloader(data, should_load_game)
-        selected_game_mode = selectoperations.gameModeSelection(data)
+        python_game.board_loader(data, should_load_game)
+        selected_game_mode = select_operations.gameModeSelection(data)
         # Call function to randomly select starting player
-        starting_player = selectoperations.selectStartingPlayer(data)
-        winning_player_id = shootingfunction.shooting(
+        starting_player = select_operations.selectStartingPlayer(data)
+        winning_player_id = shooting_function.shooting(
             data, selected_game_mode, starting_player
 
         )
         data["storage_available"] = 0
-        pythonGame.boardReset(data)
+        python_game.boardReset(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
-        outputmanager.battleEnd(winning_player_id, selected_game_mode)
+        output_manager.battleEnd(winning_player_id, selected_game_mode)
 
     # player.playerAction(currentPlayer, selected_game_mode)
 
@@ -85,7 +81,7 @@ if __name__ == "__main__":
     try:
         play_game()
     except KeyboardInterrupt:
-        memorymanager.storeData(data)
+        memory_manager.store_data(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
