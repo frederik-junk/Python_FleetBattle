@@ -1,5 +1,4 @@
-"""Module contains functions to define the placement of the ships on the board
-"""
+"""Module contains functions to define the ship placement on the board"""
 from termcolor import colored
 from colorama import init
 import blocker_functions
@@ -19,37 +18,21 @@ class WrongPlacement(Exception):
 def direction_converter(
     board, ship_length, starting_row_number, starting_column_char, direction, game_mode, ship
 ):
-    """Function that is used to define the direction the ship is placed, based on the tip of the ship
-       and user input
+    """defines direction of placed ship, based on the tip of the ship/user input"""
 
-    Args:
-        board (List): The board on which the ships are placed
-        ship_length (int): The length of each ship individual
-        starting_row_number (int): The number of the row in which the ship should be placed
-        starting_column_char (char): The letter of the column in which the ship should be placed
-        direction (String): The direction in which the ship should be placed, based on its tip
-        game_mode (int): The game mode to decide if player 2 has to set his ships too or if its computer generated
-        ship (class): The class of each ship to set some initial values
-
-    Raises:
-        WrongPlacement: Prints an error message for different occasions, for example if a wrong direction char is given as input
-
-    Returns:
-        boolean: Returns a True or False value, depending on each branch
-    """
-    j = 0  # just a counting variable for later use
+    j = 0  # count variable for later use
     position_tupel_list = (
         []
-    )  # this is the List which is given to the position list of the object
+    )  # saves tupels with position of object
     match direction:
         case "w":
-            try:  # exception for the case that the ship is placed out of bounce in the given direction
+            try:  # exception in case that the ship is placed out of bounce in the given direction
                 between_starting_row_number = starting_row_number - ship_length
                 if between_starting_row_number <= 0:
                     if game_mode == 1:
                         raise WrongPlacement
                     raise WrongPlacement("laeuft aus Spielfeld")
-                # changing every index between the beginning and the end to a 1
+                # changes every index of the placed ship to 1
                 while j < ship_length:
                     if board[starting_row_number][starting_column_char] == 1:
                         raise WrongPlacement("laeuft in anderes Schiff")
@@ -325,12 +308,12 @@ def split_column_converter(placement_input):
     starting_column_char = str(
         placement_input[0]
     )  # extracting the first char of the users input
-    try:
+    """try:
         if starting_column_char.isalpha() is False:
             raise ValueError
         starting_column_char = starting_column_char.upper()
         # match case to convert the letters into column idexes
-        """match starting_column_char:
+        match starting_column_char:
             case "A":
                 starting_column_char = 0
             case "B":
@@ -358,10 +341,8 @@ def split_column_converter(placement_input):
                 return starting_column_char
             return starting_column_char
             """
-        try:
-            return ord(starting_column_char) - 65
-        except TypeError:
-            print("nenenenenene - vg :)")
+    try:
+        return ord(starting_column_char) - 65
     except ValueError as value_error:
         print(str(value_error))
         print(
