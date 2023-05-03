@@ -153,8 +153,7 @@ def gameModeSelection(data):
                     print(
                         colored(
                             "\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",
-                            "red",
-                            attrs=["reverse"],
+                            "white","on_red",
                         )
                     )
                     # Call function placeShip for user 1 to place ships
@@ -177,8 +176,7 @@ def gameModeSelection(data):
                     print(
                         colored(
                             "\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",
-                            "red",
-                            attrs=["reverse"],
+                            "white","on_red",
                         )
                     )
                     # Call function for user 2 to place ships
