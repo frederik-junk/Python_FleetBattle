@@ -44,9 +44,6 @@ def shooting(
         if current_player == 1:
             shooting_iq = output_manager.user1.get_shooting_iq()
             match cpu_manager1(
-                data,
-                game_mode,
-                current_player,
                 shooting_iq,
                 python_game.leaked_board_2,
                 python_game.hidden_board_1,
@@ -58,7 +55,6 @@ def shooting(
 
         elif current_player == 2:
             match player_manager(
-                #data,
                 output_manager.user2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
@@ -76,7 +72,6 @@ def shooting(
             case 1:
                 if (
                     player_manager(
-                        #data,
                         output_manager.user1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
@@ -91,7 +86,6 @@ def shooting(
             case 2:
                 if (
                     player_manager(
-                        #data,
                         output_manager.user2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
@@ -310,7 +304,7 @@ def first_position(board):
     return first_cpu_memory
 
 
-def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hidden_board):
+def cpu_manager1(shooting_iq, leaked_board, hidden_board):
     """Handles the actions of the CPU
 
     Args:
@@ -592,7 +586,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
 
 
 # Switches the current player after each action
-def next_player(data, game_mode, current_player):
+def next_player(data, current_player):
     """Is responsible for changing the current_player value after a player hit water with a shot
 
     Args:

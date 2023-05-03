@@ -34,7 +34,7 @@ def main():
         while True:
             winning_player_id = shooting_function.shooting(data, data["game_mode"], data["current_player"])
             if winning_player_id == None:
-                current_player = shooting_function.next_player(data, game_mode, current_player)
+                current_player = shooting_function.next_player(data, current_player)
                 continue
             else:
                 break
@@ -59,7 +59,7 @@ def main():
         while True:
             winning_player_id = shooting_function.shooting(data, game_mode, current_player)
             if winning_player_id == None:
-                current_player = shooting_function.next_player(data, game_mode, current_player)
+                current_player = shooting_function.next_player(data, current_player)
                 continue
             else:
                 break
