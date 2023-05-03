@@ -1,4 +1,4 @@
-import unittest, selectoperations
+import unittest, select_operations
 
 # pylint: disable=C
 

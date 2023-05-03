@@ -1,6 +1,6 @@
 # pylint: disable=C
 import unittest
-import blockerfunctions
+import blocker_functions
 
 class TestBlockerFunctions(unittest.TestCase):
     def setUp(self):
