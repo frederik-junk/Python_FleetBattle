@@ -33,8 +33,7 @@ def main():
             if winning_player_id == None:
                 current_player = shooting_function.next_player(data, current_player)
                 continue
-            else:
-                break
+            break
 
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
