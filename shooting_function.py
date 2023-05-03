@@ -164,7 +164,7 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            if current_player.get_left_ships() == 1:
+                            if current_player.get_left_ships() == 10:
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
                                 return "won"
@@ -266,7 +266,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         output_manager.user_1.set_shooting_iq(shooting_iq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
                         output_manager.user_1.increase_left_ships()
-                        if output_manager.user_1.get_left_ships() == 1:
+                        if output_manager.user_1.get_left_ships() == 10:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
                     else:
