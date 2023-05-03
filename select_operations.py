@@ -81,7 +81,7 @@ def loadrequest(data):
 
 
 # Function to select the game mode. Prints message if input is not 1 or 2 and calls itself.
-def gameModeSelection(data):
+def game_mode_selection(data):
     """Function to choose one or two player mode before starting a game
 
     Args:
