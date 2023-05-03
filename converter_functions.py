@@ -8,12 +8,7 @@ init()
 
 # own exception class
 class WrongPlacement(Exception):
-    """Own exception class
-
-    Args:
-        Exception (Error): Prints an error message
-    """
-
+    """Used in case of wrong ship placement"""
 
 def direction_converter(
     board, ship_length, starting_row_number, starting_column_char, direction, game_mode, ship
@@ -32,16 +27,14 @@ def direction_converter(
                     if game_mode == 1:
                         raise WrongPlacement
                     raise WrongPlacement("laeuft aus Spielfeld")
-                # changes every index of the placed ship to 1
+                # changes every index of the placed ship to 1 on board
                 while j < ship_length:
                     if board[starting_row_number][starting_column_char] == 1:
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[starting_row_number][starting_column_char] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    # board[starting_row_number][starting_column_char] = 1 TODO:delete this
-                    # this is for the positionTuple
                     position_tupel = (starting_row_number, starting_column_char)
-                    # add every postion tuple to tuple list to store the ship position
+                    # stores ship position by adding all position tuples to position_tupel_list
                     position_tupel_list.append(position_tupel)
                     starting_row_number = starting_row_number - 1
                     j += 1
@@ -57,7 +50,7 @@ def direction_converter(
                     if str(placement_error) == "laeuft aus Spielfeld":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "In dieser Richtung laeuft das Schiff aus dem Spielfeld",
                                 "red",
                             )
                         )
@@ -65,7 +58,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in anderes Schiff":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "In dieser Richtung laeuft das Schiff in eine anderes Schiff.",
                                 "red",
                             )
                         )
@@ -73,7 +66,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in Blocker":
                         print(
                             colored(
-                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "In dieser Richtung laeuft das Schiff in einen verbotenen Bereich.",
                                 "red",
                             )
                         )
@@ -84,14 +77,14 @@ def direction_converter(
                     print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
                     print(
                         colored(
-                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und eine neue Ausrichtung.",
                             "cyan",
                         )
                     )
                     return True
                 return True
         case "a":
-            try:  # exception for the case that the ship travels out of bounce in the given direction
+            try:  # exception in case that the ship is placed out of bounce in the given direction
                 between_starting_column_char = starting_column_char - ship_length
                 if between_starting_column_char < 0:
                     if game_mode == 1:
@@ -102,13 +95,12 @@ def direction_converter(
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[starting_row_number][starting_column_char] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    # board[starting_row_number][starting_column_char] = 1 TODO:this can be deleted
-                    # this is for the position_tupel
                     position_tupel = (starting_row_number, starting_column_char)
-                    # add every postion tuple to tuple list to store the ship position
+                    # stores ship position by adding all position tuples to position_tupel_list
                     position_tupel_list.append(position_tupel)
                     starting_column_char -= 1
                     j += 1
+                    # changes every index of the placed ship to 1 on board
                     if j == ship_length:
                         for tupel in position_tupel_list:
                             row_number, column_number = tupel
@@ -121,7 +113,7 @@ def direction_converter(
                     if str(placement_error) == "laeuft aus Spielfeld":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "In dieser Richtung laeuft das Schiff aus dem Spielfeld",
                                 "red",
                             )
                         )
@@ -129,7 +121,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in anderes Schiff":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "In dieser Richtung laeuft das Schiff in eine anderes Schiff.",
                                 "red",
                             )
                         )
@@ -137,7 +129,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in Blocker":
                         print(
                             colored(
-                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "In dieser Richtung laeuft das Schiff in einen verbotenen Bereich.",
                                 "red",
                             )
                         )
@@ -148,14 +140,14 @@ def direction_converter(
                     print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
                     print(
                         colored(
-                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und eine neue Ausrichtung.",
                             "cyan",
                         )
                     )
                     return True
                 return True
         case "s":
-            try:  # exception for the case that the ship travels out of bounce in the given direction
+            try:  # exception in case that the ship is placed out of bounce in the given direction
                 between_starting_row_number = starting_row_number + ship_length
                 if between_starting_row_number > 10:
                     if game_mode == 1:
@@ -166,13 +158,12 @@ def direction_converter(
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[starting_row_number][starting_column_char] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    # board[starting_row_number][starting_column_char] = 1 TODO: delete this
-                    # this is for the position_tupel
                     position_tupel = (starting_row_number, starting_column_char)
-                    # add every postion tuple to tuple list to store the ship position
+                    # stores ship position by adding all position tuples to position_tupel_list
                     position_tupel_list.append(position_tupel)
                     starting_row_number += 1
                     j += 1
+                    # changes every index of the placed ship to 1 on board
                     if j == ship_length:
                         for tupel in position_tupel_list:
                             row_number, column_number = tupel
@@ -185,7 +176,7 @@ def direction_converter(
                     if str(placement_error) == "laeuft aus Spielfeld":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "In dieser Richtung laeuft das Schiff aus dem Spielfeld",
                                 "red",
                             )
                         )
@@ -193,7 +184,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in anderes Schiff":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "In dieser Richtung laeuft das Schiff in eine anderes Schiff.",
                                 "red",
                             )
                         )
@@ -201,7 +192,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in Blocker":
                         print(
                             colored(
-                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "In dieser Richtung laeuft das Schiff in einen verbotenen Bereich.",
                                 "red",
                             )
                         )
@@ -212,14 +203,14 @@ def direction_converter(
                     print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
                     print(
                         colored(
-                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und eine neue Ausrichtung.",
                             "cyan",
                         )
                     )
                     return True
                 return True
         case "d":
-            try:  # exception for the case that the ship travels out of bounce in the given direction
+            try:  # exception in case that the ship is placed out of bounce in the given direction
                 between_starting_row_number = starting_column_char + ship_length
                 if between_starting_row_number > 10:
                     if game_mode == 1:
@@ -230,13 +221,12 @@ def direction_converter(
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[starting_row_number][starting_column_char] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    # board[starting_row_number][starting_column_char] = 1 TODO: delete this
-                    # this is for the position_tupel
                     position_tupel = (starting_row_number, starting_column_char)
-                    # add every postion tuple to tuple list to store the ship position
+                    # stores ship position by adding all position tuples to position_tupel_list
                     position_tupel_list.append(position_tupel)
                     starting_column_char += 1
                     j += 1
+                    # changes every index of the placed ship to 1 on board
                     if j == ship_length:
                         for tupel in position_tupel_list:
                             row_number, column_number = tupel
@@ -249,7 +239,7 @@ def direction_converter(
                     if str(placement_error) == "laeuft aus Spielfeld":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff aus dem Spielfeld",
+                                "In dieser Richtung laeuft das Schiff aus dem Spielfeld",
                                 "red",
                             )
                         )
@@ -257,7 +247,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in anderes Schiff":
                         print(
                             colored(
-                                "In dieser Richtung läuft das Schiff in eine anderes Schiff.",
+                                "In dieser Richtung laeuft das Schiff in eine anderes Schiff.",
                                 "red",
                             )
                         )
@@ -265,7 +255,7 @@ def direction_converter(
                     elif str(placement_error) == "laeuft in Blocker":
                         print(
                             colored(
-                                "In dieser Richtung laeuft das Schiff in einen Verbotenen Bereich.",
+                                "In dieser Richtung laeuft das Schiff in einen verbotenen Bereich.",
                                 "red",
                             )
                         )
@@ -276,7 +266,7 @@ def direction_converter(
                     print(colored("Bitte platzieren Sie Ihr Schiff neu.", "cyan"))
                     print(
                         colored(
-                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und Ausrichtung.",
+                            "Verwenden Sie eine andere Ausrichtung oder neue Koordinaten und eine neue Ausrichtung.",
                             "cyan",
                         )
                     )
@@ -294,20 +284,11 @@ def direction_converter(
 
 
 def split_column_converter(placement_input):
-    """Function that splits the input into the column and row indices
-
-    Args:
-        placement_input (_type_): _description_
-
-    Raises:
-        ValueError: Prints an error message if wrong input is given from the user
-
-    Returns:
-        starting_column_char(char): The char to indicate the current column
-    """
+    """splits input into column and row indices
+    returns number of current column of the to be placed ship"""
     starting_column_char = str(
         placement_input[0]
-    )  # extracting the first char of the users input
+    )  # extracts first char of the user input
     """try:
         if starting_column_char.isalpha() is False:
             raise ValueError
@@ -357,21 +338,11 @@ def split_column_converter(placement_input):
 
 
 def split_row(placement_input):
-    """Function that splits the input into Rows
-
-    Args:
-        placement_input (_type_): _description_
-
-    Raises:
-        ValueError: Prints an error message if wrong input is given from the user
-
-    Returns:
-        starting_row_number(int): The number of the current row where the ship is to be placed
-    """
+    """splits input into rows,
+    returns number of current row of the to be placed ship"""
     try:
         starting_row_number = int(placement_input[1:])
-        # extracting the rest of the users input
-        # the code above could raise a ValueError which is excepted down below
+        # extracts rest of the user input
         if 0 < starting_row_number <= 10:
             return starting_row_number - 1
 

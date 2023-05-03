@@ -53,8 +53,8 @@ def shooting(
             ):
                 case 11:
                     return 1
-                case None:
-                    return 1
+                #case None:
+                 #   return 1
                 case _:
                     next_player(data, game_mode, 1)
 
@@ -68,8 +68,8 @@ def shooting(
             ):  # has to change with number of ships
                 case "won":
                     return 2  # is the winningID which should be returned to the main.
-                case None:
-                    return 2
+                #case None:
+                 #   return 2
                 case _:
                     next_player(data, game_mode, 2)
 
@@ -293,6 +293,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         return leaked_board[row][column]
         case _:
             print("something went terribly wrong")
+            return
 
 
 def first_position(board):
