@@ -1,11 +1,11 @@
 # pylint: disable=C
 import unittest
-import python_game
+import pythonGame
 from unittest.mock import MagicMock, patch
 from io import StringIO
 from contextlib import redirect_stdout
 import sys
-from converter_functions import splitColumnConverter, splitRow
+from converterfunctions import splitColumnConverter, splitRow
 
 class TestPythonGame(unittest.TestCase):
     def setUp(self):
@@ -24,9 +24,9 @@ class TestPythonGame(unittest.TestCase):
         self.assertEqual(splitRow("11"), 0)
 
     def test_initializeBoard(self):
-        python_game.initializeBoard = MagicMock()
-        python_game.initializeBoard.return_value = [[0] * 10] * 10
-        result = python_game.initializeBoard(self.board)
+        pythonGame.initializeBoard = MagicMock()
+        pythonGame.initializeBoard.return_value = [[0] * 10] * 10
+        result = pythonGame.initializeBoard(self.board)
         self.assertEqual(self.board, result)
 
     # def test_printleakedBoard(self):

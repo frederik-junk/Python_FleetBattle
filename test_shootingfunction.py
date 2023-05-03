@@ -54,7 +54,9 @@ class TestShooting(unittest.TestCase):
         gameMode = "1"
         currentPlayer = 1
         data = {"currentPlayer": 1}
+
         expected_output = f"__________________________________\n{output_manager.user2.get_name()} ist nun an der Reihe.\n__________________________________\n"
+
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shooting_function.next_player(gameMode, currentPlayer, data)
@@ -111,6 +113,7 @@ class TestShooting(unittest.TestCase):
 
         result = shooting_function.check_hit(hidden_board, leaked_board, cpuMemory)
 
+
         #self.assertEqual(result, 1)
         self.assertIsNone(result)
         self.assertEqual(hidden_board, [
@@ -118,6 +121,7 @@ class TestShooting(unittest.TestCase):
             [0, 0, 0],
             [0, 0, 0]
         ])
+
 
     def test_invalid_board(self):
         hidden_board = []
@@ -147,6 +151,7 @@ class TestShooting(unittest.TestCase):
         user1.getFirstCpuMemory.return_value = (5, 5)
         user1.getCpuMemory.return_value = (5, 5)
         user1.getDirection.return_value = 0
+
         self.leaked_board = [[0 for i in range(10)] for j in range(10)]
         self.hidden_board = [[0 for i in range(10)] for j in range(10)]
         cpu_manager1_return = shooting_function.cpu_manager1(self.gameMode, self.currentPlayer, self.shooting_iq, self.data, self.leaked_board, self.hidden_board)

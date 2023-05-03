@@ -1,6 +1,6 @@
 # pylint: disable=C
 import unittest
-import blocker_functions
+import blockerfunctions
 from unittest.mock import MagicMock, patch
 
 class TestConverterFunctions(unittest.TestCase):

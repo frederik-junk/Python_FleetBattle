@@ -1,6 +1,6 @@
 # pylint: disable=C
 import unittest
-import blocker_functions
+import blockerfunctions
 
 class TestBlockerFunctions(unittest.TestCase):
     def setUp(self):
@@ -8,14 +8,14 @@ class TestBlockerFunctions(unittest.TestCase):
 
     def test_addPlacementBlocker(self):
         positionTupelList = [(3, 3)]
-        blocker_functions.addPlacementBlocker(self.board, positionTupelList)
+        blockerfunctions.addPlacementBlocker(self.board, positionTupelList)
         expected_board = [
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 6, 6, 6, 0, 0, 0, 0, 0],
-            [0, 0, 6, 0, 6, 0, 0, 0, 0, 0],
-            [0, 0, 6, 6, 6, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 6, 0, 6, 0, 0, 0, 0],
+            [0, 0, 0, 6, 1, 6, 0, 0, 0, 0],
+            [0, 0, 0, 6, 0, 6, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],

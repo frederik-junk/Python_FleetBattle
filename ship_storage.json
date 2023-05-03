@@ -1,12 +1,15 @@
 {
-  "storage_available": 0,
+  "storage_available": 1,
   "currentPlayer": 2,
-  "gameMode": 2,
-  "playerName1": "default1",
-  "playerName2": "default2",
-  "opponentShips": 1,
-  "playerShips": 1,
-  "firstCpuMemory": [],
+  "gameMode": 1,
+  "playerName1": "Spieler 1",
+  "playerName2": "Spieler 2",
+  "opponentShips": 0,
+  "playerShips": 0,
+  "firstCpuMemory": [
+    0,
+    0
+  ],
   "shootingIq": 0,
   "direction": 0,
   "pSchlachtschiff1p": [],
