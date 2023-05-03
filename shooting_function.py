@@ -624,7 +624,7 @@ def next_player(data, current_player):
             f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user_1.get_name()}  \n"
         )
     else:
-        print("Der Spielerweschel schlug fehl!")
+        print("Der Spielerwechsel schlug fehl!")
 
     clear_console()
     return current_player

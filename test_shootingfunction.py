@@ -26,8 +26,6 @@ class TestShooting(unittest.TestCase):
     #     self.assertEqual(result, None)
 
     def test_player_manager(self):
-        data = []
-        current_player_name = "test"
         leaked_board = [[0 for i in range(10)] for j in range(10)]
         hidden_board = [[0 for i in range(10)] for j in range(10)]
         ship_list = []
@@ -54,10 +52,10 @@ class TestShooting(unittest.TestCase):
 
     def test_next_player_error(self):
         # Test for invalid current_player value
-        game_mode = "easy"
+        game_mode = "1"
         current_player = 3
         data = {"current_player": 3}
-        expected_output = "Irgendwas ist hier schief gelaufen!\nShit\n"
+        expected_output = "Der Spielerwechsel schlug fehl!\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shooting_function.next_player(data, current_player)

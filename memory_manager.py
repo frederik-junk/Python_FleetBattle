@@ -36,7 +36,7 @@ def load_data(data, game_mode):
     ship_initializer.p_schlachtschiff_1.set_position(p_schlachtschiff_p_list)
 
     p_kreuzer_1_p_list = [tuple(item) for item in data["p_kreuzer_1_p"]]
-    p_kreuzer_1_m_list = [tuple(item) for item in data["p_kreuzer_1_m"]] 
+    p_kreuzer_1_m_list = [tuple(item) for item in data["p_kreuzer_1_m"]]
     ship_initializer.p_kreuzer_1.set_position_memory(p_kreuzer_1_m_list)
     ship_initializer.p_kreuzer_1.set_position(p_kreuzer_1_p_list)
 
