@@ -25,7 +25,7 @@ with open(SHIP_STORAGE_FILE, "r") as file:
 # Holds the logic of the game, welcomes user, asks for game mode selection and navigates through the game
 def play_game():
     """Main function that provides game logic and calls other modules"""
-    output_manager.welcomeUser()
+    output_manager.welcome_user()
     should_load_game = select_operations.load_request(data)
     if should_load_game:
         python_game.board_loader(data, should_load_game)
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     try:
         play_game()
     except KeyboardInterrupt:
-        memory_manager.storeData(data)
+        memory_manager.store_data(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
