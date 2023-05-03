@@ -22,7 +22,7 @@ with open(SHIP_STORAGE_FILE, "r") as file:
     data = json.load(file)
 
 # Holds the logic of the game, welcomes user, asks for game mode selection and navigates through the game
-def play_game():
+def main():
     """Main function that provides game logic and calls other modules"""
     output_manager.welcome_user()
     should_load_game = select_operations.load_request(data)
@@ -65,7 +65,7 @@ def play_game():
 
 if __name__ == "__main__":
     try:
-        play_game()
+        main()
     except KeyboardInterrupt:
         memory_manager.store_data(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
