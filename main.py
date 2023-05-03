@@ -14,13 +14,10 @@ path = os.path.dirname(os.path.abspath(__file__))
 
 # sets current player to 0 to define it afterwards in function below
 # current_player = 1
-with open("ship_storage.json", "r", encoding="utf-8") as read_file:
+with open(SHIP_STORAGE_FILE, "r", encoding="utf-8") as read_file:
     data = json.load(read_file)
 # sets current Player to 0 to define it afterwards in function below
 # currentPlayer = 1
-with open(SHIP_STORAGE_FILE, "r") as file:
-    data = json.load(file)
-
 
 # Holds the logic of the game, welcomes user, asks for game mode selection and navigates through the game
 def main():
@@ -30,9 +27,16 @@ def main():
     if should_load_game is True:
         python_game.board_loader(data, should_load_game)
         memory_manager.load_data(data, data["game_mode"])
-        winning_player_id = shooting_function.shooting(
-            data, data["game_mode"], data["current_player"]
-        )
+        current_player = data["current_player"]
+        game_mode = data["game_mode"]
+        
+        while True:
+            winning_player_id = shooting_function.shooting(data, game_mode , current_player)
+            if winning_player_id == None:
+                current_player = shooting_function.next_player(data, current_player)
+                continue
+            break
+
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
         python_game.board_reset(data)
@@ -49,14 +53,13 @@ def main():
         # calls function to randomly select starting player
         current_player = select_operations.select_starting_player(data)
         # starts game engine to run the main game, returns number of the winning player at the end
-        
+
         while True:
             winning_player_id = shooting_function.shooting(data, game_mode, current_player)
             if winning_player_id == None:
-                current_player = shooting_function.next_player(data, game_mode, current_player)
+                current_player = shooting_function.next_player(data, current_player)
                 continue
-            else:
-                break
+            break
 
         # sets storage availability to 0 to block reloading the finished game
         data["storage_available"] = 0
@@ -69,29 +72,13 @@ def main():
         output_manager.battle_end(winning_player_id, game_mode)
     else:
         print("Ein Fehler bei der Erfassung der Lade Abfrage ist aufgetreten!")
-"""pythonGame.boardloader(data, should_load_game)
-        selected_game_mode = selectoperations.gameModeSelection(data)
-        # Call function to randomly select starting player
-        starting_player = selectoperations.selectStartingPlayer(data)
-        winning_player_id = shooting_function.shooting(
-            data, selected_game_mode, starting_player
-
-        )
-        data["storage_available"] = 0
-        pythonGame.boardReset(data)
-        with open(SHIP_STORAGE_FILE, "w") as file:
-            json.dump(data, file, indent=2)
-        outputmanager.battleEnd(winning_player_id, selected_game_mode)"""
-    # player.playerAction(currentPlayer, selected_game_mode)
-
 
 if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
         memory_manager.store_data(data)
-        with open(SHIP_STORAGE_FILE, "w") as file:
+        with open(SHIP_STORAGE_FILE, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=2)
         print(
             "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
-
