@@ -1,6 +1,8 @@
 # pylint: disable=C
 import unittest
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
+
+from converter_functions import split_column_converter
 
 class TestConverterFunctions(unittest.TestCase):
     def test_direction_w(self):
@@ -25,6 +27,23 @@ class TestConverterFunctions(unittest.TestCase):
                 ship,
             )
         )
+
+    def test_valid_input(self):
+        result = split_column_converter("A3")
+        self.assertEqual(result, 0)
+
+    def test_invalid_input_number(self):
+        with patch("builtins.print") as mock_print:
+            result = split_column_converter("A")
+            self.assertEqual(result, 0)
+
+    def test_invalid_input_letter(self):
+        with patch("builtins.print") as mock_print:
+            result = split_column_converter("1")
+            self.assertEqual(result, 11)
+            mock_print.assert_called_with("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
+            mock_print.assert_called_with("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
+
 
 
 if __name__ == "__main__":

@@ -134,21 +134,21 @@ def print_hidden_board(board):
         # 3 = shot spot with hit, 4 = eleminated ship (complete)
         print(
             "  ".join(
-                str(elem).replace("1", "~").replace("0", "~").replace("2", "O").replace("3", "x").replace("4", "#")
+                str(elem).replace("1","~").replace("0", "~").replace("2", "O").replace("3", "x").replace("4", "#")
                 for elem in row
             )
         )
 
 
 # function to place a ship in the right position with the right length and the right direction
-def place_ship(board, ship_length, ship, shipName, counter):
+def place_ship(board, ship_length, ship, ship_name, counter):
     """Function to place ships on the game board
 
     Args:
         board (List): The board on which the ships are placed
         ship_length (int): The length of each ship
         ship (Class): The class of the ship for generating initial values depending on the type
-        shipName (String): The ship name to show the user which ship has to be placed currently
+        ship_name (String): The ship name to show the user which ship has to be placed currently
         counter (int): A counter to keep track on how many ships have already been placed
 
     Raises:
@@ -159,7 +159,7 @@ def place_ship(board, ship_length, ship, shipName, counter):
     while True:
         # asking user on which position he wants to place his ship
         placement_input = input(
-            f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({shipName}) platziert werden soll. Schiffslänge: {ship_length}.\n"
+            f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({ship_name}) platziert werden soll. Schiffslänge: {ship_length}.\n"
         )
         # try to find the input postion in the board (checking if it exists)
         try:

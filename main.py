@@ -29,14 +29,13 @@ def main():
         memory_manager.load_data(data, data["game_mode"])
         current_player = data["current_player"]
         game_mode = data["game_mode"]
-        
+
         while True:
-            winning_player_id = shooting_function.shooting(data, game_mode , current_player)
-            if winning_player_id == None:
-                current_player = shooting_function.next_player(data, game_mode, current_player)
+            winning_player_id = shooting_function.shooting(game_mode , current_player)
+            if winning_player_id is None:
+                current_player = shooting_function.next_player(data, current_player)
                 continue
-            else:
-                break
+            break
 
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
@@ -56,9 +55,9 @@ def main():
         # starts game engine to run the main game, returns number of the winning player at the end
 
         while True:
-            winning_player_id = shooting_function.shooting(data, game_mode, current_player)
+            winning_player_id = shooting_function.shooting(game_mode, current_player)
             if winning_player_id is None:
-                current_player = shooting_function.next_player(data, game_mode, current_player)
+                current_player = shooting_function.next_player(data, current_player)
                 continue
             break
 
