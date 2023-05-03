@@ -25,8 +25,7 @@ def clearConsole():
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
-    #used for CPU
+def shooting(data, gameMode, currentPlayer):  
     """Function to process shots of the user 
 
     Args:
@@ -39,6 +38,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     """
     if gameMode ==  1:
         if currentPlayer == 1:
+            #CPUs turn
             shootingIq = outputmanager.user1.getShootingIq()
             match cpuManager1(data, gameMode, currentPlayer, shootingIq, pythonGame.leakedBoard2, pythonGame.hiddenBoard1):
                 case 11:
@@ -52,7 +52,7 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
              #has to change with number of ships
             match playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.opponentShips) :
                 case "won":
-                    return 2 #is the winningID which should be returned to the main.
+                    return 2 #is the winningID which is returned to the main.
                 case None:
                     return 2
                 case _:
