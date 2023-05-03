@@ -70,7 +70,7 @@ def shooting(
                     return None
 
         else:
-            print("Shit")
+            print("This cant happen")
     elif game_mode == 2:
         match current_player:
             case 1:
@@ -106,7 +106,7 @@ def shooting(
             case _:
                 print("something went wrong")
     else:
-        print("Shit")
+        print("This cant happen")
 
 
 
@@ -124,7 +124,7 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
         Exception: Prints an error message on the screen
 
     Returns:
-        String: Indication that the game is won
+        String: Indication that the game is won or it returns None if the game still goes on
     """
     shooting_repeater = True
     python_game.print_hidden_board(hidden_board)
@@ -322,7 +322,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
         hidden_board (_type_): The non visible board on which the opponent ships are placed
 
     Returns:
-        bool: Indication that shows that all ships are hit and sunk
+        returns int: returns 11 when the cpu has won, it returns 0 if the game goes on
     """
     global cpu_memory
 
