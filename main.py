@@ -16,11 +16,11 @@ with open("shipstorage.json", "r", encoding="utf-8") as readFile:
     data = json.load(readFile)
 
 
-# gameMode = 2
+# game_mode = 2
 def main():
     """Main function that provides the game logic and calls the other modules"""
     # prints a welcome message
-    outputmanager.welcomeUser()
+    outputmanager.welcome_user()
     # asks player if he likes to load a previous game
     load = selectoperations.loadrequest(data)
     # if load is true it will reload the old data if load is false it will delete the old data
@@ -28,43 +28,43 @@ def main():
         # initializes all boards with their old vaules
         pythonGame.boardloader(data, load)
         # initializes all ships with ther attributes like damage oder hitted positions
-        memorymanager.loadData(data, data["gameMode"])
+        memorymanager.loadData(data, data["game_mode"])
         # starts game engine to run the main game, returns the number of the winning player at the end
-        winningID = shootingfunction.shooting(
-            data, data["gameMode"], data["currentPlayer"]
+        winning_id = shootingfunction.shooting(
+            data, data["game_mode"], data["currentPlayer"]
         )
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default resset board
         pythonGame.boardReset(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as writeFile:
-            json.dump(data, writeFile, indent=2)
-        # prints winning / losing message using the returned winningID and the current gamemode
-        outputmanager.battleEnd(winningID, data["gameMode"])
+        with open("shipstorage.json", "w", encoding="utf-8") as write_file:
+            json.dump(data, write_file, indent=2)
+        # prints winning / losing message using the returned winning_id and the current game_mode
+        outputmanager.battle_end(winning_id, data["game_mode"])
     elif load is False:
         # initializes new boards with default values
         pythonGame.boardloader(data, load)
         # gives user the opportunity to choose the game Mode (single player/ multiple players)
-        gameMode = selectoperations.gameModeSelection(data)
+        game_mode = selectoperations.game_modeSelection(data)
         # calls function to randomly select starting player
-        startingPlayer = selectoperations.selectStartingPlayer(data)
+        starting_player = selectoperations.selectstarting_player(data)
         # starts game engine to run the main game, returns the number of the winning player at the end
-        winningID = shootingfunction.shooting(data, gameMode, startingPlayer)
+        winning_id = shootingfunction.shooting(data, game_mode, starting_player)
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
         pythonGame.boardReset(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as writeFile:
-            json.dump(data, writeFile, indent=2)
-        # prints winning / losing message using the returned winningID and the current gamemode
-        outputmanager.battleEnd(winningID, gameMode)
+        with open("shipstorage.json", "w", encoding="utf-8") as write_file:
+            json.dump(data, write_file, indent=2)
+        # prints winning / losing message using the returned winning_id and the current game_mode
+        outputmanager.battle_end(winning_id, game_mode)
     else:
         print(
             "Ein Fehler beim erfassen Ihrer Eingabe ist entstanden. Die Daten konnten daher nicht geladen werden."
         )
-    # player.playerAction(currentPlayer,gameMode)
+    # player.playerAction(currentPlayer,game_mode)
 
 
 if __name__ == "__main__":
@@ -76,8 +76,8 @@ if __name__ == "__main__":
         # calls function to store all necessary data to restore the game in future sessions
         memorymanager.storeData(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as writeFileEnd:
-            json.dump(data, writeFileEnd, indent=2)
+        with open("shipstorage.json", "w", encoding="utf-8") as write_fileEnd:
+            json.dump(data, write_fileEnd, indent=2)
         # prints message to confirm the saving process and tells the user how to restore the game
         print(
             "Wir bedanken uns fürs Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim naechsten mal mit [j] laden!\n"

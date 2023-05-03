@@ -2,116 +2,116 @@
 """
 
 
-def addPlacementBlocker(board, positionTupelList):
+def add_placement_blocker(board, position_tupel_list):
     """Function to add the blockers so that ships cant be placed next to the ship
 
     Args:
         board (List): The board on which ships can be placed
-        positionTupelList (List): A tupel list that contains the coordinates of the ships position
+        position_tupel_list (List): A tupel list that contains the coordinates of the ships position
     """
-    for tupel in positionTupelList:
-        rowNumber, columnNumber = tupel
+    for tupel in position_tupel_list:
+        row_number, column_number = tupel
         # calculate the positions left, right, top and bottom of the position (4 directions around the placed ship compartment)
-        blockerLeftNumber = columnNumber - 1
-        blockerRightNumber = columnNumber + 1
-        blockerTopNumber = rowNumber - 1
-        blockerBottomNumber = rowNumber + 1
+        blocker_left_number = column_number - 1
+        blocker_right_number = column_number + 1
+        blocker_top_number = row_number - 1
+        blocker_bottom_number = row_number + 1
         # list in which the blocker tupels are saved
-        blockerList = []
+        blocker_list = []
 
         # adding a blocker around each ship psotiob to avoid nearby placning of ships
         # proving if the blocker is out of bounce or if there is a ship (top left corner)
         if (
-            blockerTopNumber < 0
-            or blockerLeftNumber < 0
-            or board[blockerTopNumber][blockerLeftNumber] == 1
+            blocker_top_number < 0
+            or blocker_left_number < 0
+            or board[blocker_top_number][blocker_left_number] == 1
         ):
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerTopLeft = (blockerTopNumber, blockerLeftNumber)
-            blockerList.append(blockerTopLeft)
+            blocker_top_left = (blocker_top_number, blocker_left_number)
+            blocker_list.append(blocker_top_left)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerTopNumber][blockerLeftNumber] = 6
+            board[blocker_top_number][blocker_left_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (top middle)
-        if blockerTopNumber < 0 or board[blockerTopNumber][columnNumber] == 1:
+        if blocker_top_number < 0 or board[blocker_top_number][column_number] == 1:
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker  and adding it to the list
-            blockerTop = (blockerTopNumber, columnNumber)
-            blockerList.append(blockerTop)
+            blocker_top = (blocker_top_number, column_number)
+            blocker_list.append(blocker_top)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerTopNumber][columnNumber] = 6
+            board[blocker_top_number][column_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (top right corner)
         if (
-            blockerTopNumber < 0
-            or blockerRightNumber >= 10
-            or board[blockerTopNumber][blockerRightNumber] == 1
+            blocker_top_number < 0
+            or blocker_right_number >= 10
+            or board[blocker_top_number][blocker_right_number] == 1
         ):
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker  and adding it to the list
-            blockerTopRight = (blockerTopNumber, blockerRightNumber)
-            blockerList.append(blockerTopRight)
+            blocker_top_right = (blocker_top_number, blocker_right_number)
+            blocker_list.append(blocker_top_right)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerTopNumber][blockerRightNumber] = 6
+            board[blocker_top_number][blocker_right_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (right middle)
-        if blockerRightNumber >= 10 or board[rowNumber][blockerRightNumber] == 1:
+        if blocker_right_number >= 10 or board[row_number][blocker_right_number] == 1:
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerRight = (rowNumber, blockerRightNumber)
-            blockerList.append(blockerRight)
+            blocker_right = (row_number, blocker_right_number)
+            blocker_list.append(blocker_right)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[rowNumber][blockerRightNumber] = 6
+            board[row_number][blocker_right_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (bottom right corner)
         if (
-            blockerBottomNumber >= 10
-            or blockerRightNumber >= 10
-            or board[blockerBottomNumber][blockerRightNumber] == 1
+            blocker_bottom_number >= 10
+            or blocker_right_number >= 10
+            or board[blocker_bottom_number][blocker_right_number] == 1
         ):
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerBottomRight = (blockerBottomNumber, blockerRightNumber)
-            blockerList.append(blockerBottomRight)
+            blocker_bottom_right = (blocker_bottom_number, blocker_right_number)
+            blocker_list.append(blocker_bottom_right)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerBottomNumber][blockerRightNumber] = 6
+            board[blocker_bottom_number][blocker_right_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (bottom middle)
-        if blockerBottomNumber >= 10 or board[blockerBottomNumber][columnNumber] == 1:
+        if blocker_bottom_number >= 10 or board[blocker_bottom_number][column_number] == 1:
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerBottom = (blockerBottomNumber, columnNumber)
-            blockerList.append(blockerBottom)
+            blocker_bottom = (blocker_bottom_number, column_number)
+            blocker_list.append(blocker_bottom)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerBottomNumber][columnNumber] = 6
+            board[blocker_bottom_number][column_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (bottom left corner)
         if (
-            blockerBottomNumber >= 10
-            or blockerLeftNumber < 0
-            or board[blockerBottomNumber][blockerLeftNumber] == 1
+            blocker_bottom_number >= 10
+            or blocker_left_number < 0
+            or board[blocker_bottom_number][blocker_left_number] == 1
         ):
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerBottomLeft = (blockerBottomNumber, blockerLeftNumber)
-            blockerList.append(blockerBottomLeft)
+            blocker_bottom_left = (blocker_bottom_number, blocker_left_number)
+            blocker_list.append(blocker_bottom_left)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[blockerBottomNumber][blockerLeftNumber] = 6
+            board[blocker_bottom_number][blocker_left_number] = 6
 
         # proving if the blocker is out of bounce or if there is a ship (left middle)
-        if blockerLeftNumber < 0 or board[rowNumber][blockerLeftNumber] == 1:
+        if blocker_left_number < 0 or board[row_number][blocker_left_number] == 1:
             pass
         else:
             # creating a tuple containing the cordinates of the new blocker and adding it to the list
-            blockerLeft = (rowNumber, blockerLeftNumber)
-            blockerList.append(blockerLeft)
+            blocker_left = (row_number, blocker_left_number)
+            blocker_list.append(blocker_left)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
-            board[rowNumber][blockerLeftNumber] = 6
+            board[row_number][blocker_left_number] = 6
