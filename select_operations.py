@@ -11,7 +11,7 @@ import output_manager
 import python_game
 import ship_initializer
 
-global current_player
+#global current_player
 
 init()
 
@@ -109,7 +109,10 @@ def game_mode_selection(data):
                     print("__________________________________\n")
                     print(colored("1-Spieler Modus.\n", "cyan", attrs=["reverse"]))
                     # Print game rules message
-                    print(output_manager.GAME_RULES)
+                    print(output_manager.GAME_RULES1)
+                    print(output_manager.GAME_RULES2)
+                    print(output_manager.GAME_RULES3)
+                    print(output_manager.GAME_RULES4)
                     # Set computer as user 1 and ask for user 2 name
                     output_manager.user_1.set_name("Der Computer")
                     user_name_2 = input("Bitte geben Sie Ihren Namen ein: \n")
@@ -141,7 +144,10 @@ def game_mode_selection(data):
                     print("__________________________________\n")
                     print(colored("2-Spieler Modus.\n", "cyan", attrs=["reverse"]))
                     # Print game rules message
-                    print(output_manager.GAME_RULES)
+                    print(output_manager.GAME_RULES1)
+                    print(output_manager.GAME_RULES2)
+                    print(output_manager.GAME_RULES3)
+                    print(output_manager.GAME_RULES4)
                     # Ask for user 1 name and welcome message
                     user_name_1 = input("Spieler 1, bitte geben Sie Ihren Namen ein: \n")
                     # Set user name 1
