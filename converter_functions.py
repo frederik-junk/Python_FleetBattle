@@ -67,7 +67,7 @@ def direction_converter(
                             row_number, column_number = tupel
                             board[row_number][column_number] = 1
                 blocker_functions.add_placement_blocker(board, position_tupel_list)
-                ship.setPosition(position_tupel_list)
+                ship.set_position(position_tupel_list)
                 return False
             except WrongPlacement as placement_error:
                 if game_mode == 2:
@@ -131,7 +131,7 @@ def direction_converter(
                             row_number, column_number = tupel
                             board[row_number][column_number] = 1
                 blocker_functions.add_placement_blocker(board, position_tupel_list)
-                ship.setPosition(position_tupel_list)
+                ship.set_position(position_tupel_list)
                 return False
             except WrongPlacement as placement_error:
                 if game_mode == 2:
@@ -195,7 +195,7 @@ def direction_converter(
                             row_number, column_number = tupel
                             board[row_number][column_number] = 1
                 blocker_functions.add_placement_blocker(board, position_tupel_list)
-                ship.setPosition(position_tupel_list)
+                ship.set_position(position_tupel_list)
                 return False
             except WrongPlacement as placement_error:
                 if game_mode == 2:
@@ -258,7 +258,7 @@ def direction_converter(
                         for tupel in position_tupel_list:
                             row_number, column_number = tupel
                             board[row_number][column_number] = 1
-                ship.setPosition(position_tupel_list)
+                ship.set_position(position_tupel_list)
                 blocker_functions.add_placement_blocker(board, position_tupel_list)
                 return False
             except WrongPlacement as placement_error:
@@ -307,7 +307,7 @@ def direction_converter(
                 return True
             return True
     # setting of the ship position
-    # ship.setPosition(position_tupel_list)
+    # ship.set_position(position_tupel_list)
 
 
 def split_column_converter(placement_input):

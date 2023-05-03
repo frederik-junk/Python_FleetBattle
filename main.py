@@ -11,9 +11,9 @@ import memory_manager
 path = os.path.dirname(os.path.abspath(__file__))
 
 # sets current player to 0 to define it afterwards in function below
-# currentPlayer = 1
-with open("ship_storage.json", "r", encoding="utf-8") as readFile:
-    data = json.load(readFile)
+# current_player = 1
+with open("ship_storage.json", "r", encoding="utf-8") as read_file:
+    data = json.load(read_file)
 
 
 # game_mode = 2
@@ -31,7 +31,7 @@ def main():
         memory_manager.load_data(data, data["game_mode"])
         # starts game engine to run the main game, returns the number of the winning player at the end
         winning_id = shooting_function.shooting(
-            data, data["game_mode"], data["currentPlayer"]
+            data, data["game_mode"], data["current_player"]
         )
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
@@ -64,7 +64,7 @@ def main():
         print(
             "Ein Fehler beim erfassen Ihrer Eingabe ist entstanden. Die Daten konnten daher nicht geladen werden."
         )
-    # player.playerAction(currentPlayer,game_mode)
+    # player.playerAction(current_player,game_mode)
 
 
 if __name__ == "__main__":
@@ -76,8 +76,8 @@ if __name__ == "__main__":
         # calls function to store all necessary data to restore the game in future sessions
         memory_manager.storeData(data)
         # writes the changed data into json file
-        with open("ship_storage.json", "w", encoding="utf-8") as write_fileEnd:
-            json.dump(data, write_fileEnd, indent=2)
+        with open("ship_storage.json", "w", encoding="utf-8") as write_file_end:
+            json.dump(data, write_file_end, indent=2)
         # prints message to confirm the saving process and tells the user how to restore the game
         print(
             "Wir bedanken uns fürs Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim naechsten mal mit [j] laden!\n"
