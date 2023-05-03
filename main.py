@@ -47,9 +47,17 @@ def main():
         # gives the user the opportunity to choose the game mode (single player/ multiple players)
         game_mode = select_operations.game_mode_selection(data)
         # calls function to randomly select starting player
-        starting_player = select_operations.select_starting_player(data)
+        current_player = select_operations.select_starting_player(data)
         # starts game engine to run the main game, returns number of the winning player at the end
-        winning_player_id = shooting_function.shooting(data, game_mode, starting_player)
+        
+        while True:
+            winning_player_id = shooting_function.shooting(data, game_mode, current_player)
+            if winning_player_id == None:
+                current_player = shooting_function.next_player(data, game_mode, current_player)
+                continue
+            else:
+                break
+
         # sets storage availability to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board

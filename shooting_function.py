@@ -53,25 +53,20 @@ def shooting(
             ):
                 case 11:
                     return 1
-                #case None:
-                 #   return 1
                 case _:
-                    next_player(data, game_mode, 1)
+                    return None
 
         elif current_player == 2:
             match player_manager(
-                data,
-                output_manager.user_2,
+                output_manager.user2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
                 ship_initializer.opponent_ships,
             ):  # has to change with number of ships
                 case "won":
                     return 2  # is the winningID which should be returned to the main.
-                #case None:
-                 #   return 2
                 case _:
-                    next_player(data, game_mode, 2)
+                    return None
 
         else:
             print("Shit")
@@ -80,8 +75,7 @@ def shooting(
             case 1:
                 if (
                     player_manager(
-                        data,
-                        output_manager.user_1,
+                        output_manager.user1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
                         ship_initializer.opponent_ships,
@@ -90,12 +84,12 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 1
                     return winning_id  # is the winningID which should be returned to the main
-                next_player(data, game_mode, 1)
+                else:
+                    return None #return None
             case 2:
                 if (
                     player_manager(
-                        data,
-                        output_manager.user_2,
+                        output_manager.user2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
                         ship_initializer.player_ships,
@@ -104,14 +98,16 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 2
                     return winning_id  # is the winningID which should be returned to the main.
-                next_player(data, game_mode, 2)
+                else:
+                    return None
             case _:
                 print("something went wrong")
     else:
         print("Shit")
 
 
-def player_manager(data, current_player, leaked_board, hidden_board, ship_list):
+
+def player_manager(current_player, leaked_board, hidden_board, ship_list):
     """Function that handles the shots of the player
 
     Args:
@@ -182,11 +178,7 @@ def player_manager(data, current_player, leaked_board, hidden_board, ship_list):
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
                                 return "won"
-                        else:
-                            pass
-                    else:
-                        pass
-                print(colored("Sie erhalten einen weiteren Schuss\n","green"))
+                print(colored("Sie erhalten einen weiteren Schuss\n"),"green")
                 shooting_repeater = True
             case 2:
                 print(
@@ -283,10 +275,10 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                             row, column = tupel
                             hidden_board[row][column] = 4
                         shooting_iq = 0
-                        output_manager.user_1.set_shooting_iq(shooting_iq)
-                        print(colored("Der Computer hat ein Schiff versenkt", "white","on_red"))
-                        output_manager.user_1.increase_left_ships()
-                        if output_manager.user_1.get_left_ships() == 1:
+                        output_manager.user1.set_shooting_iq(shooting_iq)
+                        print(colored("Der Computer hat ein Schiff versenkt", "red"))
+                        output_manager.user1.increase_left_ships()
+                        if output_manager.user1.get_left_ships() == 1:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
                     else:
@@ -363,8 +355,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 0
                             output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
-                            break
+                            return None
                         case 1:  # if the random shot is a hit -> get a random direction
                             shooting_iq = 1
                             output_manager.user_1.set_shooting_iq(shooting_iq)
@@ -398,8 +389,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                                         shooting_iq = 2
                                         output_manager.user_1.set_shooting_iq(shooting_iq)
                                         python_game.print_hidden_board(hidden_board)
-                                        next_player(data, game_mode, current_player)
-                                        break
+                                        return None
 
                                     case 1:  # the first shot in the new direction is a hit -> shooting_iq = 1 until the first non-hit
                                         shooting_iq = 1
@@ -457,8 +447,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 3
                             output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
-                            break
+                            return None
                         case 1:
                             shooting_iq = 2
                             output_manager.user_1.set_shooting_iq(shooting_iq)
@@ -499,8 +488,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 4
                             output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
-                            break
+                            return None
                         case 1:
                             shooting_iq = 3
                             output_manager.user_1.set_shooting_iq(shooting_iq)
@@ -542,8 +530,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 5
                             output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
-                            break
+                            return None
                         case 1:
                             shooting_iq = 4
                             output_manager.user_1.set_shooting_iq(shooting_iq)
@@ -585,8 +572,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             shooting_iq = 0
                             output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
-                            break
+                            return None
                         case 1:
                             shooting_iq = 5
                             output_manager.user_1.set_shooting_iq(shooting_iq)
@@ -634,4 +620,4 @@ def next_player(data, game_mode, current_player):
         print("Irgendwas ist hier schief gelaufen!")
 
     clear_console()
-    shooting(data, game_mode, current_player)
+    return current_player
