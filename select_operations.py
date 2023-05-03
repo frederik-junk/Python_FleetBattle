@@ -1,3 +1,8 @@
+"""Module that is responsible for different game logic actions like loading saved data 
+
+Raises:
+    ValueError: Prints an error message on the screen
+"""
 import os
 import random
 from termcolor import colored
@@ -12,6 +17,8 @@ init()
 
 
 def clearConsole():
+    """Function that clears the console for better user interface
+    """
     os.system("cls" if os.name == "nt" else "clear")
 
 
@@ -104,17 +111,17 @@ def gameModeSelection(data):
                     # Print game rules message
                     print(output_manager.GAME_RULES)
                     # Set computer as user 1 and ask for user 2 name
-                    output_manager.user1.setName("Der Computer")
+                    output_manager.user1.set_name("Der Computer")
                     userName2 = input("Bitte geben Sie Ihren Namen ein: \n")
-                    output_manager.user2.setName(userName2)
+                    output_manager.user2.set_name(userName2)
                     # Print welcome message for user 2 and ask to place ships
                     print(
-                        f"Hallo {output_manager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
                     for ship in ship_initializer.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.class_place_ship(python_game.leakedBoard2, ship, counter)
                         counter = counter + 1
                     counter = 1
                     # Print message for computer to place ships
@@ -123,7 +130,7 @@ def gameModeSelection(data):
                     )
                     # Call function cpuPlaceShip to let the computer randomly place ships
                     for ship in ship_initializer.opponentShips:
-                        ship.classCpuPlaceShip(python_game.leakedBoard1, ship)
+                        ship.class_cpu_place_ship(python_game.leakedBoard1, ship)
                     print("")
                     # Print message indicating start of the game
                     print("Das Spiel beginnt.")
@@ -138,10 +145,10 @@ def gameModeSelection(data):
                     # Ask for user 1 name and welcome message
                     userName1 = input("Spieler 1, bitte geben Sie Ihren Namen ein: \n")
                     # Set user name 1
-                    output_manager.user1.setName(userName1)
+                    output_manager.user1.set_name(userName1)
                     clearConsole()
                     print(
-                        f"Hallo {output_manager.user1.getName()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user1.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     print(
                         colored(
@@ -153,7 +160,7 @@ def gameModeSelection(data):
                     # Call function placeShip for user 1 to place ships
                     counter = 1
                     for ship in ship_initializer.playerShips:
-                        ship.classPlaceShip(python_game.leakedBoard1, ship, counter)
+                        ship.class_place_ship(python_game.leakedBoard1, ship, counter)
                         counter = counter + 1
                     counter = 1
                     # Ask for user 2 name and welcome message
@@ -163,9 +170,9 @@ def gameModeSelection(data):
                     clearConsole()
                     userName2 = input("Spieler 2 bitte geben Sie Ihren Namen an: \n")
                     # Set user name 2
-                    output_manager.user2.setName(userName2)
+                    output_manager.user2.set_name(userName2)
                     print(
-                        f"Hallo {output_manager.user2.getName()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     print(
                         colored(
@@ -176,7 +183,7 @@ def gameModeSelection(data):
                     )
                     # Call function for user 2 to place ships
                     for ship in ship_initializer.opponentShips:
-                        ship.classPlaceShip(python_game.leakedBoard2, ship, counter)
+                        ship.class_place_ship(python_game.leakedBoard2, ship, counter)
                         counter = counter + 1
                     counter = 1
                     continueRequest = input(
@@ -217,7 +224,7 @@ def selectStartingPlayer(data):
     if startingPlayer == 2:
         print(
             colored(
-                f"{output_manager.user2.getName()} darf das Spiel beginnen und ist an der Reihe!",
+                f"{output_manager.user2.get_name()} darf das Spiel beginnen und ist an der Reihe!",
                 "cyan",
             )
         )
@@ -226,12 +233,12 @@ def selectStartingPlayer(data):
     if startingPlayer == 1:
         # if mode == "1":
         # cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
-        # print(f"{outputmanager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!")
+        # print(f"{outputmanager.user1.get_name()} darf das Spiel beginnen und ist an der Reihe!")
         # currentPlayer = 1
         # return currentPlayer
         print(
             colored(
-                f"{output_manager.user1.getName()} darf das Spiel beginnen und ist an der Reihe!",
+                f"{output_manager.user1.get_name()} darf das Spiel beginnen und ist an der Reihe!",
                 "cyan",
             )
         )
