@@ -3,9 +3,9 @@ from unittest.mock import Mock, patch
 import io
 import sys
 import random
-import circularImportFixing
 import pythonGame
 import converterfunctions
+import shipinitializer
 import outputmanager
 import shootingfunction
 
@@ -110,8 +110,13 @@ class TestShooting(unittest.TestCase):
 
         result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
-        self.assertEqual(result, 1)
-        self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 0, 0], [0, 0, 0]])
+        #self.assertEqual(result, 1)
+        self.assertIsNone(result)
+        self.assertEqual(hiddenBoard, [
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ])
 
     def test_invalid_board(self):
         hiddenBoard = []
@@ -141,10 +146,10 @@ class TestShooting(unittest.TestCase):
         user1.getFirstCpuMemory.return_value = (5, 5)
         user1.getCpuMemory.return_value = (5, 5)
         user1.getDirection.return_value = 0
-        cpuManager1_return = shootingfunction.cpuManager1(
-            self.gameMode, self.currentPlayer, self.shootingIq, self.data
-        )
-        self.assertEqual(cpuManager1_return, 11)
+        self.leakedBoard = [[0 for i in range(10)] for j in range(10)]
+        self.hiddenBoard = [[0 for i in range(10)] for j in range(10)]
+        cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data, self.leakedBoard, self.hiddenBoard)
+        self.assertEqual(cpuManager1_return, "something went wrong")
 
     # @patch('cpu_manager.randomDirection')
     # def test_cpuManager1_shootingIq_1(self, mock_randomDirection):

@@ -8,6 +8,9 @@ Module contains graphic elements for user interface and messages that are displa
 Returns:
     _type_: _description_
 """
+#from typing import Any
+from termcolor import colored
+from colorama import init
 
 init()
 

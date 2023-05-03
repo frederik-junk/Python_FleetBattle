@@ -15,8 +15,6 @@ class WrongPlacement(Exception):
         Exception (Error): Prints an error message
     """
 
-    pass
-
 
 def directionConverter(
     board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship
