@@ -89,4 +89,4 @@ if __name__ == "__main__":
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
-            "Wir bedanken uns fürs Spielen bis zum nächsten Mal!\nDein Spiel wurde gespeichert und lässt sich beim nächsten Mal mit [j] laden!\n")
+            "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
