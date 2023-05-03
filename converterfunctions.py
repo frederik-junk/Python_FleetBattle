@@ -20,6 +20,7 @@ def direction_converter(
     board, ship_length, starting_row_number, starting_column_char, direction, game_mode, ship
 ):
     """Function that is used to define the direction the ship is placed, based on the tip of the ship
+       and user input
 
     Args:
         board (List): The board on which the ships are placed
@@ -390,9 +391,15 @@ def splitRow(placementInput):
     try:
         starting_row_number = int(placementInput[1:])
         # extracting the rest of the users input
+<<<<<<< HEAD
         # the code above could raise a ValueError which is excepted down below
         if 0 < starting_row_number <= 10:
             return starting_row_number - 1
+=======
+        # the code above could raise a ValueError which is excep ted down below
+        if 0 < startingRowNumber <= 10:
+            return startingRowNumber - 1
+>>>>>>> c791f739e9fa8161d529d263655763d1779b6146
         raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
     except ValueError:
         starting_row_number = 11
