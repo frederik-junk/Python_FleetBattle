@@ -11,7 +11,7 @@ def load_data(data, game_mode):
     #checking if cpu data is necessary (gamemode 1)
     if game_mode == 1:
         # coordinates of tupel with succesful hit
-        first_cpu_memory = [tuple(item) for item in data["first_cpu_memory"]]
+        first_cpu_memory = tuple(data["first_cpu_memory"])
         output_manager.user_1.set_first_cpu_memory(first_cpu_memory)
         # cpu status (diffrent steps until final ship finish)
         output_manager.user_1.set_shooting_iq(data["shooting_iq"])

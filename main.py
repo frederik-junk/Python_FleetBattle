@@ -71,7 +71,7 @@ def main():
         # prints winning/losing message using the returned winning_id and the current game_mode
         output_manager.battle_end(winning_player_id, game_mode)
     else:
-        print("Ein Fehler bei der Erfassung der Lade Abfrage ist aufgetreten!")
+        print("Bei der Abfrage der gespeicherten Daten ist ein Fehler aufgetreten")
 
 if __name__ == "__main__":
     try:

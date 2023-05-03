@@ -289,39 +289,6 @@ def split_column_converter(placement_input):
     starting_column_char = str(
         placement_input[0]
     )  # extracts first char of the user input
-    """try:
-        if starting_column_char.isalpha() is False:
-            raise ValueError
-        starting_column_char = starting_column_char.upper()
-        # match case to convert the letters into column idexes
-        match starting_column_char:
-            case "A":
-                starting_column_char = 0
-            case "B":
-                starting_column_char = 1
-            case "C":
-                starting_column_char = 2
-            case "D":
-                starting_column_char = 3
-            case "E":
-                starting_column_char = 4
-            case "F":
-                starting_column_char = 5
-            case "G":
-                starting_column_char = 6
-            case "H":
-                starting_column_char = 7
-            case "I":
-                starting_column_char = 8
-            case "J":
-                starting_column_char = 9
-            case _:
-                print("Bitte geben Sie Buchstaben zwischen A und J ein.\n")
-                print("Bitte geben Sie eine neue Startposition an.\n")
-                starting_column_char = 11
-                return starting_column_char
-            return starting_column_char
-            """
     try:
         if starting_column_char.isalpha() is False:
             raise ValueError
@@ -353,3 +320,4 @@ def split_row(placement_input):
     except ValueError:
         starting_row_number = 11
         return starting_row_number
+    
