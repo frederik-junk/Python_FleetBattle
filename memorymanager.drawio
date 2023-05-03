@@ -1,0 +1,112 @@
+<mxfile host="app.diagrams.net" modified="2023-05-03T08:59:25.173Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="hrmo0nV6ZXqmi4vH0N7m" version="21.2.6" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="531" dy="660" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-10" value="False" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-0" target="ptCqigWtE8vGRIYA4Drp-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-0" value="&lt;br&gt;gameMode&lt;br&gt;==1?" style="rhombus;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="75" y="150" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-2" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-1" target="ptCqigWtE8vGRIYA4Drp-0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-1" value="loadData" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="50" width="90" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-3" value="true" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-0" target="ptCqigWtE8vGRIYA4Drp-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="150" y="250" as="sourcePoint" />
+            <mxPoint x="210" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-6" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-4" target="ptCqigWtE8vGRIYA4Drp-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-4" value="lade die Koordinaten, auf der die KI einen Treffer gelandet hat" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="210" y="155" width="150" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-8" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-5" target="ptCqigWtE8vGRIYA4Drp-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-5" value="wie viel die Ki schon herausgefunde hat" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="210" y="280" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-7" value="Lade die Richtung in welche die KI schießt" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="205" y="370" width="160" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-13" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-9" target="ptCqigWtE8vGRIYA4Drp-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-9" value="Lade die Namen der Spieler" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="55" y="460" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-11" value="" style="endArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=0.547;exitY=0.995;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.561;entryY=-0.029;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-7" target="ptCqigWtE8vGRIYA4Drp-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="70" y="440" as="sourcePoint" />
+            <mxPoint x="120" y="390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-15" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-12" target="ptCqigWtE8vGRIYA4Drp-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-12" value="Lade die Schiffe der Spieler" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="55" y="560" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-14" value="Speichere die Daten der&amp;nbsp;einzelnen Schiffe in die ship Klasse" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="40" y="650" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-23" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-18" target="ptCqigWtE8vGRIYA4Drp-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-18" value="storeData" style="ellipse;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="515" y="50" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-25" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-19" target="ptCqigWtE8vGRIYA4Drp-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-19" value="Speichere die einzelnen schiffe in das Dictionairy data" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="510" y="190" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-27" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-24" target="ptCqigWtE8vGRIYA4Drp-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-24" value="speichere die CPU Daten: &lt;br&gt;wo getroffen wurde, sowie die Richtung des Schiffes, falls herausgefunden" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="460" y="310" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-35" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-26" target="ptCqigWtE8vGRIYA4Drp-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-26" value="Speichere die Spielernamen" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="510" y="455" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-28" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-24" target="ptCqigWtE8vGRIYA4Drp-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="380" as="sourcePoint" />
+            <mxPoint x="690" y="240" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-29" value="geschieht auch, im 2 Spieler&lt;br&gt;Modus, Daten Leer" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="707" y="240" width="120" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-38" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-30" target="ptCqigWtE8vGRIYA4Drp-37">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-30" value="Speichere die Boards in data" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="510" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-36" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="ptCqigWtE8vGRIYA4Drp-32" target="ptCqigWtE8vGRIYA4Drp-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-32" value="verpacke die Schiffe in einer Liste" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="510" y="555" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ptCqigWtE8vGRIYA4Drp-37" value="setze das&amp;nbsp; Speicherungs-&lt;br&gt;Statusbit auf wahr" style="rounded=1;whiteSpace=wrap;html=1;fontSize=16;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="510" y="770" width="120" height="80" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
