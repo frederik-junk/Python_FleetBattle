@@ -1,145 +1,120 @@
-"""Module handles player and cpu actions
-
-Raises:
-    Exception: Prints an error messsage to inform the user
-"""
 import os
+import shipinitializer
+import converterfunctions
+import pythonGame
+import outputmanager
 import random
 from termcolor import colored
 from colorama import init
-import ship_initializer
-import converter_functions
-import python_game
-import output_manager
-
-cpu_memory = 0
 
 init()
 
-direction_lock = 0
-hit_status = 0
+directionLock = 0
+hitStatus = 0
 i = 0
 
 
-def clear_console():
-    """Function to clear the console for better game experience
-    """
-    os.system('cls' if os.name == 'nt' else 'clear')
+def clearConsole():
+    os.system("cls" if os.name == "nt" else "clear")
+
 
 def shooting(
-    data, game_mode, current_player
-):  # I would remove game_mode and current_player and would call the functions with other board wenn Spielverlauf
+    data, gameMode, currentPlayer
+):  # I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
     # used for CPU
     """Function to process shots of the user
 
     Args:
         data (_type_): _description_
-        game_mode (int): The game mode to indicate if there's another human player or the CPU
-        current_player (int): The current player to keep track on which boards should be printed etc.
+        gameMode (int): The game mode to indicate if there's another human player or the CPU
+        currentPlayer (int): The current player to keep track on which boards should be printed etc.
 
     Returns:
         winningID(int): An int value to indicate which player won the game
     """
-    if game_mode == 1:
-        if current_player == 1:
-            shooting_iq = output_manager.user1.get_shooting_iq()
-            match cpuManager1(
-                data,
-                game_mode,
-                current_player,
-                shooting_iq,
-                python_game.leaked_board_2,
-                python_game.hidden_board_1,
+    if gameMode == 1:
+        if currentPlayer == 1:
+            shootingIq = outputmanager.user1.getShootingIq()
+            if (
+                cpuManager1(
+                    data,
+                    gameMode,
+                    currentPlayer,
+                    shootingIq,
+                    pythonGame.leakedBoard2,
+                    pythonGame.hiddenBoard1,
+                )
+                == 11
             ):
-                case 11:
-                    return 1
-                case None:
-                    return 1
-                case _:
-                    next_player(data, game_mode, 1)
+                return 1
+            else:
+                nextPlayer(data, gameMode, 1)
 
-        elif current_player == 2:
-            match playermanager(
-                data,
-                output_manager.user2,
-                python_game.leaked_board_1,
-                python_game.hidden_board_2,
-                ship_initializer.opponentShips,
+        elif currentPlayer == 2:
+            if (
+                playermanager(
+                    data,
+                    outputmanager.user2,
+                    pythonGame.leakedBoard1,
+                    pythonGame.hiddenBoard2,
+                    shipinitializer.opponentShips,
+                )
+                == 1
             ):  # has to change with number of ships
-                case "won":
-                    return 2  # is the winningID which should be returned to the main.
-                case None:
-                    return 2
-                case _:
-                    next_player(data, game_mode, 2)
+                return 2  # is the winningID which should be returned to the main.
+            else:
+                nextPlayer(data, gameMode, 2)
 
         else:
             print("Shit")
-    elif game_mode == 2:
-        match current_player:
+    elif gameMode == 2:
+        match currentPlayer:
             case 1:
                 if (
                     playermanager(
                         data,
-                        output_manager.user1,
-                        python_game.leaked_board_2,
-                        python_game.hidden_board_1,
-                        ship_initializer.opponentShips,
+                        currentPlayer,
+                        pythonGame.leakedBoard2,
+                        pythonGame.hiddenBoard1,
+                        shipinitializer.opponentShips,
                     )
-                    == "won"
+                    == 1
                 ):  # has to change with number of ships
-                    winning_id = 1
-                    return winning_id  # is the winningID which should be returned to the main
+                    return 1  # is the winningID which should be returned to the main.
                 else:
-                    next_player(data, game_mode, 1)
+                    nextPlayer(data, gameMode, 1)
             case 2:
                 if (
                     playermanager(
                         data,
-                        output_manager.user2,
-                        python_game.leaked_board_1,
-                        python_game.hidden_board_2,
-                        ship_initializer.playerShips,
+                        outputmanager.user2,
+                        pythonGame.leakedBoard1,
+                        pythonGame.hiddenBoard2,
+                        shipinitializer.playerShips,
                     )
-                    == "won"
+                    == 1
                 ):  # has to change with number of ships
-                    winning_id = 2
-                    return winning_id  # is the winningID which should be returned to the main.
+                    return 2  # is the winningID which should be returned to the main.
                 else:
-                    next_player(data, game_mode, 2)
+                    nextPlayer(data, gameMode, 2)
             case _:
                 print("something went wrong")
     else:
         print("Shit")
 
 
-def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
-    """Function that handles the shots of the player
-
-    Args:
-        data (_type_): _description_
-        current_player (int): Indicates which player is currently allowed to take shots
-        leaked_board (list): The visible board for the player to place shots
-        hidden_board (list): The non visible board were the opponent ships are placed
-        ship_list (list): The list of available ships
-
-    Raises:
-        Exception: Prints an error message on the screen
-
-    Returns:
-        String: Indication that the game is won
-    """
-    shooting_repeater = True
-    python_game.print_hidden_board(hidden_board)
-    while shooting_repeater == True:
-        shooting_position = input(
-            f"{current_player.get_name()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
+def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
+    shootingRepeater = True
+    pythonGame.printhiddenBoard(hiddenBoard)
+    while shootingRepeater == True:
+        shootingPosition = input(
+            f"{currentPlayer.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
         )
         try:
-            row = converter_functions(shooting_position)
+            row = converterfunctions.splitRow(shootingPosition)
             if row == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
-            column = converter_functions.split_columnConverter(shooting_position)
+            column = converterfunctions.splitColumnConverter(shootingPosition)
             if column == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
         except Exception:
@@ -151,45 +126,47 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
             )
             print("Bitte geben Sie die Anfangskoordinaten erneut ein (z.B.: A3).")
             continue
-        clear_console()
-        print(colored(f"Volle Feuerkraft auf {shooting_position}!", "cyan"))
-        match leaked_board[row][column]:
+        clearConsole()
+        print(colored(f"Volle Feuerkraft auf {shootingPosition}!", "cyan"))
+        match leakedBoard[row][column]:
             case 1:
-                shooting_tupel = (row, column)
-                for ship in ship_list:
-                    name = ship.get_name()
+                shootingTupel = (row, column)
+                shootingList = [row, column]
+                for ship in shipList:
+                    name = ship.getName()
                     print(name)
                     positions = ship.getPosition()
-                    position_memory = ship.getPositionMemory()
-                    if shooting_tupel in positions:
+                    positionMemory = ship.getPositionMemory()
+                    if shootingTupel in positions:
                         print(colored("Das war ein Treffer! Weiter so!", "green"))
-                        hidden_board[row][column] = 3
-                        leaked_board[row][column] = 3
-                        position_memory.append(shooting_tupel)
-                        ship.setPositionMemory(position_memory)
-                        positions.remove(shooting_tupel)
+                        hiddenBoard[row][column] = 3
+                        leakedBoard[row][column] = 3
+                        positionMemory.append(shootingTupel)
+                        ship.setPositionMemory(positionMemory)
+                        positions.remove(shootingTupel)
                         if len(positions) == 0:
-                            current_player.increaseLeftShips()
-                            position_memory = ship.getPositionMemory()
-                            for tupel in position_memory:
+                            currentPlayer.increaseLeftShips()
+                            positionMemory = ship.getPositionMemory()
+                            for tupel in positionMemory:
                                 row, column = tupel
-                                hidden_board[row][column] = 4
+                                hiddenBoard[row][column] = 4
                                 # two times the same row?
-                                # hidden_board[row][column] = 4
+                                # hiddenBoard[row][column] = 4
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            print(current_player.getLeftShips())
-                            if current_player.getLeftShips() == 1:
-                                shooting_repeater = False
-                                python_game.print_hidden_board(hidden_board)
-                                return "won"
+
+                            if currentPlayer.getLeftShips() == 1:
+                                pythonGame.printhiddenBoard(hiddenBoard)
+                                winningID = 1
+                                return winningID
                         else:
                             pass
                     else:
                         pass
                 print("Sie erhalten einen weiteren Schuss\n")
-                shooting_repeater = True
+                shootingRepeater = True
+            # TODO case 2-4 funktionieren nicht weil sie in hiddenBoard stehen
             case 2:
                 print(
                     "Sie hatten dieses Feld bereits beschossen und einen Wassertreffer erzielt!\n"
@@ -197,7 +174,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                 print(
                     "Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!"
                 )
-                shooting_repeater = False
+                shootingRepeater = False
             case 3:
                 print(
                     "Sie hatten dieses Feld bereits beschossen und sogar einen Treffer erzielt!\nIhr Schuss liefert allerdings keine neue Erkenntnis!"
@@ -205,7 +182,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                 print(
                     "Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!"
                 )
-                shooting_repeater = False
+                shootingRepeater = False
             case 4:
                 print(
                     "Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\n"
@@ -213,164 +190,132 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                 print(
                     "Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!"
                 )
-                shooting_repeater = False
+                shootingRepeater = False
             case 0:
                 print(colored("Das war leider ein Wassertreffer", "cyan"))
-                hidden_board[row][column] = 2
-                leaked_board[row][column] = 2
-                python_game.print_hidden_board
-                shooting_repeater = False
+                hiddenBoard[row][column] = 2
+                leakedBoard[row][column] = 2
+                pythonGame.printhiddenBoard
+                shootingRepeater = False
             case 6:
                 print(colored("Das war leider ein Wassertreffer", "cyan"))
-                hidden_board[row][column] = 2
-                leaked_board[row][column] = 2
-                python_game.print_hidden_board
-                shooting_repeater = False
+                hiddenBoard[row][column] = 2
+                leakedBoard[row][column] = 2
+                pythonGame.printhiddenBoard
+                shootingRepeater = False
             case _:
                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
-        python_game.print_hidden_board(hidden_board)
+        pythonGame.printhiddenBoard(hiddenBoard)
 
 
 def randomDirection():
-    """Generates a random directino value for the CPU to shoot at
-
-    Returns:
-        int: The direction as an int value
-    """
-    direction = random.randint(0,3)
+    direction = random.randint(0, 3)
     return direction
 
 
-def check_hit(hidden_board, leaked_board, cpu_memory):
-    """Checks whether water or a ship was hit with the last shot
-
-    Args:
-        hidden_board (list): The non visible board where the opponent ships are placed 
-        leaked_board (list): The visible board for the player to take shots
-        cpu_memory (tuple): The memorized coordinates of the CPU player
-
-    Returns:
-        int: A coordinate which has been shot at
-    """
-    row, column = cpu_memory
-    match leaked_board[row][column]:
+def checkHit(hiddenBoard, leakedBoard, cpuMemory):
+    row, column = cpuMemory
+    match leakedBoard[row][column]:
         case 0:
             print(colored("Der Computer erzielt einen Wassertreffer", "cyan"))
-            hidden_board[row][column] = 2
-            return leaked_board[row][column]
+            hiddenBoard[row][column] = 2
+            return leakedBoard[row][column]
 
         case 6:
             print(colored("Der Computer erzielt einen Wassertreffer", "cyan"))
-            hidden_board[row][column] = 2
-            leaked_board[row][column] = 0
-            return leaked_board[row][column]
+            hiddenBoard[row][column] = 2
+            leakedBoard[row][column] = 0
+            return leakedBoard[row][column]
 
         case 1:
-            shooting_tupel = cpu_memory
-            for ship in ship_initializer.playerShips:
-                position_memory = ship.getPositionMemory()
+            shootingTupel = cpuMemory
+            for ship in shipinitializer.playerShips:
+                positionMemory = ship.getPositionMemory()
                 postitions = ship.getPosition()
-                if shooting_tupel in postitions:
+                if shootingTupel in postitions:
                     print(
                         colored("Der Computer hat eines Ihrer Schiffe getroffen", "red")
                     )
-                    hidden_board[row][column] = 3
-                    position_memory.append(shooting_tupel)
-                    ship.setPositionMemory(position_memory)
-                    postitions.remove(shooting_tupel)
+                    hiddenBoard[row][column] = 3
+                    positionMemory.append(shootingTupel)
+                    ship.setPositionMemory(positionMemory)
+                    postitions.remove(shootingTupel)
                     # ship is sunk
                     if len(postitions) == 0:
-                        position_memory = ship.getPositionMemory()
-                        for tupel in position_memory:
+                        outputmanager.user1.increaseLeftShips()
+                        positionMemory = ship.getPositionMemory()
+                        for tupel in positionMemory:
                             row, column = tupel
-                            hidden_board[row][column] = 4
-                        shooting_iq = 0
-                        output_manager.user1.set_shooting_iq(shooting_iq)
+                            hiddenBoard[row][column] = 4
+                        shootingIq = 0
+                        outputmanager.user1.setShootingIq(shootingIq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
-                        output_manager.user1.increaseLeftShips()
-                        if output_manager.user1.getLeftShips() == 1:
-                            all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
-                            return all_hit
+                        if outputmanager.user1.getLeftShips() == 1:
+                            allHit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
+                            return allHit
+                        else:
+                            pass
                     else:
-                        return leaked_board[row][column]
+                        return leakedBoard[row][column]
         case _:
             print("something went terribly wrong")
 
 
-def first_position(board):
-    """Decides which coordinates are not hit currently
-
-    Args:
-        board (list): The game board on which the ships are placed
-
-    Returns:
-        int: _description_
-    """
-    while True: #get correct shooting coordinates on which he didnt shot
-        row = random.randint(0,9)
-        column = random.randint(0,9)
+def firstPosition(board):
+    while True:  # get correct shooting coordinates on which he didnt shot
+        row = random.randint(0, 9)
+        column = random.randint(0, 9)
         if board[row][column] == 0:
-            shooting_tuple = (row, column)
-            first_cpu_memory = shooting_tuple
+            shootingTuple = (row, column)
+            firstCpuMemory = shootingTuple
             break
-    return first_cpu_memory
+        else:
+            continue
+    return firstCpuMemory
 
 
-def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidden_board):
-    """Handles the actions of the CPU
+def cpuManager1(data, gameMode, currentPlayer, shootingIq, leakedBoard, hiddenBoard):
+    global cpuMemory
 
-    Args:
-        data (_type_): _description_
-        game_mode (int): The chosen game mode to indicate if the CPU player is envolved
-        current_player (int): An int value to indicate which player is in turn to take a shot
-        shooting_iq (_type_): _description_
-        leaked_board (list): The visible board for the player to take a shot
-        hidden_board (_type_): The non visible board on which the opponent ships are placed
-
-    Returns:
-        bool: Indication that shows that all ships are hit and sunk
-    """
-    global cpu_memory
-
-    direction = output_manager.user1.getDirection()
-    cpu_memory = output_manager.user1.getCpuMemory()
+    direction = outputmanager.user1.getDirection()
+    cpuMemory = outputmanager.user1.getCpuMemory()
     while True:
-        match shooting_iq:
+        match shootingIq:
             case 0:
                 # unecessary if already replaced elsewhere
-                row, column = cpu_memory
-                if leaked_board[row][column] == 6:
-                    leaked_board[row][column] = 0
-                firstShootingPosition = first_position(hidden_board)
-                output_manager.user1.setFirstCpuMemory(firstShootingPosition)
+                row, column = cpuMemory
+                if leakedBoard[row][column] == 6:
+                    leakedBoard[row][column] = 0
+                firstShootingPosition = firstPosition(hiddenBoard)
+                outputmanager.user1.setFirstCpuMemory(firstShootingPosition)
 
-                shooting_iq = 1
-                output_manager.user1.set_shooting_iq(shooting_iq)
+                shootingIq = 1
+                outputmanager.user1.setShootingIq(shootingIq)
                 continue
 
             case 1:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
-                row, column = cpu_memory
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
                 while True:
                     # check if it is a hit
-                    match check_hit(hidden_board, leaked_board, cpu_memory):
-                        case 0:  # if the random shot is a non-hit -> still shooting_iq = 0
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                        case 0:  # if the random shot is a non-hit -> still shootingIq = 0
                             print(
                                 colored(
                                     "Der Computer erzielt einen Wassertreffer", "cyan"
                                 )
                             )
-                            hidden_board[row][column] = 2
-                            shooting_iq = 0
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 0
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:  # if the random shot is a hit -> get a random direction
-                            shooting_iq = 1
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            shootingIq = 1
+                            outputmanager.user1.setShootingIq(shootingIq)
                             direction = randomDirection()
-                            output_manager.user1.set_direction(direction)
+                            outputmanager.user1.setDirection(direction)
                             match direction:
                                 case 0:
                                     row = row + 1
@@ -382,29 +327,29 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                                     row = row - 1
                                 case _:
                                     print("something went wrong")
-                            output_manager.user1.set_direction(direction)
-                            python_game.print_hidden_board(hidden_board)
-                            cpu_memory = (row, column)
-                            output_manager.user1.set_cpu_memory(cpu_memory)
+                            outputmanager.user1.setDirection(direction)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            cpuMemory = (row, column)
+                            outputmanager.user1.setCpuMemory(cpuMemory)
                             while True:
-                                match check_hit(hidden_board, leaked_board, cpu_memory):
-                                    case 0:  # the first shot in the new direction is a non-hit -> shooting_iq = 2 (go opposite direction)
+                                match checkHit(hiddenBoard, leakedBoard, cpuMemory):
+                                    case 0:  # the first shot in the new direction is a non-hit -> shootingIq = 2 (go opposite direction)
                                         print(
                                             colored(
                                                 "Der Computer erzielt einen Wassertreffer",
                                                 "cyan",
                                             )
                                         )
-                                        hidden_board[row][column] = 2
-                                        shooting_iq = 2
-                                        output_manager.user1.set_shooting_iq(shooting_iq)
-                                        python_game.print_hidden_board(hidden_board)
-                                        next_player(data, game_mode, current_player)
+                                        hiddenBoard[row][column] = 2
+                                        shootingIq = 2
+                                        outputmanager.user1.setShootingIq(shootingIq)
+                                        pythonGame.printhiddenBoard(hiddenBoard)
+                                        nextPlayer(data, gameMode, currentPlayer)
                                         break
 
-                                    case 1:  # the first shot in the new direction is a hit -> shooting_iq = 1 until the first non-hit
-                                        shooting_iq = 1
-                                        output_manager.user1.set_shooting_iq(shooting_iq)
+                                    case 1:  # the first shot in the new direction is a hit -> shootingIq = 1 until the first non-hit
+                                        shootingIq = 1
+                                        outputmanager.user1.setShootingIq(shootingIq)
                                         match direction:
                                             case 0:
                                                 row = row + 1
@@ -417,21 +362,21 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                                             case _:
                                                 print("something went wrong")
 
-                                        cpu_memory = (row, column)
-                                        output_manager.user1.set_cpu_memory(cpu_memory)
-                                        python_game.print_hidden_board(hidden_board)
+                                        cpuMemory = (row, column)
+                                        outputmanager.user1.setCpuMemory(cpuMemory)
+                                        pythonGame.printhiddenBoard(hiddenBoard)
                                         continue
                                     case 11:  # the cpu killed the last ship
-                                        all_hit = 11
-                                        return all_hit
+                                        allHit = 11
+                                        return allHit
 
                         case _:
                             print("something went wrong")
                     break
 
             case 2:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
-                row, column = cpu_memory
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
                 while True:
                     match direction:
                         case 0:
@@ -444,36 +389,36 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                             row = row + 1
                         case _:
                             print("something went wrong")
-                    cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
 
-                    match check_hit(hidden_board, leaked_board, cpu_memory):
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         case 0:
                             print(
                                 colored(
                                     "Der Computer erzielt einen Wassertreffer", "cyan"
                                 )
                             )
-                            hidden_board[row][column] = 2
-                            shooting_iq = 3
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 3
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
-                            shooting_iq = 2
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
+                            shootingIq = 2
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
                         case 11:  # the cpu killed the last ship
-                            all_hit = 11
-                            return all_hit
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
                     continue
 
             case 3:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
-                row, column = cpu_memory
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
                 while True:
                     match direction:
                         case 0:
@@ -486,37 +431,37 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                             column = column - 1
                         case _:
                             print("something went wrong")
-                    cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
 
-                    match check_hit(hidden_board, leaked_board, cpu_memory):
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         case 0:
                             print(
                                 colored(
                                     "Der Computer erzielt einen Wassertreffer", "cyan"
                                 )
                             )
-                            hidden_board[row][column] = 2
-                            shooting_iq = 4
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 4
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
-                            shooting_iq = 3
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
+                            shootingIq = 3
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
                         case 11:  # the cpu killed the last ship
-                            all_hit = 11
-                            return all_hit
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
 
                     continue
 
             case 4:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
-                row, column = cpu_memory
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
                 while True:
                     match direction:
                         case 0:
@@ -529,37 +474,37 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                             column = column + 1
                         case _:
                             print("something went wrong")
-                    cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
 
-                    match check_hit(hidden_board, leaked_board, cpu_memory):
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         case 0:
                             print(
                                 colored(
                                     "Der Computer erzielt einen Wassertreffer", "cyan"
                                 )
                             )
-                            hidden_board[row][column] = 2
-                            shooting_iq = 5
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 5
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
-                            shooting_iq = 4
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
+                            shootingIq = 4
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
                         case 11:  # the cpu killed the last ship
-                            all_hit = 11
-                            return all_hit
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
 
                     continue
 
             case 5:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
-                row, column = cpu_memory
+                cpuMemory = outputmanager.user1.getFirstCpuMemory()
+                row, column = cpuMemory
                 while True:
                     match direction:
                         case 0:
@@ -572,29 +517,29 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                             column = column - 1
                         case _:
                             print("something went wrong")
-                    cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    cpuMemory = (row, column)
+                    outputmanager.user1.setCpuMemory(cpuMemory)
 
-                    match check_hit(hidden_board, leaked_board, cpu_memory):
+                    match checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         case 0:
                             print(
                                 colored(
                                     "Der Computer erzielt einen Wassertreffer", "cyan"
                                 )
                             )
-                            hidden_board[row][column] = 2
-                            shooting_iq = 0
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
-                            next_player(data, game_mode, current_player)
+                            hiddenBoard[row][column] = 2
+                            shootingIq = 0
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
+                            nextPlayer(data, gameMode, currentPlayer)
                             break
                         case 1:
-                            shooting_iq = 5
-                            output_manager.user1.set_shooting_iq(shooting_iq)
-                            python_game.print_hidden_board(hidden_board)
+                            shootingIq = 5
+                            outputmanager.user1.setShootingIq(shootingIq)
+                            pythonGame.printhiddenBoard(hiddenBoard)
                         case 11:  # the cpu killed the last ship
-                            all_hit = 11
-                            return all_hit
+                            allHit = 11
+                            return allHit
                         case _:
                             print("something went wrong")
 
@@ -604,35 +549,28 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
 
 
 # Switches the current player after each action
-def next_player(data, game_mode, current_player):
-    """Is responsible for changing the current_player value after a player hit water with a shot
-
-    Args:
-        data (_type_): _description_
-        game_mode (int): The game mode to indicate if CPU player is envolved or two humans
-        current_player (int): The int value that indicates the current player
-    """
-    if current_player == 1:
-        current_player = 2
-        data["current_player"] = current_player
+def nextPlayer(data, gameMode, currentPlayer):
+    if currentPlayer == 1:
+        currentPlayer = 2
+        data["currentPlayer"] = currentPlayer
         print("__________________________________\n")
-        print(f"{output_manager.user2.get_name()} ist nun an der Reihe.")
+        print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continue_request = input(
-            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user2.get_name()}  \n"
+        continueRequest = input(
+            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n"
         )
 
-    elif current_player == 2:
-        current_player = 1
-        data["current_player"] = current_player
+    elif currentPlayer == 2:
+        currentPlayer = 1
+        data["currentPlayer"] = currentPlayer
         print("__________________________________\n")
-        print(f"{output_manager.user1.get_name()} ist nun an der Reihe.")
+        print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continue_request = input(
-            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user1.get_name()}  \n"
+        continueRequest = input(
+            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n"
         )
     else:
         print("Irgendwas ist hier schief gelaufen!")
 
-    clear_console()
-    shooting(data, game_mode, current_player)
+    clearConsole()
+    shooting(data, gameMode, currentPlayer)

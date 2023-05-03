@@ -1,5 +1,5 @@
 import unittest
-import blocker_functions
+import blockerfunctions
 from unittest.mock import MagicMock, patch
 
 # pylint: disable=C

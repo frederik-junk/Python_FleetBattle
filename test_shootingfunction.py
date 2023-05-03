@@ -3,10 +3,10 @@ from unittest.mock import Mock, patch
 import io
 import sys
 import random
-import python_game
-import converter_functions
-import ship_initializer
-import output_manager
+import circularImportFixing
+import pythonGame
+import converterfunctions
+import outputmanager
 import shootingfunction
 
 
@@ -53,7 +53,7 @@ class TestShooting(unittest.TestCase):
         gameMode = "1"
         currentPlayer = 1
         data = {"currentPlayer": 1}
-        expected_output = f"__________________________________\n{output_manager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
+        expected_output = f"__________________________________\n{outputmanager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shootingfunction.nextPlayer(gameMode, currentPlayer, data)
@@ -110,13 +110,8 @@ class TestShooting(unittest.TestCase):
 
         result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
-        #self.assertEqual(result, 1)
-        self.assertIsNone(result)
-        self.assertEqual(hiddenBoard, [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ])
+        self.assertEqual(result, 1)
+        self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 0, 0], [0, 0, 0]])
 
     def test_invalid_board(self):
         hiddenBoard = []
@@ -146,10 +141,10 @@ class TestShooting(unittest.TestCase):
         user1.getFirstCpuMemory.return_value = (5, 5)
         user1.getCpuMemory.return_value = (5, 5)
         user1.getDirection.return_value = 0
-        self.leakedBoard = [[0 for i in range(10)] for j in range(10)]
-        self.hiddenBoard = [[0 for i in range(10)] for j in range(10)]
-        cpuManager1_return = shootingfunction.cpuManager1(self.gameMode, self.currentPlayer, self.shootingIq, self.data, self.leakedBoard, self.hiddenBoard)
-        self.assertEqual(cpuManager1_return, "something went wrong")
+        cpuManager1_return = shootingfunction.cpuManager1(
+            self.gameMode, self.currentPlayer, self.shootingIq, self.data
+        )
+        self.assertEqual(cpuManager1_return, 11)
 
     # @patch('cpu_manager.randomDirection')
     # def test_cpuManager1_shootingIq_1(self, mock_randomDirection):
