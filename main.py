@@ -6,8 +6,8 @@ import select_operations
 import shooting_function
 import python_game
 import memory_manager
-
 SHIP_STORAGE_FILE = "ship_storage.json"
+
 
 # extracts current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
@@ -20,6 +20,7 @@ with open("ship_storage.json", "r", encoding="utf-8") as read_file:
 # currentPlayer = 1
 with open(SHIP_STORAGE_FILE, "r") as file:
     data = json.load(file)
+
 
 # Holds the logic of the game, welcomes user, asks for game mode selection and navigates through the game
 def main():
@@ -60,6 +61,19 @@ def main():
         output_manager.battle_end(winning_player_id, game_mode)
     else:
         print("Ein Fehler bei der Erfassung der Lade Abfrage ist aufgetreten!")
+"""pythonGame.boardloader(data, should_load_game)
+        selected_game_mode = selectoperations.gameModeSelection(data)
+        # Call function to randomly select starting player
+        starting_player = selectoperations.selectStartingPlayer(data)
+        winning_player_id = shooting_function.shooting(
+            data, selected_game_mode, starting_player
+
+        )
+        data["storage_available"] = 0
+        pythonGame.boardReset(data)
+        with open(SHIP_STORAGE_FILE, "w") as file:
+            json.dump(data, file, indent=2)
+        outputmanager.battleEnd(winning_player_id, selected_game_mode)"""
     # player.playerAction(currentPlayer, selected_game_mode)
 
 
@@ -71,5 +85,5 @@ if __name__ == "__main__":
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
-            "Wir bedanken uns fürs Spielen bis zum nächsten Mal!\n\
-Dein Spiel wurde gespeichert und lässt sich beim nächsten Mal mit [j] laden!\n")
+            "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
+

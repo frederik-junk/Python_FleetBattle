@@ -2,6 +2,7 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.black-formatter"
     },
+
     "python.formatting.provider": "none",
     "python.testing.unittestArgs": [
         "-v",
@@ -12,4 +13,3 @@
     ],
     "python.testing.pytestEnabled": false,
     "python.testing.unittestEnabled": true
-}
