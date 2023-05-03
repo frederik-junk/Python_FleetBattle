@@ -1,4 +1,5 @@
 # pylint: disable=C
+from io import StringIO
 import unittest
 from unittest.mock import MagicMock, patch
 import output_manager
@@ -98,7 +99,6 @@ class TestBattleEnd(unittest.TestCase):
             "\x1b[32mHerzlichen Glueckwunsch Spieler 2 du hast das Spiel gegen den Computer gewonnen!\x1b[0m"
             ""
         )
-
 
 if __name__ == "__main__":
     unittest.main()
