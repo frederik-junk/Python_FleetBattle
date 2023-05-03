@@ -7,7 +7,7 @@ Returns:
 from termcolor import colored
 from colorama import init
 
-init()
+init(autoreset=True)
 
 
 # creating class user to store player names
