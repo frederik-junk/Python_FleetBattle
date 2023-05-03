@@ -1,4 +1,4 @@
-"""Module provides the functions to make sure that ships do not collide when placing them besides each other
+"""Module provides the functions to make sure that ships do not collide when placing them
 """
 
 
@@ -11,7 +11,7 @@ def add_placement_blocker(board, position_tupel_list):
     """
     for tupel in position_tupel_list:
         row_number, column_number = tupel
-        # calculate the positions left, right, top and bottom of the position (4 directions around the placed ship compartment)
+        # calculate the positions left, right, top and bottom of the position
         blocker_left_number = column_number - 1
         blocker_right_number = column_number + 1
         blocker_top_number = row_number - 1
@@ -28,7 +28,7 @@ def add_placement_blocker(board, position_tupel_list):
         ):
             pass
         else:
-            # creating a tuple containing the cordinates of the new blocker and adding it to the list
+            # creating a tuple with cordinates of the new blocker and add to list
             blocker_top_left = (blocker_top_number, blocker_left_number)
             blocker_list.append(blocker_top_left)
             # changing the id value for the new blocker psotion in the board (6 = placement blocker)
