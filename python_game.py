@@ -116,7 +116,7 @@ def print_leaked_board(board):
 
 
 # function to print the hole board while player is placing the ships
-def printhiddenBoard(board):
+def print_hidden_Board(board):
     """Function to print the board without showing the ships, so the opponent cannot see the ships of the other player
 
     Args:
