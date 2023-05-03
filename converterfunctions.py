@@ -16,6 +16,7 @@ class WrongPlacement(Exception):
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     """Function that is used to define the direction the ship is placed, based on the tip of the ship
+       and user input
 
     Args:
         board (List): The board on which the ships are placed
@@ -92,7 +93,6 @@ def directionConverter(board, shipLength, startingRowNumber, startingColumnChar,
                         raise WrongPlacement("laeuft in anderes Schiff")
                     if board[startingRowNumber][startingColumnChar] == 6:
                         raise WrongPlacement("laeuft in Blocker")
-                    #board[startingRowNumber][startingColumnChar] = 1 TODO:this can be deleted
                     #this is for the positionTupel
                     positionTupel = (startingRowNumber,startingColumnChar)
                     #add every postion tuple to tuple list to store the ship position
@@ -291,7 +291,7 @@ def splitRow(placementInput):
     try:
         startingRowNumber = int(placementInput[1:])
         # extracting the rest of the users input
-        # the code above could raise a ValueError which is excepted down below
+        # the code above could raise a ValueError which is excep ted down below
         if 0 < startingRowNumber <= 10:
             return startingRowNumber - 1
         raise ValueError("Ihre Angabe liegt außerhalb vom Spielfeld")
