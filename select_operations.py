@@ -226,8 +226,7 @@ def select_starting_player(data):
                 "cyan",
             )
         )
-        current_player = 2
-        return current_player
+        return starting_player
     if starting_player == 1:
         # if mode == "1":
         # cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
@@ -240,5 +239,4 @@ def select_starting_player(data):
                 "cyan",
             )
         )
-        current_player = 1
-        return current_player
+        return starting_player
