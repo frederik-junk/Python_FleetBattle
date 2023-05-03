@@ -1,8 +1,7 @@
+# pylint: disable=C
 import unittest
-import blockerfunctions
+import blocker_functions
 from unittest.mock import MagicMock, patch
-
-#pylint: disable=C
 
 class TestConverterFunctions(unittest.TestCase):
     def test_direction_w(self):
@@ -16,7 +15,17 @@ class TestConverterFunctions(unittest.TestCase):
 
         # Test if a ship can be placed in the given direction without any issues
         directionConverter = MagicMock()
-        self.assertTrue(directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship))
+        self.assertTrue(
+            directionConverter(
+                board,
+                shipLength,
+                startingRowNumber,
+                startingColumnChar,
+                direction,
+                gameMode,
+                ship,
+            )
+        )
         expected_board = [
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
@@ -27,7 +36,7 @@ class TestConverterFunctions(unittest.TestCase):
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         ]
         # self.assertEqual(board, expected_board)
 
@@ -43,6 +52,7 @@ class TestConverterFunctions(unittest.TestCase):
         #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         #     [0
+
 
 if __name__ == "__main__":
     unittest.main()

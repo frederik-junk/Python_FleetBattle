@@ -1,40 +1,39 @@
 """Module that is responsible for correct loading of the data
 """
-import shipinitializer
-import outputmanager
-import pythonGame
+import ship_initializer
+import output_manager
+import python_game
 
-#function to load all data elements after game restart
-def loadData(data, gameMode):
+
+def load_data(data, game_mode):
     """Function that sets each value that is read from the saved file to the right variable in the game.
     """
     #checking if cpu data is necessary (gamemode 1)
-    if gameMode == 1:
-        #cordinates of tupel with succesful hit
-        firstCpuMemory = [tuple(item) for item in data["firstCpuMemory"]]
-        outputmanager.user1.setFirstCpuMemory(firstCpuMemory)
-        #cpu status (diffrent steps until final ship finish)
-        outputmanager.user1.setShootingIq(data["shootingIq"])
-        #direction for next hits after succesful first hit
-        outputmanager.user1.setDirection(data["direction"])
-    #load name of Player 1
-    outputmanager.user1.setName(data["playerName1"])
-    #load name of Player 2
-    outputmanager.user2.setName(data["playerName2"])
-    #loading amount of sunken ships (player 1)
-    outputmanager.user1.setLeftShips(data["playerShips"])
-    #loading amount of sunken ships (player 2)
-    outputmanager.user1.setLeftShips(data["opponentShips"])
+    if game_mode == 1:
+        # coordinates of tupel with succesful hit
+        first_cpu_memory = [tuple(item) for item in data["first_cpu_memory"]]
+        output_manager.user1.set_first_cpu_memory(first_cpu_memory)
+        # cpu status (diffrent steps until final ship finish)
+        output_manager.user1.set_shooting_iq(data["shootingIq"])
+        # direction for next hits after succesful first hit
+        output_manager.user1.set_direction(data["direction"])
+    # loads name of Player 1
+    output_manager.user1.set_name(data["playerName1"])
+    # loads name of Player 2
+    output_manager.user2.set_name(data["playerName2"])
+    # loads amount of sunken ships (player 1)
+    output_manager.user1.set_left_ships(data["playerShips"])
+    # loads amount of sunken ships (player 2)
+    output_manager.user1.set_left_ships(data["opponentShips"])
 
-
-    #initalize all player 1 (player) ships with memory data of postion and hitted spots
-    #variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
+    # initalize all player 1 (player) ships with memory data of postion and hitted spots
+    # variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
     # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
 
-    pSchlachtschiffpList = [tuple(item) for item in data["pSchlachtschiff1p"]]
-    pSchlachtschiffmList = [tuple(item) for item in data["pSchlachtschiff1m"]]
-    shipinitializer.pSchlachtschiff1.setPositionMemory(pSchlachtschiffmList)
-    shipinitializer.pSchlachtschiff1.setPosition(pSchlachtschiffpList)
+    p_schlachtschiff_p_list = [tuple(item) for item in data["pSchlachtschiff1p"]]
+    p_schlachtschiff_m_list = [tuple(item) for item in data["pSchlachtschiff1m"]]
+    ship_initializer.pSchlachtschiff1.setPositionMemory(p_schlachtschiff_m_list)
+    ship_initializer.pSchlachtschiff1.setPosition(p_schlachtschiff_p_list)
     """
     pKreuzer1pList = [tuple(item) for item in data["pKreuzer1p"]]
     pKreuzer1mList = [tuple(item) for item in data["pKreuzer1m"]] 
@@ -83,14 +82,14 @@ def loadData(data, gameMode):
 
     """
 
-    #initalize all player 2 (opponent) ships with memory data of postion and hitted spots
-    #variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
-    #(p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
+    # initalize all player 2 (opponent) ships with memory data of postion and hitted spots
+    # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
+    # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
 
-    oSchlachtschiff1pList = [tuple(item) for item in data["oSchlachtschiff1p"]]
-    oSchlachtschiff1mList = [tuple(item) for item in data["oSchlachtschiff1m"]]
-    shipinitializer.oSchlachtschiff1.setPositionMemory(oSchlachtschiff1mList)
-    shipinitializer.oSchlachtschiff1.setPosition(oSchlachtschiff1pList)
+    o_schlachtschiff_1_p_list = [tuple(item) for item in data["oSchlachtschiff1p"]]
+    o_schlachtschiff_1_m_list = [tuple(item) for item in data["oSchlachtschiff1m"]]
+    ship_initializer.oSchlachtschiff1.setPositionMemory(o_schlachtschiff_1_m_list)
+    ship_initializer.oSchlachtschiff1.setPosition(o_schlachtschiff_1_p_list)
     """
     oKreuzer1pList = [tuple(item) for item in data["oKreuzer1p"]]
     oKreuzer1mList = [tuple(item) for item in data["oKreuzer1m"]] 
@@ -139,15 +138,16 @@ def loadData(data, gameMode):
 
     """
 
-def storeData(data):
+
+def store_data(data):
     """Function that saves the game data into a file for later reading and continuing the game
     """
 
     #getting postion data of all player 1 (player) ships and store them via tupel lists
     #variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
     #(p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
-    data["pSchlachtschiff1m"] = shipinitializer.pSchlachtschiff1.getPositionMemory()
-    data["pSchlachtschiff1p"] = shipinitializer.pSchlachtschiff1.getPosition()
+    data["pSchlachtschiff1m"] = ship_initializer.pSchlachtschiff1.getPositionMemory()
+    data["pSchlachtschiff1p"] = ship_initializer.pSchlachtschiff1.getPosition()
 
     """
     data["pKreuzer1m"] = shipinitializer.pKreuzer1.getPositionMemory()
@@ -177,11 +177,11 @@ def storeData(data):
     data["pUboot4m"] = shipinitializer.pUboot4.getPositionMemory()
     data["pUboot4p"] = shipinitializer.pUboot4.getPosition()
     """
-    #getting postion data of all player 2 (opponent) ships and store them via tupel lists
-    #variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
-    #(p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
-    data["oSchlachtschiff1m"] = shipinitializer.oSchlachtschiff1.getPositionMemory()
-    data["oSchlachtschiff1p"] = shipinitializer.oSchlachtschiff1.getPosition()
+    # getting postion data of all player 2 (opponent) ships and store them via tupel lists
+    # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
+    # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
+    data["oSchlachtschiff1m"] = ship_initializer.oSchlachtschiff1.getPositionMemory()
+    data["oSchlachtschiff1p"] = ship_initializer.oSchlachtschiff1.getPosition()
 
     """
     data["oKreuzer1m"] = shipinitializer.oKreuzer1.getPositionMemory()
@@ -212,28 +212,27 @@ def storeData(data):
     data["oUboot4p"] = shipinitializer.oUboot4.getPosition()
     """
 
-    #saving data of first successfuly hitted postion from oponent by cpu
-    data["firstCpuMemory"] = outputmanager.user1.getFirstCpuMemory()
-    #saving cpu hitting status
-    data["shootingIq"] = outputmanager.user1.getShootingIq()
-    #saving cpu direction for following hits
-    data["direction"] = outputmanager.user1.getDirection()
-    #saving name of player 1
-    data["playerName1"] = outputmanager.user1.getName()
-    #saving name of player 2
-    data["playerName2"] = outputmanager.user2.getName()
-    #saving amount of left unsunken ships from player 1
-    data["playerShips"] = outputmanager.user1.getLeftShips()
-    #saving amount of left unsunken ships from player 2
-    data["opponentShips"] = outputmanager.user2.getLeftShips()
-    #saving leakedBoard 1 to restore all informations of ship position (player 1 ships)
-    data["leakedBoard1"] = pythonGame.leakedBoard1
-    #saving leakedBoard 2 to restore all informations of ship position (player 2 ships)
-    data["leakedBoard2"] = pythonGame.leakedBoard2
-    #saving hiddenBoard 1 to restore all informations of hitted positions (player 1 ships)
-    data["hiddenBoard1"] = pythonGame.hiddenBoard1
-    #saving hiddenBoard 2 to restore all informations of hitted positions (player 2 ships)
-    data["hiddenBoard2"] = pythonGame.hiddenBoard2
-    #saving information if storage data is available (1) or not (0)
+    # saves data of first successfuly hitted postion from oponent by cpu
+    data["first_cpu_memory"] = output_manager.user1.get_first_cpu_memory()
+    # saves cpu hitting status
+    data["shootingIq"] = output_manager.user1.get_shooting_iq()
+    # saves cpu direction for following hits
+    data["direction"] = output_manager.user1.get_direction()
+    # saves name of player 1
+    data["playerName1"] = output_manager.user1.get_name()
+    # saves name of player 2
+    data["playerName2"] = output_manager.user2.get_name()
+    # saves amount of left unsunken ships from player 1
+    data["playerShips"] = output_manager.user1.get_left_ships()
+    # saves amount of left unsunken ships from player 2
+    data["opponentShips"] = output_manager.user2.get_left_ships()
+    # saves leakedBoard 1 to restore all informations of ship position (player 1 ships)
+    data["leakedBoard1"] = python_game.leakedBoard1
+    # saves leakedBoard 2 to restore all informations of ship position (player 2 ships)
+    data["leakedBoard2"] = python_game.leakedBoard2
+    # saves hiddenBoard 1 to restore all informations of hitted positions (player 1 ships)
+    data["hiddenBoard1"] = python_game.hiddenBoard1
+    # saves hiddenBoard 2 to restore all informations of hitted positions (player 2 ships)
+    data["hiddenBoard2"] = python_game.hiddenBoard2
+    # saves information if storage data is available (1) or not (0)
     data["storage_available"] = 1
-    
