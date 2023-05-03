@@ -25,7 +25,7 @@ with open(SHIP_STORAGE_FILE, "r") as file:
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def play_game():
     """Main function that provides the game logic and calls the other modules"""
-    output_manager.welcomeUser()
+    output_manager.welcome_user()
     should_load_game = select_operations.load_request(data)
     if should_load_game:
         python_game.board_loader(data, should_load_game)
