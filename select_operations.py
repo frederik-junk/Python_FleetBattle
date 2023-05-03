@@ -120,7 +120,7 @@ def game_mode_selection(data):
                     )
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
-                    for ship in ship_initializer.playerShips:
+                    for ship in ship_initializer.player_ships:
                         ship.class_place_ship(python_game.leaked_board_2, ship, counter)
                         counter = counter + 1
                     counter = 1
@@ -129,7 +129,7 @@ def game_mode_selection(data):
                         "Der Computer platziert nun seine Schiffe. Dies kann einige Sekunden dauern"
                     )
                     # Call function cpuPlaceShip to let the computer randomly place ships
-                    for ship in ship_initializer.opponentShips:
+                    for ship in ship_initializer.opponent_ships:
                         ship.class_cpu_place_ship(python_game.leaked_board_1, ship)
                     print("")
                     # Print message indicating start of the game
@@ -158,7 +158,7 @@ def game_mode_selection(data):
                     )
                     # Call function placeShip for user 1 to place ships
                     counter = 1
-                    for ship in ship_initializer.playerShips:
+                    for ship in ship_initializer.player_ships:
                         ship.class_place_ship(python_game.leaked_board_1, ship, counter)
                         counter = counter + 1
                     counter = 1
@@ -180,7 +180,7 @@ def game_mode_selection(data):
                         )
                     )
                     # Call function for user 2 to place ships
-                    for ship in ship_initializer.opponentShips:
+                    for ship in ship_initializer.opponent_ships:
                         ship.class_place_ship(python_game.leaked_board_2, ship, counter)
                         counter = counter + 1
                     counter = 1

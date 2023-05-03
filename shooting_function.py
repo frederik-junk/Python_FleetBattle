@@ -64,7 +64,7 @@ def shooting(
                 output_manager.user2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
-                ship_initializer.opponentShips,
+                ship_initializer.opponent_ships,
             ):  # has to change with number of ships
                 case "won":
                     return 2  # is the winningID which should be returned to the main.
@@ -84,7 +84,7 @@ def shooting(
                         output_manager.user1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
-                        ship_initializer.opponentShips,
+                        ship_initializer.opponent_ships,
                     )
                     == "won"
                 ):  # has to change with number of ships
@@ -98,7 +98,7 @@ def shooting(
                         output_manager.user2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
-                        ship_initializer.playerShips,
+                        ship_initializer.player_ships,
                     )
                     == "won"
                 ):  # has to change with number of ships
@@ -265,7 +265,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
 
         case 1:
             shooting_tupel = cpu_memory
-            for ship in ship_initializer.playerShips:
+            for ship in ship_initializer.player_ships:
                 position_memory = ship.get_position_memory()
                 postitions = ship.get_position()
                 if shooting_tupel in postitions:
