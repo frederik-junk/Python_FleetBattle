@@ -1,11 +1,13 @@
-# Import required modules
 import os
 import random
+from termcolor import colored
+from colorama import init
 import outputmanager
 import pythonGame
 import shipinitializer
-from termcolor import colored
-from colorama import init
+
+global currentPlayer
+
 init()
 
 def clearConsole():
@@ -29,30 +31,32 @@ def loadrequest(data):
             loadstorage = input("Wollen Sie einen alten Spielstand laden ja[j] / nein[n]?\n")
             match loadstorage:
                 case 'j':
-                        storage_available = data["storage_available"]
-                        if storage_available == 1:
-                            load = True
-                            clearConsole()
-                            print("Willkommen zurück, Ihre Daten konnten erfolgreich geladen werden.\nDas Spiel geht an gespeicherter Stelle weiter!")
-                            return load
-                        elif storage_available == 0:
-                            load = False
-                            clearConsole()
-                            print("Leider ist kein Spielstand vorhanden!\nDas Spiel startet daher ohne Spielstand!")
-                            return load
-                        else :
-                            print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut und gebe [n] an!")
-                            return False
+                    storageAvailable = data["storage_available"]
+                    if storageAvailable == 1:
+                        load = True
+                        clearConsole()
+                        print("Willkommen zurück, Ihre Daten konnten erfolgreich geladen werden.\nDas Spiel geht an gespeicherter Stelle weiter!")
+
+                    elif storageAvailable == 0:
+                        load = False
+                        clearConsole()
+                        print("Leider ist kein Spielstand vorhanden!\nDas Spiel startet daher ohne Spielstand!")
+
+                    else :
+                        print("Ein Speicherfehler ist aufgetreten. Wir versuchen dieses Problem zu beheben bitte starte das Spiel erneut und gebe [n] an!")
+                        load = False
+                    return load
+
                 case 'n':
                     load = False
                     clearConsole()
                     print("Alles klar, das Spiel wird ohne Speicherdaten gestartet!")
-                    return False
+                    return load
                 case _:
                     # Raise value error if input is not 1 or 2
                     raise ValueError("Ihre Eingabe ist falsch.")
-        except ValueError as f:
-            print(str(f))
+        except ValueError as valueError:
+            print(str(valueError))
             print("Bitte wählen Sie entweder [j] für die Moeglichkeit einen Spielstand zu laden oder [n] um das Spiel normal zu starten.")
             continue
 
@@ -126,7 +130,7 @@ def gameModeSelection(data):
                     counter = 1
                     # Ask for user 2 name and welcome message
                     continueRequest = input("Enter drücken um Chat zu leeren und Spieler 2 seine Schiffe platzieren zu lassen: \n")
-                    clearConsole() 
+                    clearConsole()
                     userName2 = input("Spieler 2 bitte geben Sie Ihren Namen an: \n")
                     # Set user name 2
                     outputmanager.user2.setName(userName2)
@@ -146,9 +150,9 @@ def gameModeSelection(data):
                 case _:
                     # Raise value error if input is not 1 or 2
                     raise ValueError("Ihre Eingabe ist falsch.")
-        except ValueError as e:
+        except ValueError as valueError:
             # Print error message and ask for correct input
-            print(str(e))
+            print(str(valueError))
             print("Bitte wählen Sie entweder [1] für den Einspieler-Modus oder [2] für den Mehrspieler-Modus.")
             continue
 
@@ -161,7 +165,7 @@ def selectStartingPlayer(data):
     Returns:
         currentPlayer(int): An int value that indicates the current player 
     """
-    global currentPlayer
+
     #playerOne = 1
     #playerTwo = 2
     print("Es wird zufällig bestimmt wer beginnt...")

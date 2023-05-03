@@ -25,7 +25,7 @@ class Ships:
 
     def getPosition(self):
         return self.__position
-    
+
     def getPositionMemory(self):
         return self.__positionMemory
 
@@ -36,33 +36,26 @@ class Ships:
     def hitOnShip(self):
         self.__damageCounter += 1
 
-    #function to call ship place function 
+    #function to call ship place function
     def classPlaceShip(self, board, ship, counter):
-         result = pythonGame.placeShip(board, self.getSize(), ship, self.getName(), counter)
-         print(self.getPosition()) #TODO: this is a debug output can be deleted
-         return result
-    
+        pythonGame.placeShip(board, self.getSize(), ship, self.getName(), counter)
+
     def classCpuPlaceShip(self, board, ship):
-         result = pythonGame.cpuPlaceShip(board, self.getSize(), ship)
-         return result
-         
+        pythonGame.cpuPlaceShip(board, self.getSize(), ship)
 
 #classes for each ship type with standard values
 class Schlachtschiff(Ships):
-        def __init__(self,position, positionMemory):
-            super().__init__("Schlachtschiff(1x)", 5, position, positionMemory)
+    def __init__(self,position, positionMemory):
+        super().__init__("Schlachtschiff(1x)", 5, position, positionMemory)
 
 class Kreuzer(Ships):
-        def __init__(self,position, positionMemory):
-            super().__init__("Kreuzer(2x)", 4, position, positionMemory)
+    def __init__(self,position, positionMemory):
+        super().__init__("Kreuzer(2x)", 4, position, positionMemory)
 
 class Zerstoerer(Ships):
-        def __init__(self,position, positionMemory):
-            super().__init__("Zerstoerer(3x)", 3, position, positionMemory)
+    def __init__(self,position, positionMemory):
+        super().__init__("Zerstoerer(3x)", 3, position, positionMemory)
 
 class Uboot(Ships):
-        def __init__(self,position, positionMemory):
-            super().__init__("UBoot(4x)", 2, position, positionMemory)
-
-
-
+    def __init__(self,position, positionMemory):
+        super().__init__("UBoot(4x)", 2, position, positionMemory)

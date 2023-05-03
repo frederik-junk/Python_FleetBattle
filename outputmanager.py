@@ -1,11 +1,13 @@
 from typing import Any
-"""Module contains graphic elements for user interface and messages that are displayed if a game is over
+from termcolor import colored
+from colorama import init
+"""
+Module contains graphic elements for user interface and messages that are displayed if a game is over
 
 Returns:
     _type_: _description_
 """
-from termcolor import colored
-from colorama import init
+
 init()
 
 #creating class user to store player names
@@ -64,28 +66,28 @@ class User:
 
     def getCpuMemory(self):
         return self.__cpuMemory
-    
+
     def setCpuMemory(self, cpuMemory):
         self.__cpuMemory = cpuMemory
 
 
     def getFirstCpuMemory(self):
         return self.__firstCpuMemory
-    
+
     def setFirstCpuMemory(self, firstCpuMemory):
         self.__firstCpuMemory = firstCpuMemory
 
 
     def getShootingIq(self):
         return self.__shootingIq
-    
+
     def setShootingIq(self, shootingIq):
         self.__shootingIq = shootingIq
 
 
     def getDirection(self):
         return self.__direction
-    
+
     def setDirection(self, direction):
         self.__direction = direction
 
@@ -124,13 +126,13 @@ def battleEnd(winningID, gameMode):
         case _:
             winoutput()
             print(colored("Herzlichen Glueckwunsch du hast gewonnen!",'green'))
-    
+
 
     #winoutput()
     #print(colored(f"Herzlichen Glueckwunsch {winningID} du hast gewonnen",'green'))
 
 
-    
+
 
 def welcomeUser():
     """function to print out the game name at beginning of the game
