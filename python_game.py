@@ -6,7 +6,7 @@ Raises:
 import os
 import random
 from termcolor import colored
-from colorama import init, Fore, Back
+from colorama import init
 import converter_functions
 
 init()
@@ -73,7 +73,7 @@ def board_loader(data, load_available):
         initialize_board(hidden_board_2)
     elif load_available is True:
         # loading the boards from stored data
-        leaked_board_1 = data["leakedBoard1"]
+        leaked_board_1 = data["leaked_board_1"]
         leaked_board_2 = data["leaked_board_2"]
         hidden_board_1 = data["hidden_board_1"]
         hidden_board_2 = data["hidden_board_2"]
@@ -134,12 +134,7 @@ def print_hidden_board(board):
         # 3 = shot spot with hit, 4 = eleminated ship (complete)
         print(
             "  ".join(
-                str(elem)
-                .replace("1", "~")
-                .replace("0", "~")
-                .replace("2", "O")
-                .replace("3", "x")
-                .replace("4", "#")
+                str(elem).replace("1", "~").replace("0", "~").replace("2", "O").replace("3", "x").replace("4", "#")
                 for elem in row
             )
         )
