@@ -22,13 +22,13 @@ def main():
     # prints a welcome message
     output_manager.welcome_user()
     # asks player if he likes to load a previous game
-    load = select_operations.loadrequest(data)
+    load = select_operations.load_request(data)
     # if load is true it will reload the old data if load is false it will delete the old data
     if load is True:
         # initializes all boards with their old vaules
-        python_game.boardloader(data, load)
+        python_game.board_loader(data, load)
         # initializes all ships with ther attributes like damage oder hitted positions
-        memory_manager.loadData(data, data["game_mode"])
+        memory_manager.load_data(data, data["game_mode"])
         # starts game engine to run the main game, returns the number of the winning player at the end
         winning_id = shooting_function.shooting(
             data, data["game_mode"], data["currentPlayer"]
@@ -36,7 +36,7 @@ def main():
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default resset board
-        python_game.boardReset(data)
+        python_game.board_reset(data)
         # writes the changed data into json file
         with open("ship_storage.json", "w", encoding="utf-8") as write_file:
             json.dump(data, write_file, indent=2)
@@ -44,7 +44,7 @@ def main():
         output_manager.battle_end(winning_id, data["game_mode"])
     elif load is False:
         # initializes new boards with default values
-        python_game.boardloader(data, load)
+        python_game.board_loader(data, load)
         # gives user the opportunity to choose the game Mode (single player/ multiple players)
         game_mode = select_operations.game_mode_selection(data)
         # calls function to randomly select starting player
@@ -54,7 +54,7 @@ def main():
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
-        python_game.boardReset(data)
+        python_game.board_reset(data)
         # writes the changed data into json file
         with open("ship_storage.json", "w", encoding="utf-8") as write_file:
             json.dump(data, write_file, indent=2)

@@ -22,7 +22,7 @@ def clear_console():
     os.system("cls" if os.name == "nt" else "clear")
 
 
-def loadrequest(data):
+def load_request(data):
     """Function to check if the player wants to load an existing score or start a new game
 
     Args:
