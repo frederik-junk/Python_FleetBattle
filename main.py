@@ -3,7 +3,7 @@ import os
 import json
 import output_manager
 import select_operations
-import shootingfunction
+import shooting_function
 import python_game
 import memory_manager
 
@@ -12,7 +12,7 @@ path = os.path.dirname(os.path.abspath(__file__))
 
 # sets current player to 0 to define it afterwards in function below
 # currentPlayer = 1
-with open("shipstorage.json", "r", encoding="utf-8") as readFile:
+with open("ship_storage.json", "r", encoding="utf-8") as readFile:
     data = json.load(readFile)
 
 
@@ -30,7 +30,7 @@ def main():
         # initializes all ships with ther attributes like damage oder hitted positions
         memory_manager.loadData(data, data["game_mode"])
         # starts game engine to run the main game, returns the number of the winning player at the end
-        winning_id = shootingfunction.shooting(
+        winning_id = shooting_function.shooting(
             data, data["game_mode"], data["currentPlayer"]
         )
         # sets storage availibility to 0 to block reloading the finished game
@@ -38,7 +38,7 @@ def main():
         # resets all boards to default value (filled with 0) using a default resset board
         python_game.boardReset(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as write_file:
+        with open("ship_storage.json", "w", encoding="utf-8") as write_file:
             json.dump(data, write_file, indent=2)
         # prints winning / losing message using the returned winning_id and the current game_mode
         output_manager.battle_end(winning_id, data["game_mode"])
@@ -50,13 +50,13 @@ def main():
         # calls function to randomly select starting player
         starting_player = select_operations.select_starting_player(data)
         # starts game engine to run the main game, returns the number of the winning player at the end
-        winning_id = shootingfunction.shooting(data, game_mode, starting_player)
+        winning_id = shooting_function.shooting(data, game_mode, starting_player)
         # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default reset board
         python_game.boardReset(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as write_file:
+        with open("ship_storage.json", "w", encoding="utf-8") as write_file:
             json.dump(data, write_file, indent=2)
         # prints winning / losing message using the returned winning_id and the current game_mode
         output_manager.battle_end(winning_id, game_mode)
@@ -76,7 +76,7 @@ if __name__ == "__main__":
         # calls function to store all necessary data to restore the game in future sessions
         memory_manager.storeData(data)
         # writes the changed data into json file
-        with open("shipstorage.json", "w", encoding="utf-8") as write_fileEnd:
+        with open("ship_storage.json", "w", encoding="utf-8") as write_fileEnd:
             json.dump(data, write_fileEnd, indent=2)
         # prints message to confirm the saving process and tells the user how to restore the game
         print(

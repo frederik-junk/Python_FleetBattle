@@ -1,10 +1,8 @@
+# pylint: disable=C
 import unittest
 from unittest.mock import patch, MagicMock
 from io import StringIO
 import select_operations
-
-# pylint: disable=C
-
 
 class TestStartingPlayerSelection(unittest.TestCase):
     @patch("builtins.input", return_value="j")

@@ -1,2 +1,5 @@
 [MASTER]
 max-line-length=160
+
+[MESSAGES CONTROL]
+disable= too-many-arguments, too-many-statements, invalid-name

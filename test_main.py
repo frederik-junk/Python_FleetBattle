@@ -1,7 +1,5 @@
-import unittest, select_operations
-
 # pylint: disable=C
-
+import unittest, select_operations
 
 class TestMain(unittest.TestCase):
     currentPlayer = 1

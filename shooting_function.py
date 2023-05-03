@@ -90,8 +90,7 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 1
                     return winning_id  # is the winningID which should be returned to the main
-                else:
-                    next_player(data, game_mode, 1)
+                next_player(data, game_mode, 1)
             case 2:
                 if (
                     playermanager(
@@ -105,8 +104,7 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 2
                     return winning_id  # is the winningID which should be returned to the main.
-                else:
-                    next_player(data, game_mode, 2)
+                next_player(data, game_mode, 2)
             case _:
                 print("something went wrong")
     else:
@@ -131,7 +129,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
     """
     shooting_repeater = True
     python_game.print_hidden_board(hidden_board)
-    while shooting_repeater == True:
+    while shooting_repeater is True:
         shooting_position = input(
             f"{current_player.get_name()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
         )
@@ -139,7 +137,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
             row = converter_functions(shooting_position)
             if row == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
-            column = converter_functions.split_columnConverter(shooting_position)
+            column = converter_functions.split_column_converter(shooting_position)
             if column == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
         except Exception:
@@ -159,18 +157,18 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                 for ship in ship_list:
                     name = ship.get_name()
                     print(name)
-                    positions = ship.getPosition()
-                    position_memory = ship.getPositionMemory()
+                    positions = ship.get_position()
+                    position_memory = ship.get_position_memory()
                     if shooting_tupel in positions:
                         print(colored("Das war ein Treffer! Weiter so!", "green"))
                         hidden_board[row][column] = 3
                         leaked_board[row][column] = 3
                         position_memory.append(shooting_tupel)
-                        ship.setPositionMemory(position_memory)
+                        ship.set_position_memory(position_memory)
                         positions.remove(shooting_tupel)
                         if len(positions) == 0:
                             current_player.increaseLeftShips()
-                            position_memory = ship.getPositionMemory()
+                            position_memory = ship.get_position_memory()
                             for tupel in position_memory:
                                 row, column = tupel
                                 hidden_board[row][column] = 4
@@ -179,8 +177,8 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            print(current_player.getLeftShips())
-                            if current_player.getLeftShips() == 1:
+                            print(current_player.get_left_ships())
+                            if current_player.get_left_ships() == 1:
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
                                 return "won"
@@ -268,19 +266,19 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
         case 1:
             shooting_tupel = cpu_memory
             for ship in ship_initializer.playerShips:
-                position_memory = ship.getPositionMemory()
-                postitions = ship.getPosition()
+                position_memory = ship.get_position_memory()
+                postitions = ship.get_position()
                 if shooting_tupel in postitions:
                     print(
                         colored("Der Computer hat eines Ihrer Schiffe getroffen", "red")
                     )
                     hidden_board[row][column] = 3
                     position_memory.append(shooting_tupel)
-                    ship.setPositionMemory(position_memory)
+                    ship.set_position_memory(position_memory)
                     postitions.remove(shooting_tupel)
                     # ship is sunk
                     if len(postitions) == 0:
-                        position_memory = ship.getPositionMemory()
+                        position_memory = ship.get_position_memory()
                         for tupel in position_memory:
                             row, column = tupel
                             hidden_board[row][column] = 4
@@ -288,7 +286,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         output_manager.user1.set_shooting_iq(shooting_iq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
                         output_manager.user1.increaseLeftShips()
-                        if output_manager.user1.getLeftShips() == 1:
+                        if output_manager.user1.get_left_ships() == 1:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
                     else:
@@ -332,8 +330,8 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
     """
     global cpu_memory
 
-    direction = output_manager.user1.getDirection()
-    cpu_memory = output_manager.user1.getCpuMemory()
+    direction = output_manager.user1.get_direction()
+    cpu_memory = output_manager.user1.get_cpu_memory()
     while True:
         match shooting_iq:
             case 0:
@@ -342,7 +340,7 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                 if leaked_board[row][column] == 6:
                     leaked_board[row][column] = 0
                 firstShootingPosition = first_position(hidden_board)
-                output_manager.user1.setFirstCpuMemory(firstShootingPosition)
+                output_manager.user1.set_first_cpu_memory(firstShootingPosition)
 
                 shooting_iq = 1
                 output_manager.user1.set_shooting_iq(shooting_iq)

@@ -1,9 +1,7 @@
+# pylint: disable=C
 import unittest
 import blocker_functions
 from unittest.mock import MagicMock, patch
-
-# pylint: disable=C
-
 
 class TestConverterFunctions(unittest.TestCase):
     def test_direction_w(self):
