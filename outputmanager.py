@@ -1,14 +1,9 @@
-from typing import Any
-from termcolor import colored
-from colorama import init
-
 """
 Module contains graphic elements for user interface and messages that are displayed if a game is over
 
 Returns:
     _type_: _description_
 """
-#from typing import Any
 from termcolor import colored
 from colorama import init
 

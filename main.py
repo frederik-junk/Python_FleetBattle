@@ -46,9 +46,9 @@ def main():
         # initializes new boards with default values
         pythonGame.boardloader(data, load)
         # gives user the opportunity to choose the game Mode (single player/ multiple players)
-        game_mode = selectoperations.game_modeSelection(data)
+        game_mode = selectoperations.game_mode_selection(data)
         # calls function to randomly select starting player
-        starting_player = selectoperations.selectstarting_player(data)
+        starting_player = selectoperations.select_starting_player(data)
         # starts game engine to run the main game, returns the number of the winning player at the end
         winning_id = shootingfunction.shooting(data, game_mode, starting_player)
         # sets storage availibility to 0 to block reloading the finished game
