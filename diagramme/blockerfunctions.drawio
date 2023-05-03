@@ -1,30 +1,30 @@
-<mxfile host="app.diagrams.net" modified="2023-05-03T06:05:51.941Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="dUqWNbxqU2rZkCf3EBZx" version="21.2.3" type="device">
+<mxfile host="app.diagrams.net" modified="2023-04-29T12:26:12.689Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="jf1kPV1wiBpktEnlgN6L" version="21.2.3" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="753" dy="863" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="614" dy="691" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-0" edge="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-2" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-0">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="330" y="140" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-0" value="addPlacementBlocker" style="ellipse;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-0" value="addPlacementBlocker" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="270" y="20" width="120" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-4" target="TFMJAXkaFAYzoaxynS_k-5" edge="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-4" target="TFMJAXkaFAYzoaxynS_k-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-4" value="für jede Position des Schiffes führe folgendes aus:&amp;nbsp;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-4" value="für jede Position des Schiffes führe folgendes aus:&amp;nbsp;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="270" y="140" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-5" target="TFMJAXkaFAYzoaxynS_k-7" edge="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-5" target="TFMJAXkaFAYzoaxynS_k-7">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-5" value="berechne für das beschossene Feld die 4 anliegenden Felder" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-5" value="berechne für das Feld die 4 anliegenden Felder" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="270" y="220" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-12" value="außerhalb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="TFMJAXkaFAYzoaxynS_k-4" edge="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-12" value="außerhalb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="TFMJAXkaFAYzoaxynS_k-4">
           <mxGeometry x="-0.5231" y="10" relative="1" as="geometry">
             <mxPoint x="490" y="260" as="targetPoint" />
             <Array as="points">
@@ -35,65 +35,33 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-14" value="innerhalb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="YwJXvPrBj6vsCMlhRKbd-2" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="330" y="450" as="targetPoint" />
-          </mxGeometry>
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-14" value="innerhalb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="TFMJAXkaFAYzoaxynS_k-13">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-7" value="&lt;br&gt;checkt ob die&amp;nbsp; anliegenden&lt;br&gt;Felder noch auf dem &lt;br&gt;Spielfeld sind" style="rhombus;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-7" value="&lt;br&gt;checkt ob die anliegenden&lt;br&gt;Felder noch auf dem &lt;br&gt;Spielfeld sind" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
           <mxGeometry x="240" y="310" width="180" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-9" value="jeweils die diagonalen und in den anliegenden Feldern" style="rounded=0;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="50" y="390" width="120" height="60" as="geometry" />
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-9" value="jeweils die diagonalen und in den anliegenden Feldern" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="70" y="240" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-10" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="TFMJAXkaFAYzoaxynS_k-9" edge="1">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-10" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-7" target="TFMJAXkaFAYzoaxynS_k-9">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="280" y="300" as="sourcePoint" />
             <mxPoint x="330" y="250" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-13">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="510" y="210" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="620" y="610" />
-              <mxPoint x="620" y="210" />
-              <mxPoint x="510" y="210" />
-            </Array>
-          </mxGeometry>
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-13" value="setzte an die umliegenden Felder einen Blocker" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="270" y="440" width="120" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="TFMJAXkaFAYzoaxynS_k-13" value="setzte an die umliegenden Felder einen Blocker" style="rounded=1;whiteSpace=wrap;html=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="270" y="585" width="120" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-5" value="False" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YwJXvPrBj6vsCMlhRKbd-2" target="TFMJAXkaFAYzoaxynS_k-13">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="330" y="570" />
-              <mxPoint x="330" y="570" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-6" value="True" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YwJXvPrBj6vsCMlhRKbd-2" target="YwJXvPrBj6vsCMlhRKbd-11">
-          <mxGeometry x="-0.3483" relative="1" as="geometry">
-            <mxPoint x="520" y="485" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="460" y="485" />
-              <mxPoint x="520" y="486" />
-            </Array>
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-2" value="&lt;br&gt;checkt ob auf den Feldern schon ein Schiff Platziert ist" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="260" y="440" width="140" height="90" as="geometry" />
-        </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-8" value="" style="endArrow=none;dashed=1;html=1;dashPattern=1 3;strokeWidth=2;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YwJXvPrBj6vsCMlhRKbd-2" target="TFMJAXkaFAYzoaxynS_k-9">
+        <mxCell id="TFMJAXkaFAYzoaxynS_k-15" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="TFMJAXkaFAYzoaxynS_k-13">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="320" y="470" as="sourcePoint" />
-            <mxPoint x="370" y="420" as="targetPoint" />
+            <mxPoint x="310" y="330" as="sourcePoint" />
+            <mxPoint x="510" y="350" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="330" y="520" />
+              <mxPoint x="510" y="520" />
+            </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="YwJXvPrBj6vsCMlhRKbd-11" value="Zusätzliche SIcherheit sollte nie eintreten&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
-          <mxGeometry x="460" y="455" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

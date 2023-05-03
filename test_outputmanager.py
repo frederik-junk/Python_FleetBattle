@@ -1,7 +1,7 @@
 # pylint: disable=C
 import unittest
 from unittest.mock import MagicMock, patch
-from output_manager import *
+from outputmanager import *
 
 class TestBattleEnd(unittest.TestCase):
     @patch("builtins.print")
