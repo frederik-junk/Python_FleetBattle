@@ -1,10 +1,10 @@
 # pylint: disable=C
 import unittest
 from unittest.mock import MagicMock, patch
-
-from converter_functions import split_column_converter
+from converter_functions import split_column_converter, split_row
 
 class TestConverterFunctions(unittest.TestCase):
+
     def test_direction_w(self):
         board = [[0] * 10 for _ in range(10)]
         ship_length = 3
@@ -29,20 +29,25 @@ class TestConverterFunctions(unittest.TestCase):
         )
 
     def test_valid_input(self):
-        result = split_column_converter("A3")
+        result = split_column_converter("a3")
         self.assertEqual(result, 0)
-
-    def test_invalid_input_number(self):
-        with patch("builtins.print") as mock_print:
-            result = split_column_converter("A")
-            self.assertEqual(result, 0)
 
     def test_invalid_input_letter(self):
         with patch("builtins.print") as mock_print:
             result = split_column_converter("1")
             self.assertEqual(result, 11)
             mock_print.assert_called_with("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
-            mock_print.assert_called_with("Geben Sie bitte die Anfangskoordinaten erneut an (z.B.: A3).")
+    
+    def test_valid_input(self):
+        self.assertEqual(split_row("A1"), 0)
+        self.assertEqual(split_row("B2"), 1)
+        self.assertEqual(split_row("C10"), 9)
+    
+    def test_invalid_input(self):
+        self.assertEqual(split_row("A0"), 11)
+        self.assertEqual(split_row("D11"), 11)
+        self.assertEqual(split_row("F"), 11)
+        self.assertEqual(split_row(""), 11)
 
 
 

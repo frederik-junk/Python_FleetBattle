@@ -320,3 +320,4 @@ def split_row(placement_input):
     except ValueError:
         starting_row_number = 11
         return starting_row_number
+    
