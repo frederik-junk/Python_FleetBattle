@@ -1,15 +1,39 @@
 {
-  "storage_available": 0,
+  "storage_available": 1,
   "currentPlayer": 2,
   "gameMode": 2,
-  "playerName1": "default1",
-  "playerName2": "default2",
-  "opponentShips": 1,
-  "playerShips": 1,
-  "firstCpuMemory": [],
+  "playerName1": "asd",
+  "playerName2": "Spieler 2",
+  "opponentShips": 0,
+  "playerShips": 0,
+  "firstCpuMemory": [
+    0,
+    0
+  ],
   "shootingIq": 0,
   "direction": 0,
-  "pSchlachtschiff1p": [],
+  "pSchlachtschiff1p": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      0
+    ],
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
+    ]
+  ],
   "pSchlachtschiff1m": [],
   "pKreuzer1p": [],
   "pKreuzer2p": [],
@@ -63,20 +87,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      6,
+      6,
       0,
       0,
       0,
@@ -87,20 +99,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      1,
+      6,
       0,
       0,
       0,
@@ -111,20 +111,8 @@
       0
     ],
     [
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0,
-      0
-    ],
-    [
-      0,
-      0,
+      1,
+      6,
       0,
       0,
       0,
@@ -135,8 +123,44 @@
       0
     ],
     [
+      1,
+      6,
       0,
       0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      6,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      6,
+      6,
       0,
       0,
       0,
