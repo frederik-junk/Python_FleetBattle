@@ -75,16 +75,6 @@ class TestConverterFunctions(unittest.TestCase):
         )
 
     def test_direction_invalid(self):
-        board = [[0] * 10 for _ in range(10)]
-        ship_length = 3
-        starting_row_number = -1
-        starting_column_char = -2
-        direction = "s"
-        game_mode = 2
-        ship = None
-
-        # Test if a ship can be placed in the given direction without any issues
-        direction_converter = MagicMock()
         with patch("builtins.print") as mock_print:
             mock_print.assert_not_called()
 

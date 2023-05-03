@@ -1,6 +1,5 @@
 # pylint: disable=C
 from io import StringIO
-import json
 import unittest, select_operations
 from unittest.mock import patch
 from main import main
@@ -13,14 +12,14 @@ class TestMain(unittest.TestCase):
         self.assertNotEqual(starting_player, 3)
 
     @patch('builtins.input', return_value='2')
-    def test_main_should_load_game_false(self, mock_input):
-        data = {
-                "game_mode": "",
-                "board_1": [],
-                "board_2": [],
-                "storage_available": 1,
-                "current_player": "1"
-            }
+    def test_main_should_load_game_false(self):
+        with patch('sys.stdout', new=StringIO()) as fake_output:
+            select_operations.load_request = lambda data: False
+            main()
+            output = fake_output.getvalue().strip()
+
+            self.assertIn("Spieler 1 beginnt das Spiel", output)
+            self.assertIn("Spieler 2 hat gewonnen", output)
 
 
 
