@@ -6,7 +6,7 @@ Raises:
 import os
 import random
 from termcolor import colored
-from colorama import init
+from colorama import init, Fore, Back
 import converter_functions
 
 init()
@@ -109,7 +109,7 @@ def print_leaked_board(board):
         # replace function to optical replace 1 = ship position, 0 = free space (water), 6 = placement blocker for following player ships
         print(
             "  ".join(
-                str(elem).replace("1", "#").replace("0", "~").replace("6", "X")
+                str(elem).replace("1", "\033[37m#").replace("0", "\033[34m~").replace("6", "\033[31mX")
                 for elem in row
             )
         )
