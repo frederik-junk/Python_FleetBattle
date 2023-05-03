@@ -167,14 +167,14 @@ def place_ship(board, ship_length, ship, ship_name, counter):
             if (
                 starting_column_char == 11
             ):  # eleven is the statuscode for input is out of bounce
-                raise Exception("Ihre Angabe ist fehlerhaft")
+                raise ValueError("Ihre Angabe ist fehlerhaft")
             starting_row_number = converter_functions.split_row(placement_input)
             if (
                 starting_row_number == 11
             ):  # eleven is the statuscode for input is out of bounce
-                raise Exception("Ihre Angabe ist fehlerhaft")
+                raise ValueError("Ihre Angabe ist fehlerhaft")
         # if placing fails the user is asked to replace his ship
-        except Exception:
+        except ValueError:
             print(
                 colored(
                     "Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\n Bitte geben Sie eine Zahl zwischen 1 und 10 ein.",

@@ -8,7 +8,7 @@ def add_placement_blocker(board, position_tupel_list):
         board (List): The board on which ships can be placed
         position_tupel_list (List): A tupel list that contains the coordinates of the ships position
     """
-#falls if/else statements zuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu viele: evtl. mit if not(blabla): --> kein else nötig weils schon in if not() steht (pass- teil kann weg)
+
 
     for tupel in position_tupel_list:
         row_number, column_number = tupel

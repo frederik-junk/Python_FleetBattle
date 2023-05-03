@@ -16,8 +16,6 @@ cpu_memory = 0
 
 init()
 
-direction_lock = 0
-hit_status = 0
 i = 0
 
 
@@ -27,7 +25,7 @@ def clear_console():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def shooting(
-    data, game_mode, current_player
+    game_mode, current_player
 ):  # I would remove game_mode and current_player and would call the functions with other board wenn Spielverlauf
     # used for CPU
     """Function to process shots of the user
@@ -42,7 +40,7 @@ def shooting(
     """
     if game_mode == 1:
         if current_player == 1:
-            shooting_iq = output_manager.user_1.get_shooting_iq()
+            shooting_iq = output_manager.user__1.get_shooting_iq()
             match cpu_manager1(
                 shooting_iq,
                 python_game.leaked_board_2,
@@ -81,8 +79,8 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 1
                     return winning_id  # is the winningID which should be returned to the main
-                else:
-                    return None #return None
+
+                return None #return None
             case 2:
                 if (
                     player_manager(
@@ -95,8 +93,8 @@ def shooting(
                 ):  # has to change with number of ships
                     winning_id = 2
                     return winning_id  # is the winningID which should be returned to the main.
-                else:
-                    return None
+
+                return None
             case _:
                 print("something went wrong")
     else:
@@ -129,11 +127,11 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
         try:
             row = converter_functions.split_row(shooting_position)
             if row == 11:
-                raise Exception("Ihre Angabe ist fehlerhaft")
+                raise ValueError("Ihre Angabe ist fehlerhaft")
             column = converter_functions.split_column_converter(shooting_position)
             if column == 11:
-                raise Exception("Ihre Angabe ist fehlerhaft")
-        except Exception:
+                raise ValueError("Ihre Angabe ist fehlerhaft")
+        except ValueError:
             print(
                 colored(
                     "Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\nBitte geben Sie eine Zahl zwischen 1 und 10 ein.",
@@ -148,8 +146,6 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
             case 1:
                 shooting_tupel = (row, column)
                 for ship in ship_list:
-                    name = ship.get_name()
-                    print(name)
                     positions = ship.get_position()
                     position_memory = ship.get_position_memory()
                     if shooting_tupel in positions:
@@ -165,12 +161,9 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                             for tupel in position_memory:
                                 row, column = tupel
                                 hidden_board[row][column] = 4
-                                # two times the same row?
-                                # hidden_board[row][column] = 4
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            print(current_player.get_left_ships())
                             if current_player.get_left_ships() == 1:
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
@@ -194,8 +187,8 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                 )
                 shooting_repeater = False
             case 4:
-                print(
-                    "Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\n"
+                print("Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!")
+                print("Das Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\n"
                 )
                 print(
                     "Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!"
@@ -205,13 +198,11 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                 print(colored("Das war leider ein Wassertreffer", "cyan"))
                 hidden_board[row][column] = 2
                 leaked_board[row][column] = 2
-                python_game.print_hidden_board
                 shooting_repeater = False
             case 6:
                 print(colored("Das war leider ein Wassertreffer", "cyan"))
                 hidden_board[row][column] = 2
                 leaked_board[row][column] = 2
-                python_game.print_hidden_board
                 shooting_repeater = False
             case _:
                 print("Hier ist ein Fehler aufgetreten den es nicht geben kann")
@@ -329,8 +320,8 @@ def cpu_manager1(shooting_iq, leaked_board, hidden_board):
                 row, column = cpu_memory
                 if leaked_board[row][column] == 6:
                     leaked_board[row][column] = 0
-                firstShootingPosition = first_position(hidden_board)
-                output_manager.user_1.set_first_cpu_memory(firstShootingPosition)
+                first_shooting_position = first_position(hidden_board)
+                output_manager.user_1.set_first_cpu_memory(first_shooting_position)
 
                 shooting_iq = 1
                 output_manager.user_1.set_shooting_iq(shooting_iq)
