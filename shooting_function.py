@@ -273,7 +273,6 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         return leaked_board[row][column]
         case _:
             print("something went terribly wrong")
-            return
 
 
 def first_position(board):
@@ -334,11 +333,6 @@ def cpu_manager1(shooting_iq, leaked_board, hidden_board):
                     # check if it is a hit
                     match check_hit(hidden_board, leaked_board, cpu_memory):
                         case 0:  # if the random shot is a non-hit -> still shooting_iq = 0
-                            print(
-                                colored(
-                                    "Der Computer erzielt einen Wassertreffer", "cyan"
-                                )
-                            )
                             hidden_board[row][column] = 2
                             shooting_iq = 0
                             output_manager.user_1.set_shooting_iq(shooting_iq)

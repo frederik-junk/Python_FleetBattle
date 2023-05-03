@@ -327,5 +327,4 @@ def cpu_place_ship(board, ship_length, ship):
             == 11
         ):
             continue
-        print_leaked_board(board)
         break
