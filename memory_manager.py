@@ -12,73 +12,73 @@ def load_data(data, game_mode):
     if game_mode == 1:
         # coordinates of tupel with succesful hit
         first_cpu_memory = [tuple(item) for item in data["first_cpu_memory"]]
-        output_manager.user1.set_first_cpu_memory(first_cpu_memory)
+        output_manager.user_1.set_first_cpu_memory(first_cpu_memory)
         # cpu status (diffrent steps until final ship finish)
-        output_manager.user1.set_shooting_iq(data["shootingIq"])
+        output_manager.user_1.set_shooting_iq(data["shooting_iq"])
         # direction for next hits after succesful first hit
-        output_manager.user1.set_direction(data["direction"])
+        output_manager.user_1.set_direction(data["direction"])
     # loads name of Player 1
-    output_manager.user1.set_name(data["playerName1"])
+    output_manager.user_1.set_name(data["player_name_1"])
     # loads name of Player 2
-    output_manager.user2.set_name(data["playerName2"])
+    output_manager.user_2.set_name(data["player_name_2"])
     # loads amount of sunken ships (player 1)
-    output_manager.user1.set_left_ships(data["playerShips"])
+    output_manager.user_1.set_left_ships(data["player_ships"])
     # loads amount of sunken ships (player 2)
-    output_manager.user1.set_left_ships(data["opponentShips"])
+    output_manager.user_1.set_left_ships(data["opponent_ships"])
 
     # initalize all player 1 (player) ships with memory data of postion and hitted spots
     # variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
     # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
 
-    p_schlachtschiff_p_list = [tuple(item) for item in data["pSchlachtschiff1p"]]
-    p_schlachtschiff_m_list = [tuple(item) for item in data["pSchlachtschiff1m"]]
-    ship_initializer.pSchlachtschiff1.setPositionMemory(p_schlachtschiff_m_list)
-    ship_initializer.pSchlachtschiff1.setPosition(p_schlachtschiff_p_list)
+    p_schlachtschiff_p_list = [tuple(item) for item in data["p_schlachtschiff_1_p"]]
+    p_schlachtschiff_m_list = [tuple(item) for item in data["p_schlachtschiff_1_m"]]
+    ship_initializer.p_schlachtschiff_1.set_position_memory(p_schlachtschiff_m_list)
+    ship_initializer.p_schlachtschiff_1.set_position(p_schlachtschiff_p_list)
     """
-    pKreuzer1pList = [tuple(item) for item in data["pKreuzer1p"]]
-    pKreuzer1mList = [tuple(item) for item in data["pKreuzer1m"]] 
-    shipinitializer.pKreuzer1.setPositionMemory(pKreuzer1mList)
-    shipinitializer.pKreuzer1.setPosition(pKreuzer1pList)
+    p_kreuzer_1_p_list = [tuple(item) for item in data["p_kreuzer_1_p"]]
+    p_kreuzer_1_m_list = [tuple(item) for item in data["p_kreuzer_1_m"]] 
+    ship_initializer.p_kreuzer_1.set_position_memory(p_kreuzer_1_m_list)
+    ship_initializer.p_kreuzer_1.set_position(p_kreuzer_1_p_list)
 
-    pKreuzer2pList = [tuple(item) for item in data["pKreuzer2p"]]
-    pKreuzer2mList = [tuple(item) for item in data["pKreuzer2m"]] 
-    shipinitializer.pKreuzer2.setPositionMemory(pKreuzer2mList)
-    shipinitializer.pKreuzer2.setPosition(pKreuzer2pList)
+    p_kreuzer_2_p_list = [tuple(item) for item in data["p_kreuzer_2_p"]]
+    p_kreuzer_2_m_list = [tuple(item) for item in data["p_kreuzer_2_m"]] 
+    ship_initializer.p_kreuzer_2.set_position_memory(p_kreuzer_2_m_list)
+    ship_initializer.p_kreuzer_2.set_position(p_kreuzer_2_p_list)
 
-    pZerstoerer1pList = [tuple(item) for item in data["pZerstoerer1p"]]
-    pZerstoerer1mList = [tuple(item) for item in data["pZerstoerer1m"]] 
-    shipinitializer.pZerstoerer1.setPositionMemory(pZerstoerer1mList)
-    shipinitializer.pZerstoerer1.setPosition(pZerstoerer1pList)
+    p_zerstoerer_1_p_list = [tuple(item) for item in data["p_zerstoerer_1_p"]]
+    p_zerstoerer_1_m_list = [tuple(item) for item in data["p_zerstoerer_1_m"]] 
+    ship_initializer.p_zerstoerer_1.set_position_memory(p_zerstoerer_1_m_list)
+    ship_initializer.p_zerstoerer_1.set_position(p_zerstoerer_1_p_list)
 
-    pZerstoerer2pList = [tuple(item) for item in data["pZerstoerer2p"]]
-    pZerstoerer2mList = [tuple(item) for item in data["pZerstoerer2m"]] 
-    shipinitializer.pZerstoerer2.setPositionMemory(pZerstoerer2mList)
-    shipinitializer.pZerstoerer2.setPosition(pZerstoerer2pList)
+    p_zerstoerer_2_p_list = [tuple(item) for item in data["p_zerstoerer_2_p"]]
+    p_zerstoerer_2_m_list = [tuple(item) for item in data["p_zerstoerer_2_m"]] 
+    ship_initializer.p_zerstoerer_2.set_position_memory(p_zerstoerer_2_m_list)
+    ship_initializer.p_zerstoerer_2.set_position(p_zerstoerer_2_p_list)
 
-    pZerstoerer3pList = [tuple(item) for item in data["pZerstoerer3p"]]
-    pZerstoerer3mList = [tuple(item) for item in data["pZerstoerer3m"]] 
-    shipinitializer.pZerstoerer3.setPositionMemory(pZerstoerer3mList)
-    shipinitializer.pZerstoerer3.setPosition(pZerstoerer3pList)
+    p_zerstoerer_3_p_list = [tuple(item) for item in data["p_zerstoerer_3_p"]]
+    p_zerstoerer_3_m_list = [tuple(item) for item in data["p_zerstoerer_3_m"]] 
+    ship_initializer.p_zerstoerer_3.set_position_memory(p_zerstoerer_3_m_list)
+    ship_initializer.p_zerstoerer_3.set_position(p_zerstoerer_3_p_list)
 
-    pUboot1pList = [tuple(item) for item in data["pUboot1p"]]
-    pUboot1mList = [tuple(item) for item in data["pUboot1m"]] 
-    shipinitializer.pUboot1.setPositionMemory(pUboot1mList)
-    shipinitializer.pUboot1.setPosition(pUboot1pList)
+    p_uboot_1p_list = [tuple(item) for item in data["p_uboot_1p"]]
+    p_uboot_1m_list = [tuple(item) for item in data["p_uboot_1m"]] 
+    ship_initializer.p_uboot_1.set_position_memory(p_uboot_1m_list)
+    ship_initializer.p_uboot_1.set_position(p_uboot_1p_list)
 
-    pUboot2pList = [tuple(item) for item in data["pUboot2p"]]
-    pUboot2mList = [tuple(item) for item in data["pUboot2m"]] 
-    shipinitializer.pUboot2.setPositionMemory(pUboot2mList)
-    shipinitializer.pUboot2.setPosition(pUboot2pList)
+    p_uboot_2_p_list = [tuple(item) for item in data["p_uboot_2_p"]]
+    p_uboot_2_m_list = [tuple(item) for item in data["p_uboot_2_m"]] 
+    ship_initializer.p_uboot_2.set_position_memory(p_uboot_2_m_list)
+    ship_initializer.p_uboot_2.set_position(p_uboot_2_p_list)
 
-    pUboot3pList = [tuple(item) for item in data["pUboot3p"]]
-    pUboot3mList = [tuple(item) for item in data["pUboot3m"]] 
-    shipinitializer.pUboot3.setPositionMemory(pUboot3mList)
-    shipinitializer.pUboot3.setPosition(pUboot3pList)
+    p_uboot_3_p_list = [tuple(item) for item in data["p_uboot_3_p"]]
+    p_uboot_3_m_list = [tuple(item) for item in data["p_uboot_3_m"]] 
+    ship_initializer.p_uboot_3.set_position_memory(p_uboot_3_m_list)
+    ship_initializer.p_uboot_3.set_position(p_uboot_3_p_list)
 
-    pUboot4pList = [tuple(item) for item in data["pUboot4p"]]
-    pUboot4mList = [tuple(item) for item in data["pUboot4m"]] 
-    shipinitializer.pUboot4.setPositionMemory(pUboot4mList)
-    shipinitializer.pUboot4.setPosition(pUboot4pList)
+    p_uboot_4_p_list = [tuple(item) for item in data["p_uboot_4_p"]]
+    p_uboot_4_m_list = [tuple(item) for item in data["p_uboot_4_m"]] 
+    ship_initializer.p_uboot_4.set_position_memory(p_uboot_4_m_list)
+    ship_initializer.p_uboot_4.set_position(p_uboot_4_p_list)
 
     """
 
@@ -86,55 +86,55 @@ def load_data(data, game_mode):
     # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
     # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
 
-    o_schlachtschiff_1_p_list = [tuple(item) for item in data["oSchlachtschiff1p"]]
-    o_schlachtschiff_1_m_list = [tuple(item) for item in data["oSchlachtschiff1m"]]
-    ship_initializer.oSchlachtschiff1.setPositionMemory(o_schlachtschiff_1_m_list)
-    ship_initializer.oSchlachtschiff1.setPosition(o_schlachtschiff_1_p_list)
+    o_schlachtschiff_1_p_list = [tuple(item) for item in data["o_schlachtschiff_1_p"]]
+    o_schlachtschiff_1_m_list = [tuple(item) for item in data["o_schlachtschiff_1_m"]]
+    ship_initializer.o_schlachtschiff_1.set_position_memory(o_schlachtschiff_1_m_list)
+    ship_initializer.o_schlachtschiff_1.set_position(o_schlachtschiff_1_p_list)
     """
-    oKreuzer1pList = [tuple(item) for item in data["oKreuzer1p"]]
-    oKreuzer1mList = [tuple(item) for item in data["oKreuzer1m"]] 
-    shipinitializer.oKreuzer1.setPositionMemory(oKreuzer1mList)
-    shipinitializer.oKreuzer1.setPosition(oKreuzer1pList)
+    o_kreuzer_1_p_list = [tuple(item) for item in data["o_kreuzer_1_p"]]
+    o_kreuzer_1_m_list = [tuple(item) for item in data["o_kreuzer_1_m"]] 
+    ship_initializer.o_kreuzer_1.set_position_memory(o_kreuzer_1_m_list)
+    ship_initializer.o_kreuzer_1.set_position(o_kreuzer_1_p_list)
 
-    oKreuzer2pList = [tuple(item) for item in data["oKreuzer2p"]]
-    oKreuzer2mList = [tuple(item) for item in data["oKreuzer2m"]] 
-    shipinitializer.oKreuzer2.setPositionMemory(oKreuzer2mList)
-    shipinitializer.oKreuzer2.setPosition(oKreuzer2pList)
+    o_kreuzer_2_p_list = [tuple(item) for item in data["o_kreuzer_2_p"]]
+    o_kreuzer_2_m_list = [tuple(item) for item in data["o_kreuzer_2_m"]] 
+    ship_initializer.o_kreuzer_2.set_position_memory(o_kreuzer_2_m_list)
+    ship_initializer.o_kreuzer_2.set_position(o_kreuzer_2_p_list)
 
-    oZerstoerer1pList = [tuple(item) for item in data["oZerstoerer1p"]]
-    oZerstoerer1mList = [tuple(item) for item in data["oZerstoerer1m"]] 
-    shipinitializer.oZerstoerer1.setPositionMemory(oZerstoerer1mList)
-    shipinitializer.oZerstoerer1.setPosition(oZerstoerer1pList)
+    o_zerstoerer_1_p_list = [tuple(item) for item in data["o_zerstoerer_1_p"]]
+    o_zerstoerer_1_m_list = [tuple(item) for item in data["o_zerstoerer_1_m"]] 
+    ship_initializer.o_zerstoerer_1.set_position_memory(o_zerstoerer_1_m_list)
+    ship_initializer.o_zerstoerer_1.set_position(o_zerstoerer_1_p_list)
 
-    oZerstoerer2pList = [tuple(item) for item in data["oZerstoerer2p"]]
-    oZerstoerer2mList = [tuple(item) for item in data["oZerstoerer2m"]] 
-    shipinitializer.oZerstoerer2.setPositionMemory(oZerstoerer2mList)
-    shipinitializer.oZerstoerer2.setPosition(oZerstoerer2pList)
+    o_zerstoerer_2_p_list = [tuple(item) for item in data["o_zerstoerer_2_p"]]
+    o_zerstoerer_2_m_list = [tuple(item) for item in data["o_zerstoerer_2_m"]] 
+    ship_initializer.o_zerstoerer_2.set_position_memory(o_zerstoerer_2_m_list)
+    ship_initializer.o_zerstoerer_2.set_position(o_zerstoerer_2_p_list)
 
-    oZerstoerer3pList = [tuple(item) for item in data["oZerstoerer3p"]]
-    oZerstoerer3mList = [tuple(item) for item in data["oZerstoerer3m"]] 
-    shipinitializer.oZerstoerer3.setPositionMemory(oZerstoerer3mList)
-    shipinitializer.oZerstoerer3.setPosition(oZerstoerer3pList)
+    o_zerstoerer_3_p_list = [tuple(item) for item in data["o_zerstoerer_3_p"]]
+    o_zerstoerer_3_m_list = [tuple(item) for item in data["o_zerstoerer_3_m"]] 
+    ship_initializer.o_zerstoerer_3.set_position_memory(o_zerstoerer_3_m_list)
+    ship_initializer.o_zerstoerer_3.set_position(o_zerstoerer_3_p_list)
 
-    oUboot1pList = [tuple(item) for item in data["oUboot1p"]]
-    oUboot1mList = [tuple(item) for item in data["oUboot1m"]] 
-    shipinitializer.oUboot1.setPositionMemory(oUboot1mList)
-    shipinitializer.oUboot1.setPosition(oUboot1pList)
+    o_uboot_1_p_list = [tuple(item) for item in data["o_uboot_1_p"]]
+    o_uboot_1_m_list = [tuple(item) for item in data["o_uboot_1_m"]] 
+    ship_initializer.oUboot1.set_position_memory(o_uboot_1_m_list)
+    ship_initializer.oUboot1.set_position(o_uboot_1_p_list)
 
-    oUboot2pList = [tuple(item) for item in data["oUboot2p"]]
-    oUboot2mList = [tuple(item) for item in data["oUboot2m"]] 
-    shipinitializer.oUboot2.setPositionMemory(oUboot2mList)
-    shipinitializer.oUboot2.setPosition(oUboot2pList)
+    o_uboot_2_p_list = [tuple(item) for item in data["o_uboot_2_p"]]
+    o_uboot_2_m_list = [tuple(item) for item in data["o_uboot_2_m"]] 
+    ship_initializer.o_uboot_2.set_position_memory(o_uboot_2_m_list)
+    ship_initializer.o_uboot_2.set_position(o_uboot_2_p_list)
 
-    oUboot3pList = [tuple(item) for item in data["oUboot3p"]]
-    oUboot3mList = [tuple(item) for item in data["oUboot3m"]] 
-    shipinitializer.oUboot3.setPositionMemory(oUboot3mList)
-    shipinitializer.oUboot3.setPosition(oUboot3pList)
+    o_uboot_3_p_list = [tuple(item) for item in data["o_uboot_3_p"]]
+    o_uboot_3_m_list = [tuple(item) for item in data["o_uboot_3_m"]] 
+    ship_initializer.o_uboot_3.set_position_memory(o_uboot_3_m_list)
+    ship_initializer.o_uboot_3.set_position(o_uboot_3_p_list)
 
-    oUboot4pList = [tuple(item) for item in data["oUboot4p"]]
-    oUboot4mList = [tuple(item) for item in data["oUboot4m"]] 
-    shipinitializer.oUboot4.setPositionMemory(oUboot4mList)
-    shipinitializer.oUboot4.setPosition(oUboot4pList)
+    o_uboot_4_p_list = [tuple(item) for item in data["o_uboot_4_p"]]
+    o_uboot_4_m_list = [tuple(item) for item in data["o_uboot_4_m"]] 
+    ship_initializer.o_uboot_4.set_position_memory(o_uboot_4_m_list)
+    ship_initializer.o_uboot_4.set_position(o_uboot_4_p_list)
 
     """
 
@@ -146,93 +146,93 @@ def store_data(data):
     #getting postion data of all player 1 (player) ships and store them via tupel lists
     #variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
     #(p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
-    data["pSchlachtschiff1m"] = ship_initializer.pSchlachtschiff1.getPositionMemory()
-    data["pSchlachtschiff1p"] = ship_initializer.pSchlachtschiff1.getPosition()
+    data["p_schlachtschiff_1_m"] = ship_initializer.p_schlachtschiff_1.get_position_memory()
+    data["p_schlachtschiff_1_p"] = ship_initializer.p_schlachtschiff_1.get_position()
 
     """
-    data["pKreuzer1m"] = shipinitializer.pKreuzer1.getPositionMemory()
-    data["pKreuzer1p"] = shipinitializer.pKreuzer1.getPosition()
+    data["p_kreuzer_1_m"] = ship_initializer.p_kreuzer_1.get_position_memory()
+    data["p_kreuzer_1_p"] = ship_initializer.p_kreuzer_1.get_position()
 
-    data["pKreuzer2m"] = shipinitializer.pKreuzer2.getPositionMemory()
-    data["pKreuzer2p"] = shipinitializer.pKreuzer2.getPosition()
+    data["p_kreuzer_2_m"] = ship_initializer.p_kreuzer_2.get_position_memory()
+    data["p_kreuzer_2_p"] = ship_initializer.p_kreuzer_2.get_position()
 
-    data["pZerstoerer1m"] = shipinitializer.pZerstoerer1.getPositionMemory()
-    data["pZerstoerer1p"] = shipinitializer.pZerstoerer1.getPosition()
+    data["p_zerstoerer_1_m"] = ship_initializer.p_zerstoerer_1.get_position_memory()
+    data["p_zerstoerer_1_p"] = ship_initializer.p_zerstoerer_1.get_position()
 
-    data["pZerstoerer2m"] = shipinitializer.pZerstoerer2.getPositionMemory()
-    data["pZerstoerer2p"] = shipinitializer.pZerstoerer2.getPosition()
+    data["p_zerstoerer_2_m"] = ship_initializer.p_zerstoerer_2.get_position_memory()
+    data["p_zerstoerer_2_p"] = ship_initializer.p_zerstoerer_2.get_position()
 
-    data["pZerstoerer3m"] = shipinitializer.pZerstoerer3.getPositionMemory()
-    data["pZerstoerer3p"] = shipinitializer.pZerstoerer3.getPosition()
+    data["p_zerstoerer_3_m"] = ship_initializer.p_zerstoerer_3.get_position_memory()
+    data["p_zerstoerer_3_p"] = ship_initializer.p_zerstoerer_3.get_position()
 
-    data["pUboot1m"] = shipinitializer.pUboot1.getPositionMemory()
-    data["pUboot1p"] = shipinitializer.pUboot1.getPosition()
+    data["p_uboot_1m"] = ship_initializer.p_uboot_1.get_position_memory()
+    data["p_uboot_1p"] = ship_initializer.p_uboot_1.get_position()
 
-    data["pUboot2m"] = shipinitializer.pUboot2.getPositionMemory()
-    data["pUboot2p"] = shipinitializer.pUboot2.getPosition()
+    data["p_uboot_2_m"] = ship_initializer.p_uboot_2.get_position_memory()
+    data["p_uboot_2_p"] = ship_initializer.p_uboot_2.get_position()
 
-    data["pUboot3m"] = shipinitializer.pUboot3.getPositionMemory()
-    data["pUboot3p"] = shipinitializer.pUboot3.getPosition()
+    data["p_uboot_3_m"] = ship_initializer.p_uboot_3.get_position_memory()
+    data["p_uboot_3_p"] = ship_initializer.p_uboot_3.get_position()
 
-    data["pUboot4m"] = shipinitializer.pUboot4.getPositionMemory()
-    data["pUboot4p"] = shipinitializer.pUboot4.getPosition()
+    data["p_uboot_4_m"] = ship_initializer.p_uboot_4.get_position_memory()
+    data["p_uboot_4_p"] = ship_initializer.p_uboot_4.get_position()
     """
     # getting postion data of all player 2 (opponent) ships and store them via tupel lists
     # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
     # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
-    data["oSchlachtschiff1m"] = ship_initializer.oSchlachtschiff1.getPositionMemory()
-    data["oSchlachtschiff1p"] = ship_initializer.oSchlachtschiff1.getPosition()
+    data["o_schlachtschiff_1_m"] = ship_initializer.o_schlachtschiff_1.get_position_memory()
+    data["o_schlachtschiff_1_p"] = ship_initializer.o_schlachtschiff_1.get_position()
 
     """
-    data["oKreuzer1m"] = shipinitializer.oKreuzer1.getPositionMemory()
-    data["oKreuzer1p"] = shipinitializer.oKreuzer1.getPosition()
+    data["o_kreuzer_1_m"] = ship_initializer.o_kreuzer_1.get_position_memory()
+    data["o_kreuzer_1_p"] = ship_initializer.o_kreuzer_1.get_position()
 
-    data["oKreuzer2m"] = shipinitializer.oKreuzer2.getPositionMemory()
-    data["oKreuzer2p"] = shipinitializer.oKreuzer2.getPosition()
+    data["o_kreuzer_2_m"] = ship_initializer.o_kreuzer_2.get_position_memory()
+    data["o_kreuzer_2_p"] = ship_initializer.o_kreuzer_2.get_position()
 
-    data["oZerstoerer1m"] = shipinitializer.oZerstoerer1.getPositionMemory()
-    data["oZerstoerer1p"] = shipinitializer.oZerstoerer1.getPosition()
+    data["o_zerstoerer_1_m"] = ship_initializer.o_zerstoerer_1.get_position_memory()
+    data["o_zerstoerer_1_p"] = ship_initializer.o_zerstoerer_1.get_position()
 
-    data["oZerstoerer2m"] = shipinitializer.oZerstoerer2.getPositionMemory()
-    data["oZerstoerer2p"] = shipinitializer.oZerstoerer2.getPosition()
+    data["o_zerstoerer_2_m"] = ship_initializer.o_zerstoerer_2.get_position_memory()
+    data["o_zerstoerer_2_p"] = ship_initializer.o_zerstoerer_2.get_position()
 
-    data["oZerstoerer3m"] = shipinitializer.oZerstoerer3.getPositionMemory()
-    data["oZerstoerer3p"] = shipinitializer.oZerstoerer3.getPosition()
+    data["o_zerstoerer_3_m"] = ship_initializer.o_zerstoerer_3.get_position_memory()
+    data["o_zerstoerer_3_p"] = ship_initializer.o_zerstoerer_3.get_position()
 
-    data["oUboot1m"] = shipinitializer.oUboot1.getPositionMemory()
-    data["oUboot1p"] = shipinitializer.oUboot1.getPosition()
+    data["o_uboot_1_m"] = ship_initializer.oUboot1.get_position_memory()
+    data["o_uboot_1_p"] = ship_initializer.oUboot1.get_position()
 
-    data["oUboot2m"] = shipinitializer.oUboot2.getPositionMemory()
-    data["oUboot2p"] = shipinitializer.oUboot2.getPosition()
+    data["o_uboot_2_m"] = ship_initializer.o_uboot_2.get_position_memory()
+    data["o_uboot_2_p"] = ship_initializer.o_uboot_2.get_position()
 
-    data["oUboot3m"] = shipinitializer.oUboot3.getPositionMemory()
-    data["oUboot3p"] = shipinitializer.oUboot3.getPosition()
+    data["o_uboot_3_m"] = ship_initializer.o_uboot_3.get_position_memory()
+    data["o_uboot_3_p"] = ship_initializer.o_uboot_3.get_position()
 
-    data["oUboot4m"] = shipinitializer.oUboot4.getPositionMemory()
-    data["oUboot4p"] = shipinitializer.oUboot4.getPosition()
+    data["o_uboot_4_m"] = ship_initializer.o_uboot_4.get_position_memory()
+    data["o_uboot_4_p"] = ship_initializer.o_uboot_4.get_position()
     """
 
     # saves data of first successfuly hitted postion from oponent by cpu
-    data["first_cpu_memory"] = output_manager.user1.get_first_cpu_memory()
+    data["first_cpu_memory"] = output_manager.user_1.get_first_cpu_memory()
     # saves cpu hitting status
-    data["shootingIq"] = output_manager.user1.get_shooting_iq()
+    data["shooting_iq"] = output_manager.user_1.get_shooting_iq()
     # saves cpu direction for following hits
-    data["direction"] = output_manager.user1.get_direction()
+    data["direction"] = output_manager.user_1.get_direction()
     # saves name of player 1
-    data["playerName1"] = output_manager.user1.get_name()
+    data["player_name_1"] = output_manager.user_1.get_name()
     # saves name of player 2
-    data["playerName2"] = output_manager.user2.get_name()
+    data["player_name_2"] = output_manager.user_2.get_name()
     # saves amount of left unsunken ships from player 1
-    data["playerShips"] = output_manager.user1.get_left_ships()
+    data["player_ships"] = output_manager.user_1.get_left_ships()
     # saves amount of left unsunken ships from player 2
-    data["opponentShips"] = output_manager.user2.get_left_ships()
+    data["opponent_ships"] = output_manager.user_2.get_left_ships()
     # saves leakedBoard 1 to restore all informations of ship position (player 1 ships)
-    data["leakedBoard1"] = python_game.leakedBoard1
+    data["leaked_board_1"] = python_game.leaked_board_1
     # saves leakedBoard 2 to restore all informations of ship position (player 2 ships)
-    data["leakedBoard2"] = python_game.leakedBoard2
+    data["leaked_board_2"] = python_game.leaked_board_2
     # saves hiddenBoard 1 to restore all informations of hitted positions (player 1 ships)
-    data["hiddenBoard1"] = python_game.hiddenBoard1
+    data["hidden_board_1"] = python_game.hidden_board_1
     # saves hiddenBoard 2 to restore all informations of hitted positions (player 2 ships)
-    data["hiddenBoard2"] = python_game.hiddenBoard2
+    data["hidden_board_2"] = python_game.hidden_board_2
     # saves information if storage data is available (1) or not (0)
     data["storage_available"] = 1

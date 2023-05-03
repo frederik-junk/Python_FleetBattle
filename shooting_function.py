@@ -53,13 +53,13 @@ def shooting(
             ):
                 case 11:
                     return 1
-                case None:
-                    return 1
+                #case None:
+                 #   return 1
                 case _:
                     next_player(data, game_mode, 1)
 
         elif current_player == 2:
-            match playermanager(
+            match player_manager(
                 data,
                 output_manager.user2,
                 python_game.leaked_board_1,
@@ -68,8 +68,8 @@ def shooting(
             ):  # has to change with number of ships
                 case "won":
                     return 2  # is the winningID which should be returned to the main.
-                case None:
-                    return 2
+                #case None:
+                 #   return 2
                 case _:
                     next_player(data, game_mode, 2)
 
@@ -79,7 +79,7 @@ def shooting(
         match current_player:
             case 1:
                 if (
-                    playermanager(
+                    player_manager(
                         data,
                         output_manager.user1,
                         python_game.leaked_board_2,
@@ -93,7 +93,7 @@ def shooting(
                 next_player(data, game_mode, 1)
             case 2:
                 if (
-                    playermanager(
+                    player_manager(
                         data,
                         output_manager.user2,
                         python_game.leaked_board_1,
@@ -111,7 +111,7 @@ def shooting(
         print("Shit")
 
 
-def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
+def player_manager(data, current_player, leaked_board, hidden_board, ship_list):
     """Function that handles the shots of the player
 
     Args:
@@ -293,6 +293,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         return leaked_board[row][column]
         case _:
             print("something went terribly wrong")
+            return
 
 
 def first_position(board):
@@ -616,7 +617,7 @@ def next_player(data, game_mode, current_player):
         print("__________________________________\n")
         print(f"{output_manager.user2.get_name()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continue_request = input(
+        input(
             f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user2.get_name()}  \n"
         )
 
@@ -626,7 +627,7 @@ def next_player(data, game_mode, current_player):
         print("__________________________________\n")
         print(f"{output_manager.user1.get_name()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continue_request = input(
+        input(
             f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user1.get_name()}  \n"
         )
     else:

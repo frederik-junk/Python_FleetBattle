@@ -1,6 +1,5 @@
-import unittest, selectoperations
-
 # pylint: disable=C
+import unittest, select_operations
 
 
 class TestMain(unittest.TestCase):
