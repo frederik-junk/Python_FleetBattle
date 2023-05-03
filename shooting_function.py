@@ -111,7 +111,7 @@ def shooting(
         print("Shit")
 
 
-def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
+def playermanager(current_player, leaked_board, hidden_board, ship_list):
     """Function that handles the shots of the player
 
     Args:
