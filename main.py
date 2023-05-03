@@ -7,11 +7,12 @@ import python_game
 import memory_manager
 import outputmanager
 import selectoperations
-import shootingfunction
+import shooting_function
 import pythonGame
 import memorymanager
 
-SHIP_STORAGE_FILE = "shipstorage.json"
+SHIP_STORAGE_FILE = "ship_storage.json"
+
 
 # extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
@@ -34,7 +35,7 @@ def play_game():
     if should_load_game:
         pythonGame.boardloader(data, should_load_game)
         memorymanager.loadData(data, data["game_mode"])
-        winning_player_id = shootingfunction.shooting(
+        winning_player_id = shooting_function.shooting(
             data, data["game_mode"], data["current_player"]
         )
         data["storage_available"] = 0
@@ -68,7 +69,7 @@ def play_game():
         selected_game_mode = selectoperations.gameModeSelection(data)
         # Call function to randomly select starting player
         starting_player = selectoperations.selectStartingPlayer(data)
-        winning_player_id = shootingfunction.shooting(
+        winning_player_id = shooting_function.shooting(
             data, selected_game_mode, starting_player
 
         )
@@ -90,3 +91,4 @@ if __name__ == "__main__":
             json.dump(data, file, indent=2)
         print(
             "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
+
