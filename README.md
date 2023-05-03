@@ -50,57 +50,60 @@ playerIndex 3 = Computer
 2 = Spieler
 
 {
-  "storage_available": 0,
-  "currentPlayer": 1,
-  "gameMode": 2,
-  "playerName1": "default1",
-  "playerName2": "default2",
-  "opponentShips": 1,
-  "playerShips": 1,
-  "firstCpuMemory": [],
-  "shootingIq": 0,
+  "storage_available": 1,
+  "current_player": 2,
+  "game_mode": 1,
+  "player_name_1": "Spieler 1",
+  "player_name_2": "Spieler 2",
+  "opponent_ships": 0,
+  "player_ships": 0,
+  "first_cpu_memory": [
+    0,
+    0
+  ],
+  "shooting_iq": 0,
   "direction": 0,
-  "pSchlachtschiff1p": [],
-  "pSchlachtschiff1m": [],
-  "pKreuzer1p": [],
-  "pKreuzer2p": [],
-  "pZerstoerer1p": [],
-  "pZerstoerer2p": [],
-  "pZerstoerer3p": [],
-  "pUboot1p": [],
+  "p_schlachtschiff_1_p": [],
+  "p_schlachtschiff_1_m": [],
+  "p_kreuzer_1_p": [],
+  "p_kreuzer_2_p": [],
+  "p_zerstoerer_1_p": [],
+  "p_zerstoerer_2_p": [],
+  "p_zerstoerer_3_p": [],
+  "p_uboot_1_p": [],
   "pUboot2p": [],
-  "pUboot3p": [],
-  "pUboot4p": [],
-  "pKreuzer1m": [],
-  "pKreuzer2m": [],
-  "pZerstoerer1m": [],
-  "pZerstoerer2m": [],
-  "pZerstoerer3m": [],
-  "pUboot1m": [],
-  "pUboot2m": [],
-  "pUboot3m": [],
-  "pUboot4m": [],
-  "oSchlachtschiff1p": [],
-  "oSchlachtschiff1m": [],
-  "oKreuzer1p": [],
-  "oKreuzer2p": [],
-  "oZerstoerer1p": [],
-  "oZerstoerer2p": [],
-  "oZerstoerer3p": [],
-  "oUboot1p": [],
-  "oUboot2p": [],
-  "oUboot3p": [],
-  "oUboot4p": [],
-  "oKreuzer1m": [],
-  "oKreuzer2m": [],
-  "oZerstoerer1m": [],
-  "oZerstoerer2m": [],
-  "oZerstoerer3m": [],
-  "oUboot1m": [],
-  "oUboot2m": [],
-  "oUboot3m": [],
-  "oUboot4m": [],
-  "leakedBoard1": [
+  "p_uboot_3_p": [],
+  "p_uboot_4_p": [],
+  "p_kreuzer_1_m": [],
+  "p_kreuzer_2_m": [],
+  "p_zerstoerer_1_m": [],
+  "p_zerstoerer_2_m": [],
+  "p_zerstoerer_3_m": [],
+  "p_uboot_1_m": [],
+  "p_uboot_2_m": [],
+  "p_uboot_3_m": [],
+  "p_uboot_4_m": [],
+  "o_schlachtschiff_1_p": [],
+  "o_schlachtschiff_1_m": [],
+  "o_kreuzer_1_p": [],
+  "o_kreuzer_2_p": [],
+  "o_zerstoerer_1_p": [],
+  "o_zerstoerer_2_p": [],
+  "o_zerstoerer_3_p": [],
+  "o_uboot_1_p": [],
+  "o_uboot_2_p": [],
+  "o_uboot_3_p": [],
+  "o_uboot_4_p": [],
+  "o_kreuzer_1_m": [],
+  "o_kreuzer_2_m": [],
+  "o_zerstoerer_1_m": [],
+  "o_zerstoerer_2_m": [],
+  "o_zerstoerer_3_m": [],
+  "o_uboot_1_m": [],
+  "o_uboot_2_m": [],
+  "o_uboot_3_m": [],
+  "o_uboot_4_m": [],
+  "leaked_board_1": [
     [
       0,
       0,
@@ -222,7 +225,7 @@ playerIndex 3 = Computer
       0
     ]
   ],
-  "leakedBoard2": [
+  "leaked_board_2": [
     [
       0,
       0,
@@ -344,7 +347,7 @@ playerIndex 3 = Computer
       0
     ]
   ],
-  "hiddenBoard1": [
+  "hidden_board_1": [
     [
       0,
       0,
@@ -466,7 +469,7 @@ playerIndex 3 = Computer
       0
     ]
   ],
-  "hiddenBoard2": [
+  "hidden_board_2": [
     [
       0,
       0,
@@ -588,7 +591,7 @@ playerIndex 3 = Computer
       0
     ]
   ],
-  "resetBoard": [
+  "reset_board": [
     [
       0,
       0,
