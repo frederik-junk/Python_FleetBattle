@@ -121,7 +121,7 @@ def gameModeSelection(data):
                     outputmanager.user1.setName(userName1)
                     clearConsole()
                     print (f"Hallo {outputmanager.user1.getName()}, bitte platzieren Sie nun Ihre Schiffe")
-                    print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'red',attrs=["reverse"]))
+                    print(colored("\nDer andere Spieler sollte diesen Vorgang nicht sehen, bitte wegschauen!\n",'white','on_red'))
                     # Call function placeShip for user 1 to place ships
                     counter = 1
                     for ship in shipinitializer.playerShips:
