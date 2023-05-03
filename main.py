@@ -29,10 +29,10 @@ def main():
         memory_manager.load_data(data, data["game_mode"])
         current_player = data["current_player"]
         game_mode = data["game_mode"]
-        
+
         while True:
             winning_player_id = shooting_function.shooting(data, game_mode , current_player)
-            if winning_player_id == None:
+            if winning_player_id is None:
                 current_player = shooting_function.next_player(data, current_player)
                 continue
             break
@@ -56,7 +56,7 @@ def main():
 
         while True:
             winning_player_id = shooting_function.shooting(data, game_mode, current_player)
-            if winning_player_id == None:
+            if winning_player_id is None:
                 current_player = shooting_function.next_player(data, current_player)
                 continue
             break
