@@ -40,7 +40,7 @@ def shooting(
     """
     if game_mode == 1:
         if current_player == 1:
-            shooting_iq = output_manager.user_1.get_shooting_iq()
+            shooting_iq = output_manager.user__1.get_shooting_iq()
             match cpu_manager1(
                 shooting_iq,
                 python_game.leaked_board_2,
@@ -146,8 +146,6 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
             case 1:
                 shooting_tupel = (row, column)
                 for ship in ship_list:
-                    name = ship.get_name()
-                    print(name)
                     positions = ship.get_position()
                     position_memory = ship.get_position_memory()
                     if shooting_tupel in positions:
@@ -163,12 +161,9 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                             for tupel in position_memory:
                                 row, column = tupel
                                 hidden_board[row][column] = 4
-                                # two times the same row?
-                                # hidden_board[row][column] = 4
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            print(current_player.get_left_ships())
                             if current_player.get_left_ships() == 1:
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
