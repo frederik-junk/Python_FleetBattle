@@ -1,3 +1,8 @@
+"""Module handles player and cpu actions
+
+Raises:
+    Exception: Prints an error messsage to inform the user
+"""
 import os
 import random
 from termcolor import colored
@@ -16,6 +21,8 @@ hitStatus = 0
 i = 0
 
 def clearConsole():
+    """Function to clear the console for better game experience
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and currentPlayer and would call the functions with other board wenn Spielverlauf
@@ -40,9 +47,10 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
                     return 1
                 case _:
                     nextPlayer(data, gameMode, 1)
-          
+
         elif currentPlayer == 2:
-            match playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.opponentShips) : #has to change with number of ships
+             #has to change with number of ships
+            match playermanager(data ,outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.opponentShips) :
                 case "won":
                     return 2 #is the winningID which should be returned to the main.
                 case None:
@@ -55,26 +63,41 @@ def shooting(data, gameMode, currentPlayer):  #I would remove gameMode and curre
     elif gameMode == 2:
         match currentPlayer:
             case 1:
-                if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, shipinitializer.opponentShips) == "won": #has to change with number of ships
+                 #has to change with number of ships
+                if playermanager(data, outputmanager.user1, pythonGame.leakedBoard2, pythonGame.hiddenBoard1, shipinitializer.opponentShips) == "won":
                     winningId = 1
                     return winningId #is the winningID which should be returned to the main
-                else:
-                        nextPlayer(data, gameMode, 1)
+                nextPlayer(data, gameMode, 1)
             case 2:
-                if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.playerShips) == "won": #has to change with number of ships
+                #has to change with number of ships
+                if playermanager(data, outputmanager.user2, pythonGame.leakedBoard1, pythonGame.hiddenBoard2, shipinitializer.playerShips) == "won":
                     winningId = 2
                     return winningId #is the winningID which should be returned to the main.
-                else:
-                        nextPlayer(data, gameMode, 2)
-            case _: 
+                nextPlayer(data, gameMode, 2)
+            case _:
                 print("something went wrong")
     else:
         print("Shit")
 
 def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
+    """Function that handles the shots of the player
+
+    Args:
+        data (_type_): _description_
+        currentPlayer (int): Indicates which player is currently allowed to take shots
+        leakedBoard (list): The visible board for the player to place shots
+        hiddenBoard (list): The non visible board were the opponent ships are placed
+        shipList (list): The list of available ships
+
+    Raises:
+        Exception: Prints an error message on the screen
+
+    Returns:
+        String: Indication that the game is won
+    """
     shootingRepeater = True
     pythonGame.printhiddenBoard(hiddenBoard)
-    while shootingRepeater == True:
+    while shootingRepeater is True:
         shootingPosition = input(f"{currentPlayer.getName()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n")
         try:
             row = converterfunctions.splitRow(shootingPosition)
@@ -84,7 +107,7 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
             if column == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
         except Exception:
-            print(colored("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie Buchstaben zwischen A und J ein.\nBitte geben Sie eine Zahl zwischen 1 und 10 ein.",'red'))
+            print(colored("Ihre Eingabe enthaelt Fehler.\n Bitte geben Sie ein Koordinatenpaar (bspw. 'C2') ein, mit Buchstaben A-J und Zahlen 0-9",'red'))
             print("Bitte geben Sie die Anfangskoordinaten erneut ein (z.B.: A3).")
             continue
         clearConsole()
@@ -133,7 +156,7 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
                 print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
                 shootingRepeater = False
             case 4:
-                print("Blubb blubb Schuss verweigert, denn hier herrscht Totenstille, Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt, lassen wir den Toten besser ihre verdiente Ruhe.\n")
+                print("Sie hatten dieses Feld bereits beschossen!\nDas Schiff an dieser Stelle ist bereits versenkt.\n")
                 print("Tipp: Waehlen Sie beim naechsten Mal Felder, die noch mit [~] markiert sind!")
                 shootingRepeater = False
             case 0:
@@ -160,11 +183,26 @@ def playermanager(data, currentPlayer, leakedBoard, hiddenBoard, shipList):
 
 
 def randomDirection():
+    """Generates a random directino value for the CPU to shoot at
+
+    Returns:
+        int: The direction as an int value
+    """
     direction = random.randint(0,3)
     return direction
 
 
 def checkHit(hiddenBoard, leakedBoard, cpuMemory):
+    """Checks whether water or a ship was hit with the last shot
+
+    Args:
+        hiddenBoard (list): The non visible board where the opponent ships are placed 
+        leakedBoard (list): The visible board for the player to take shots
+        cpuMemory (tuple): The memorized coordinates of the CPU player
+
+    Returns:
+        int: A coordinate which has been shot at
+    """
     row, column = cpuMemory
     match leakedBoard[row][column]:
         case 0:
@@ -202,8 +240,6 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
                         if outputmanager.user1.getLeftShips() == 1:
                             allHit = 11 #11 is the number which determines that the cpu won (for the winning ID)
                             return allHit
-                        else:
-                            pass
                     else:
                         return leakedBoard[row][column]
         case _:
@@ -213,6 +249,14 @@ def checkHit(hiddenBoard, leakedBoard, cpuMemory):
 
 
 def firstPosition(board):
+    """Decides which coordinates are not hit currently
+
+    Args:
+        board (list): The game board on which the ships are placed
+
+    Returns:
+        int: _description_
+    """
     while True: #get correct shooting coordinates on which he didnt shot
         row = random.randint(0,9)
         column = random.randint(0,9)
@@ -220,13 +264,24 @@ def firstPosition(board):
             shootingTuple = (row, column)
             firstCpuMemory = shootingTuple
             break
-        else:
-            continue
     return firstCpuMemory
 
 
 
 def cpuManager1(data, gameMode, currentPlayer, shootingIq, leakedBoard, hiddenBoard):
+    """Handles the actions of the CPU
+
+    Args:
+        data (_type_): _description_
+        gameMode (int): The chosen game mode to indicate if the CPU player is envolved
+        currentPlayer (int): An int value to indicate which player is in turn to take a shot
+        shootingIq (_type_): _description_
+        leakedBoard (list): The visible board for the player to take a shot
+        hiddenBoard (_type_): The non visible board on which the opponent ships are placed
+
+    Returns:
+        bool: Indication that shows that all ships are hit and sunk
+    """
     global cpuMemory
 
     direction = outputmanager.user1.getDirection()
@@ -478,23 +533,27 @@ def cpuManager1(data, gameMode, currentPlayer, shootingIq, leakedBoard, hiddenBo
 
 # Switches the current player after each action
 def nextPlayer(data, gameMode, currentPlayer):
+    """Is responsible for changing the currentPlayer value after a player hit water with a shot
 
+    Args:
+        data (_type_): _description_
+        gameMode (int): The game mode to indicate if CPU player is envolved or two humans
+        currentPlayer (int): The int value that indicates the current player
+    """
     if currentPlayer == 1:
         currentPlayer = 2
         data["currentPlayer"] = currentPlayer
         print("__________________________________\n")
         print(f"{outputmanager.user2.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n")
-        
-        
+        input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user2.getName()}  \n")
     elif currentPlayer == 2:
         currentPlayer = 1
         data["currentPlayer"] = currentPlayer
         print("__________________________________\n")
         print(f"{outputmanager.user1.getName()} ist nun an der Reihe.")
         print("__________________________________\n")
-        continueRequest = input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
+        input(f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {outputmanager.user1.getName()}  \n")
     else:
         print("Irgendwas ist hier schief gelaufen!")
 

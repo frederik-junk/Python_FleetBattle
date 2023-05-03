@@ -12,7 +12,6 @@ class WrongPlacement(Exception):
     Args:
         Exception (Error): Prints an error message
     """
-    pass
 
 def directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship):
     """Function that is used to define the direction the ship is placed, based on the tip of the ship

@@ -1,9 +1,13 @@
+"""Module that is responsible for correct loading of the data
+"""
 import shipinitializer
 import outputmanager
 import pythonGame
 
 #function to load all data elements after game restart
 def loadData(data, gameMode):
+    """Function that sets each value that is read from the saved file to the right variable in the game.
+    """
     #checking if cpu data is necessary (gamemode 1)
     if gameMode == 1:
         #cordinates of tupel with succesful hit
@@ -136,6 +140,8 @@ def loadData(data, gameMode):
     """
 
 def storeData(data):
+    """Function that saves the game data into a file for later reading and continuing the game
+    """
 
     #getting postion data of all player 1 (player) ships and store them via tupel lists
     #variable explanation: p-(code letter for player 1)- Schlachtschiff1 -(unique ship name)- p/m -
