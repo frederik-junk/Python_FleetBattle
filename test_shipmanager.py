@@ -17,9 +17,9 @@ class TestShipmanager(unittest.TestCase):
         self.schlachtSchiff.set_position(7)
         self.assertEqual(self.schlachtSchiff.get_position(), 7)
 
-    def test_hitOnShip(self):
+    def test_hit_on_ship(self):
         self.assertEqual(self.kreuzer.get_damage_counter(), 0)
-        self.kreuzer.hitOnShip()
+        self.kreuzer.hit_on_ship()
         self.assertEqual(self.kreuzer.get_damage_counter(), 1)
 
     def test_get_size(self):

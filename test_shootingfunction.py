@@ -3,11 +3,6 @@ import unittest
 from unittest.mock import Mock, patch
 import io
 import sys
-# import random
-# import python_game
-# import converter_functions
-# import ship_initializer
-import output_manager
 import shooting_function
 
 
@@ -55,12 +50,9 @@ class TestShooting(unittest.TestCase):
         current_player = 1
         data = {"current_player": 1}
 
-        expected_output = f"__________________________________\n{output_manager.user2.get_name()} ist nun an der Reihe.\n__________________________________\n"
-
         with patch("builtins.input", return_value="a"):
-            with patch("sys.stdout", new=io.StringIO()) as fake_output:
-                shooting_function.next_player(game_mode, current_player, data)
-                self.assertEqual(data["current_player"], 1)
+            shooting_function.next_player(data, game_mode, current_player)
+            self.assertEqual(data["current_player"], 1)
 
     def test_next_player_error(self):
         # Test for invalid current_player value
@@ -70,7 +62,7 @@ class TestShooting(unittest.TestCase):
         expected_output = "Irgendwas ist hier schief gelaufen!\nShit\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
-                shooting_function.next_player(game_mode, current_player, data)
+                shooting_function.next_player(data, game_mode, current_player)
                 self.assertEqual(fake_output.getvalue(), expected_output)
 
     @patch("random.randint")
@@ -88,9 +80,9 @@ class TestShooting(unittest.TestCase):
     def test_missed_shot(self):
         hidden_board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         leaked_board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-        cpuMemory = (1, 1)
+        cpu_memory = (1, 1)
 
-        result = shooting_function.check_hit(hidden_board, leaked_board, cpuMemory)
+        result = shooting_function.check_hit(hidden_board, leaked_board, cpu_memory)
 
         self.assertEqual(result, 0)
         self.assertEqual(hidden_board, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
@@ -98,9 +90,9 @@ class TestShooting(unittest.TestCase):
     def test_water_hit(self):
         hidden_board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         leaked_board = [[0, 0, 0], [0, 6, 0], [0, 0, 0]]
-        cpuMemory = (1, 1)
+        cpu_memory = (1, 1)
 
-        result = shooting_function.check_hit(hidden_board, leaked_board, cpuMemory)
+        result = shooting_function.check_hit(hidden_board, leaked_board, cpu_memory)
 
         self.assertEqual(result, 0)
         self.assertEqual(hidden_board, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
@@ -109,9 +101,9 @@ class TestShooting(unittest.TestCase):
     def test_ship_hit(self):
         hidden_board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         leaked_board = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
-        cpuMemory = (1, 1)
+        cpu_memory = (1, 1)
 
-        result = shooting_function.check_hit(hidden_board, leaked_board, cpuMemory)
+        result = shooting_function.check_hit(hidden_board, leaked_board, cpu_memory)
 
 
         #self.assertEqual(result, 1)
@@ -126,67 +118,66 @@ class TestShooting(unittest.TestCase):
     def test_invalid_board(self):
         hidden_board = []
         leaked_board = []
-        cpuMemory = (1, 1)
+        cpu_memory = (1, 1)
 
         with self.assertRaises(IndexError):
-            shooting_function.check_hit(hidden_board, leaked_board, cpuMemory)
+            shooting_function.check_hit(hidden_board, leaked_board, cpu_memory)
 
     def test_first_position_returns_tuple(self):
         board = [[0 for _ in range(10)] for _ in range(10)]
-        firstCpuMemory = shooting_function.first_position(board)
-        self.assertIsInstance(firstCpuMemory, tuple)
+        first_cpu_memory = shooting_function.first_position(board)
+        self.assertIsInstance(first_cpu_memory, tuple)
 
     def test_first_position_returns_valid_coordinates(self):
         board = [[0 for _ in range(10)] for _ in range(10)]
-        firstCpuMemory = shooting_function.first_position(board)
-        row, col = firstCpuMemory
+        first_cpu_memory = shooting_function.first_position(board)
+        row, col = first_cpu_memory
         self.assertGreaterEqual(row, 0)
         self.assertLess(row, 10)
         self.assertGreaterEqual(col, 0)
         self.assertLess(col, 10)
 
-    def test_cpu_manager1_return_11(self):
+    def test_cpu_manager_1_return_11(self):
         self.shooting_iq = 0
-        user_1 = Mock()
-        user_1.getFirstCpuMemory.return_value = (5, 5)
-        user_1.getCpuMemory.return_value = (5, 5)
-        user_1.getDirection.return_value = 0
-
         self.leaked_board = [[0 for i in range(10)] for j in range(10)]
         self.hidden_board = [[0 for i in range(10)] for j in range(10)]
-        cpu_manager1_return = shooting_function.cpu_manager1(self.game_mode, self.current_player, self.shooting_iq, self.data, self.leaked_board, self.hidden_board)
-        self.assertEqual(cpu_manager1_return, "something went wrong")
+        user_1 = Mock()
+        user_1.get_first_cpu_memory.return_value = (5, 5)
+        user_1.get_cpu_memory.return_value = (5, 5)
+        user_1.get_direction.return_value = 0
+        cpu_manager_1_return = shooting_function.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data, self.leaked_board, self.hidden_board)
+        self.assertEqual(cpu_manager_1_return, "something went wrong")
 
     # @patch('cpu_manager.random_direction')
-    # def test_cpu_manager1_shooting_iq_1(self, mock_random_direction):
+    # def test_cpu_manager_1_shooting_iq_1(self, mock_random_direction):
     #     mock_random_direction.return_value = 1
     #     user_1 = Mock()
-    #     user_1.getFirstCpuMemory.return_value = (5, 5)
-    #     user_1.getCpuMemory.return_value = (5, 6)
-    #     user_1.getDirection.return_value = 1
+    #     user_1.get_first_cpu_memory.return_value = (5, 5)
+    #     user_1.get_cpu_memory.return_value = (5, 6)
+    #     user_1.get_direction.return_value = 1
     #     self.shooting_iq = 1
-    #     cpu_manager1_return = shootingfunction.cpu_manager1(self.game_mode, self.current_player, self.shooting_iq, self.data)
+    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
     #     self.assertEqual(user_1.setCpuMemory.call_count, 3)
     #     self.assertEqual(user_1.setDirection.call_count, 2)
     #     self.assertEqual(user_1.setShootingIq.call_count, 2)
 
-    # def test_cpu_manager1_shooting_iq_2(self):
+    # def test_cpu_manager_1_shooting_iq_2(self):
     #     user_1 = Mock()
-    #     user_1.getFirstCpuMemory.return_value = (5, 5)
-    #     user_1.getCpuMemory.return_value = (4, 5)
-    #     user_1.getDirection.return_value = 2
+    #     user_1.get_first_cpu_memory.return_value = (5, 5)
+    #     user_1.get_cpu_memory.return_value = (4, 5)
+    #     user_1.get_direction.return_value = 2
     #     self.shooting_iq = 2
-    #     cpu_manager1_return = shootingfunction.cpu_manager1(self.game_mode, self.current_player, self.shooting_iq, self.data)
+    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
     #     self.assertEqual(user_1.setCpuMemory.call_count, 2)
     #     self.assertEqual(user_1.setShootingIq.call_count, 1)
 
-    # def test_cpu_manager1_shooting_iq_3(self):
+    # def test_cpu_manager_1_shooting_iq_3(self):
     #     user_1 = Mock()
-    #     user_1.getFirstCpuMemory.return_value = (5, 5)
-    #     user_1.getCpuMemory.return_value = (4, 6)
-    #     user_1.getDirection.return_value = 3
+    #     user_1.get_first_cpu_memory.return_value = (5, 5)
+    #     user_1.get_cpu_memory.return_value = (4, 6)
+    #     user_1.get_direction.return_value = 3
     #     self.shooting_iq = 3
-    #     cpu_manager1_return = shootingfunction.cpu_manager1(self.game_mode, self.current_player, self.shooting_iq, self.data)
+    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
     #     self.assertEqual(user_1.setCpuMemory.call_count, 2)
     #     self.assertEqual(user_1.setShootingIq.call_count, 1)
 
