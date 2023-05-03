@@ -1,0 +1,5 @@
+[FORMAT]
+max-line-length=160
+
+[MESSAGES CONTROL]
+disable= too-many-arguments, too-many-statements, anomalous-backslash-in-string, too-many-locals, too-many-branches, global-variable-undefined, too-many-return-statements, unused-variable, inconsistent-return-statements
