@@ -34,7 +34,7 @@ def load_data(data, game_mode):
     p_schlachtschiff_m_list = [tuple(item) for item in data["p_schlachtschiff_1_m"]]
     ship_initializer.p_schlachtschiff_1.set_position_memory(p_schlachtschiff_m_list)
     ship_initializer.p_schlachtschiff_1.set_position(p_schlachtschiff_p_list)
-    """
+
     p_kreuzer_1_p_list = [tuple(item) for item in data["p_kreuzer_1_p"]]
     p_kreuzer_1_m_list = [tuple(item) for item in data["p_kreuzer_1_m"]] 
     ship_initializer.p_kreuzer_1.set_position_memory(p_kreuzer_1_m_list)
@@ -80,7 +80,7 @@ def load_data(data, game_mode):
     ship_initializer.p_uboot_4.set_position_memory(p_uboot_4_m_list)
     ship_initializer.p_uboot_4.set_position(p_uboot_4_p_list)
 
-    """
+
 
     # initalize all player 2 (opponent) ships with memory data of postion and hitted spots
     # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
@@ -90,7 +90,7 @@ def load_data(data, game_mode):
     o_schlachtschiff_1_m_list = [tuple(item) for item in data["o_schlachtschiff_1_m"]]
     ship_initializer.o_schlachtschiff_1.set_position_memory(o_schlachtschiff_1_m_list)
     ship_initializer.o_schlachtschiff_1.set_position(o_schlachtschiff_1_p_list)
-    """
+
     o_kreuzer_1_p_list = [tuple(item) for item in data["o_kreuzer_1_p"]]
     o_kreuzer_1_m_list = [tuple(item) for item in data["o_kreuzer_1_m"]] 
     ship_initializer.o_kreuzer_1.set_position_memory(o_kreuzer_1_m_list)
@@ -118,8 +118,8 @@ def load_data(data, game_mode):
 
     o_uboot_1_p_list = [tuple(item) for item in data["o_uboot_1_p"]]
     o_uboot_1_m_list = [tuple(item) for item in data["o_uboot_1_m"]] 
-    ship_initializer.oUboot1.set_position_memory(o_uboot_1_m_list)
-    ship_initializer.oUboot1.set_position(o_uboot_1_p_list)
+    ship_initializer.o_uboot_1.set_position_memory(o_uboot_1_m_list)
+    ship_initializer.o_uboot_1.set_position(o_uboot_1_p_list)
 
     o_uboot_2_p_list = [tuple(item) for item in data["o_uboot_2_p"]]
     o_uboot_2_m_list = [tuple(item) for item in data["o_uboot_2_m"]] 
@@ -136,7 +136,7 @@ def load_data(data, game_mode):
     ship_initializer.o_uboot_4.set_position_memory(o_uboot_4_m_list)
     ship_initializer.o_uboot_4.set_position(o_uboot_4_p_list)
 
-    """
+
 
 
 def store_data(data):
@@ -149,7 +149,7 @@ def store_data(data):
     data["p_schlachtschiff_1_m"] = ship_initializer.p_schlachtschiff_1.get_position_memory()
     data["p_schlachtschiff_1_p"] = ship_initializer.p_schlachtschiff_1.get_position()
 
-    """
+
     data["p_kreuzer_1_m"] = ship_initializer.p_kreuzer_1.get_position_memory()
     data["p_kreuzer_1_p"] = ship_initializer.p_kreuzer_1.get_position()
 
@@ -176,14 +176,14 @@ def store_data(data):
 
     data["p_uboot_4_m"] = ship_initializer.p_uboot_4.get_position_memory()
     data["p_uboot_4_p"] = ship_initializer.p_uboot_4.get_position()
-    """
+
     # getting postion data of all player 2 (opponent) ships and store them via tupel lists
     # variable explanation: o-(code letter for player 2)- Schlachtschiff1 -(unique ship name)- p/m -
     # (p = tupellist with unhitted ship spots/ m = tupellist with hitted ship spots)
     data["o_schlachtschiff_1_m"] = ship_initializer.o_schlachtschiff_1.get_position_memory()
     data["o_schlachtschiff_1_p"] = ship_initializer.o_schlachtschiff_1.get_position()
 
-    """
+
     data["o_kreuzer_1_m"] = ship_initializer.o_kreuzer_1.get_position_memory()
     data["o_kreuzer_1_p"] = ship_initializer.o_kreuzer_1.get_position()
 
@@ -199,8 +199,8 @@ def store_data(data):
     data["o_zerstoerer_3_m"] = ship_initializer.o_zerstoerer_3.get_position_memory()
     data["o_zerstoerer_3_p"] = ship_initializer.o_zerstoerer_3.get_position()
 
-    data["o_uboot_1_m"] = ship_initializer.oUboot1.get_position_memory()
-    data["o_uboot_1_p"] = ship_initializer.oUboot1.get_position()
+    data["o_uboot_1_m"] = ship_initializer.o_uboot_1.get_position_memory()
+    data["o_uboot_1_p"] = ship_initializer.o_uboot_1.get_position()
 
     data["o_uboot_2_m"] = ship_initializer.o_uboot_2.get_position_memory()
     data["o_uboot_2_p"] = ship_initializer.o_uboot_2.get_position()
@@ -210,7 +210,7 @@ def store_data(data):
 
     data["o_uboot_4_m"] = ship_initializer.o_uboot_4.get_position_memory()
     data["o_uboot_4_p"] = ship_initializer.o_uboot_4.get_position()
-    """
+    
 
     # saves data of first successfuly hitted postion from oponent by cpu
     data["first_cpu_memory"] = output_manager.user_1.get_first_cpu_memory()
