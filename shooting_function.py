@@ -55,7 +55,7 @@ def shooting(
 
         elif current_player == 2:
             match player_manager(
-                output_manager.user2,
+                output_manager.user_2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
                 ship_initializer.opponent_ships,
@@ -72,7 +72,7 @@ def shooting(
             case 1:
                 if (
                     player_manager(
-                        output_manager.user1,
+                        output_manager.user_1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
                         ship_initializer.opponent_ships,
@@ -86,7 +86,7 @@ def shooting(
             case 2:
                 if (
                     player_manager(
-                        output_manager.user2,
+                        output_manager.user_2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
                         ship_initializer.player_ships,
@@ -272,10 +272,10 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                             row, column = tupel
                             hidden_board[row][column] = 4
                         shooting_iq = 0
-                        output_manager.user1.set_shooting_iq(shooting_iq)
+                        output_manager.user_1.set_shooting_iq(shooting_iq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
-                        output_manager.user1.increase_left_ships()
-                        if output_manager.user1.get_left_ships() == 1:
+                        output_manager.user_1.increase_left_ships()
+                        if output_manager.user_1.get_left_ships() == 1:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
                     else:
