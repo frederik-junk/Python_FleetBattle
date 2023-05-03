@@ -1,13 +1,14 @@
+# pylint: disable=C
 import unittest
 from unittest.mock import Mock, patch
 import io
 import sys
 import random
-import circularImportFixing
-import pythonGame
-import converterfunctions
-import outputmanager
-import shootingfunction
+import python_game
+import converter_functions
+import ship_initializer
+import output_manager
+import shooting_function
 
 
 class TestShooting(unittest.TestCase):
@@ -38,7 +39,7 @@ class TestShooting(unittest.TestCase):
         currentPlayer = 1
         with io.StringIO("A1\n") as mock_input:
             sys.stdin = mock_input
-            output = shootingfunction.playermanager(
+            output = shooting_function.playermanager(
                 data,
                 currentPlayerName,
                 leakedBoard,
@@ -56,7 +57,7 @@ class TestShooting(unittest.TestCase):
         expected_output = f"__________________________________\n{outputmanager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
-                shootingfunction.nextPlayer(gameMode, currentPlayer, data)
+                shooting_function.nextPlayer(gameMode, currentPlayer, data)
                 self.assertEqual(data["currentPlayer"], 1)
 
     def test_nextPlayer_error(self):
@@ -67,7 +68,7 @@ class TestShooting(unittest.TestCase):
         expected_output = "Irgendwas ist hier schief gelaufen!\nShit\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
-                shootingfunction.nextPlayer(gameMode, currentPlayer, data)
+                shooting_function.nextPlayer(gameMode, currentPlayer, data)
                 self.assertEqual(fake_output.getvalue(), expected_output)
 
     @patch("random.randint")
@@ -76,7 +77,7 @@ class TestShooting(unittest.TestCase):
         mock_randint.return_value = 2
 
         # Call the function and assert that it returns the expected value
-        result = shootingfunction.randomDirection()
+        result = shooting_function.randomDirection()
         self.assertEqual(result, 2)
 
         # Assert that the mock random integer function was called with the expected arguments
@@ -87,7 +88,7 @@ class TestShooting(unittest.TestCase):
         leakedBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
-        result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
+        result = shooting_function.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
         self.assertEqual(result, 0)
         self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
@@ -97,7 +98,7 @@ class TestShooting(unittest.TestCase):
         leakedBoard = [[0, 0, 0], [0, 6, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
-        result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
+        result = shooting_function.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
         self.assertEqual(result, 0)
         self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
@@ -108,7 +109,7 @@ class TestShooting(unittest.TestCase):
         leakedBoard = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
-        result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
+        result = shooting_function.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
         self.assertEqual(result, 1)
         self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 0, 0], [0, 0, 0]])
@@ -119,16 +120,16 @@ class TestShooting(unittest.TestCase):
         cpuMemory = (1, 1)
 
         with self.assertRaises(IndexError):
-            shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
+            shooting_function.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
     def test_first_position_returns_tuple(self):
         board = [[0 for _ in range(10)] for _ in range(10)]
-        firstCpuMemory = shootingfunction.firstPosition(board)
+        firstCpuMemory = shooting_function.firstPosition(board)
         self.assertIsInstance(firstCpuMemory, tuple)
 
     def test_first_position_returns_valid_coordinates(self):
         board = [[0 for _ in range(10)] for _ in range(10)]
-        firstCpuMemory = shootingfunction.firstPosition(board)
+        firstCpuMemory = shooting_function.firstPosition(board)
         row, col = firstCpuMemory
         self.assertGreaterEqual(row, 0)
         self.assertLess(row, 10)

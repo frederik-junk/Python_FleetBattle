@@ -1,3 +1,4 @@
+# pylint: disable=C
 import unittest
 import pythonGame
 from unittest.mock import MagicMock, patch
@@ -5,9 +6,6 @@ from io import StringIO
 from contextlib import redirect_stdout
 import sys
 from converterfunctions import splitColumnConverter, splitRow
-
-# pylint: disable=C
-
 
 class TestPythonGame(unittest.TestCase):
     def setUp(self):

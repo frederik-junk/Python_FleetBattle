@@ -1,8 +1,6 @@
+# pylint: disable=C
 import unittest
 from shipmanager import *
-
-# pylint: disable=C
-
 
 class TestShipmanager(unittest.TestCase):
     def setUp(self):

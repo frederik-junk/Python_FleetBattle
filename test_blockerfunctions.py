@@ -1,8 +1,6 @@
+# pylint: disable=C
 import unittest
 import blockerfunctions
-
-# pylint: disable=C
-
 
 class TestBlockerFunctions(unittest.TestCase):
     def setUp(self):

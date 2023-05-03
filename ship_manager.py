@@ -98,7 +98,7 @@ class Ships:
             ship (Class): The class of the ship 
             counter (int): The counter to keep count on how many ships have already been placed
         """
-        python_game.placeShip(board, self.get_size(), ship, self.get_name(), counter)
+        python_game.place_ship(board, self.get_size(), ship, self.get_name(), counter)
 
     def class_cpu_place_ship(self, board, ship):
         """Method to set a ship for the CPU opponent
@@ -107,7 +107,7 @@ class Ships:
             board (List): The board on which the ships should be placed
             ship (Class): The type of ship which is to be placed
         """
-        python_game.cpuPlaceShip(board, self.get_size(), ship)
+        python_game.cpu_place_ship(board, self.get_size(), ship)
 
 
 # classes for each ship type with standard values
