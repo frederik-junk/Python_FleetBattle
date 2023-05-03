@@ -1,5 +1,4 @@
 # pylint: disable=C
-from io import StringIO
 import unittest
 from unittest.mock import MagicMock, patch
 import output_manager

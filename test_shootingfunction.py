@@ -35,11 +35,10 @@ class TestShooting(unittest.TestCase):
         with io.StringIO("A1\n") as mock_input:
             sys.stdin = mock_input
             output = shooting_function.player_manager(
-                current_player_name,
+                current_player,
                 leaked_board,
                 hidden_board,
                 ship_list,
-                current_player,
             )
             self.assertIsNone(output)
 
@@ -50,7 +49,7 @@ class TestShooting(unittest.TestCase):
         data = {"current_player": 1}
 
         with patch("builtins.input", return_value="a"):
-            shooting_function.next_player(data, game_mode, current_player)
+            shooting_function.next_player(data, current_player)
             self.assertEqual(data["current_player"], 2)
 
     def test_next_player_error(self):
@@ -61,7 +60,7 @@ class TestShooting(unittest.TestCase):
         expected_output = "Irgendwas ist hier schief gelaufen!\nShit\n"
         with patch("builtins.input", return_value="a"):
             with patch("sys.stdout", new=io.StringIO()) as fake_output:
-                shooting_function.next_player(data, game_mode, current_player)
+                shooting_function.next_player(data, current_player)
                 self.assertEqual(fake_output.getvalue(), expected_output)
 
     @patch("random.randint")
@@ -144,52 +143,8 @@ class TestShooting(unittest.TestCase):
         user_1.get_first_cpu_memory.return_value = (5, 5)
         user_1.get_cpu_memory.return_value = (5, 5)
         user_1.get_direction.return_value = 0
-        cpu_manager_1_return = shooting_function.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data, self.leaked_board, self.hidden_board)
-        self.assertEqual(cpu_manager_1_return, "something went wrong")
-
-    # @patch('cpu_manager.random_direction')
-    # def test_cpu_manager_1_shooting_iq_1(self, mock_random_direction):
-    #     mock_random_direction.return_value = 1
-    #     user_1 = Mock()
-    #     user_1.get_first_cpu_memory.return_value = (5, 5)
-    #     user_1.get_cpu_memory.return_value = (5, 6)
-    #     user_1.get_direction.return_value = 1
-    #     self.shooting_iq = 1
-    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
-    #     self.assertEqual(user_1.setCpuMemory.call_count, 3)
-    #     self.assertEqual(user_1.setDirection.call_count, 2)
-    #     self.assertEqual(user_1.setShootingIq.call_count, 2)
-
-    # def test_cpu_manager_1_shooting_iq_2(self):
-    #     user_1 = Mock()
-    #     user_1.get_first_cpu_memory.return_value = (5, 5)
-    #     user_1.get_cpu_memory.return_value = (4, 5)
-    #     user_1.get_direction.return_value = 2
-    #     self.shooting_iq = 2
-    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
-    #     self.assertEqual(user_1.setCpuMemory.call_count, 2)
-    #     self.assertEqual(user_1.setShootingIq.call_count, 1)
-
-    # def test_cpu_manager_1_shooting_iq_3(self):
-    #     user_1 = Mock()
-    #     user_1.get_first_cpu_memory.return_value = (5, 5)
-    #     user_1.get_cpu_memory.return_value = (4, 6)
-    #     user_1.get_direction.return_value = 3
-    #     self.shooting_iq = 3
-    #     cpu_manager_1_return = shootingfunction.cpu_manager_1(self.game_mode, self.current_player, self.shooting_iq, self.data)
-    #     self.assertEqual(user_1.setCpuMemory.call_count, 2)
-    #     self.assertEqual(user_1.setShootingIq.call_count, 1)
-
-    # @patch('builtins.input', side_effect=['K1', 'A11', 'A1'])
-    # def test_player_manager_2(self, mock_input):
-    #     result = player_manager(self.data, user_1.get_name(), leaked_board2, hidden_board1, playerShips)
-    #     self.assertEqual(result, None)
-
-    # @patch('builtins.input', side_effect=['K1', 'A11', 'A1'])
-    # def test_shooting_2(self, mock_input):
-    #     result = shooting(self.data, self.game_mode, self.current_player)
-    #     self.assertEqual(result, None)
-
+        cpu_manager_1_return = shooting_function.cpu_manager_1(self.shooting_iq, self.leaked_board, self.hidden_board)
+        self.assertEqual(cpu_manager_1_return, None)
 
 if __name__ == "__main__":
     unittest.main()

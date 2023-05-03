@@ -41,7 +41,7 @@ def shooting(
     if game_mode == 1:
         if current_player == 1:
             shooting_iq = output_manager.user_1.get_shooting_iq()
-            match cpu_manager1(
+            match cpu_manager_1(
                 shooting_iq,
                 python_game.leaked_board_2,
                 python_game.hidden_board_1,
@@ -122,7 +122,7 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
     python_game.print_hidden_board(hidden_board)
     while shooting_repeater is True:
         shooting_position = input(
-            f"{current_player.get_name()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
+            f"{current_player.get_name} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
         )
         try:
             row = converter_functions.split_row(shooting_position)
@@ -295,7 +295,7 @@ def first_position(board):
     return first_cpu_memory
 
 
-def cpu_manager1(shooting_iq, leaked_board, hidden_board):
+def cpu_manager_1(shooting_iq, leaked_board, hidden_board):
     """Handles the actions of the CPU
 
     Args:

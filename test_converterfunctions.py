@@ -1,7 +1,7 @@
 # pylint: disable=C
 import unittest
 from unittest.mock import MagicMock, patch
-from converter_functions import split_column_converter, split_row, direction_converter, WrongPlacement
+from converter_functions import split_column_converter, split_row
 
 class TestConverterFunctions(unittest.TestCase):
 

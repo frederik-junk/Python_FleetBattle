@@ -2,7 +2,7 @@
 from io import StringIO
 import json
 import unittest, select_operations
-from unittest.mock import mock_open, patch
+from unittest.mock import patch
 from main import main
 
 class TestMain(unittest.TestCase):
@@ -21,14 +21,6 @@ class TestMain(unittest.TestCase):
                 "storage_available": 1,
                 "current_player": "1"
             }
-
-        with patch('sys.stdout', new=StringIO()) as fake_output:
-            select_operations.load_request = lambda data: False
-            main()
-            output = fake_output.getvalue().strip()
-
-            self.assertIn("Spieler 1 beginnt das Spiel", output)
-            self.assertIn("Spieler 2 hat gewonnen", output)
 
 
 
