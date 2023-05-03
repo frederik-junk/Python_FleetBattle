@@ -42,7 +42,7 @@ def shooting(
     """
     if game_mode == 1:
         if current_player == 1:
-            shooting_iq = output_manager.user1.get_shooting_iq()
+            shooting_iq = output_manager.user_1.get_shooting_iq()
             match cpu_manager1(
                 data,
                 game_mode,
@@ -59,7 +59,7 @@ def shooting(
         elif current_player == 2:
             match player_manager(
                 #data,
-                output_manager.user2,
+                output_manager.user_2,
                 python_game.leaked_board_1,
                 python_game.hidden_board_2,
                 ship_initializer.opponent_ships,
@@ -77,7 +77,7 @@ def shooting(
                 if (
                     player_manager(
                         #data,
-                        output_manager.user1,
+                        output_manager.user_1,
                         python_game.leaked_board_2,
                         python_game.hidden_board_1,
                         ship_initializer.opponent_ships,
@@ -92,7 +92,7 @@ def shooting(
                 if (
                     player_manager(
                         #data,
-                        output_manager.user2,
+                        output_manager.user_2,
                         python_game.leaked_board_1,
                         python_game.hidden_board_2,
                         ship_initializer.player_ships,
@@ -154,8 +154,6 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
             case 1:
                 shooting_tupel = (row, column)
                 for ship in ship_list:
-                    name = ship.get_name()
-                    print(name)
                     positions = ship.get_position()
                     position_memory = ship.get_position_memory()
                     if shooting_tupel in positions:
@@ -171,12 +169,9 @@ def player_manager(current_player, leaked_board, hidden_board, ship_list):
                             for tupel in position_memory:
                                 row, column = tupel
                                 hidden_board[row][column] = 4
-                                # two times the same row?
-                                # hidden_board[row][column] = 4
                             print(
                                 colored("\nSchiff versenkt\n", "green", attrs=["blink"])
                             )
-                            print(current_player.get_left_ships())
                             if current_player.get_left_ships() == 1:
                                 shooting_repeater = False
                                 python_game.print_hidden_board(hidden_board)
@@ -278,10 +273,10 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                             row, column = tupel
                             hidden_board[row][column] = 4
                         shooting_iq = 0
-                        output_manager.user1.set_shooting_iq(shooting_iq)
+                        output_manager.user_1.set_shooting_iq(shooting_iq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
-                        output_manager.user1.increase_left_ships()
-                        if output_manager.user1.get_left_ships() == 1:
+                        output_manager.user_1.increase_left_ships()
+                        if output_manager.user_1.get_left_ships() == 1:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
                     else:
@@ -326,8 +321,8 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
     """
     global cpu_memory
 
-    direction = output_manager.user1.get_direction()
-    cpu_memory = output_manager.user1.get_cpu_memory()
+    direction = output_manager.user_1.get_direction()
+    cpu_memory = output_manager.user_1.get_cpu_memory()
     while True:
         match shooting_iq:
             case 0:
@@ -336,14 +331,14 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                 if leaked_board[row][column] == 6:
                     leaked_board[row][column] = 0
                 firstShootingPosition = first_position(hidden_board)
-                output_manager.user1.set_first_cpu_memory(firstShootingPosition)
+                output_manager.user_1.set_first_cpu_memory(firstShootingPosition)
 
                 shooting_iq = 1
-                output_manager.user1.set_shooting_iq(shooting_iq)
+                output_manager.user_1.set_shooting_iq(shooting_iq)
                 continue
 
             case 1:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
+                cpu_memory = output_manager.user_1.get_first_cpu_memory()
                 row, column = cpu_memory
                 while True:
                     # check if it is a hit
@@ -356,14 +351,14 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             )
                             hidden_board[row][column] = 2
                             shooting_iq = 0
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                             return None
                         case 1:  # if the random shot is a hit -> get a random direction
                             shooting_iq = 1
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             direction = random_direction()
-                            output_manager.user1.set_direction(direction)
+                            output_manager.user_1.set_direction(direction)
                             match direction:
                                 case 0:
                                     row = row + 1
@@ -375,10 +370,10 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                                     row = row - 1
                                 case _:
                                     print("something went wrong")
-                            output_manager.user1.set_direction(direction)
+                            output_manager.user_1.set_direction(direction)
                             python_game.print_hidden_board(hidden_board)
                             cpu_memory = (row, column)
-                            output_manager.user1.set_cpu_memory(cpu_memory)
+                            output_manager.user_1.set_cpu_memory(cpu_memory)
                             while True:
                                 match check_hit(hidden_board, leaked_board, cpu_memory):
                                     case 0:  # the first shot in the new direction is a non-hit -> shooting_iq = 2 (go opposite direction)
@@ -390,13 +385,13 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                                         )
                                         hidden_board[row][column] = 2
                                         shooting_iq = 2
-                                        output_manager.user1.set_shooting_iq(shooting_iq)
+                                        output_manager.user_1.set_shooting_iq(shooting_iq)
                                         python_game.print_hidden_board(hidden_board)
                                         return None
 
                                     case 1:  # the first shot in the new direction is a hit -> shooting_iq = 1 until the first non-hit
                                         shooting_iq = 1
-                                        output_manager.user1.set_shooting_iq(shooting_iq)
+                                        output_manager.user_1.set_shooting_iq(shooting_iq)
                                         match direction:
                                             case 0:
                                                 row = row + 1
@@ -410,7 +405,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                                                 print("something went wrong")
 
                                         cpu_memory = (row, column)
-                                        output_manager.user1.set_cpu_memory(cpu_memory)
+                                        output_manager.user_1.set_cpu_memory(cpu_memory)
                                         python_game.print_hidden_board(hidden_board)
                                         continue
                                     case 11:  # the cpu killed the last ship
@@ -422,7 +417,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                     break
 
             case 2:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
+                cpu_memory = output_manager.user_1.get_first_cpu_memory()
                 row, column = cpu_memory
                 while True:
                     match direction:
@@ -437,7 +432,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                         case _:
                             print("something went wrong")
                     cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    output_manager.user_1.set_cpu_memory(cpu_memory)
 
                     match check_hit(hidden_board, leaked_board, cpu_memory):
                         case 0:
@@ -448,12 +443,12 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             )
                             hidden_board[row][column] = 2
                             shooting_iq = 3
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                             return None
                         case 1:
                             shooting_iq = 2
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                         case 11:  # the cpu killed the last ship
                             all_hit = 11
@@ -463,7 +458,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                     continue
 
             case 3:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
+                cpu_memory = output_manager.user_1.get_first_cpu_memory()
                 row, column = cpu_memory
                 while True:
                     match direction:
@@ -478,7 +473,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                         case _:
                             print("something went wrong")
                     cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    output_manager.user_1.set_cpu_memory(cpu_memory)
 
                     match check_hit(hidden_board, leaked_board, cpu_memory):
                         case 0:
@@ -489,12 +484,12 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             )
                             hidden_board[row][column] = 2
                             shooting_iq = 4
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                             return None
                         case 1:
                             shooting_iq = 3
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                         case 11:  # the cpu killed the last ship
                             all_hit = 11
@@ -505,7 +500,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                     continue
 
             case 4:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
+                cpu_memory = output_manager.user_1.get_first_cpu_memory()
                 row, column = cpu_memory
                 while True:
                     match direction:
@@ -520,7 +515,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                         case _:
                             print("something went wrong")
                     cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    output_manager.user_1.set_cpu_memory(cpu_memory)
 
                     match check_hit(hidden_board, leaked_board, cpu_memory):
                         case 0:
@@ -531,12 +526,12 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             )
                             hidden_board[row][column] = 2
                             shooting_iq = 5
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                             return None
                         case 1:
                             shooting_iq = 4
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                         case 11:  # the cpu killed the last ship
                             all_hit = 11
@@ -547,7 +542,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                     continue
 
             case 5:
-                cpu_memory = output_manager.user1.get_first_cpu_memory()
+                cpu_memory = output_manager.user_1.get_first_cpu_memory()
                 row, column = cpu_memory
                 while True:
                     match direction:
@@ -562,7 +557,7 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                         case _:
                             print("something went wrong")
                     cpu_memory = (row, column)
-                    output_manager.user1.set_cpu_memory(cpu_memory)
+                    output_manager.user_1.set_cpu_memory(cpu_memory)
 
                     match check_hit(hidden_board, leaked_board, cpu_memory):
                         case 0:
@@ -573,12 +568,12 @@ def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hid
                             )
                             hidden_board[row][column] = 2
                             shooting_iq = 0
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                             return None
                         case 1:
                             shooting_iq = 5
-                            output_manager.user1.set_shooting_iq(shooting_iq)
+                            output_manager.user_1.set_shooting_iq(shooting_iq)
                             python_game.print_hidden_board(hidden_board)
                         case 11:  # the cpu killed the last ship
                             all_hit = 11
@@ -604,20 +599,20 @@ def next_player(data, game_mode, current_player):
         current_player = 2
         data["current_player"] = current_player
         print("__________________________________\n")
-        print(f"{output_manager.user2.get_name()} ist nun an der Reihe.")
+        print(f"{output_manager.user_2.get_name()} ist nun an der Reihe.")
         print("__________________________________\n")
         input(
-            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user2.get_name()}  \n"
+            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user_2.get_name()}  \n"
         )
 
     elif current_player == 2:
         current_player = 1
         data["current_player"] = current_player
         print("__________________________________\n")
-        print(f"{output_manager.user1.get_name()} ist nun an der Reihe.")
+        print(f"{output_manager.user_1.get_name()} ist nun an der Reihe.")
         print("__________________________________\n")
         input(
-            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user1.get_name()}  \n"
+            f"Beliebige Taste und Enter drücken um fortzufahren. Bitte uebergebe das Geraet an {output_manager.user_1.get_name()}  \n"
         )
     else:
         print("Irgendwas ist hier schief gelaufen!")

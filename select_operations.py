@@ -111,12 +111,12 @@ def game_mode_selection(data):
                     # Print game rules message
                     print(output_manager.GAME_RULES)
                     # Set computer as user 1 and ask for user 2 name
-                    output_manager.user1.set_name("Der Computer")
+                    output_manager.user_1.set_name("Der Computer")
                     user_name_2 = input("Bitte geben Sie Ihren Namen ein: \n")
-                    output_manager.user2.set_name(user_name_2)
+                    output_manager.user_2.set_name(user_name_2)
                     # Print welcome message for user 2 and ask to place ships
                     print(
-                        f"Hallo {output_manager.user2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user_2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
@@ -145,10 +145,10 @@ def game_mode_selection(data):
                     # Ask for user 1 name and welcome message
                     user_name_1 = input("Spieler 1, bitte geben Sie Ihren Namen ein: \n")
                     # Set user name 1
-                    output_manager.user1.set_name(user_name_1)
+                    output_manager.user_1.set_name(user_name_1)
                     clear_console()
                     print(
-                        f"Hallo {output_manager.user1.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user_1.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     print(
                         colored(
@@ -169,9 +169,9 @@ def game_mode_selection(data):
                     clear_console()
                     user_name_2 = input("Spieler 2 bitte geben Sie Ihren Namen an: \n")
                     # Set user name 2
-                    output_manager.user2.set_name(user_name_2)
+                    output_manager.user_2.set_name(user_name_2)
                     print(
-                        f"Hallo {output_manager.user2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
+                        f"Hallo {output_manager.user_2.get_name()}, bitte platzieren Sie nun Ihre Schiffe"
                     )
                     print(
                         colored(
@@ -222,7 +222,7 @@ def select_starting_player(data):
     if starting_player == 2:
         print(
             colored(
-                f"{output_manager.user2.get_name()} darf das Spiel beginnen und ist an der Reihe!",
+                f"{output_manager.user_2.get_name()} darf das Spiel beginnen und ist an der Reihe!",
                 "cyan",
             )
         )
@@ -230,12 +230,12 @@ def select_starting_player(data):
     if starting_player == 1:
         # if mode == "1":
         # cccc ist als Kontrolltext mit drin um zu zeigen, dass hier der Computer spielt
-        # print(f"{outputmanager.user1.get_name()} darf das Spiel beginnen und ist an der Reihe!")
+        # print(f"{outputmanager.user_1.get_name()} darf das Spiel beginnen und ist an der Reihe!")
         # current_player = 1
         # return current_player
         print(
             colored(
-                f"{output_manager.user1.get_name()} darf das Spiel beginnen und ist an der Reihe!",
+                f"{output_manager.user_1.get_name()} darf das Spiel beginnen und ist an der Reihe!",
                 "cyan",
             )
         )

@@ -1,9 +1,9 @@
 {
   "storage_available": 0,
   "current_player": 2,
-  "game_mode": 2,
-  "player_name_1": "Spieler 1",
-  "player_name_2": "Spieler 2",
+  "game_mode": 1,
+  "player_name_1": "asd",
+  "player_name_2": "df",
   "opponent_ships": 0,
   "player_ships": 0,
   "first_cpu_memory": [
@@ -12,8 +12,30 @@
   ],
   "shooting_iq": 0,
   "direction": 0,
-  "p_schlachtschiff_1_p": [],
-  "p_schlachtschiff_1_m": [],
+  "p_schlachtschiff_1_p": [
+    [
+      5,
+      0
+    ],
+    [
+      6,
+      0
+    ]
+  ],
+  "p_schlachtschiff_1_m": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      0
+    ]
+  ],
   "p_kreuzer_1_p": [],
   "p_kreuzer_2_p": [],
   "p_zerstoerer_1_p": [],
@@ -32,8 +54,42 @@
   "p_uboot_2_m": [],
   "p_uboot_3_m": [],
   "p_uboot_4_m": [],
-  "o_schlachtschiff_1_p": [],
-  "o_schlachtschiff_1_m": [],
+  "o_schlachtschiff_1_p": [
+    [
+      4,
+      5
+    ],
+    [
+      4,
+      4
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      4,
+      2
+    ],
+    [
+      4,
+      1
+    ]
+  ],
+  "o_schlachtschiff_1_m": [
+    [
+      2,
+      0
+    ],
+    [
+      3,
+      0
+    ],
+    [
+      4,
+      0
+    ]
+  ],
   "o_kreuzer_1_p": [],
   "o_kreuzer_2_p": [],
   "o_zerstoerer_1_p": [],
