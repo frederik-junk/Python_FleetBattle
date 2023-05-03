@@ -13,6 +13,7 @@ import memorymanager
 
 SHIP_STORAGE_FILE = "ship_storage.json"
 
+
 # extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,4 +90,5 @@ if __name__ == "__main__":
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
-            "Wir bedanken uns fuers Spielen bis zum nächsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
+            "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
+
