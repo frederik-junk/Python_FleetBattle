@@ -13,7 +13,7 @@ class TestSelectOperations(unittest.TestCase):
         mock_system.assert_called_once_with("cls" if os.name == "nt" else "clear")
 
     @patch('builtins.input', side_effect=['j'])
-    def test_load_game(self, mock_input):
+    def test_load_game(self):
         data = {"storage_available": 1}
         expected_output = "Willkommen zurück, Ihre Daten konnten erfolgreich geladen werden.\nDas Spiel geht an gespeicherter Stelle weiter!\n"
         
@@ -23,7 +23,7 @@ class TestSelectOperations(unittest.TestCase):
             self.assertEqual(fake_out.getvalue(), expected_output)
     
     @patch('builtins.input', side_effect=['n'])
-    def test_new_game(self, mock_input):
+    def test_new_game(self):
         data = {"storage_available": 0}
         expected_output = "Alles klar, das Spiel wird ohne Speicherdaten gestartet!\n"
         

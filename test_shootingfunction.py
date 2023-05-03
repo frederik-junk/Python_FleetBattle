@@ -42,7 +42,6 @@ class TestShooting(unittest.TestCase):
 
     def test_next_player_player_1(self):
         # Test for current_player == 1
-        game_mode = "1"
         current_player = 1
         data = {"current_player": 1}
 
@@ -52,7 +51,6 @@ class TestShooting(unittest.TestCase):
 
     def test_next_player_error(self):
         # Test for invalid current_player value
-        game_mode = "1"
         current_player = 3
         data = {"current_player": 3}
         expected_output = "Der Spielerwechsel schlug fehl!\n"
