@@ -1,7 +1,6 @@
 # pylint: disable=C
 import unittest
-import blocker_functions
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 class TestConverterFunctions(unittest.TestCase):
     def test_direction_w(self):
@@ -26,32 +25,6 @@ class TestConverterFunctions(unittest.TestCase):
                 ship,
             )
         )
-        expected_board = [
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ]
-        # self.assertEqual(board, expected_board)
-
-        # Test if the function raises the correct exception when a ship is placed out of the game board
-        # startingRowNumber = 1
-        # self.assertTrue(directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship))
-        # expected_board = [
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0
 
 
 if __name__ == "__main__":
