@@ -40,7 +40,7 @@ def shooting(
     """
     if game_mode == 1:
         if current_player == 1:
-            shooting_iq = output_manager.user__1.get_shooting_iq()
+            shooting_iq = output_manager.user_1.get_shooting_iq()
             match cpu_manager1(
                 shooting_iq,
                 python_game.leaked_board_2,
@@ -309,7 +309,7 @@ def cpu_manager1(shooting_iq, leaked_board, hidden_board):
     Returns:
         returns int: returns 11 when the cpu has won, it returns 0 if the game goes on
     """
-    global cpu_memory
+    #global cpu_memory
 
     direction = output_manager.user_1.get_direction()
     cpu_memory = output_manager.user_1.get_cpu_memory()

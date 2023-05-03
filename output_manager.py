@@ -146,7 +146,10 @@ user_1 = User("Spieler 1", (0, 0), (0, 0), 0, 0)
 user_2 = User("Spieler 2", (0, 0), (0, 0), 0, 0)
 
 # variable that holds the game rules to print when starting the game
-GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
+GAME_RULES1 = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden"
+GAME_RULES2 = " 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen"
+GAME_RULES3 = " 4. Schiffe dürfen nicht übereinander platziert werden"
+GAME_RULES4 = " 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
 
 #function to select the right winning/ losing informations after game has ended
 def battle_end(winning_id, game_mode):
