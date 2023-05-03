@@ -43,7 +43,7 @@ def shooting(
     if game_mode == 1:
         if current_player == 1:
             shooting_iq = output_manager.user1.get_shooting_iq()
-            match cpuManager1(
+            match cpu_manager1(
                 data,
                 game_mode,
                 current_player,
@@ -134,7 +134,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
             f"{current_player.get_name()} geben Sie eine Koordinate an, auf die sie schießen wollen: \n"
         )
         try:
-            row = converter_functions(shooting_position)
+            row = converter_functions.split_row(shooting_position)
             if row == 11:
                 raise Exception("Ihre Angabe ist fehlerhaft")
             column = converter_functions.split_column_converter(shooting_position)
@@ -167,7 +167,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
                         ship.set_position_memory(position_memory)
                         positions.remove(shooting_tupel)
                         if len(positions) == 0:
-                            current_player.increaseLeftShips()
+                            current_player.increase_left_ships()
                             position_memory = ship.get_position_memory()
                             for tupel in position_memory:
                                 row, column = tupel
@@ -229,7 +229,7 @@ def playermanager(data, current_player, leaked_board, hidden_board, ship_list):
         python_game.print_hidden_board(hidden_board)
 
 
-def randomDirection():
+def random_direction():
     """Generates a random directino value for the CPU to shoot at
 
     Returns:
@@ -285,7 +285,7 @@ def check_hit(hidden_board, leaked_board, cpu_memory):
                         shooting_iq = 0
                         output_manager.user1.set_shooting_iq(shooting_iq)
                         print(colored("Der Computer hat ein Schiff versenkt", "red"))
-                        output_manager.user1.increaseLeftShips()
+                        output_manager.user1.increase_left_ships()
                         if output_manager.user1.get_left_ships() == 1:
                             all_hit = 11  # 11 is the number which determines that the cpu won (for the winning ID)
                             return all_hit
@@ -314,7 +314,7 @@ def first_position(board):
     return first_cpu_memory
 
 
-def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidden_board):
+def cpu_manager1(data, game_mode, current_player, shooting_iq, leaked_board, hidden_board):
     """Handles the actions of the CPU
 
     Args:
@@ -367,7 +367,7 @@ def cpuManager1(data, game_mode, current_player, shooting_iq, leaked_board, hidd
                         case 1:  # if the random shot is a hit -> get a random direction
                             shooting_iq = 1
                             output_manager.user1.set_shooting_iq(shooting_iq)
-                            direction = randomDirection()
+                            direction = random_direction()
                             output_manager.user1.set_direction(direction)
                             match direction:
                                 case 0:

@@ -1,4 +1,3 @@
-"""Main module for game logic"""
 import os
 import json
 import output_manager
@@ -6,18 +5,29 @@ import select_operations
 import shooting_function
 import python_game
 import memory_manager
+import outputmanager
+import selectoperations
+import shootingfunction
+import pythonGame
+import memorymanager
 
-# extracts current path for optimal usage on Windows and Linux systems
+SHIP_STORAGE_FILE = "shipstorage.json"
+
+# extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
 
 # sets current player to 0 to define it afterwards in function below
+# current_player = 1
+with open("ship_storage.json", "r", encoding="utf-8") as read_file:
+    data = json.load(read_file)
+# setting current Player to 0 to define it afterwards in function below
 # currentPlayer = 1
-with open("ship_storage.json", "r", encoding="utf-8") as readFile:
-    data = json.load(readFile)
+with open(SHIP_STORAGE_FILE, "r") as file:
+    data = json.load(file)
 
 
-# game_mode = 2
-def main():
+# Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
+def play_game():
     """Main function that provides the game logic and calls the other modules"""
     # prints a welcome message
     output_manager.welcome_user()
@@ -33,7 +43,6 @@ def main():
         winning_id = shooting_function.shooting(
             data, data["game_mode"], data["currentPlayer"]
         )
-        # sets storage availibility to 0 to block reloading the finished game
         data["storage_available"] = 0
         # resets all boards to default value (filled with 0) using a default resset board
         python_game.board_reset(data)
@@ -61,17 +70,26 @@ def main():
         # prints winning / losing message using the returned winning_id and the current game_mode
         output_manager.battle_end(winning_id, game_mode)
     else:
-        print(
-            "Ein Fehler beim erfassen Ihrer Eingabe ist entstanden. Die Daten konnten daher nicht geladen werden."
+        pythonGame.boardloader(data, should_load_game)
+        selected_game_mode = selectoperations.gameModeSelection(data)
+        # Call function to randomly select starting player
+        starting_player = selectoperations.selectStartingPlayer(data)
+        winning_player_id = shootingfunction.shooting(
+            data, selected_game_mode, starting_player
+
         )
-    # player.playerAction(currentPlayer,game_mode)
+        data["storage_available"] = 0
+        pythonGame.boardReset(data)
+        with open(SHIP_STORAGE_FILE, "w") as file:
+            json.dump(data, file, indent=2)
+        outputmanager.battleEnd(winning_player_id, selected_game_mode)
+
+    # player.playerAction(currentPlayer, selected_game_mode)
 
 
 if __name__ == "__main__":
     try:
-        # tries to run the game
-        main()
-    # catches error if game is stopt by user
+        play_game()
     except KeyboardInterrupt:
         # calls function to store all necessary data to restore the game in future sessions
         memory_manager.store_data(data)
@@ -80,5 +98,4 @@ if __name__ == "__main__":
             json.dump(data, write_fileEnd, indent=2)
         # prints message to confirm the saving process and tells the user how to restore the game
         print(
-            "Wir bedanken uns fürs Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim naechsten mal mit [j] laden!\n"
-        )
+            "Wir bedanken uns fürs Spielen bis zum nächsten Mal!\nDein Spiel wurde gespeichert und lässt sich beim nächsten Mal mit [j] laden!\n")

@@ -1,57 +1,30 @@
 # pylint: disable=C
 import unittest
-import blocker_functions
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 class TestConverterFunctions(unittest.TestCase):
     def test_direction_w(self):
         board = [[0] * 10 for _ in range(10)]
-        shipLength = 3
-        startingRowNumber = 5
-        startingColumnChar = 2
+        ship_length = 3
+        starting_row_number = 5
+        starting_column_char = 2
         direction = "w"
-        gameMode = 1
+        game_mode = 1
         ship = None
 
         # Test if a ship can be placed in the given direction without any issues
-        directionConverter = MagicMock()
+        direction_converter = MagicMock()
         self.assertTrue(
-            directionConverter(
+            direction_converter(
                 board,
-                shipLength,
-                startingRowNumber,
-                startingColumnChar,
+                ship_length,
+                starting_row_number,
+                starting_column_char,
                 direction,
-                gameMode,
+                game_mode,
                 ship,
             )
         )
-        expected_board = [
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        ]
-        # self.assertEqual(board, expected_board)
-
-        # Test if the function raises the correct exception when a ship is placed out of the game board
-        # startingRowNumber = 1
-        # self.assertTrue(directionConverter(board, shipLength, startingRowNumber, startingColumnChar, direction, gameMode, ship))
-        # expected_board = [
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        #     [0
 
 
 if __name__ == "__main__":
