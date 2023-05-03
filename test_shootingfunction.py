@@ -26,7 +26,6 @@ class TestShooting(unittest.TestCase):
     #     self.assertEqual(result, None)
 
     def test_player_manager(self):
-        data = []
         current_player_name = "test"
         leaked_board = [[0 for i in range(10)] for j in range(10)]
         hidden_board = [[0 for i in range(10)] for j in range(10)]
