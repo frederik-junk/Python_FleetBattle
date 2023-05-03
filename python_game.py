@@ -12,7 +12,7 @@ import converter_functions
 init()
 
 
-def clearConsole():
+def clear_console():
     """Function to clear the console for better user interface while playing"""
     os.system("cls" if os.name == "nt" else "clear")
 
@@ -33,7 +33,7 @@ letterRow = [
 ]  # creating the playgroup column
 
 
-def initializeBoard(board):
+def initialize_board(board):
     """Initializes the board to place ships on
 
     Args:
@@ -46,7 +46,7 @@ def initializeBoard(board):
         board.append(row)
 
 
-def boardloader(data, loadavailable):
+def board_loader(data, loadavailable):
     """Function that loads the board with its values
 
     Args:
@@ -64,13 +64,13 @@ def boardloader(data, loadavailable):
     hiddenBoard2 = []
     if loadavailable is False:
         # creating board with leaked ships for player 1 ship placing
-        initializeBoard(leakedBoard1)
+        initialize_board(leakedBoard1)
         # creating board with leaked ships for player 2 ship placing
-        initializeBoard(leakedBoard2)
+        initialize_board(leakedBoard2)
         # creating board with hidden ships from player 1 for game of player 2
-        initializeBoard(hiddenBoard1)
+        initialize_board(hiddenBoard1)
         # creating board with hidden ships from player 2 for game of player 1
-        initializeBoard(hiddenBoard2)
+        initialize_board(hiddenBoard2)
     elif loadavailable is True:
         # loading the boards from stored data
         leakedBoard1 = data["leakedBoard1"]
@@ -81,7 +81,7 @@ def boardloader(data, loadavailable):
         print("Beim Laden des Boards ist ein Fehler aufgetreten")
 
 
-def boardReset(data):
+def board_reset(data):
     """Function to reset the board to initial values
 
     Args:
@@ -95,7 +95,7 @@ def boardReset(data):
 
 
 # function to print the hole board while player is playing the game
-def printleakedBoard(board):
+def print_leaked_board(board):
     """
     function to print the board with visible ships
     Args:
@@ -160,7 +160,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
         Exception: Prints an error message if there was a wrong input for example
     """
     if counter == 1:
-        printleakedBoard(board)
+        print_leaked_board(board)
     while True:
         # asking user on which position he wants to place his ship
         placementInput = input(
@@ -222,7 +222,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
         ):
             continue
         break
-    # printleakedBoard(board)
+    # print_leaked_board(board)
     # DELETE if Positions for ships are available
     # placing the ship in the right direction
     # shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
@@ -259,9 +259,9 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
         is True
     ):
         return True  # is send back to set another coordinate
-    clearConsole()
+    clear_console()
     print(colored("Ihr Schiff wurde platziert!", "green"))
-    printleakedBoard(board)
+    print_leaked_board(board)
     return False
 
 
@@ -332,5 +332,5 @@ def cpuPlaceShip(board, shipLength, ship):
             == 11
         ):
             continue
-        printleakedBoard(board)
+        print_leaked_board(board)
         break
