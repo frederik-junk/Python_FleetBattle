@@ -323,6 +323,9 @@ def split_column_converter(placement_input):
             return starting_column_char
             """
     try:
+        if starting_column_char.isalpha() is False:
+            raise ValueError
+        starting_column_char = starting_column_char.upper()
         return ord(starting_column_char) - 65
     except ValueError as value_error:
         print(str(value_error))
