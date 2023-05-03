@@ -1,53 +1,92 @@
 import os
-from python_game import *
-from random import *
+import json
+import output_manager
+import select_operations
+import shooting_function
+import python_game
+import memory_manager
+import outputmanager
+import selectoperations
+import shootingfunction
+import pythonGame
+import memorymanager
 
+SHIP_STORAGE_FILE = "shipstorage.json"
+
+# extracting current Path for optimal usage on Windows and Linux systems
 path = os.path.dirname(os.path.abspath(__file__))
-print("Aktueller Pfad: ", path)
 
-gameRules = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n"
+# sets current player to 0 to define it afterwards in function below
+# current_player = 1
+with open("ship_storage.json", "r", encoding="utf-8") as read_file:
+    data = json.load(read_file)
+# setting current Player to 0 to define it afterwards in function below
+# currentPlayer = 1
+with open(SHIP_STORAGE_FILE, "r") as file:
+    data = json.load(file)
 
-def selectStartingPlayer(mode):
-    playerOne = 1
-    playerTwo = 2
-    startingPlayer = 0
-    randint(1,2)
-    if(mode == "1"):
-        if(randint == "onePlayer"):
-            print("Spieler 1 beginnt.")
-            startingPlayer = 1
-        else:
-            print("Der Computer beginnt.")
-            startingPlayer = 2
-    elif(mode == "2"):
-        if(randint == playerOne):
-            print("Spieler 1 beginnt.")
-            startingPlayer = 1
-        else:
-            print("Spieler 2 beginnt.")
-            startingPlayer = 2
 
-def main():
-    print("__________________________________\n")
-    print("Schiffe versenken v1.0")
-    print("__________________________________\n")
-    userInput = input("Bitte wähle die gewünschte Spielart: \n [1] Spiel gegen den Computer \n [2] 2 Spieler\n")
-    if(userInput == "1"):
-        print("__________________________________\n")
-        print("Spiel gegen den Computer.\n")
-        print(gameRules)
-        placeShip(placementBoard, shipLength)
-        cpuPlaceShip(placementBoard, shipLength)
-        print("Das Spiel beginnt.")
-        selectStartingPlayer(userInput)
-    elif(userInput == "2"):
-        print("__________________________________\n")
-        print("2 Spieler an diesem Computer.\n")
-        print(gameRules)
-        placeShip(placementBoard, shipLength)
-        cpuPlaceShip(placementBoard, shipLength)
-        print("Das Spiel beginnt.")
-        selectStartingPlayer(userInput)        
+# Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
+def play_game():
+    """Main function that provides the game logic and calls the other modules"""
+    outputmanager.welcomeUser()
+    should_load_game = selectoperations.loadrequest(data)
+    if should_load_game:
+        pythonGame.boardloader(data, should_load_game)
+        memorymanager.loadData(data, data["game_mode"])
+        winning_player_id = shootingfunction.shooting(
+            data, data["game_mode"], data["current_player"]
+        )
+        data["storage_available"] = 0
+        # resets all boards to default value (filled with 0) using a default resset board
+        python_game.board_reset(data)
+        # writes the changed data into json file
+        with open("ship_storage.json", "w", encoding="utf-8") as write_file:
+            json.dump(data, write_file, indent=2)
+        # prints winning / losing message using the returned winning_id and the current game_mode
+        output_manager.battle_end(winning_id, data["game_mode"])
+    elif load is False:
+        # initializes new boards with default values
+        python_game.board_loader(data, load)
+        # gives user the opportunity to choose the game Mode (single player/ multiple players)
+        game_mode = select_operations.game_mode_selection(data)
+        # calls function to randomly select starting player
+        starting_player = select_operations.select_starting_player(data)
+        # starts game engine to run the main game, returns the number of the winning player at the end
+        winning_id = shooting_function.shooting(data, game_mode, starting_player)
+        # sets storage availibility to 0 to block reloading the finished game
+        data["storage_available"] = 0
+        # resets all boards to default value (filled with 0) using a default reset board
+        python_game.board_reset(data)
+        # writes the changed data into json file
+        with open("ship_storage.json", "w", encoding="utf-8") as write_file:
+            json.dump(data, write_file, indent=2)
+        # prints winning / losing message using the returned winning_id and the current game_mode
+        output_manager.battle_end(winning_id, game_mode)
+    else:
+        pythonGame.boardloader(data, should_load_game)
+        selected_game_mode = selectoperations.gameModeSelection(data)
+        # Call function to randomly select starting player
+        starting_player = selectoperations.selectStartingPlayer(data)
+        winning_player_id = shootingfunction.shooting(
+            data, selected_game_mode, starting_player
+
+        )
+        data["storage_available"] = 0
+        pythonGame.boardReset(data)
+        with open(SHIP_STORAGE_FILE, "w") as file:
+            json.dump(data, file, indent=2)
+        outputmanager.battleEnd(winning_player_id, selected_game_mode)
+
+    # player.playerAction(currentPlayer, selected_game_mode)
+
 
 if __name__ == "__main__":
-    main()
+    try:
+        play_game()
+    except KeyboardInterrupt:
+        memorymanager.storeData(data)
+        with open(SHIP_STORAGE_FILE, "w") as file:
+            json.dump(data, file, indent=2)
+        print(
+            "Wir bedanken uns fürs Spielen bis zum nächsten Mal!\nDein Spiel wurde gespeichert und lässt sich beim nächsten Mal mit [j] laden!\n")
