@@ -25,7 +25,7 @@ with open(SHIP_STORAGE_FILE, "r") as file:
 # Holds the logic of the game. Welcomes the user, asks for game mode selection and navigates through the game
 def play_game():
     """Main function that provides the game logic and calls the other modules"""
-    output_manager.welcome_user()
+    output_manager.welcomeUser()
     should_load_game = select_operations.load_request(data)
     if should_load_game:
         python_game.board_loader(data, should_load_game)
@@ -61,18 +61,18 @@ def play_game():
         output_manager.battle_end(winning_id, game_mode)
     else:
         python_game.board_loader(data, should_load_game)
-        selected_game_mode = select_operations.gameModeSelection(data)
+        selected_game_mode = select_operations.game_mode_selection(data)
         # Call function to randomly select starting player
-        starting_player = select_operations.selectStartingPlayer(data)
+        starting_player = select_operations.select_starting_player(data)
         winning_player_id = shooting_function.shooting(
             data, selected_game_mode, starting_player
 
         )
         data["storage_available"] = 0
-        python_game.boardReset(data)
+        python_game.board_reset(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
-        output_manager.battleEnd(winning_player_id, selected_game_mode)
+        output_manager.battle_end(winning_player_id, selected_game_mode)
 
     # player.playerAction(currentPlayer, selected_game_mode)
 
@@ -81,7 +81,7 @@ if __name__ == "__main__":
     try:
         play_game()
     except KeyboardInterrupt:
-        memory_manager.store_data(data)
+        memory_manager.storeData(data)
         with open(SHIP_STORAGE_FILE, "w") as file:
             json.dump(data, file, indent=2)
         print(
