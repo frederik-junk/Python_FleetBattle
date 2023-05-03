@@ -8,11 +8,14 @@ import random
 from termcolor import colored
 from colorama import init
 import converterfunctions
+
 init()
+
 
 def clearConsole():
     """Function to clear the console for better user interface while playing"""
     os.system("cls" if os.name == "nt" else "clear")
+
 
 # letterrow to show user the name of each column
 letterRow = [
@@ -29,6 +32,7 @@ letterRow = [
     "J",
 ]  # creating the playgroup column
 
+
 def initializeBoard(board):
     """Initializes the board to place ships on
 
@@ -41,6 +45,7 @@ def initializeBoard(board):
             row.append(0)
         board.append(row)
 
+
 def boardloader(data, loadavailable):
     """Function that loads the board with its values
 
@@ -48,7 +53,7 @@ def boardloader(data, loadavailable):
         data (_type_): _description_
         loadavailable (int): Indicates if there is a score that can be loaded
     """
-    #setting all boards as globals to allow access in all functions
+    # setting all boards as globals to allow access in all functions
     global leakedBoard1
     leakedBoard1 = []
     global leakedBoard2
@@ -75,19 +80,21 @@ def boardloader(data, loadavailable):
     else:
         print("Beim Laden des Boards ist ein Fehler aufgetreten")
 
+
 def boardReset(data):
     """Function to reset the board to initial values
 
     Args:
         data (_type_): _description_
     """
-    #reseting all boards with default values
+    # reseting all boards with default values
     data["leakedBoard1"] = data["resetBoard"]
     data["leakedBoard2"] = data["resetBoard"]
     data["hiddenBoard1"] = data["resetBoard"]
     data["hiddenBoard2"] = data["resetBoard"]
 
-#function to print the hole board while player is playing the game
+
+# function to print the hole board while player is playing the game
 def printleakedBoard(board):
     """
     function to print the board with visible ships
@@ -107,7 +114,8 @@ def printleakedBoard(board):
             )
         )
 
-#function to print the hole board while player is placing the ships
+
+# function to print the hole board while player is placing the ships
 def printhiddenBoard(board):
     """Function to print the board without showing the ships, so the opponent cannot see the ships of the other player
 
@@ -136,6 +144,7 @@ def printhiddenBoard(board):
             )
         )
 
+
 # function to place a ship in the right position with the right length and the right direction
 def placeShip(board, shipLength, ship, shipName, counter):
     """Function to place ships on the game board
@@ -153,11 +162,11 @@ def placeShip(board, shipLength, ship, shipName, counter):
     if counter == 1:
         printleakedBoard(board)
     while True:
-        #asking user on which position he wants to place his ship
+        # asking user on which position he wants to place his ship
         placementInput = input(
             f"Geben Sie eine Koordinate an, auf die die Spitze Ihres {counter}. Schiffs ({shipName}) platziert werden soll. Schiffslänge: {shipLength}.\n"
         )
-        #try to find the input postion in the board (checking if it exists)
+        # try to find the input postion in the board (checking if it exists)
         try:
             startingColumnChar = converterfunctions.splitColumnConverter(placementInput)
             if (
@@ -169,7 +178,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
                 startingRowNumber == 11
             ):  # eleven is the statuscode for input is out of bounce
                 raise Exception("Ihre Angabe ist fehlerhaft")
-        #if placing fails the user is asked to replace his ship
+        # if placing fails the user is asked to replace his ship
         except Exception:
             print(
                 colored(
@@ -180,11 +189,11 @@ def placeShip(board, shipLength, ship, shipName, counter):
             print("Bitte geben Sie neue Anfangskoordinaten ein (z.B.: A3).")
             continue
 
-        #initialize row and column number as int to avoid overflow
+        # initialize row and column number as int to avoid overflow
         startingRowNumber = int(startingRowNumber)
         startingColumnChar = int(startingColumnChar)
 
-        #checking if position is already filled with a ship and asking user to replace the ship
+        # checking if position is already filled with a ship and asking user to replace the ship
         if board[startingRowNumber][startingColumnChar] == 1:
             print(
                 colored(
@@ -193,7 +202,7 @@ def placeShip(board, shipLength, ship, shipName, counter):
                 )
             )
             continue
-        #chcking if wished ship position is already blocked because of another nearby ship and asking user to replacer the ship
+        # chcking if wished ship position is already blocked because of another nearby ship and asking user to replacer the ship
         if board[startingRowNumber][startingColumnChar] == 6:
             print(
                 colored(
@@ -202,10 +211,15 @@ def placeShip(board, shipLength, ship, shipName, counter):
                 )
             )
             continue
-        #if all rules are checked then confirming the chosen position
+        # if all rules are checked then confirming the chosen position
         print(colored(f"Die Spitze des Schiffes liegt auf {placementInput}", "cyan"))
         # placing the ship in the right direction
-        if shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship) is True:
+        if (
+            shipDirection(
+                board, shipLength, startingRowNumber, startingColumnChar, ship
+            )
+            is True
+        ):
             continue
         break
     # printleakedBoard(board)
@@ -213,7 +227,8 @@ def placeShip(board, shipLength, ship, shipName, counter):
     # placing the ship in the right direction
     # shipDirection(board, shipLength, startingRowNumber, startingColumnChar)
 
-#user function to choose the direction of the current ship
+
+# user function to choose the direction of the current ship
 def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     """Function to set the direction of the ship that is to be placed
 
@@ -245,11 +260,10 @@ def shipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship
     ):
         return True  # is send back to set another coordinate
     clearConsole()
-    print(
-        colored("Ihr Schiff wurde platziert!", "green")
-    )
+    print(colored("Ihr Schiff wurde platziert!", "green"))
     printleakedBoard(board)
     return False
+
 
 def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar, ship):
     """Function to set the direction of the ship that is to be placed for the computer opponent
@@ -294,7 +308,9 @@ def cpuShipDirection(board, shipLength, startingRowNumber, startingColumnChar, s
             return 11
         break
 
+
 # function to add the blockers so that ships cant be placed next to the ship
+
 
 # function for the cpu opponent to place the a ship
 def cpuPlaceShip(board, shipLength, ship):

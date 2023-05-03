@@ -1,3 +1,7 @@
+from typing import Any
+from termcolor import colored
+from colorama import init
+
 """
 Module contains graphic elements for user interface and messages that are displayed if a game is over
 
@@ -10,8 +14,9 @@ from colorama import init
 
 init()
 
-#creating class user to store player names
-#in case of 1 player mode, computer uses player 1 as playeraccount
+
+# creating class user to store player names
+# in case of 1 player mode, computer uses player 1 as playeraccount
 class User:
     """Class for storing Username of the players
     """
@@ -141,10 +146,9 @@ class User:
         self.__direction = direction
 
 
-
-#creating two instances of User
-user1 = User("Spieler 1", (0,0), (0,0), 0, 0)
-user2 = User("Spieler 2", (0,0), (0,0), 0, 0)
+# creating two instances of User
+user1 = User("Spieler 1", (0, 0), (0, 0), 0, 0)
+user2 = User("Spieler 2", (0, 0), (0, 0), 0, 0)
 
 # variable that holds the game rules to print when starting the game
 GAME_RULES = "Spielregeln:\n 1. Schiffe dürfen nur vertikal oder horizontal platziert werden\n 2. Schiffe dürfen sich nicht berühren \n 3. Schiffe dürfen nicht über den Rand des Spielfelds hinausgehen \n 4. Schiffe dürfen nicht übereinander platziert werden\n 5. Die Schiffe dürfen nicht über Eck gebaut sein oder Ausbuchtungen besitzen\n 6. Jeder Spieler hat 10 Schiffe\n"
@@ -199,12 +203,12 @@ def win_output():
     """function to print out "win" in case a user won the game (always used in 2 player mode)
     """
     print("_________________________________\n")
-    print(colored(" _____   _____   ______    _____",'green'))
-    print(colored("/ ____| |_   _| |  ____|  / ____|",'green'))
-    print(colored("| (___    | |   | |__    | |  __",'green'))
-    print(colored("\___ \    | |   |  __|   | | |_ |",'green'))
-    print(colored("____) |  _| |_  | |____  | |__| |",'green'))
-    print(colored("|_____/ |_____| |______|  \_____|",'green'))
+    print(colored(" _____   _____   ______    _____", "green"))
+    print(colored("/ ____| |_   _| |  ____|  / ____|", "green"))
+    print(colored("| (___    | |   | |__    | |  __", "green"))
+    print(colored("\___ \    | |   |  __|   | | |_ |", "green"))
+    print(colored("____) |  _| |_  | |____  | |__| |", "green"))
+    print(colored("|_____/ |_____| |______|  \_____|", "green"))
     print("_________________________________\n")
 
 def lose_output():

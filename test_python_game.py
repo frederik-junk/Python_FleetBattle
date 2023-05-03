@@ -6,12 +6,12 @@ from contextlib import redirect_stdout
 import sys
 from converterfunctions import splitColumnConverter, splitRow
 
-#pylint: disable=C
+# pylint: disable=C
+
 
 class TestPythonGame(unittest.TestCase):
-
     def setUp(self):
-        self.board = ([[0]*10]*10)
+        self.board = [[0] * 10] * 10
 
     def test_splitColumnConverter(self):
         self.assertEqual(splitColumnConverter("A1"), 0)
@@ -26,9 +26,8 @@ class TestPythonGame(unittest.TestCase):
         self.assertEqual(splitRow("11"), 0)
 
     def test_initializeBoard(self):
-        
         pythonGame.initializeBoard = MagicMock()
-        pythonGame.initializeBoard.return_value = ([[0]*10]*10)
+        pythonGame.initializeBoard.return_value = [[0] * 10] * 10
         result = pythonGame.initializeBoard(self.board)
         self.assertEqual(self.board, result)
 
@@ -47,5 +46,6 @@ class TestPythonGame(unittest.TestCase):
     #         self.printhiddenBoard(self.board)
     #         self.assertEqual(buf.getvalue(), expected_output)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

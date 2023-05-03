@@ -9,15 +9,15 @@ import shipinitializer
 import outputmanager
 import shootingfunction
 
-class TestShooting(unittest.TestCase):
 
+class TestShooting(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.data = {}
         cls.currentPlayer = 1
         cls.gameMode = 1
         cls.user1 = "Testspieler"
-        
+
     # @patch('builtins.input', side_effect=['A1'])
     # def test_playermanager_1(self, mock_input):
     #     global user1
@@ -38,7 +38,14 @@ class TestShooting(unittest.TestCase):
         currentPlayer = 1
         with io.StringIO("A1\n") as mock_input:
             sys.stdin = mock_input
-            output = shootingfunction.playermanager(data, currentPlayerName, leakedBoard, hiddenBoard, shipList, currentPlayer)
+            output = shootingfunction.playermanager(
+                data,
+                currentPlayerName,
+                leakedBoard,
+                hiddenBoard,
+                shipList,
+                currentPlayer,
+            )
             self.assertIsNone(output)
 
     def test_nextPlayer_player1(self):
@@ -47,27 +54,27 @@ class TestShooting(unittest.TestCase):
         currentPlayer = 1
         data = {"currentPlayer": 1}
         expected_output = f"__________________________________\n{outputmanager.user2.getName()} ist nun an der Reihe.\n__________________________________\n"
-        with patch('builtins.input', return_value='a'):
-            with patch('sys.stdout', new=io.StringIO()) as fake_output:
+        with patch("builtins.input", return_value="a"):
+            with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shootingfunction.nextPlayer(gameMode, currentPlayer, data)
                 self.assertEqual(data["currentPlayer"], 1)
-                
+
     def test_nextPlayer_error(self):
         # Test for invalid currentPlayer value
         gameMode = "easy"
         currentPlayer = 3
         data = {"currentPlayer": 3}
         expected_output = "Irgendwas ist hier schief gelaufen!\nShit\n"
-        with patch('builtins.input', return_value='a'):
-            with patch('sys.stdout', new=io.StringIO()) as fake_output:
+        with patch("builtins.input", return_value="a"):
+            with patch("sys.stdout", new=io.StringIO()) as fake_output:
                 shootingfunction.nextPlayer(gameMode, currentPlayer, data)
                 self.assertEqual(fake_output.getvalue(), expected_output)
 
-    @patch('random.randint')
+    @patch("random.randint")
     def test_random_direction(self, mock_randint):
         # Set up the mock random integer function to return a known value
         mock_randint.return_value = 2
-        
+
         # Call the function and assert that it returns the expected value
         result = shootingfunction.randomDirection()
         self.assertEqual(result, 2)
@@ -76,65 +83,29 @@ class TestShooting(unittest.TestCase):
         mock_randint.assert_called_once_with(0, 3)
 
     def test_missed_shot(self):
-        hiddenBoard = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ]
-        leakedBoard = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ]
+        hiddenBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        leakedBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
         result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
         self.assertEqual(result, 0)
-        self.assertEqual(hiddenBoard, [
-            [0, 0, 0],
-            [0, 2, 0],
-            [0, 0, 0]
-        ])
+        self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
 
     def test_water_hit(self):
-        hiddenBoard = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ]
-        leakedBoard = [
-            [0, 0, 0],
-            [0, 6, 0],
-            [0, 0, 0]
-        ]
+        hiddenBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        leakedBoard = [[0, 0, 0], [0, 6, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
         result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
 
         self.assertEqual(result, 0)
-        self.assertEqual(hiddenBoard, [
-            [0, 0, 0],
-            [0, 2, 0],
-            [0, 0, 0]
-        ])
-        self.assertEqual(leakedBoard, [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ])
+        self.assertEqual(hiddenBoard, [[0, 0, 0], [0, 2, 0], [0, 0, 0]])
+        self.assertEqual(leakedBoard, [[0, 0, 0], [0, 0, 0], [0, 0, 0]])
 
     def test_ship_hit(self):
-        hiddenBoard = [
-            [0, 0, 0],
-            [0, 0, 0],
-            [0, 0, 0]
-        ]
-        leakedBoard = [
-            [0, 0, 0],
-            [0, 1, 0],
-            [0, 0, 0]
-        ]
+        hiddenBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        leakedBoard = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
         cpuMemory = (1, 1)
 
         result = shootingfunction.checkHit(hiddenBoard, leakedBoard, cpuMemory)
@@ -159,7 +130,7 @@ class TestShooting(unittest.TestCase):
         board = [[0 for _ in range(10)] for _ in range(10)]
         firstCpuMemory = shootingfunction.firstPosition(board)
         self.assertIsInstance(firstCpuMemory, tuple)
-    
+
     def test_first_position_returns_valid_coordinates(self):
         board = [[0 for _ in range(10)] for _ in range(10)]
         firstCpuMemory = shootingfunction.firstPosition(board)
@@ -223,5 +194,6 @@ class TestShooting(unittest.TestCase):
     #     result = shooting(self.data, self.gameMode, self.currentPlayer)
     #     self.assertEqual(result, None)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()
