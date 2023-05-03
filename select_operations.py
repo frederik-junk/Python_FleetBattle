@@ -121,7 +121,7 @@ def game_mode_selection(data):
                     # Call function placeShip to give user the opportunity to select the ship positions
                     counter = 1
                     for ship in ship_initializer.playerShips:
-                        ship.class_place_ship(python_game.leaked_board_1, ship, counter)
+                        ship.class_place_ship(python_game.leaked_board_2, ship, counter)
                         counter = counter + 1
                     counter = 1
                     # Print message for computer to place ships
@@ -181,7 +181,7 @@ def game_mode_selection(data):
                     )
                     # Call function for user 2 to place ships
                     for ship in ship_initializer.opponentShips:
-                        ship.class_place_ship(python_game.leaked_board_1, ship, counter)
+                        ship.class_place_ship(python_game.leaked_board_2, ship, counter)
                         counter = counter + 1
                     counter = 1
                     input(
