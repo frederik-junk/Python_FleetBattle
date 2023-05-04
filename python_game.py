@@ -163,6 +163,8 @@ def place_ship(board, ship_length, ship, ship_name, counter):
         )
         # try to find the input postion in the board (checking if it exists)
         try:
+            if len(placement_input) is 0:
+                raise ValueError
             starting_column_char = converter_functions.split_column_converter(placement_input)
             if (
                 starting_column_char == 11
