@@ -86,5 +86,3 @@ if __name__ == "__main__":
             json.dump(data, file, indent=2)
         print(
             "Wir bedanken uns fuers Spielen bis zum naechsten Mal!\nDein Spiel wurde gespeichert und laesst sich beim nächsten Mal mit [j] laden!\n")
-
-print ("test")
